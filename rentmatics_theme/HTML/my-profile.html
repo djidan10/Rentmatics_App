@@ -40,7 +40,7 @@ $(document).ready(function(){
    
     $.ajax({
       type: "POST",
-      url: "http://localhost:8083/GetProfile",
+      url: "http://176.111.105.86:8083/GetProfile",
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(Getprofile),
 
@@ -87,7 +87,7 @@ function logout() {
     delete_cookie("RentmaticsCookie");
      $.ajax({
         type: "GET",
-        url: "http://localhost:8083/Logout",
+        url: "http://176.111.105.86:8083/Logout",
 
 
         success: function(responsee) {
@@ -149,7 +149,7 @@ alert("inside profile");
    
     $.ajax({
       type: "POST",
-      url: "http://localhost:8083/Myprofile",
+      url: "http://176.111.105.86:8083/Myprofile",
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(Profile),
 

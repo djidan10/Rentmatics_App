@@ -57,7 +57,7 @@ $(document).ready(function(){
 window.onload = function () {
 	$.ajax({
          type: "GET",
-         url: "http://localhost:8083/GetAllhomedetails",
+         url: "http://176.111.105.86:8083/GetAllhomedetails",
          
         
 
@@ -939,7 +939,7 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 <!-- Back To Top Button -->
 <div id="backtotop"><a href="#"></a></div>
 
-      <!-- <script>
+      <script>
 google.maps.event.addDomListener(window, 'load', initialize);
 function initialize() {
 var input = document.getElementById('tags');
@@ -957,7 +957,7 @@ console.log(place.geometry['location'].lng());
 });
 }
 </script>
- -->
+
 
 
 <!-- Scripts
@@ -980,7 +980,7 @@ console.log(place.geometry['location'].lng());
 <!-- <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script> -->
 <script type="text/javascript" src="scripts/login.js"></script>
 
-
+<!-- 
 <script>
          var Tagname = new Array();
          var Tags = new Array();
@@ -988,7 +988,7 @@ console.log(place.geometry['location'].lng());
          $(document).ready(function(){
          $.ajax({
           type: "GET",
-          url: "http://localhost:8083/GetCities",
+          url: "http://176.111.105.86:8083/GetCities",
           contentType:"application/json; charset=utf-8",
          
          success: function(responsee){
@@ -1012,7 +1012,7 @@ console.log(place.geometry['location'].lng());
          });
          
          
-      </script>
+      </script> -->
 
 
 <!-- Style Switcher

@@ -145,7 +145,7 @@ $(document).ready(function(){
          
             $.ajax({
                type: "POST",
-               url: "http://localhost:8083/GetIndivual_home",
+               url: "http://176.111.105.86:8083/GetIndivual_home",
                contentType:"application/json; charset=utf-8",
                data: JSON.stringify(Home),
                async: false,
@@ -387,7 +387,7 @@ document.getElementById("imageslider").innerHTML=image;
              
          $.ajax({
                type: "POST",
-               url: "http://localhost:8083/ScheduleVisit",
+               url: "http://176.111.105.86:8083/ScheduleVisit",
                contentType:"application/json; charset=utf-8",
                data: JSON.stringify(schedule),
          
@@ -464,7 +464,7 @@ document.getElementById("imageslider").innerHTML=image;
           
          
          
-         //var redirecturl="http://localhost:8083/rentmatics/?userid="+user_id;
+         //var redirecturl="http://176.111.105.86:8083/rentmatics/?userid="+user_id;
          
          //Book The House
          
@@ -501,7 +501,7 @@ document.getElementById("imageslider").innerHTML=image;
          $.ajax({
               
                type: "POST",
-               url: "http://localhost:8083/paytm",
+               url: "http://176.111.105.86:8083/paytm",
                contentType:"application/json; charset=utf-8",
                data: JSON.stringify(payment),
               
@@ -529,7 +529,7 @@ document.getElementById("imageslider").innerHTML=image;
          
           $.ajax({
            type: "GET",
-           url: "http://localhost:8083/Logout",
+           url: "http://176.111.105.86:8083/Logout",
          
          success: function(responsee){
           location.reload(true);

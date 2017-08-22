@@ -459,40 +459,6 @@ $(document).ready(function(){
 <script type="text/javascript" src="scripts/login.js"></script>
 
 
-<script>
-         var Tagname = new Array();
-         var Tags = new Array();
-
-         $(document).ready(function(){
-         $.ajax({
-          type: "GET",
-          url: "http://localhost:8083/GetCities",
-          contentType:"application/json; charset=utf-8",
-         
-         success: function(responsee){
-         
-         var availableTags = JSON.parse(responsee)
-         Tags = availableTags
-         for (i = 0; i < Tags.length; i++) { 
-           Tagname[i] = Tags[i].City
-         }
-         
-         
-         //Implement Action to Html page
-         $( "#tags" ).autocomplete({
-           source: Tagname
-            
-         
-          });
-         }
-         
-         });
-         });
-         
-         
-      </script>
-
-
 <!-- Style Switcher
 ================================================== -->
 <script src="scripts/switcher.js"></script>

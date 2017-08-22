@@ -46,7 +46,7 @@ function Login() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8083/Login",
+        url: "http://176.111.105.86:8083/Login",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Rentmatics),
 
@@ -85,7 +85,7 @@ function SignupRent() {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8083/User",
+        url: "http://176.111.105.86:8083/User",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Rentmatics),
 
@@ -206,7 +206,7 @@ function onSignIn(googleUser) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8083/User",
+        url: "http://176.111.105.86:8083/User",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Gmail),
 
@@ -299,7 +299,7 @@ function onSignIn(googleUser) {
 
     $.ajax({
         type: "POST",
-        url: "http://localhost:8083/User",
+        url: "http://176.111.105.86:8083/User",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Facebook),
 

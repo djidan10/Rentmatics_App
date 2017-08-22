@@ -48,8 +48,9 @@ window.onload = function () {
 
    $.ajax({
          type: "POST",
-         url: "http://localhost:8083/Wishlist",
-         contentType:"application/json; charset=utf-8",
+      
+          url: "http://176.111.105.86:8083/Wishlist",
+          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
          success: function(responsee){

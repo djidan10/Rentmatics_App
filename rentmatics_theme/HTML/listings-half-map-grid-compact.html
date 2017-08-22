@@ -53,7 +53,7 @@ $(document).ready(function(){
     if(params==""||params==null||params==undefined||params=="NODATA"){
       $.ajax({
          type: "GET",
-         url: "http://localhost:8083/GetAllhomedetails",
+         url: "http://176.111.105.86:8083/GetAllhomedetails",
          
         
 
@@ -101,7 +101,7 @@ $(document).ready(function(){
 
    $.ajax({
          type: "POST",
-         url: "http://localhost:8083/Gethomedetails",
+         url: "http://176.111.105.86:8083/Gethomedetails",
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
@@ -315,7 +315,7 @@ function Addfav(getid,getlogin,colorid){
 
    $.ajax({
          type: "POST",
-         url: "http://localhost:8083/Insertwishlist",
+         url: "http://176.111.105.86:8083/Insertwishlist",
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
@@ -340,7 +340,7 @@ else{
 
    $.ajax({
          type: "POST",
-         url: "http://localhost:8083/Deletewishlist",
+         url: "http://176.111.105.86:8083/Deletewishlist",
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
@@ -460,7 +460,7 @@ function GetFilterhome(){
     console.log(Filter)
     $.ajax({
       type: "POST",
-      url: "http://localhost:8083/GetFilter",
+      url: "http://176.111.105.86:8083/GetFilter",
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(Filter),
 
@@ -497,7 +497,7 @@ function Notification(){
     
 $.ajax({
       type: "POST",
-      url: "http://localhost:8083/Notifyme",
+      url: "http://176.111.105.86:8083/Notifyme",
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(s),
 
@@ -516,7 +516,7 @@ $.ajax({
             
           $.ajax({
            type: "GET",
-           url: "http://localhost:8083/Logout",
+           url: "http://176.111.105.86:8083/Logout",
          
          success: function(responsee){
 
