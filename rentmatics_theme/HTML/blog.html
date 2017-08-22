@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Rentmatics</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+    
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script>
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+    }
+});
+
+</script>
+
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth">
+
+	<!-- Topbar -->
+	<div id="top-bar">
+		<div class="container">
+      <!-- Left Side Content -->
+			<div class="left-side">
+				<ul class="top-bar-menu">
+				    <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+          <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
+				</ul>
+      </div>
+			<div class="right-side">
+        <ul class="social-icons">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div id="header">
+		<div class="container">
+			<div class="left-side">
+				 <div id="logo">
+					<a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+				 </div>
+         <!-- Mobile Navigation -->
+				<div class="menu-responsive">
+					<i class="fa fa-reorder menu-trigger"></i>
+				</div>
+         <!-- Main Navigation -->
+				<nav id="navigation" class="style-1">
+					<ul id="responsive">
+            <li><a  href="index-2.html">Home</a></li>
+            <li><a href="how_it_works.html">How It Works </a>
+              <ul>
+                <li><a href="owners.html">Owners</a> </li>
+                <li><a href="tenants.html">Tenants</a></li>
+             </ul>
+            </li>
+           <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+           <li><a javascript:Payalert()>Pay Myrent</a></li>
+			    </ul>
+			</nav>
+			<div class="clearfix"></div>
+			</div>
+			<div class="right-side">
+
+				<nav id="navigation" class="style-1">
+          <ul id="responsive">
+          <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
+           <li id="loginhiden">
+          <a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
+          </li>
+           <li style="display:none" id="account"><a href="#">My Account</a>
+            <ul>
+                    <li><a href="my-profile.html">My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                    <li><a href="change-password.html">Change Password</a></li>
+                   
+                  </ul> 
+                </li> 
+          </ul>
+       </nav>
+		</div>
+	</div>
+</div>
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<br>
+
+<!-- Content
+================================================== -->
+<div class="container">
+
+	<!-- Blog Posts -->
+	<div class="blog-page">
+	<div class="row">
+		<div class="col-md-8">
+
+			<!-- Blog Post -->
+			<div class="blog-post">
+				
+				<!-- Img -->
+				<a href="blog-post.html" class="post-img">
+					<img src="images/blog-post-01a.jpg" alt="">
+				</a>
+				
+				<!-- Content -->
+				<div class="post-content">
+					<h3><a href="blog-post.html">8 Tips to Help You Finding New Home</a></h3>
+
+					<ul class="post-meta">
+						<li>Novemer 12, 2016</li>
+						<li><a href="#">5 Comments</a></li>
+					</ul>
+
+					<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue dapibus facilisis.</p>
+
+					<a href="blog-post.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+				</div>
+
+			</div>
+			<!-- Blog Post / End -->
+
+
+			<!-- Blog Post -->
+			<div class="blog-post">
+				
+				<!-- Img -->
+				<a href="blog-post.html" class="post-img">
+					<img src="images/blog-post-02a.jpg" alt="">
+				</a>
+				
+				<!-- Content -->
+				<div class="post-content">
+					<h3><a href="blog-post.html">Bedroom Colors You'll Never Regret</a></h3>
+
+					<ul class="post-meta">
+						<li>November 9, 2016</li>
+						<li><a href="#">5 Comments</a></li>
+					</ul>
+
+					<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue dapibus facilisis.</p>
+
+					<a href="blog-post.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+				</div>
+
+			</div>
+			<!-- Blog Post / End -->
+
+
+			<!-- Blog Post -->
+			<div class="blog-post">
+				
+				<!-- Img -->
+				<a href="blog-post.html" class="post-img">
+					<img src="images/blog-post-03a.jpg" alt="">
+				</a>
+				
+				<!-- Content -->
+				<div class="post-content">
+					<h3><a href="blog-post.html">What to Do a Year Before Buying Apartment</a></h3>
+
+					<ul class="post-meta">
+						<li>October 26, 2016</li>
+						<li><a href="#">3 Comments</a></li>
+					</ul>
+
+					<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue dapibus facilisis.</p>
+
+					<a href="blog-post.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+				</div>
+
+			</div>
+			<!-- Blog Post / End -->
+
+
+			<!-- Pagination -->
+			<div class="clearfix"></div>
+			<div class="pagination-container">
+				<nav class="pagination">
+					<ul>
+						<li><a href="#" class="current-page">1</a></li>
+						<li><a href="#">2</a></li>
+						<li><a href="#">3</a></li>
+					</ul>
+				</nav>
+
+				<nav class="pagination-next-prev">
+					<ul>
+						<li><a href="#" class="prev">Previous</a></li>
+						<li><a href="#" class="next">Next</a></li>
+					</ul>
+				</nav>
+			</div>
+			<div class="clearfix"></div>
+
+		</div>
+
+	<!-- Blog Posts / End -->
+
+
+	<!-- Widgets -->
+	<div class="col-md-4">
+		<div class="sidebar right">
+
+			<!-- Widget -->
+			<div class="widget">
+				<h3 class="margin-top-0 margin-bottom-25">Search Blog</h3>
+				<div class="search-blog-input">
+					<div class="input"><input class="search-field" type="text" placeholder="Type and hit enter" value=""/></div>
+				</div>
+				<div class="clearfix"></div>
+			</div>
+			<!-- Widget / End -->
+
+
+			<!-- Widget -->
+			<div class="widget">
+				<h3>Got any questions?</h3>
+				<div class="info-box margin-bottom-10">
+					<p>If you are having any questions, please feel free to ask.</p>
+					<a href="contact.html" class="button fullwidth margin-top-20"><i class="fa fa-envelope-o"></i> Drop Us a Line</a>
+				</div>
+			</div>
+			<!-- Widget / End -->
+
+
+			<!-- Widget -->
+			<div class="widget">
+
+				<h3>Popular Posts</h3>
+				<ul class="widget-tabs">
+
+					<!-- Post #1 -->
+					<li>
+						<div class="widget-content">
+								<div class="widget-thumb">
+								<a href="blog-full-width-single-post.html"><img src="images/blog-widget-03.jpg" alt=""></a>
+							</div>
+							
+							<div class="widget-text">
+								<h5><a href="blog-full-width-single-post.html">What to Do a Year Before Buying Apartment </a></h5>
+								<span>October 26, 2016</span>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					
+					<!-- Post #2 -->
+					<li>
+						<div class="widget-content">
+							<div class="widget-thumb">
+								<a href="blog-full-width-single-post.html"><img src="images/blog-widget-02.jpg" alt=""></a>
+							</div>
+							
+							<div class="widget-text">
+								<h5><a href="blog-full-width-single-post.html">Bedroom Colors You'll Never Regret</a></h5>
+								<span>November 9, 2016</span>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+					
+					<!-- Post #3 -->
+					<li>
+						<div class="widget-content">
+							<div class="widget-thumb">
+								<a href="blog-full-width-single-post.html"><img src="images/blog-widget-01.jpg" alt=""></a>
+							</div>
+							
+							<div class="widget-text">
+								<h5><a href="blog-full-width-single-post.html">8 Tips to Help You Finding New Home</a></h5>
+								<span>November 12, 2016</span>
+							</div>
+							<div class="clearfix"></div>
+						</div>
+					</li>
+
+				</ul>
+
+			</div>
+			<!-- Widget / End-->
+
+
+			<!-- Widget -->
+			<div class="widget">
+				<h3 class="margin-top-0 margin-bottom-25">Social</h3>
+				<ul class="social-icons rounded">
+					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+					<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
+				</ul>
+
+			</div>
+			<!-- Widget / End-->
+
+			<div class="clearfix"></div>
+			<div class="margin-bottom-40"></div>
+		</div>
+	</div>
+	</div>
+	<!-- Sidebar / End -->
+
+
+</div>
+</div>
+
+
+
+
+<!-- The Modal -->
+<div id="myModal1" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" style="width:40%;">
+    <span class="close">&times;</span>
+
+   <span style="color:black">Pay My rent is Comming soon!...</span>
+  
+
+</div>
+</div>
+<!-- Footer
+================================================== -->
+<div class="margin-top-55"></div>
+
+
+<!-- Footer
+================================================== -->
+<div id="footer" class="sticky-footer">
+	<!-- Main -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-6">
+				<img class="footer-logo" src="images/rm_logo.png" alt="">
+				<br><br>
+				<p>Simple and search for your property.</p>
+			</div>
+
+			<div class="col-md-4 col-sm-6 ">
+				<h4>Helpful Links</h4>
+				<ul class="footer-links">
+					<li><a href="login-register.html">Login</a></li>
+					<li><a href="login-register.html">Sign Up</a></li>
+					<li><a href="my-profile.html">My Account</a></li>
+					
+					<li><a href="myprivacy.html">Privacy Policy</a></li>
+				</ul>
+
+				<ul class="footer-links">
+					<!-- <li><a href="#">FAQ</a></li> -->
+					<li><a href="blog.html">Blog</a></li>
+					<li><a href="how_it_works.html">How It Works</a></li>
+					<li><a href="tandc.html">Terms and condition</a></li>
+					
+				</ul>
+				<div class="clearfix"></div>
+			</div>		
+
+			<div class="col-md-3  col-sm-12">
+				<h4>Contact Us</h4>
+				<div class="text-widget">
+					<span>12345 Little Lonsdale St, Melbourne</span> <br>
+					Phone: <span>Tel: +91-9884379333/9811448697 </span><br>
+					E-Mail:<span> <a href="#">Rentmatics@gmail.com</a> </span><br>
+				</div>
+
+				<ul class="social-icons margin-top-20">
+					<li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+					<li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+					<li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+				</ul>
+
+			</div>
+
+		</div>
+		
+		<!-- Copyright -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="copyrights">© 2016 Rentmatics. All Rights Reserved.</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+<!-- Footer / End -->
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+
+
+
+<!-- Style Switcher
+================================================== -->
+<script src="scripts/switcher.js"></script>
+
+<div id="style-switcher">
+	<h2>Color Switcher <a href="#"><i class="sl sl-icon-settings"></i></a></h2>
+	
+	<div>
+		<ul class="colors" id="color1">
+			<li><a href="#" class="blue" title="Blue"></a></li>
+			<li><a href="#" class="green" title="Green"></a></li>
+			<li><a href="#" class="orange" title="Orange"></a></li>
+			<li><a href="#" class="navy" title="Navy"></a></li>
+			<li><a href="#" class="yellow" title="Yellow"></a></li>
+			<li><a href="#" class="peach" title="Peach"></a></li>
+			<li><a href="#" class="beige" title="Beige"></a></li>
+			<li><a href="#" class="purple" title="Purple"></a></li>
+			<li><a href="#" class="celadon" title="Celadon"></a></li>
+			<li><a href="#" class="pink" title="Pink"></a></li>
+			<li><a href="#" class="red" title="Red"></a></li>
+			<li><a href="#" class="brown" title="Brown"></a></li>
+			<li><a href="#" class="cherry" title="Cherry"></a></li>
+			<li><a href="#" class="cyan" title="Cyan"></a></li>
+			<li><a href="#" class="gray" title="Gray"></a></li>
+			<li><a href="#" class="olive" title="Olive"></a></li>
+		</ul>
+	</div>
+		
+</div>
+<!-- Style Switcher / End -->
+
+
+</div>
+<!-- Wrapper / End -->
+<script>
+
+
+
+
+
+
+// Get the modal
+var modal = document.getElementById('myModal');
+var modal1 = document.getElementById('myModal1');
+var btn = document.getElementById("myBtn");
+var pop = document.getElementById("mypop");
+var span = document.getElementsByClassName("close")[0];
+btn.onclick = function() {
+ 
+   Schedule1()
+
+   modal.style.display = "block";
+ 
+   
+   
+}
+
+pop.onclick = function() {
+ 
+  
+
+   modal1.style.display = "block";
+ 
+   
+   
+}
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+    modal.style.display = "none";
+    modal1.style.display = "none";
+}
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
+</script>
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+	<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Rentmatics</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+<link rel="stylesheet" href="css/jquery-ui.css">
+
+        
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script>
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.visibility = "visible";
+                localStorage.setItem("LoginID", cooki);
+    }
+});
+
+</script>
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth">
+
+	<!-- Topbar -->
+	<div id="top-bar">
+		<div class="container">
+      <!-- Left Side Content -->
+			<div class="left-side">
+				<ul class="top-bar-menu">
+				    <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+          <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
+				</ul>
+      </div>
+			<div class="right-side">
+        <ul class="social-icons">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div id="header">
+		<div class="container">
+			<div class="left-side">
+				 <div id="logo">
+					<a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+				 </div>
+         <!-- Mobile Navigation -->
+				<div class="menu-responsive">
+					<i class="fa fa-reorder menu-trigger"></i>
+				</div>
+         <!-- Main Navigation -->
+				<nav id="navigation" class="style-1">
+					<ul id="responsive">
+            <li><a  href="index-2.html">Home</a></li>
+            <li><a href="how_it_works.html">How It Works </a>
+              <ul>
+                <li><a href="owners.html">Owners</a> </li>
+                <li><a href="tenants.html">Tenants</a></li>
+             </ul>
+            </li>
+           <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+           <li><a javascript:Payalert()>Pay Myrent</a></li>
+			    </ul>
+			</nav>
+			<div class="clearfix"></div>
+			</div>
+			<div class="right-side">
+
+				<nav id="navigation" class="style-1">
+          <ul id="responsive">
+          <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
+           <li id="loginhiden">
+          <a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
+          </li>
+           <li style="display:none" id="account"><a href="#">My Account</a>
+            <ul>
+                    <li><a href="my-profile.html">My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                 <li><a href="javascript:logout()">Logout</a></li>
+                    
+                  </ul> 
+                </li> 
+          </ul>
+       </nav>
+		</div>
+	</div>
+</div>
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Banner
+================================================== -->
+<div class="parallax" data-background="images/about.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
+
+	<div class="container" style="height:30%">
+		<div class="row">
+			<div class="col-md-12">
+				
+				<div class="search-container" style="margin-left:13%">
+
+					<!-- Form -->
+					<h2 style="margin-left:25%;font-family:Hanken;font-weight: 200;font-size: 54px;">About</h2>
+					<h4 style="color:white;font-size: 24px;">Rentmatics is perfect place for families and bachelors looking for best living place</h4>
+
+					
+					<!-- Row With Forms / End -->
+
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+		
+<!-- Content
+================================================== -->
+<!-- Fullwidth Section -->
+<section>
+
+	<!-- Content -->
+	
+
+<!-- Content -->
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-6">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					
+
+					<p style="font-size:20px; font-family:Source Sans Pro;text-align:justify;box-sizing: border-box;word-break:break-word;color:#484848;line-height: 1.9;">Rentmatics acts as a network where tenants connect directly with property owners who own space to share for living space. With Rentmatics now it’s easy to find the best place to setup your living space without any hassle. No leasing problem and other hindrances for families and bachelors, your Rent space is now just one click away. Pay by the month and start now.</p>
+				</div>
+			</div>
+
+			<div class="col-md-6">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					
+					<p style="font-size:20px; font-family:Source Sans Pro;text-align:justify;box-sizing: border-box;word-break:break-word;color:#484848;line-height: 1.9;">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+				</div>
+			</div>
+			</div>
+			</div>
+</section>
+<!-- Fullwidth Section / End -->
+
+
+
+
+<!-- Fullwidth Section -->
+<section class="fullwidth margin-top-105 margin-bottom-0 padding-bottom-80 padding-top-95" data-background-color="#9AB9C3">
+
+	<!-- Box Headline -->
+	<h3 class="headline-box">Why us?</h3>
+	
+	<div class="container">
+		<div class="row">
+
+			
+
+			<div class="col-md-6">
+				<div class="testimonial-box">
+
+					
+					<div style="margin-left:24%;">
+					<img src="http://rentmatics.com/wp-content/uploads/2016/03/contract_icon_2x.png" alt="" style="height:80px">
+					<div  style="font-size:17px;font-family:Source Sans Pro;word-break:break-word;color:color;line-height: 1.6;">
+                    <br>
+                    
+					<span style="font-size:30px;color:white;margin-left:-7%">Just Form away</span><br>
+<span style="font-size:20px;color:white;margin-left:-17%">Just Share your details, we share with</span><br>
+<span style="font-size:20px;color:white;margin-left:-20%"> landlord and make sure you got your first </span><br>
+<span style="font-size:20px;color:white;margin-left:-7%">and best Rent place</span>
+</div>
+					
+			</div>
+			</div>
+			</div>
+			<div class="col-md-6">
+				<div class="testimonial-box">
+
+					
+					<div style="margin-left:24%;">
+					<img src="http://rentmatics.com/wp-content/uploads/2016/03/click_icon_2x.png" alt="" style="height:80px">
+					<div  style="font-size:17px;font-family:Source Sans Pro;word-break:break-word;color:color;line-height: 1.6;">
+                    <br>
+                    
+					<span style="font-size:30px;color:white;margin-left:-7%">Yours with a Click</span><br>
+<span style="font-size:20px;color:white;margin-left:-17%">Pay using your Credit/Debit Card and your </span><br>
+<span style="font-size:20px;color:white;margin-left:-20%"> card will be charged every month. Cancel </span><br>
+<span style="font-size:20px;color:white;margin-left:-7%">anytime you wish.</span>
+</div>
+					
+			</div>
+			</div>
+			</div>
+
+			<div class="col-md-6" style="margin-top:10%;">
+				<div class="testimonial-box">
+
+					
+					<div style="margin-left:24%;">
+					<img src="http://rentmatics.com/wp-content/uploads/2016/03/building_icon_2x.png" alt="" style="height:80px">
+					<div  style="font-size:17px;font-family:Source Sans Pro;word-break:break-word;color:color;line-height: 1.6;">
+                    <br>
+                    
+					<span style="font-size:30px;color:white;margin-left:-17%">Zero hassles. Zero brokerage</span><br>
+<span style="font-size:20px;color:white;margin-left:-22%">From tenant sourcing to rent collection, to </span><br>
+<span style="font-size:20px;color:white;margin-left:-27%"> tenant move-out and everything in between, </span><br>
+<span style="font-size:20px;color:white;margin-left:-16%"> Rentmatics takes care of it all.</span>
+</div>	
+					
+			</div>
+			</div>
+			</div>
+			<div class="col-md-6" style="margin-top:10%;">
+				<div class="testimonial-box">
+
+					
+					<div style="margin-left:10%;">
+					<img src="http://rentmatics.com/wp-content/uploads/2016/03/msgcontacts_icon_2x.png" alt="" style="height:70px">
+					<div  style="font-size:17px;font-family:Source Sans Pro;word-break:break-word;color:color;line-height: 1.6;">
+                    <br>
+                    
+					<span style="font-size:30px;color:white;margin-left:10%">No MiddleMan</span><br>
+<span style="font-size:20px;color:white;margin-left:2%">In Rentmatics, we connect hosts and guests, </span><br>
+<span style="font-size:20px;color:white;margin-left:-5%"> so that if you have any queries you ask </span><br>
+<span style="font-size:20px;color:white;margin-left:12%">them directly.</span>
+</div>
+					
+			</div>
+			</div>
+			</div>
+	</div>
+
+
+</section>
+<!-- Fullwidth Section / End -->
+
+
+
+	
+	<div class="parallax" data-background="images/about.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				
+				<div class="search-container" >
+
+					<!-- Form -->
+					<h2 style="font-family:Hanken;font-weight: 200;font-size: 24px;">Standup for a Tenants</h2>
+					<h4 style="font-family:Hanken;font-weight: 200;font-size: 24px;">We do understand, what are all the problems a tenants faces initially while searching for a living space. We remove the burden that most real estate industries puts on tenants about deciding about sizes, style and location of the rent space for your family. So, just visit us, book your space just by a click and know about your moving day (whenever suits you).</h4>
+
+					
+					<!-- Row With Forms / End -->
+
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+
+
+
+
+
+
+<!-- Fullwidth Section -->
+<section class="fullwidth " data-background-color="#9AB9C3" style="margin-top:-5%;">
+
+	
+	<div class="container">
+		<div class="row">
+
+			
+
+			<div class="col-md-6">
+				<div class="testimonial-box">
+
+					
+					<div >
+					<img src="http://rentmatics.com/wp-content/uploads/2016/03/help_icon_2x.png" alt="" style="height:300px">
+
+					
+			</div>
+			</div>
+			</div>
+			<div class="col-md-6">
+				<div class="testimonial-box">
+
+					
+					<div style="margin-left:24%;">
+					<div  style="font-size:17px;font-family:Source Sans Pro;word-break:break-word;color:color;line-height: 1.6;">
+                    <br>
+                    
+					<span style="font-size:30px;color:white;">Let’s Connect</span><br>
+<span style="font-size:20px;color:white;">General Questions: info@rentmatics.com</span><br>
+<span style="font-size:20px;color:white;">Adding Multiple Locations: sales@rentmatics.com</span><br>
+<span style="font-size:20px;color:white;">Customer Support: support@ rentmatics.com</span>
+</div>
+					
+			</div>
+			</div>
+			</div>
+
+		
+			
+	</div>
+
+
+</section>
+
+<!-- Fullwidth Section -->
+<section class="fullwidth " data-background-color="#00C2C4" style="margin-top:-5%;height:300px">
+
+	
+	<div class="container">
+		<div class="row">
+		<h2  style="font-family:Hanken;margin-left:5%;font-weight: 500;font-size: 40px;color:white;text-align: center;    line-height: 1.7;">Want to Come A board? Check out our Jobs Page</h2>
+
+			
+
+			
+	</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<!-- Footer
+================================================== -->
+<div id="footer" >
+	<!-- Main -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-6">
+				<img class="footer-logo" src="images/rm_logo.png" alt="">
+				<br><br>
+				<p>Simple and search for your property.</p>
+			</div>
+
+			<div class="col-md-4 col-sm-6 ">
+				<h4>Helpful Links</h4>
+				<ul class="footer-links">
+					<li><a href="login-register.html">Login</a></li>
+					<li><a href="login-register.html">Sign Up</a></li>
+					<li><a href="my-profile.html">My Account</a></li>
+					
+					<li><a href="myprivacy.html">Privacy Policy</a></li>
+				</ul>
+
+				<ul class="footer-links">
+					<!-- <li><a href="#">FAQ</a></li> -->
+					<li><a href="blog.html">Blog</a></li>
+					<li><a href="how_it_works.html">How It Works</a></li>
+					<li><a href="tandc.html">Terms and condition</a></li>
+					
+				</ul>
+				<div class="clearfix"></div>
+			</div>		
+
+			<div class="col-md-3  col-sm-12">
+				<h4>Contact Us</h4>
+				<div class="text-widget">
+					<span>12345 Little Lonsdale St, Melbourne</span> <br>
+					Phone: <span>Tel: +91-9884379333/9811448697 </span><br>
+					E-Mail:<span> <a href="#">Rentmatics@gmail.com</a> </span><br>
+				</div>
+
+				<ul class="social-icons margin-top-20">
+					<li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+					<li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+					<li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+				</ul>
+
+			</div>
+
+		</div>
+		
+		<!-- Copyright -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="copyrights">© 2016 Rentmatics. All Rights Reserved.</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+<!-- Footer / End -->
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+<!-- Scripts
+================================================== -->
+<!-- <script type="text/javascript"  src="scripts/jquery-min.js"></script> -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript"  src="scripts/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+
+
+<script>
+         var Tagname = new Array();
+         var Tags = new Array();
+
+         $(document).ready(function(){
+         $.ajax({
+          type: "GET",
+          url: "http://localhost:8083/GetCities",
+          contentType:"application/json; charset=utf-8",
+         
+         success: function(responsee){
+         
+         var availableTags = JSON.parse(responsee)
+         Tags = availableTags
+         for (i = 0; i < Tags.length; i++) { 
+           Tagname[i] = Tags[i].City
+         }
+         
+         
+         //Implement Action to Html page
+         $( "#tags" ).autocomplete({
+           source: Tagname
+            
+         
+          });
+         }
+         
+         });
+         });
+         
+         
+      </script>
+
+
+<!-- Style Switcher
+================================================== -->
+<script src="scripts/switcher.js"></script>
+
+
+
+</div>
+
+</body>
+</html>

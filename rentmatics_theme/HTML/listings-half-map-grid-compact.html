@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Findeo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+
+    <style>
+#map-canvas {
+  min-width: 600px;
+  width: 100%;
+  min-height: 800px;
+  height: 100%;
+}
+</style>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script>
+
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+
+
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+    }
+});
+
+ //Get All home based on Areas
+ var Loginid = ""
+ var tmp = ""
+   Loginid = localStorage.getItem("LoginID");
+
+    window.onload = function () {
+
+    var url = document.location.href,
+    url1 = decodeURIComponent(url)
+
+   
+  var params = location.search.substr(location.search.indexOf("?")+1);
+    if(params==""||params==null||params==undefined||params=="NODATA"){
+      $.ajax({
+         type: "GET",
+         url: "http://localhost:8083/GetAllhomedetails",
+         
+        
+
+         success: function(responsee){
+   
+            var searchout = JSON.parse(responsee);
+            alert(searchout);
+           
+
+    
+      var searchout = JSON.parse(responsee);
+            Getresponse(searchout)
+          }
+
+
+});
+      
+    }else{
+
+
+  var sval = "";
+  params = params.split("&");
+    // split param and value into individual pieces
+    for (var i=0; i<params.length; i++)
+       {
+
+         temp = params[i].split("=");
+         if ( [temp[0]] == "Id" ) { sval = temp[1]; }
+       } 	
+
+
+
+
+
+      loginid= Loginid
+     
+     
+      
+
+
+      var s={
+          "Id" :sval,
+          "Loginid":cooki
+        };
+
+   $.ajax({
+         type: "POST",
+         url: "http://localhost:8083/Gethomedetails",
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+         success: function(responsee){
+   
+            var searchout = JSON.parse(responsee);
+            if (searchout == null){
+
+          url = 'working.html?loginid='+loginid; 	 	 	 
+        
+           document.location.href = url;
+        
+
+
+
+            }
+            else{
+
+		
+			var searchout = JSON.parse(responsee);
+            Getresponse(searchout)
+          }
+}
+
+});
+}
+}
+//Get Mix and Max for Filter
+
+var ID;
+var bhkarray = new Array();
+bhkarray = ["1","2","3"];
+var bhkarraycount=0;
+$("#getbhk").html(bhkarray[bhkarraycount]);
+
+//Get minus for number of Bhk
+function getminus(){
+if (bhkarraycount>0){
+   $("#getbhk").val(bhkarray[--bhkarraycount]);
+    }}
+
+//Get plus count for number of Bhk
+function getplus(){
+if (bhkarraycount<=2){
+   $("#getbhk").val(bhkarray[++bhkarraycount]);
+   }}
+
+
+//Get Counting for Number of Beds
+
+ var  bhkarray1=new Array();
+ var bhkarraycount1=0;
+    
+ bhkarray1 = ["1","2","3","4","5","6"];
+$("#getbed").html(bhkarray1[bhkarraycount1]);
+
+function getminus1(){
+if (bhkarraycount1>0){
+  $("#getbed").val(bhkarray1[--bhkarraycount1]);
+
+}}
+function getplus1(){
+if (bhkarraycount1<=6){
+  
+   $("#getbed").val(bhkarray1[++bhkarraycount1]);
+}}
+
+     
+
+function GetRent(min,max){
+    
+$("#getmin").val(min);
+$("#getmax").val(max);
+  
+}
+
+//Get Radio button values
+function getRadiovalue(elements){
+
+for (var i = 0, l = elements.length; i < l; i++)
+    {
+        if (elements[i].checked)
+        {
+            return elements[i].value;
+        }
+    }
+}
+
+
+
+
+//Common function for s=Displaying Response
+function Getresponse(searchout){
+	
+  var cardstring ="";
+  var property =searchout.length +" Results Found ";
+ for (k=0;k<searchout.length;k++){
+    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,Loginid);
+   
+  }
+
+  document.getElementById("listContainer").innerHTML=cardstring;
+
+ for (l=0;l<searchout.length;l++){
+    GetLiked("colorid"+searchout[l].RentFullStruct.Id);
+  }
+
+
+
+
+
+
+
+
+ for(j=0;j<searchout.length;j++){
+ console.log(searchout[j].RentFullimages.length);
+ var finalDiv="";
+
+ var Singlesliderstart2="<img src='";
+ var Singlesliderend = "' alt='"+"'>";
+ var bhk1 =" Bhk"
+ 
+ 
+  for (i=0;i<searchout[j].RentFullimages.length;i++){
+  	finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
+   }
+    
+  
+
+ 
+  var ID = searchout[j].RentFullStruct.Id;
+    var Liked = searchout[j].RentFullStruct.Liked;
+  GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
+  
+ var mapview = searchout[j].Cityname;
+ var City =searchout[j].Cityname
+ var Rent = "$ "+searchout[j].RentFullStruct.Month_rent;
+ var Housename = searchout[j].RentFullStruct.Housename;
+ var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
+ var Address1 = searchout[j].RentFullStruct.Adress1;
+ var Address2 = searchout[j].RentFullStruct.Adress2;
+ var pin = searchout[j].RentFullStruct.Pin;
+ var state = searchout[j].RentFullStruct.State;
+ var country = searchout[j].RentFullStruct.Country;
+ var housetype =searchout[j].RentFullStruct.House_type
+ var tenantType =searchout[j].RentFullStruct.Tenant_type
+ var furnishingType =searchout[j].RentFullStruct.Furnish_type
+ var bedType =searchout[j].RentFullStruct.Bed
+
+
+
+
+
+
+$("#property").html(property);
+$("#Rent"+ID).html(Rent);
+$("#Housename"+ID).html(Housename);
+$("#bhk"+ID).html(bhk);
+$("#bed"+ID).html(bedType);
+$("#Address1"+ID).html(Address1);
+$("#Address2"+ID).html(Address2);
+$("#pin"+ID).html(pin);
+$("#state"+ID).html(state);
+$("#country"+ID).html(country);
+$("#city"+ID).html(City);
+$("#houseType"+ID).html(housetype);
+$("#tenantType"+ID).html(tenantType);
+$("#furnishtype"+ID).html(furnishingType);
+$("#rentimage1"+ID).html(finalDiv);
+
+ url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
+
+document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+    var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
+      src=src.replace("&amp;","&")
+    
+        // document.getElementById("map-canvas").setAttribute("src",src);
+//var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
+// document.getElementById("maprightview").setAttribute("src",src);
+// document.getElementById("mapscroll").setAttribute("src",src);
+// document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+
+}
+}
+function Addfav(getid,getlogin,colorid){
+	alert("inside wish");
+	alert( colorid.style.color);
+	alert(cooki);
+
+
+
+   if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
+    alert("inside nodata");
+   var url2 = "login-register.html";
+     //alert(url2);
+    document.location.href = url2;
+        }
+      else{
+            alert(cooki);
+               if (colorid.style.color == "black"){
+                alert("inside black")
+                    colorid.style.color="orange";  
+                      var s={
+          "Id": null,
+          "Homeid" :parseInt(getid),
+          "Loginid":Loginid
+
+        };
+
+   $.ajax({
+         type: "POST",
+         url: "http://localhost:8083/Insertwishlist",
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+         success: function(responsee){
+              alert("success");
+           var searchout = JSON.parse(responsee);
+          
+          
+            Getresponse(searchout)
+}
+
+});
+}
+else{
+
+   var s={
+         
+          "Homeid" :getid,
+          "Loginid":getlogin
+
+        };
+
+   $.ajax({
+         type: "POST",
+         url: "http://localhost:8083/Deletewishlist",
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+           success: function(responsee){
+           colorid.style.color="black";  
+           document.getElementById(colorid).style.color = "orange"; 
+ 
+          
+}
+
+});
+
+
+
+}
+// 
+
+}
+}
+
+
+
+function GetLiked(likedid,liked){
+
+if (liked == true){
+   document.getElementById(likedid).style.color = "orange";
+}else{
+   document.getElementById(likedid).style.color = "black";
+}
+}
+
+
+ //For Slider
+ function Getjavascript(Dyid,loginid){
+ 
+  var rentimage = 
+    
+"<div class='listings-container list-layout'>"+
+"<div class='listing-item'>"+
+"<a class='listing-img-container' id='getUrl"+Dyid+"'>"+
+"<div style ='width=100%;height:100%;'id='rentimage1"+Dyid+"'"+
+"></div>"+
+
+"<div class='listing-badges'>"+
+"<span id='tenantType"+Dyid+"'></span>"+
+"</div>"+
+
+"<div class='listing-img-content'>"+
+"<span class='listing-price' id='Rent"+Dyid+"' ></span>"+"<br>"+
+"<span class='listing-price' style='font-size:100%' > monthly</span>"+
+"</div>"+
+
+"</a>"+
+"<div class='listing-content'>"+
+"<div class='listing-title'>"+
+"<h4 id='Housename"+Dyid+"'>Eagle Apartments</h4>"+
+"<a href='#' class='listing-address popup-gmaps'>"+
+
+"<i class='fa fa-map-marker' ></i>"+ 
+"<span style='visibility:hidden' >a</span>"+
+"<span id='Address2"+Dyid+"'></span>"+
+"</a>"+
+"<span  style='color:black;background-color:red;margin-bottom:8%;'  onclick='Addfav("+Dyid+",loginid,this)' id='colorid"+Dyid+"' class='like-icon '></span>"+
+"</div>"+
+"<ul class='listing-details' >"+
+   "<li><span id='houseType"+Dyid+"'>"+"</span></li>"+
+"<li><span id='bhk"+Dyid+"'  >"+"</span></li>"+
+ "<li><span id='furnishtype"+Dyid+"'></span></li>"+
+"</ul>"+
+"</div>"+
+"</div>";
+
+
+ return rentimage;
+
+ }
+ 
+ //For Filter Get REsponse
+function GetFilterhome(){
+  
+
+
+    var minrent =  document.getElementById('getmin').value;
+    var maxrent = document.getElementById('getmax').value;
+    var gettenanttype = document.getElementsByName('tenantType');
+    var getbookingtype =document.getElementsByName('bookingType');
+    var gethousetype =document.getElementsByName('houseType');
+    var getfurnishingType =document.getElementsByName('furnishingType');
+    var getdistance =document.getElementById('distance').value;
+    var getbhk =document.getElementById('getbhk').value;
+     var getbed =document.getElementById('getbed').value;
+
+
+    
+  
+
+    //Calling Radio button Function
+    var tenantType=getRadiovalue(gettenanttype);
+    var bookingtype=getRadiovalue(getbookingtype);
+    var housetype=getRadiovalue(gethousetype);
+    var furnishingType=getRadiovalue(getfurnishingType);
+
+  
+  var Filter ={
+      "F_Loginid" : cooki,
+      "F_Monthrent_Min": parseInt(minrent),
+      "F_Monthrent_Max": parseInt(maxrent),
+      "F_Tenant_type":tenantType,
+      "F_Bookingtype":bookingtype,
+      "F_Housetype":housetype,
+      "F_Furnished_type":furnishingType,
+      "F_Distance":getdistance,
+      "F_Bhk":parseInt(getbhk),
+      "F_Bed":parseInt(getbed)
+
+     };
+    console.log(Filter)
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:8083/GetFilter",
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(Filter),
+
+   success: function(responsee){
+
+     var searchout = JSON.parse(responsee);
+         
+            Getresponse(searchout);
+
+ }
+
+});
+}
+
+
+function Notification(){
+
+    var Availname =  document.getElementById('getname1').value;
+    var AvailEmail =  document.getElementById('getemail1').value
+    var Avaiphone =  document.getElementById('getphone1').value;
+    var Availtenant =  document.getElementById('gettenant1').value;
+    var Availiabity =  document.getElementById('availaibity1').value;
+    var Availcity =  document.getElementById('getcity1').value;
+     
+
+    var s ={
+      "Notifyname":Availname,
+      "NotifyEmail":AvailEmail,
+      "Notifyphone":Avaiphone,
+      "Notifytenenattype":Availtenant,
+      "Notifyavailibity":Availiabity,
+      "NotifyCity":Availcity,
+     };
+    
+$.ajax({
+      type: "POST",
+      url: "http://localhost:8083/Notifyme",
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(s),
+
+  success: function(responsee){
+    alert("responsee"+responsee)
+    var aaa = JSON.parse(responsee)
+   
+ 
+ }
+
+});
+
+}
+
+   function logout(){
+            
+          $.ajax({
+           type: "GET",
+           url: "http://localhost:8083/Logout",
+         
+         success: function(responsee){
+
+          window.location.reload(true);
+          document.getElementById("Userdetails").style.visibility = "hidden"; 
+         document.getElementById("wishlist").style.visibility = "hidden"; 
+         document.getElementById("logout").style.visibility = "hidden"; 
+         document.getElementById("loginhide").style.visibility = "visible";
+         document.getElementById("signuphide").style.visibility = "visible";  
+         }
+         
+         });
+          
+         }
+ 
+
+ </script>
+
+
+
+</script>
+
+</head>
+
+<body >
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth">
+
+	<!-- Topbar -->
+	<div id="top-bar">
+		<div class="container">
+      <!-- Left Side Content -->
+			<div class="left-side">
+				<ul class="top-bar-menu">
+				    <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+          <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
+				</ul>
+      </div>
+			<div class="right-side">
+        <ul class="social-icons">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
+			</div>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+	<div id="header">
+		<div class="container">
+			<div class="left-side">
+				 <div id="logo">
+					<a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+				 </div>
+         <!-- Mobile Navigation -->
+				<div class="menu-responsive">
+					<i class="fa fa-reorder menu-trigger"></i>
+				</div>
+         <!-- Main Navigation -->
+				<nav id="navigation" class="style-1">
+					<ul id="responsive">
+            <li><a  href="index-2.html">Home</a></li>
+            <li><a href="how_it_works.html">How It Works </a>
+              <ul>
+                <li><a href="owners.html">Owners</a> </li>
+                <li><a href="tenants.html">Tenants</a></li>
+             </ul>
+            </li>
+           <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+           <li><a javascript:Payalert()>Pay Myrent</a></li>
+			    </ul>
+			</nav>
+			<div class="clearfix"></div>
+			</div>
+			<div class="right-side">
+
+				<nav id="navigation" class="style-1">
+          <ul id="responsive">
+          <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
+           <li id="loginhiden">
+          <a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
+          </li>
+           <li style="display:none" id="account"><a href="#">My Account</a>
+            <ul>
+                    <li><a href="my-profile.html">My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                   <li><a href="javascript:logout()">Logout</a></li>
+                   
+                  </ul> 
+                </li> 
+          </ul>
+       </nav>
+		</div>
+	</div>
+</div>
+</header>
+
+
+
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Content
+================================================== -->
+<div class="fs-container">
+
+	<div class="fs-inner-container">
+  <!-- <div class="fs-inner-container"> -->
+
+    <!-- Map -->
+    <div id="map-container">
+        <div id="map" data-map-zoom="4" data-map-scroll="true">
+            <!-- map goes here -->
+        </div>
+
+        <!-- Map Navigation -->
+      <a href="#" id="geoLocation" title="Your location"></a>
+      <ul id="mapnav-buttons" class="top">
+          <li><a href="#" id="prevpoint" title="Previous point on map">Prev</a></li>
+          <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
+      </ul>
+    </div>
+
+  <!-- </div> -->
+
+
+	
+		 
+				 <!-- <div> -->
+            <!-- <iframe  id="map-canvas" frameborder="0" style="border:0"   allowfullscreen="">
+            </iframe> -->
+         <!--  <iframe id="map-canvas" frameborder="0" style="border:0" allowfullscreen=""    
+          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q=electronic city ,Banglore,India">
+            </iframe> -->
+		    <!-- Map Navigation -->
+			<!-- <a href="#" id="geoLocation" title="Your location"></a>
+			<ul id="mapnav-buttons" class="top">
+			    <li><a href="#" id="prevpoint" title="Previous point on map">Prev</a></li>
+			    <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
+			</ul> -->
+		<!-- </div> -->
+
+	</div>
+
+
+	<div class="fs-inner-container">
+		<div class="fs-content">
+
+			<!-- Search -->
+			<section >
+
+				<div class="row">
+					<div class="col-md-12">
+
+						
+
+						<!-- Form -->
+						<div>
+
+
+							<!-- Row With Forms -->
+							<div class="row with-forms">
+
+								<!-- Main Search Input -->
+							<!-- 	<div class="col-fs-6">
+									<input type="text" placeholder="Enter address e.g. street, city or state" value=""/>
+								</div> -->
+		<a href="#" class="more-search-options-trigger margin-top-20" data-open-title="Filter Options" data-close-title="Less Options" style="margin-left:70%;"></a>
+
+							<div class="more-search-options relative" >
+								<div class="more-search-options-container margin-top-30" style="margin-left:5%;">
+								
+								<!-- Property Type -->
+								<div class="row with-forms">
+								<div class="col-fs-3">
+									<select data-placeholder="Tenant Type" class="chosen-select-no-single" id="tenantType">
+										<option >Tenant Type </option>	
+										<option value="Girls">Girls</option>
+										<option value="Boys">Boys</option>
+										<option value="Family">Family</option>
+										
+									</select>
+								</div>
+								<div class="col-fs-2" style="width:47%">
+									<select data-placeholder="House Type" class="chosen-select-no-single" id="houseType">
+										<option>House Type </option>	
+										<option value="Apartment">Apartment</option>
+										<option value="Independent">Independent House</option>
+										<option value="Villa">Villa</option>
+										
+									</select>
+								</div>
+								</div>
+
+							
+							<!-- Row With Forms / End -->
+
+
+							<!-- Row With Forms -->
+							<div class="row with-forms">
+
+								<!-- Min Price -->
+								<div class="col-fs-3">
+									
+									<!-- Select Input -->
+									<div class="select-input disabled-first-option">
+										<input type="text" placeholder="Min Rent" data-unit="$" id="getmin">
+										<select>	
+											<option>Min </option>
+											<option value="5000">5000</option>
+											<option value="7500">7500</option>
+											<option value="10000">10000</option>
+											<option value="12500">12500</option>
+											<option value="15000">15000</option>
+											<option value="20000">20000</option>
+											<option value="25000">25000</option>
+											<option value="30000">30000+</option>
+										</select>
+									</div>
+									<!-- Select Input / End -->
+
+								</div>
+
+								<!-- Max Price -->
+								<div class="col-fs-3" style="width:47%">
+									
+									<!-- Select Input -->
+									<div class="select-input disabled-first-option">
+										<input type="text" placeholder="Max Rent"  data-unit="$" id="getmax">
+										<select>	
+											<option>Max </option>
+											<option value="7500">7500</option>
+											<option value="10000">10000</option>
+											<option value="12500">12500</option>
+											<option value="15000">15000</option>
+											<option value="20000">20000</option>
+											<option value="25000">25000</option>
+											<option value="30000">30000+</option>
+										</select>
+									</div>
+									<!-- Select Input / End -->
+
+								</div>
+								</div>
+	<!-- Row With Forms -->
+
+							<div class="row with-forms">
+
+								
+								<!-- Property Type -->
+								<div class="col-fs-3">
+									<select data-placeholder="Furnished Type" class="chosen-select-no-single" id="furnishingType">
+										<option >Furnished Type</option>	
+										<option value="Fully Furnished">Fully Furnished</option>
+										<option value="Semi Furnished">Semi Furnished</option>
+										<option value="Unfurnished">UnFurnished</option>
+										
+									</select>
+								</div>
+								<div class="col-fs-3" style="width:47%">
+									<select data-placeholder="Booking Type" class="chosen-select-no-single" id="bookingType" >
+										<option>Booking Type </option>	
+										<option value="Shared Room">Shared Room</option>
+										<option value="Private Room">Private Room</option>
+										<option value="Entire House">Entire House</option>
+										
+									</select>
+								</div>
+
+							</div>
+							<!-- Row With Forms / End -->
+
+
+
+							<div class="row with-forms">
+								<!-- Min Price -->
+								<div class="col-fs-3">
+									
+									<!-- Select Input -->
+									<div class="select-input disabled-first-option">
+										<input type="text" placeholder="Distance" data-unit="KM" id="distance">
+										<select  >	
+										<option label="blank"></option>	
+											<option>Distance </option>
+											<option value="1">1 Km</option>
+											<option value="2">2 Km</option>	
+											<option value="3">3 Km</option>	
+											<option value="4">4 Km</option>	
+											<option value="5">5 Km</option>	
+											
+										</select>
+									</div>
+									<!-- Select Input / End -->
+
+								</div>
+
+	<!-- Row With Forms -->
+									<div class="row with-forms">
+										<!-- Rooms Area -->
+										<div class="col-fs-3" style="width:46%">
+											<select data-placeholder="BHK" class="chosen-select-no-single" id="getbhk">
+												<option label="blank"></option>	
+												<option>Bhk </option>	
+												<option value="1">1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
+
+										</div>
+										</div>
+		<div class="row with-forms" style="display:none">
+
+										<!-- Min Area -->
+										<div class="col-fs-3">
+											<select data-placeholder="Beds" class="chosen-select-no-single" id="getbed">
+												<option label="blank"></option>	
+												<option>Beds </option>	
+												<option value="1" >1</option>
+												<option value="2">2</option>
+												<option value="3">3</option>
+												<option value="4">4</option>
+												<option value="5">5</option>
+											</select>
+										</div>
+ </div>
+								    
+
+									<!-- Checkboxes -->
+									<div class="checkboxes in-row">
+								
+										<input id="check-2" type="checkbox" name="check">
+										<label for="check-2">Air Conditioning</label>
+
+										<input id="check-3" type="checkbox" name="check">
+										<label for="check-3">Swimming Pool</label>
+
+										<input id="check-4" type="checkbox" name="check" >
+										<label for="check-4">Central Heating</label>
+
+										<input id="check-5" type="checkbox" name="check">
+										<label for="check-5">Laundry Room</label>	
+
+
+										<input id="check-6" type="checkbox" name="check">
+										<label for="check-6">Gym</label>
+
+										<input id="check-7" type="checkbox" name="check">
+										<label for="check-7">Alarm</label>
+
+										<input id="check-8" type="checkbox" name="check">
+										<label for="check-8">Window Covering</label>
+								
+									</div>
+									<!-- Checkboxes / End -->
+
+										<button class="button fs-map-btn" onclick="GetFilterhome()">Update</button>
+
+													</div>
+								</div>
+
+							</div>
+						
+
+						</div>
+						<!-- Box / End -->
+					</div>
+			
+
+			</section>
+			<!-- Search / End -->
+
+
+
+			<!-- Listings Container -->
+			<div class="row fs-listings">
+
+				<!-- Displaying -->
+				<div class="col-md-12">
+					<p class="showing-results" id="property"></p>
+				</div>
+                
+                <div class="listings-container grid-layout" id="listContainer">
+
+
+
+                 </div>
+				
+
+		</div>
+	</div>
+
+</div>
+
+<!-- The Modal -->
+<div id="myModal1" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" style="width:40%;">
+    <span class="close">&times;</span>
+
+   <span style="color:black">Pay My rent is Comming soon!...</span>
+  
+
+</div>
+</div>
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+ <!-- <script src="http://vast-eng.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script> -->
+
+
+<!-- Maps -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&sensor=false&amp;language=en"></script>
+<script type="text/javascript" src="scripts/infobox.min.js"></script>
+<script type="text/javascript" src="scripts/markerclusterer.js"></script>
+<script type="text/javascript" src="scripts/maps.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+
+
+
+</div>
+<!-- Wrapper / End -->
+
+</body>
+</html>

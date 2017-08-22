@@ -1,0 +1,1036 @@
+<!-- Rentmatics v1 (140417)-->
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
+      <meta name="author" content="">
+      <meta name="google-signin-client_id" content="512343144553-4uoof7pml3lajhivpajgru0jo2u6mdnh.apps.googleusercontent.com">
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+     <style>
+         .ui-autocomplete {
+         color: black;
+         font-family: font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+         line-height: 2.5;
+         font-size:14.9px;
+         border-radius: 0px;
+         border: 3px solid #454545;
+         }
+         .ui-state-active,
+         .ui-widget-content .ui-state-active,
+         .ui-widget-header .ui-state-active,
+         a.ui-button:active,
+         .ui-button:active,
+         .ui-button.ui-state-active:hover {
+         background-color:  #FF4D58;
+         border-color: #eceff1;
+         }
+         
+         ul.dropdown-menu>li>a:hover{
+         background: #FF4D58 !important;
+         }
+      </style>
+      <script src="js/jquery.min.js"></script>
+      <script type="text/javascript" src="js/jquery.cookie.min.js"></script>
+      <script type="text/javascript">
+         var loginidd="";
+         var cooki=$.cookie('RentmaticsCookie');
+         $(document).ready(function(){
+          if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+            document.getElementById("Userdetails").style.visibility = "hidden"; 
+            document.getElementById("loginhide").style.visibility = "visible"; 
+            document.getElementById("signuphide").style.visibility = "visible";
+            document.getElementById("Userdetails1").style.visibility = "hidden"; 
+            document.getElementById("loginhide1").style.visibility = "visible"; 
+            document.getElementById("signuphide1").style.visibility = "visible"; 
+            }else{
+             	
+             	 document.getElementById("loginhide").style.display = "none"; 
+             	 document.getElementById("signuphide").style.display = "none"; 
+             	 $("#login").html(cooki);
+          document.getElementById("Userdetails").style.visibility = "visible"; 
+          document.getElementById("wishlist").style.visibility = "visible"; 
+          document.getElementById("logout").style.visibility = "visible";
+
+          document.getElementById("loginhide1").style.display = "none"; 
+               document.getElementById("signuphide1").style.display = "none"; 
+               $("#login1").html(cooki);
+          document.getElementById("Userdetails1").style.visibility = "visible"; 
+          document.getElementById("wishlist1").style.visibility = "visible"; 
+          document.getElementById("logout1").style.visibility = "visible";
+         
+         
+          $("#wish").html("Wishlist");
+         
+         
+             }
+         });
+         
+
+
+    function Login(){
+    	var loginuser=document.getElementById('uname').value;
+    var loginpass=document.getElementById('upass').value;
+
+var Rentmatics ={
+         	  
+         	"Username": loginuser,
+         	"Password":loginpass,
+         	
+              
+              };
+               
+         
+             $.ajax({
+               type: "POST",
+               url: "http://localhost:8083/Login",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(Rentmatics),
+         
+           success: function(responsee){
+           var searchout = JSON.parse(responsee);
+           console.log("^^^^^^^^^^^^^^^^^^6");
+           console.log(searchout.Status);
+
+
+          if (searchout.Status == "Success"){
+
+ 			loginidd=searchout.Loginid;
+      alert("loogin id="+loginidd);
+         
+          
+           $("#login").html(loginidd);
+          document.getElementById("loginhide").style.display = "none"; 
+          document.getElementById("signuphide").style.display = "none"; 
+          document.getElementById("Userdetails").style.visibility = "visible"; 
+
+
+
+          document.getElementById("loginhide1").style.display = "none"; 
+          document.getElementById("signuphide1").style.display = "none"; 
+          document.getElementById("Userdetails1").style.visibility = "visible"; 
+
+
+          }else{
+
+          	alert("Incorect Username and Password")
+
+          }
+         
+
+
+}
+});
+}
+      
+         
+   function SignupRent(){
+ 	var signuser=document.getElementById('Susername').value;
+    var signpass=document.getElementById('cpassword').value;
+    var signemail=document.getElementById('Semail').value;
+    var Rentmatics ={
+         	"Id ": "",      
+         	"Username": signuser,
+         	"Password":signpass,
+         	"Loginid":  signemail, 
+         	"Logintype": "Rentmatics"
+              
+              };
+               
+         
+             $.ajax({
+               type: "POST",
+               url: "http://localhost:8083/User",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(Rentmatics),
+         
+            success: function(responsee){
+           var searchout = JSON.parse(responsee);
+           var uservalue=searchout.Username;
+           loginidd=searchout.Loginid;
+         
+          
+           $("#login").html(loginidd);
+           alert("loogin id="+loginidd);
+          document.getElementById("loginhide").style.display = "none"; 
+          document.getElementById("signuphide").style.display = "none"; 
+          document.getElementById("Userdetails").style.visibility = "visible"; 
+         
+
+
+           document.getElementById("loginhide1").style.display = "none"; 
+          document.getElementById("signuphide1").style.display = "none"; 
+          document.getElementById("Userdetails1").style.visibility = "visible"; 
+        }
+          });
+         }
+         
+           
+            function Getwish(){
+              alert("inside wish "+loginidd);
+            url = "wishlist.html";
+         	document.location.href = url;
+         				
+          }   
+         
+         
+         			var auth2; // The Sign-In object.
+         			var googleUser; // The current user.
+					var appStart = function() {
+         			  gapi.load('auth2', initSigninV2);
+         			};
+         			var initSigninV2 = function() {
+         			  auth2 = gapi.auth2.init({
+         			      client_id: 'CLIENT_ID.apps.googleusercontent.com',
+         			      scope: 'profile'
+         			  });
+         
+         			  
+         			  auth2.isSignedIn.listen(signinChanged);
+        			  auth2.currentUser.listen(userChanged);
+         
+         			  if (auth2.isSignedIn.get() == true) {
+         			    auth2.signIn();
+         			  }
+					  refreshValues();
+         			};
+         
+         			
+         			var signinChanged = function (val) {
+         			  console.log('Signin state changed to ', val);
+         			  
+         			};
+         
+         			var userChanged = function (user) {
+         			  console.log('User now: ', user);
+         			  googleUser = user;
+         			  updateGoogleUser();
+         			 
+         			};
+         
+         			
+         			var updateGoogleUser = function () {
+         			  if (googleUser) {
+         			  	console.log("got google user");
+         			  	console.log(googleUser)
+         			    
+         			  } else {
+         			  	console.log("did nit get google user");
+         			  
+         			  }
+         			};
+         
+         			
+         			var refreshValues = function() {
+         			  if (auth2){
+         			    console.log('Refreshing values...');
+         
+         			    googleUser = auth2.currentUser.get();
+         				console.log(googleUser)
+         				updateGoogleUser();
+         			  }
+         			}
+
+               function GsignOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function () {
+      console.log('User signed out.');
+      
+    });
+  }
+
+
+
+  var delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+
+
+         function logout(){
+         
+         GsignOut();
+         
+         
+         // $.removeCookie('RentmaticsCookie');
+         delete_cookie("RentmaticsCookie");
+         
+         
+         
+          $.ajax({
+           type: "GET",
+           url: "http://localhost:8083/Logout",
+         
+         success: function(responsee){
+          document.getElementById("Userdetails").style.visibility = "hidden"; 
+         document.getElementById("wishlist").style.visibility = "hidden"; 
+         document.getElementById("logout").style.visibility = "hidden"; 
+         document.getElementById("loginhide").style.visibility = "visible";
+         document.getElementById("signuphide").style.visibility = "visible";  
+
+
+         document.getElementById("Userdetails1").style.visibility = "hidden"; 
+         document.getElementById("wishlist1").style.visibility = "hidden"; 
+         document.getElementById("logout1").style.visibility = "hidden"; 
+         document.getElementById("loginhide1").style.visibility = "visible";
+         document.getElementById("signuphide1").style.visibility = "visible";  
+         }
+         
+         });
+          
+         }
+
+
+         			var email="";
+         function onSignIn(googleUser) {
+         					alert("inside google")
+         			  var profile = googleUser.getBasicProfile();
+         			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+         			  console.log('Name: ' + profile.getName());
+         			  console.log('Image URL: ' + profile.getImageUrl());
+         			  console.log('Email: ' + profile.getEmail()); 
+         
+         			  // This is null if the 'email' scope is not present.
+         			
+          				var Id = profile.getId(); // Do not send to your backend! Use an ID token instead.
+         			 var name = profile.getName();
+         			// var iamprofile.getImageUrl());
+         			   email = profile.getEmail();
+         
+         
+         
+         var Gmail ={
+         	"Id ": Id,      
+         	"Username": name,
+         	"Password":  "",
+         	"Loginid":  email, 
+         	"Logintype": "Gmail"
+              
+              };
+               
+         
+             $.ajax({
+               type: "POST",
+               url: "http://localhost:8083/User",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(Gmail),
+         
+            success: function(responsee){
+            	var searchout = JSON.parse(responsee);
+         
+         
+         
+          console.log("response");
+          console.log(searchout)
+          var uservalue=searchout.Username;
+         
+          // $("#Userdetails").html(uservalue);
+         
+            $("#login").html(uservalue);
+         
+         
+         
+          document.getElementById("loginhide").style.display = "none"; 
+          document.getElementById("signuphide").style.display = "none"; 
+          document.getElementById("Userdetails").style.visibility = "visible"; 
+
+
+          document.getElementById("loginhide1").style.display = "none"; 
+          document.getElementById("signuphide1").style.display = "none"; 
+          document.getElementById("Userdetails1").style.visibility = "visible"; 
+         
+         
+         
+          }
+         
+         });
+         			}
+         
+     function signOut() {
+             var auth2 = gapi.auth2.getAuthInstance();
+             auth2.signOut().then(function () {
+         	 console.log('User signed out.');
+         			    });
+         			  }
+         		
+           window.fbAsyncInit = function() {
+             FB.init({
+               appId      : '837076093106264',
+               xfbml      : true,
+               version    : 'v2.9'
+             });
+             FB.AppEvents.logPageView();
+           };
+         
+           (function(d, s, id){
+              var js, fjs = d.getElementsByTagName(s)[0];
+              if (d.getElementById(id)) {return;}
+              js = d.createElement(s); js.id = id;
+              //js.src = "//connect.facebook.net/en_US/sdk.js";
+              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1243386559017640";
+              fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+         
+          // This is called with the results from from FB.getLoginStatus().
+           function statusChangeCallback(response) {
+             console.log('statusChangeCallback');
+             console.log(response);
+            
+             if (response.status === 'connected') {
+               // Logged into your app and Facebook.
+               testAPI();
+             } else {
+             
+               
+             }
+           }
+         
+           function checkLoginState() {
+             FB.getLoginStatus(function(response) {
+               statusChangeCallback(response);
+             });
+           }
+         
+         
+           function testAPI() {
+             console.log('Welcome!  Fetching your information.... ');
+             FB.api('/me', function(response) {
+               console.log('Successful login for: ' + response.name);
+               console.log(response);
+               document.getElementById('status').innerHTML =
+                 'Thanks for logging in, ' + response.name + '!';
+             });
+           }
+         
+           //Post Data to Next page
+         function Gethomes(){
+            
+             var cities =  document.getElementById('tags').value;
+             
+             	for(i=0;i<Tags.length;i++){
+         				if(cities==Tags[i].City){
+                  "http://example.com/index.html?url=" + encodeURIComponent(  );
+         				
+         				  url = 'search_result.html?url=Id=' + encodeURIComponent(Tags[i].Id+'&loginid=sandy@gmail.com');
+                  //var safeUrlPart = encodeURIComponent(url.replace(/\./g, '&#46;'));
+
+            				 document.location.href = url;
+         				}
+         		 }
+             }   
+         
+          
+      </script>
+      <link rel="icon" href="img/favicon.ico">
+      <title>Rentmatics — Find Your Best Rentspace</title>
+      <!-- Google font Source Sans Pro -->
+      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
+      <!-- Fontawesome Icons -->
+      <link href="css/font-awesome.min.css" rel="stylesheet">
+      <!-- Bootstrap -->
+      <link href="css/bootstrap.min.css" rel="stylesheet">
+      <!-- Custom CSS -->
+      <link href="css/style.css" rel="stylesheet">
+   </head>
+   <body>
+      <div id="mySidenav" class="sidenav">
+         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+            <svg class="close-icon" width="30" height="30" viewBox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+               <path d="M16.326 15l13.4-13.4c.366-.366.366-.96 0-1.325-.366-.367-.96-.367-1.326 0L15 13.675 1.6.275C1.235-.093.64-.093.275.275c-.367.365-.367.96 0 1.324l13.4 13.4-13.4 13.4c-.367.364-.367.96 0 1.323.182.184.422.275.662.275.24 0 .48-.09.663-.276l13.4-13.4 13.4 13.4c.183.184.423.275.663.275.24 0 .48-.09.662-.276.367-.365.367-.96 0-1.324L16.325 15z" fill-rule="evenodd"></path>
+            </svg>
+         </a>
+                    
+                     <li id="signuphide1"><a data-toggle="modal" data-target="#signupModal" >Sign up</a></li>
+                     <li id="loginhide1"><a data-toggle="modal" data-target="#loginModal" >Login</a></li>
+                     <!-- <li class="active" id="Userdetails" style="display:none;"><a href="#" id="login" ></a></li> -->
+                     <li   id="Userdetails1" style="visibility:hidden">
+                        <a href="#"   role="button"  id="login1">Login</a></li>
+                         <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                     <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
+                        
+                           <li class="active" id="wishlist1"><a href="javascript:Getwish()" >Wishlist</a></li>
+<!--                            <li><a href="#">Settings</a></li>
+ -->                           <li id="logout1"><a href="javascript:logout()"  >Logout</a></li>
+                        
+                   
+                       
+                    
+      </div>
+      <script>
+           
+
+     
+         
+         
+         
+      </script>
+      <!-- jumbotran
+         =================================== -->
+      <div class="flxc jumbotran">
+         <!-- Navbar -->
+         <nav class="navbar navbar-inverse rm-navbar">
+            <div class="container-fluid">
+               <div class="navbar-header">
+                  <button type="button" class="navbar-toggle rm-toggle" onclick="openNav()">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  </button>
+                  <a class="navbar-brand" href="#"><img src="img/rm_logo.png" alt="Rentmatics"></a>
+               </div>
+               <div id="navbar" class="collapse navbar-collapse">
+                  <ul class="nav navbar-nav navbar-right rm-nav">
+                     <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                     <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
+                     <li id="signuphide"><a data-toggle="modal" data-target="#signupModal" >Sign up</a></li>
+                     <li id="loginhide"><a data-toggle="modal" data-target="#loginModal" >Login</a></li>
+                     <!-- <li class="active" id="Userdetails" style="display:none;"><a href="#" id="login" ></a></li> -->
+                     <li class="dropdown"  id="Userdetails" style="visibility:hidden">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  id="login">Login</a>
+                        <ul class="dropdown-menu">
+                           <li  id="wishlist"><a href="javascript:Getwish()" >Wishlist</a></li>
+                           <li><a href="#">Settings</a></li>
+                           <li id="logout"><a href="javascript:logout()"  >Logout</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+               </div>
+               <!--/.nav-collapse -->
+            </div>
+         </nav>
+         <!-- /Navbar -->
+         <div class="container jumbo-conent">
+            <div class="search-wrap">
+               <h1 class="page-title">Find Your Best Rentspace</h1>
+               <div class="flx main-searchbar">
+                  <div class="search-inp flx1">
+                     <input type="text" value="" placeholder="Search by locality, landmark or office location" autocomplete="off" id="tags" >
+                  </div>
+                  <div class="search-option">
+                     <select class="search-option-dropdown">
+                        <option value="">Any</option>
+                        <option value="">Girls (2)</option>
+                        <option value="">Families (1)</option>
+                     </select>
+                  </div>
+                  <a class="search-submit-btn" href="javascript:Gethomes();">
+                  <i class="fa fa-search"></i>
+                  <span>Search</span>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Find your best rentspace
+         =================================== -->
+      <div class="content-block find-best">
+         <div class="container">
+            <!-- title -->
+            <div class="section-title-wrap">
+               <h4 class="content-block-title">Find Your Best RentSpace</h4>
+               <span class="content-block-micro">Search spaces as your wise and you choice</span>
+            </div>
+            <!-- /title -->
+            <div class="row">
+               <div class="col-md-4">
+                  <a class="item">
+                     <div class="card-item">
+                        <div class="card-img" style="background-image: url('http://rentmatics.com/wp-content/uploads/2015/11/11_listable_demo-450x341.jpg');">
+                        </div>
+                        <div class="card-content">
+                           <h2 class="card-title">Jago Food</h2>
+                           <div class="card-tagline">Southern European and Ashkenazi cuisine</div>
+                           <footer class="flxcr card-footer">
+                              <div class="card-rating  card-pin">
+                                 <svg width="14px" height="20px" viewBox="0 0 14 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                       <path d="M7,0 C3.13383665,0 0,3.0828692 0,6.88540084 C0,10.68827 6.33390528,20 7,20 C7.66609472,20 14,10.68827 14,6.88540084 C14,3.0828692 10.8661633,0 7,0 L7,0 Z M7,9.87341772 C5.2947838,9.87341772 3.91146191,8.51274262 3.91146191,6.83544304 C3.91146191,5.15814346 5.2947838,3.79746835 7,3.79746835 C8.7052162,3.79746835 10.0885381,5.15814346 10.0885381,6.83544304 C10.0885381,8.51274262 8.7052162,9.87341772 7,9.87341772 L7,9.87341772 Z" id="Imported-Layers-Copy-5" fill="currentColor" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                 </svg>
+                              </div>
+                              <div class="address card-address">
+                                 <span class="address-street">Ethiraj Salai</span>
+                                 <span class="address-street-no">2</span>
+                                 <span class="address-city">Chennai</span>
+                                 <span class="address-postcode">600008</span>
+                                 <span class="address-country">IN</span>
+                                 <span class="address-country-short">India</span>
+                              </div>
+                              <ul class="card-tags">
+                                 <li>
+                                    <div class="card-tag">
+                                       <div class="pin-icon">
+                                          <svg class="icon" width="26" height="24" viewBox="0 0 26 24" xmlns="http://www.w3.org/2000/svg">
+                                             <g transform="translate(-11 -12)" fill="none" fill-rule="evenodd">
+                                                <circle stroke="currentColor" stroke-width="2" cx="24" cy="24" r="24"></circle>
+                                                <g fill="currentColor">
+                                                   <path d="M28 36h-7v-5h-3v5h-7V12h17v24zm-6-1h5V13H12v22h5v-5h5v5z"></path>
+                                                   <path d="M18.5 27.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM25.5 27.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM34.5 27.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM34.5 33.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM18.5 20.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM25.5 20.5h-5v-5h5v5zm-4-1h3v-3h-3v3z"></path>
+                                                   <path d="M37 36H27V20h10v16zm-9-1h8V21h-8v14z"></path>
+                                                </g>
+                                             </g>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </footer>
+                        </div>
+                        <!-- .card__content -->
+                     </div>
+                  </a>
+               </div>
+               <div class="col-md-4">
+                  <a class="item">
+                     <div class="card-item">
+                        <div class="card-img" style="background-image: url('http://rentmatics.com/wp-content/uploads/2015/11/11_listable_demo-450x341.jpg');">
+                        </div>
+                        <div class="card-content">
+                           <h2 class="card-title">Jago Food</h2>
+                           <div class="card-tagline">Southern European and Ashkenazi cuisine</div>
+                           <footer class="flxcr card-footer">
+                              <div class="card-rating  card-pin">
+                                 <svg width="14px" height="20px" viewBox="0 0 14 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                       <path d="M7,0 C3.13383665,0 0,3.0828692 0,6.88540084 C0,10.68827 6.33390528,20 7,20 C7.66609472,20 14,10.68827 14,6.88540084 C14,3.0828692 10.8661633,0 7,0 L7,0 Z M7,9.87341772 C5.2947838,9.87341772 3.91146191,8.51274262 3.91146191,6.83544304 C3.91146191,5.15814346 5.2947838,3.79746835 7,3.79746835 C8.7052162,3.79746835 10.0885381,5.15814346 10.0885381,6.83544304 C10.0885381,8.51274262 8.7052162,9.87341772 7,9.87341772 L7,9.87341772 Z" id="Imported-Layers-Copy-5" fill="currentColor" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                 </svg>
+                              </div>
+                              <div class="address card-address">
+                                 <span class="address-street">Ethiraj Salai</span>
+                                 <span class="address-street-no">2</span>
+                                 <span class="address-city">Chennai</span>
+                                 <span class="address-postcode">600008</span>
+                                 <span class="address-country">IN</span>
+                                 <span class="address-country-short">India</span>
+                              </div>
+                              <ul class="card-tags">
+                                 <li>
+                                    <div class="card-tag">
+                                       <div class="pin-icon">
+                                          <svg class="icon" width="26" height="24" viewBox="0 0 26 24" xmlns="http://www.w3.org/2000/svg">
+                                             <g transform="translate(-11 -12)" fill="none" fill-rule="evenodd">
+                                                <circle stroke="currentColor" stroke-width="2" cx="24" cy="24" r="24"></circle>
+                                                <g fill="currentColor">
+                                                   <path d="M28 36h-7v-5h-3v5h-7V12h17v24zm-6-1h5V13H12v22h5v-5h5v5z"></path>
+                                                   <path d="M18.5 27.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM25.5 27.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM34.5 27.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM34.5 33.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM18.5 20.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM25.5 20.5h-5v-5h5v5zm-4-1h3v-3h-3v3z"></path>
+                                                   <path d="M37 36H27V20h10v16zm-9-1h8V21h-8v14z"></path>
+                                                </g>
+                                             </g>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </footer>
+                        </div>
+                        <!-- .card__content -->
+                     </div>
+                  </a>
+               </div>
+               <div class="col-md-4">
+                  <a class="item">
+                     <div class="card-item">
+                        <div class="card-img" style="background-image: url('http://rentmatics.com/wp-content/uploads/2015/11/11_listable_demo-450x341.jpg');">
+                        </div>
+                        <div class="card-content">
+                           <h2 class="card-title">Jago Food</h2>
+                           <div class="card-tagline">Southern European and Ashkenazi cuisine</div>
+                           <footer class="flxcr card-footer">
+                              <div class="card-rating  card-pin">
+                                 <svg width="14px" height="20px" viewBox="0 0 14 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                                    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                                       <path d="M7,0 C3.13383665,0 0,3.0828692 0,6.88540084 C0,10.68827 6.33390528,20 7,20 C7.66609472,20 14,10.68827 14,6.88540084 C14,3.0828692 10.8661633,0 7,0 L7,0 Z M7,9.87341772 C5.2947838,9.87341772 3.91146191,8.51274262 3.91146191,6.83544304 C3.91146191,5.15814346 5.2947838,3.79746835 7,3.79746835 C8.7052162,3.79746835 10.0885381,5.15814346 10.0885381,6.83544304 C10.0885381,8.51274262 8.7052162,9.87341772 7,9.87341772 L7,9.87341772 Z" id="Imported-Layers-Copy-5" fill="currentColor" sketch:type="MSShapeGroup"></path>
+                                    </g>
+                                 </svg>
+                              </div>
+                              <div class="address card-address">
+                                 <span class="address-street">Ethiraj Salai</span>
+                                 <span class="address-street-no">2</span>
+                                 <span class="address-city">Chennai</span>
+                                 <span class="address-postcode">600008</span>
+                                 <span class="address-country">IN</span>
+                                 <span class="address-country-short">India</span>
+                              </div>
+                              <ul class="card-tags">
+                                 <li>
+                                    <div class="card-tag">
+                                       <div class="pin-icon">
+                                          <svg class="icon" width="26" height="20" viewBox="0 0 26 20" xmlns="http://www.w3.org/2000/svg">
+                                             <g transform="translate(-11 -14)" fill="none" fill-rule="evenodd">
+                                                <circle stroke="currentColor" stroke-width="2" cx="24" cy="24" r="24"></circle>
+                                                <g fill="currentColor">
+                                                   <path d="M36.103 33.276H11.897V20.724h24.206v12.552zm-23.31-.897h22.414V21.62H12.793v10.76z"></path>
+                                                   <path d="M26.69 33.276h-5.38v-7.173h5.38v7.173zm-4.483-.897h3.586V27h-3.586v5.38zM19.517 28.793h-4.483v-4.93h4.483v4.93zm-3.586-.896h2.69V24.76h-2.69v3.137z"></path>
+                                                   <path d="M16.828 24.76h.897v3.137h-.897zM32.966 28.793h-4.483v-4.93h4.483v4.93zm-3.587-.896h2.69V24.76h-2.69v3.137z"></path>
+                                                   <path d="M30.276 24.76h.897v3.137h-.897zM12.345 30.586h9.414v.897h-9.415zM26.24 30.586h9.415v.897H26.24zM23.552 22.517h.897v1.345h-.898z"></path>
+                                                   <path d="M26.062 25.207h-4.124l.896-1.793h2.332l.896 1.793zm-2.69-.897h1.256-1.256zM24.448 29.24h.897v.898h-.897zM37 21.62H11v-2.554l13-4.663 13 4.663v2.555zm-25.103-.896h24.206v-1.03L24 15.39l-12.103 4.303v1.03z"></path>
+                                                </g>
+                                             </g>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                 </li>
+                                 <li>
+                                    <div class="card-tag">
+                                       <div class="pin-icon">
+                                          <svg class="icon" width="26" height="24" viewBox="0 0 26 24" xmlns="http://www.w3.org/2000/svg">
+                                             <g transform="translate(-11 -12)" fill="none" fill-rule="evenodd">
+                                                <circle stroke="currentColor" stroke-width="2" cx="24" cy="24" r="24"></circle>
+                                                <g fill="currentColor">
+                                                   <path d="M28 36h-7v-5h-3v5h-7V12h17v24zm-6-1h5V13H12v22h5v-5h5v5z"></path>
+                                                   <path d="M18.5 27.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM25.5 27.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM34.5 27.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM34.5 33.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM18.5 20.5h-5v-5h5v5zm-4-1h3v-3h-3v3zM25.5 20.5h-5v-5h5v5zm-4-1h3v-3h-3v3z"></path>
+                                                   <path d="M37 36H27V20h10v16zm-9-1h8V21h-8v14z"></path>
+                                                </g>
+                                             </g>
+                                          </svg>
+                                       </div>
+                                    </div>
+                                 </li>
+                              </ul>
+                           </footer>
+                        </div>
+                        <!-- .card__content -->
+                     </div>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- How it works
+         =================================== -->
+      <div class="content-block how-it-works">
+         <div class="container">
+            <!-- title -->
+            <div class="section-title-wrap">
+               <h4 class="content-block-title">How it works</h4>
+               <span class="content-block-micro">Discover how rentmatics can you help you find everything you want</span>
+            </div>
+            <!-- /title -->
+            <div class="row">
+               <div class="col-md-4">
+                  <a class="item">
+                     <div class="card2">
+                        <img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/phone.png">
+                        <div class="cardTitle">Book and Confirm</div>
+                        <p class="cardText">Search and filter hundreds of listings, read reviews, explore photos and find the perfect spot.</p>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-md-4">
+                  <a class="item">
+                     <div class="card2">
+                        <img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/find.png">
+                        <div class="cardTitle">Check In and Work</div>
+                        <p class="cardText">Go and have a good time or even make a booking directly from the listing page. All of those, thanks to Listable!</p>
+                     </div>
+                  </a>
+               </div>
+               <div class="col-md-4">
+                  <a class="item">
+                     <div class="card2">
+                        <img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/save.png">
+                        <div class="cardTitle">Find a Space</div>
+                        <p class="cardText">Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a mall to do some shopping?</p>
+                     </div>
+                  </a>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Tips & Articles
+         ===================================-->
+      <div class="content-block tips-n-articles">
+         <div class="container">
+            <!-- title -->
+            <div class="section-title-wrap">
+               <h4 class="content-block-title">Tips & Articles</h4>
+               <span class="content-block-micro">Browse the latest articles from our blog</span>
+            </div>
+            <!-- /title -->
+            <div class="row">
+               <div class="col-md-4">
+                  <div class="item">
+                     <div class="card3">
+                        <div class="card3-img" style="background-image: url('http://rentmatics.com/wp-content/uploads/2015/11/03_listable_demo-450x300.jpg')"></div>
+                        <div class="card-content">
+                           <div class="cardTitle"><a class="link1">Etiquette tips for travellers</a></div>
+                           <div class="card-meta">
+                              <span class="posted-on"><a class="link2">October 20, 2015</a></span>			
+                              <ul class="card-links">
+                                 <li><a class="link2">Travelling</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="item">
+                     <div class="card3">
+                        <div class="card3-img" style="background-image: url('http://rentmatics.com/wp-content/uploads/2015/11/13_listable_demo-450x253.jpg')"></div>
+                        <div class="card-content">
+                           <div class="cardTitle"><a class="link1">The Annual Gathering Comunity</a></div>
+                           <div class="card-meta">
+                              <span class="posted-on"><a class="link2">October 10, 2015</a></span>			
+                              <ul class="card-links">
+                                 <li><a class="link2">Culture</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <div class="col-md-4">
+                  <div class="item">
+                     <div class="card3">
+                        <div class="card3-img" style="background-image: url('http://rentmatics.com/wp-content/uploads/2015/11/00_listable_demo-450x279.jpg')"></div>
+                        <div class="card-content">
+                           <div class="cardTitle"><a class="link1">The Famous Streets of London</a></div>
+                           <div class="card-meta">
+                              <span class="posted-on"><a class="link2">September 17, 2015</a></span>			
+                              <ul class="card-links">
+                                 <li><a class="link2">Travelling</a></li>
+                              </ul>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+            <div class="nav-links">
+               <a class="nav-next" href="http://rentmatics.com/blog/">View All</a>
+            </div>
+         </div>
+      </div>
+      <!-- Testimonial 
+         ===================================-->
+      <div class="content-block testimonial">
+         <div class="container">
+            <div class="carousel slide" data-ride="carousel">
+               <!-- Indicators -->
+               <!-- <ol class="carousel-indicators">
+                  <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                  <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+                  </ol> -->
+               <!-- Wrapper for slides -->
+               <div class="carousel-inner" role="listbox">
+                  <div class="item active">
+                     <div class="testm-block">
+                        <span class="testm-user-pic"></span>
+                        <p class="testm-txt">Useful info, easy to book, trustworthy Website easy to navigate, useful info, easy to book. From experience trustworthy.</p>
+                        <p class="testm-name">Priya</p>
+                        <p class="testm-txt">Tenant</p>
+                     </div>
+                  </div>
+                  <div class="item">
+                     <div class="testm-block">
+                        <span class="testm-user-pic"></span>
+                        <p class="testm-txt">It was a nice experience with Rentmatics. They helped me to find a new home to stay as it was difficult for me,as an individual,to find a home with friendly roommates.Thankfully Rentmatics helped me to get one with all kind of facilities.</p>
+                        <p class="testm-name">Paramesh</p>
+                        <p class="testm-txt">Tenant</p>
+                     </div>
+                  </div>
+                  <div class="item">
+                     <div class="testm-block">
+                        <span class="testm-user-pic"></span>
+                        <p class="testm-txt">I’ve experienced the difficulty of trying to find and connect with a potential roommate, but now with Rentmatics, I’m all set with a friend that understands how I live. Great UX. Will use again and recommend.</p>
+                        <p class="testm-name">Debi Prasanna Shetty</p>
+                        <p class="testm-txt">Tenant</p>
+                     </div>
+                  </div>
+               </div>
+               <!-- Controls -->
+               <!-- <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                  </a>
+                  <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                  </a> -->
+            </div>
+         </div>
+      </div>
+      <!-- Footer
+         ====================================-->
+      <footer class="fat-footer">
+         <!-- Social links -->
+         <div class="social-footer">
+            <div class="container">
+               <ul class="list-inline socLinks">
+                  <li>
+                     <a class="fb" href="https://www.facebook.com/Rentmatics/" target="_blank">
+                     <i class="fa fa-facebook"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="twtr" href="https://twitter.com/rentmatics" target="_blank">
+                     <i class="fa fa-twitter"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="insta" href="https://www.instagram.com/rentmatics/" target="_blank">
+                     <i class="fa fa-instagram"></i>	
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <!-- /Social links -->
+         <!-- Footer text -->
+         <div class="footer-content">
+            <div class="container">
+               <div class="site-info">
+                  <ul class="list-inline footer-menu">
+                     <li>
+                        <a href="http://rentmatics.com/blog/">Blog</a>
+                     </li>
+                     <li>
+                        <a href="http://rentmatics.com/about/">About</a>
+                     </li>
+                     <li>
+                        <a href="http://rentmatics.com/help/">Help</a>
+                     </li>
+                     <li>
+                        <a href="http://rentmatics.com/careers/">Jobs</a>
+                     </li>
+                     <li>
+                        <a href="http://rentmatics.com/contact-us/">Contact Us</a>
+                     </li>
+                     <li>
+                        <a href="http://rentmatics.com/privacy/">Privacy</a>
+                     </li>
+                     <li>
+                        <a href="http://rentmatics.com/terms-conditions/">Terms &amp; Conditions</a>
+                     </li>
+                  </ul>
+               </div>
+               <div class="site-copyright-area">Copyright © 2016 Rentmatics.  •  <i class="fa fa-heart"></i> 
+                  •  Tel: +91-9884379333/9811448697					
+               </div>
+            </div>
+         </div>
+         <!-- Footer text -->
+      </footer>
+      <div class="modal fade vert-centered" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <form>
+                     <div class="rightPanel-wrapper">
+                        <a class="navbar-brand" href="#"><img src="img/rm_logo.png" alt="Rentmatics" style="margin-left:30%"></a>
+                        <div class="rp-form"> 
+                           <br>
+                           <br>
+                           <input type="name" placeholder="Username" class="rpfi" id="Susername" style="font:bold" required >
+                           <br>
+                           <br>
+                           <input type="password" placeholder="Password" class="rpfi" id="password" required>
+                           <br>
+                           <br>
+                           <input type="password" placeholder="Confirm Password" class="rpfi"  id="cpassword" required>
+                           <span id='message'></span>
+                           <br>
+                           <br>
+                           <input type="email" placeholder="Email" class="rpfi" id="Semail" required>
+                           <br>
+                           <button class="btn btn-lg btn-block btn-notify" onclick="SignupRent()">Signup</button>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Modals
+         ===========================================-->
+      <!-- Login / Signup modal -->
+      <div class="modal fade vert-centered" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+         <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+               <div class="modal-body">
+                  <div  scope="public_profile,email" onlogin="checkLoginState();" class="fb-login-button" data-max-rows="1" data-size="large"  data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
+                  <br><br>
+                  <div class="g-signin2" data-onsuccess="onSignIn" data-width="230" data-height="40" data-longtitle="true"></div>
+                  <br>
+                  <p style="margin-left:40%">OR</p>
+                  <div class="rightPanel-wrapper">
+                     <a class="navbar-brand" href="#"><img src="img/rm_logo.png" alt="Rentmatics" style="margin-left:30%"></a>
+                     <br>
+                     <br>
+                     <br>
+                     <div class="rp-form">
+                        <div class="form-group">
+                           <input type="name" placeholder="Username" class="rpfi" id="uname" required>
+                        </div>
+                        <div class="form-group">
+                           <input type="password" placeholder="Password" class="rpfi" id="upass" required>
+                        </div>
+                        <button class="btn btn-lg btn-block btn-notify" onclick="Login()">Login</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- Bootstrap core JavaScript
+         ================================================== -->
+      <!-- Placed at the end of the document so the pages load faster -->
+      <script src="js/jquery.min.js"></script>
+      <script src="js/jquery-1.12.4.js"></script>
+      <script src="js/jquery-ui.js"></script>
+      <!-- Bootstrap JS -->
+      <script src="js/bootstrap.min.js"></script>
+      <!-- Script for Sidebar navigation in mobile resolution -->   
+      <script type="text/javascript">
+         /* Set the width of the side navigation to 250px */
+         function openNav() {
+          document.getElementById("mySidenav").style.width = "300px";
+         }
+         
+         /* Set the width of the side navigation to 0 */
+         function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+         }
+      </script> 
+      <!-- Auto Complete Jquery -->
+      <script>
+         var Tagname = new Array();
+         var Tags = new Array();
+         
+         $(document).ready(function(){
+         $.ajax({
+          type: "GET",
+          url: "http://localhost:8083/GetCities",
+         	 contentType:"application/json; charset=utf-8",
+         
+         success: function(responsee){
+         
+         var availableTags = JSON.parse(responsee)
+         Tags = availableTags
+         for (i = 0; i < Tags.length; i++) { 
+           Tagname[i] = Tags[i].City
+         }
+         
+         
+         //Implement Action to Html page
+         $( "#tags" ).autocomplete({
+           source: Tagname
+            
+         
+          });
+         }
+         
+         });
+         });
+         
+         
+      </script>
+      <script type="text/javascript" src="js/jquery.cookie.min.js" ></script>	
+   </body>
+</html>

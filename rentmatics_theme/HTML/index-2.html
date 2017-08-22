@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Rentmatics</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<style>
+         .ui-autocomplete {
+         color: black;
+         font-family: font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+         line-height: 2.5;
+         font-size:14.9px;
+         border-radius: 0px;
+         border: 3px solid #454545;
+         }
+         .ui-state-active,
+         .ui-widget-content .ui-state-active,
+         .ui-widget-header .ui-state-active,
+         a.ui-button:active,
+         .ui-button:active,
+         .ui-button.ui-state-active:hover {
+         background-color:  #fa5b0f;
+         border-color: #eceff1;
+         }
+         
+         ul.dropdown-menu>li>a:hover{
+         background: #fa5b0f !important;
+         }
+      </style>
+ <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&sensor=false"></script> -->
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
+
+
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script>
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+                localStorage.setItem("LoginID", cooki);
+    }
+});
+window.onload = function () {
+	$.ajax({
+         type: "GET",
+         url: "http://localhost:8083/GetAllhomedetails",
+         
+        
+
+         success: function(responsee){
+   
+          
+    
+      var searchout = JSON.parse(responsee);
+            Getresponse(searchout)
+          }
+
+
+});
+
+
+
+}
+
+//Common function for s=Displaying Response
+function Getresponse(searchout){
+	
+  var cardstring ="";
+  var property =searchout.length +" Results Found ";
+ for (k=0;k<searchout.length;k++){
+    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,cooki);
+    console.log(cardstring)
+  }
+
+  document.getElementById("listContainer").innerHTML=cardstring;
+
+ // for (l=0;l<searchout.length;l++){
+ //    GetLiked("colorid"+searchout[l].RentFullStruct.Id);
+ //  }
+
+
+ for(j=0;j<searchout.length;j++){
+ console.log(searchout[j].RentFullimages.length);
+ var finalDiv="";
+
+ var Singlesliderstart2="<img src='";
+ var Singlesliderend = "' alt='"+"'>";
+ var bhk1 =" Bhk"
+ 
+ 
+  for (i=0;i<searchout[j].RentFullimages.length;i++){
+  	finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
+   }
+    
+  var ID = searchout[j].RentFullStruct.Id;
+  var Liked = searchout[j].RentFullStruct.Liked;
+  // GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
+  
+ var mapview = searchout[j].Cityname;
+ var City =searchout[j].Cityname
+ var Rent = "$ "+searchout[j].RentFullStruct.Month_rent;
+ var Housename = searchout[j].RentFullStruct.Housename;
+ var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
+ var Address1 = searchout[j].RentFullStruct.Adress1;
+ var Address2 = searchout[j].RentFullStruct.Adress2;
+ var pin = searchout[j].RentFullStruct.Pin;
+ var state = searchout[j].RentFullStruct.State;
+ var country = searchout[j].RentFullStruct.Country;
+ var housetype =searchout[j].RentFullStruct.House_type
+ var tenantType =searchout[j].RentFullStruct.Tenant_type
+ var furnishingType =searchout[j].RentFullStruct.Furnish_type
+ var bedType =searchout[j].RentFullStruct.Bed
+$("#property").html(property);
+$("#Rent"+ID).html(Rent);
+$("#Housename"+ID).html(Housename);
+$("#bhk"+ID).html(bhk);
+$("#bed"+ID).html(bedType);
+$("#Address1"+ID).html(Address1);
+$("#Address2"+ID).html(Address2);
+$("#pin"+ID).html(pin);
+$("#state"+ID).html(state);
+$("#country"+ID).html(country);
+$("#city"+ID).html(City);
+$("#houseType"+ID).html(housetype);
+$("#tenantType"+ID).html(tenantType);
+$("#furnishtype"+ID).html(furnishingType);
+$("#rentimage1"+ID).html(finalDiv);
+
+ url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
+
+document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+    var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
+      src=src.replace("&amp;","&")
+      console.log(src)
+        // document.getElementById("map-canvas").setAttribute("src",src);
+//var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
+// document.getElementById("maprightview").setAttribute("src",src);
+// document.getElementById("mapscroll").setAttribute("src",src);
+// document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+
+}
+}
+
+//For Slider
+ function Getjavascript(Dyid,loginid){
+ 
+  var rentimage = 
+
+
+"<div class='carousel-item'>"+
+"<div class='listing-item compact'>"+
+"<a id='getUrl"+Dyid+"' class='listing-img-container'>"+
+"<div class='listing-badges'>"+
+"<span id='tenantType"+Dyid+"'></span>"+
+"</div>"+
+"<div class='listing-img-content'>"+
+
+"<span class='listing-price' id='Housename"+Dyid+"' ></span>"+
+"<span class='listing-price' id='Rent"+Dyid+"' ></span>"+
+"<ul class='listing-hidden-content'>"+
+"<li>BHK <span id='bhk"+Dyid+"'></span></li>"+
+"<li>Furnished <span id='furnishtype"+Dyid+"'>3</span></li>"+
+"<li>Housetype <span id='houseType"+Dyid+"'>1</span></li>"+
+"</ul>"+
+"</div>"+
+"<div id='rentimage1"+Dyid+"'"+
+"></div>"+
+"</a>"+
+"</div>"+
+
+
+"</div>";
+
+
+ return rentimage;
+
+ }
+</script>
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="header-style-2">
+
+	<!-- Header -->
+	<div id="header">
+		<div class="container">
+			
+			<!-- Left Side Content -->
+			<div class="left-side">
+				
+				<!-- Logo -->
+				<div id="logo" class="margin-top-10">
+					<a href="index-2.html"><img src="images/rm_logo.png" alt=""></a>
+
+					<!-- Logo for Sticky Header -->
+					<a href="index-2.html" class="sticky-logo"><img src="images/rm_logo.png" alt=""></a>
+				</div>
+				
+			</div>
+			<!-- Left Side Content / End -->
+
+			<!-- Right Side Content / End -->
+			<div class="right-side">
+				<ul class="header-widget">
+					<li>
+						<i class="sl sl-icon-call-in"></i>
+						<div class="widget-content">
+							<span class="title">Questions?</span>
+							<span class="data">+91-9884379333 </span>
+						</div>
+					</li>
+
+				
+					<li class="with-btn"><a href="owners.html" class="button border">For Owners</a></li>
+				</ul>
+			</div>
+			<!-- Right Side Content / End -->
+
+		</div>
+
+
+		<!-- Mobile Navigation -->
+		<div class="menu-responsive">
+			<i class="fa fa-reorder menu-trigger"></i>
+		</div>
+
+
+		<!-- Main Navigation -->
+		<nav id="navigation" class="style-2">
+			<div class="container">
+					<ul id="responsive">
+
+						<li><a class="current" href="index-2.html">Home</a>
+							
+						</li>
+
+						<li><a href="how_it_works.html">How It Works </a>
+							<ul>
+								<li><a href="owners.html">Owners</a>
+									
+								</li>
+								<li><a href="tenants.html">Tenants</a>
+									
+								</li>
+							
+							</ul>
+						</li>
+
+                          <li><a href="listings-half-map-grid-compact.html">Find Room</a>
+					
+						</li>
+
+						<li><a href="javascript:Payalert()" >Pay MyRent</a>
+						
+						</li>
+
+                            
+
+
+							
+							
+						 <li><a href="#" style="visibility:hidden">Forrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</a></li>
+
+
+                   	<li style="display:none" id="account"><a href="#">My Account</a>
+									<ul>
+										<li><a href="my-profile.html">My Profile</a></li>
+										<li><a href="my-bookmarks.html">My Wish List</a></li>
+										<li><a href="javascript:logout()">Logout</a></li>
+									
+									</ul>	
+								</li>
+
+                     
+
+
+
+
+						<li id="loginhiden">
+					<a href="login-register.html" class="sign-in"  ><i class="fa fa-user"></i> Log In / Register</a>
+				</li>
+				  
+					
+
+				<!-- Header Widget -->
+				
+			</div>
+		</nav>
+		<div class="clearfix"></div>
+		<!-- Main Navigation / End -->
+	</div>
+	<!-- Header / End -->
+
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Banner
+================================================== -->
+<div class="parallax" data-background="images/jumbo-banner.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				
+				<div class="search-container" style="margin-left:13%">
+
+					<!-- Form -->
+					<h2 style="margin-left:14%">Find Your Best Rentspace</h2>
+
+					<!-- Row With Forms -->
+					<div class="row with-forms">	
+
+						<!-- Property Type -->
+							<div class="col-md-2">
+							<select data-placeholder="Any Type" class="chosen-select-no-single" >
+								<option>Boys</option>
+								<option>Girls</option>
+								<option>Family</option>
+								
+							</select>
+						</div>
+
+
+						<!-- Status -->
+						
+
+						<!-- Main Search Input -->
+						<div class="col-md-6">
+							<div class="main-search-input">
+								 <input type="text"  placeholder="Search by locality, landmark or office location"  id="tags" >
+								<button class="button" onclick="Gethomes()"><i class="fa fa-search"></i></button>
+							</div>
+						</div>
+						<!-- Property Type -->
+					
+
+					</div>
+					<!-- Row With Forms / End -->
+
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+		
+<!-- Content
+================================================== -->
+<!-- Fullwidth Section -->
+<section class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50" data-background-color="#ffffff">
+
+	<!-- Content -->
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-4">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					<div class="icon-container">
+						<i class="im im-icon-Checked-User"></i>
+					</div>
+
+					<h3>Agent Finder</h3>
+					<p>See who specializes in your area, has the most reviews and the right experience to meet your needs.</p>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					<div class="icon-container">
+						<i class="im im-icon-Cloud-Computer"></i>
+					</div>
+
+					<h3>Modern Technology</h3>
+					<p>More than 10,000 customers buy or sell a home with us each year. We help people and homes find each together.</p>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					<div class="icon-container">
+						<i class="im im-icon-Idea"></i>
+					</div>
+
+					<h3>Home Designs Ideas</h3>
+					<p>Our specialists can help you get started on that home project. Find paint colors, that perfect tile and more. </p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</section>
+<!-- Fullwidth Section / End -->
+
+
+
+
+
+<!-- Featured -->
+<div class="container">
+	<div class="row">
+	
+		<div class="col-md-12">
+			<h3 class="headline margin-bottom-25 margin-top-65">Featured</h3>
+		</div>
+		
+		<!-- Carousel -->
+		 <div class="col-md-12" id="listContainer">
+		 <div class="carousel">
+
+
+		 <div >
+		 </div>
+		</div>
+				
+	
+
+	</div>
+</div>
+<!-- Featured / End -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Featured -->
+<div class="container">
+	<div class="row">
+	
+		<div class="col-md-12">
+			<h3 class="headline margin-bottom-25 margin-top-65">Featured</h3>
+		</div>
+		
+		<!-- Carousel -->
+		<div class="col-md-12">
+			<div class="carousel">
+				
+				<!-- Listing Item -->
+				<div class="carousel-item">
+					<div class="listing-item compact">
+
+						<a href="single-property-page-1.html" class="listing-img-container">
+
+							<div class="listing-badges">
+								<span class="featured">Featured</span>
+								<span>For Sale</span>
+							</div>
+
+							<div class="listing-img-content">
+								<span class="listing-compact-title">Eagle Apartments <i>$275,000</i></span>
+
+								<ul class="listing-hidden-content">
+									<li>Area <span>530 sq ft</span></li>
+									<li>Rooms <span>3</span></li>
+									<li>Beds <span>1</span></li>
+									<li>Baths <span>1</span></li>
+								</ul>
+							</div>
+
+							<img src="images/listing-01.jpg" alt="">
+						</a>
+
+					</div>
+				</div>
+				<!-- Listing Item / End -->
+
+				<!-- Listing Item -->
+				<div class="carousel-item">
+					<div class="listing-item compact">
+
+						<a href="single-property-page-2.html" class="listing-img-container">
+
+							<div class="listing-badges">
+								<span class="featured">Featured</span>
+								<span>For Sale</span>
+							</div>
+
+							<div class="listing-img-content">
+								<span class="listing-compact-title">Serene Uptown <i>$900 / monthly</i></span>
+
+								<ul class="listing-hidden-content">
+									<li>Area <span>440 sq ft</span></li>
+									<li>Rooms <span>3</span></li>
+									<li>Beds <span>1</span></li>
+									<li>Baths <span>1</span></li>
+								</ul>
+							</div>
+
+							<img src="images/listing-02.jpg" alt="">
+						</a>
+
+					</div>
+				</div>
+				<!-- Listing Item / End -->
+
+				<!-- Listing Item -->
+				<div class="carousel-item">
+					<div class="listing-item compact">
+
+						<a href="single-property-page-1.html" class="listing-img-container">
+
+							<div class="listing-badges">
+								<span class="featured">Featured</span>
+								<span>For Rent</span>
+							</div>
+
+							<div class="listing-img-content">
+								<span class="listing-compact-title">Meridian Villas <i>$1700 / monthly</i></span>
+
+								<ul class="listing-hidden-content">
+									<li>Area <span>1450 sq ft</span></li>
+									<li>Rooms <span>3</span></li>
+									<li>Beds <span>2</span></li>
+									<li>Baths <span>2</span></li>
+								</ul>
+							</div>
+
+							<img src="images/listing-03.jpg" alt="">
+						</a>
+
+					</div>
+				</div>
+				<!-- Listing Item / End -->
+
+				<!-- Listing Item -->
+				<div class="carousel-item">
+					<div class="listing-item compact">
+
+						<a href="single-property-page-3.html" class="listing-img-container">
+
+							<div class="listing-badges">
+								<span class="featured">Featured</span>
+								<span>For Sale</span>
+							</div>
+
+							<div class="listing-img-content">
+								<span class="listing-compact-title">Selway Apartments <i>$420,000</i></span>
+
+								<ul class="listing-hidden-content">
+									<li>Area <span>540 sq ft</span></li>
+									<li>Rooms <span>2</span></li>
+									<li>Beds <span>2</span></li>
+									<li>Baths <span>1</span></li>
+								</ul>
+							</div>
+
+							<img src="images/listing-04.jpg" alt="">
+						</a>
+
+					</div>
+				</div>
+				<!-- Listing Item / End -->
+
+				<!-- Listing Item -->
+				<div class="carousel-item">
+					<div class="listing-item compact">
+
+						<a href="single-property-page-2.html" class="listing-img-container">
+
+							<div class="listing-badges">
+								<span class="featured">Featured</span>
+								<span>For Sale</span>
+							</div>
+
+							<div class="listing-img-content">
+								<span class="listing-compact-title">Oak Tree Villas <i>$535,000</i></span>
+
+								<ul class="listing-hidden-content">
+									<li>Area <span>550 sq ft</span></li>
+									<li>Rooms <span>3</span></li>
+									<li>Beds <span>2</span></li>
+									<li>Baths <span>2</span></li>
+								</ul>
+							</div>
+
+							<img src="images/listing-05.jpg" alt="">
+						</a>
+
+					</div>
+				</div>
+				<!-- Listing Item / End -->
+
+				<!-- Listing Item -->
+				<div class="carousel-item">
+					<div class="listing-item compact">
+
+						<a href="single-property-page-1.html" class="listing-img-container">
+
+							<div class="listing-badges">
+								<span class="featured">Featured</span>
+								<span>For Rent</span>
+							</div>
+
+							<div class="listing-img-content">
+								<span class="listing-compact-title">Old Town Manchester <i>$500 / monthly</i></span>
+
+								<ul class="listing-hidden-content">
+									<li>Area <span>850 sq ft</span></li>
+									<li>Rooms <span>3</span></li>
+									<li>Beds <span>2</span></li>
+									<li>Baths <span>1</span></li>
+								</ul>
+							</div>
+
+							<img src="images/listing-06.jpg" alt="">
+						</a>
+
+					</div>
+				</div>
+				<!-- Listing Item / End -->
+
+			</div>
+		</div>
+		<!-- Carousel / End -->
+
+	</div>
+</div>
+<!-- Featured / End -->
+
+
+
+<!-- Fullwidth Section -->
+<section class="fullwidth margin-top-105 margin-bottom-0 padding-bottom-80 padding-top-95" data-background-color="#f7f7f7">
+
+	<!-- Box Headline -->
+	<h3 class="headline-box">What Our Clients Say</h3>
+	
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-12">
+				<div class="testimonials-subtitle">We collect reviews from our customers so you can get an honest opinion of what an apartment is really like!</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="testimonial-box">
+					<div class="testimonial">Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim. Donec vel lectus vel felis lacinia luctus vitae iaculis arcu. Mauris mattis, massa eu porta ultricies.</div>
+					<div class="testimonial-author">
+						<img src="images/happy-client-01.jpg" alt="">
+						<h4>Jennie Wilson <span>Rented Apartment</span></h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="testimonial-box">
+					<div class="testimonial">Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim. Donec vel lectus vel felis lacinia luctus vitae iaculis arcu. Mauris mattis, massa eu porta ultricies.</div>
+					<div class="testimonial-author">
+						<img src="images/happy-client-02.jpg" alt="">
+						<h4>Thomas Smith <span>Bought House</span></h4>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<div class="testimonial-box">
+					<div class="testimonial">Aliquam dictum elit vitae mauris facilisis, at dictum urna dignissim. Donec vel lectus vel felis lacinia luctus vitae iaculis arcu. Mauris mattis, massa eu porta ultricies.</div>
+					<div class="testimonial-author">
+						<img src="images/happy-client-03.jpg" alt="">
+						<h4>Robert Lindstrom <span>Sold Apartment</span></h4>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</section>
+<!-- Fullwidth Section / End -->
+
+
+
+<!-- Parallax -->
+<div class="parallax margin-bottom-70"
+	data-background="images/listings-parallax.jpg"
+	data-color="#36383e"
+	data-color-opacity="0.7"
+	data-img-width="800"
+	data-img-height="505">
+
+	<!-- Infobox -->
+	<div class="text-content white-font">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-6 col-sm-8">
+					<h2>It's your journey. We're here to help.</h2>
+					<p>We’re full-service, local agents who know how to find people and home each together. We use online tools with an unmatched search capability to make you smarter and faster.</p>
+					<a href="listings-half-map-grid-compact.html" class="button margin-top-25">Get Started</a>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+	<!-- Infobox / End -->
+
+</div>
+<!-- Parallax / End -->
+
+
+
+
+
+<!-- Fullwidth Section -->
+<section class="fullwidth margin-top-95 margin-bottom-0">
+
+	<!-- Box Headline -->
+	<h3 class="headline-box">Articles & Tips</h3>
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-4">
+
+				<!-- Blog Post -->
+				<div class="blog-post">
+					
+					<!-- Img -->
+					<a href="blog-post.html" class="post-img">
+						<img src="images/blog-post-01.jpg" alt="">
+					</a>
+					
+					<!-- Content -->
+					<div class="post-content">
+						<h3><a href="#">8 Tips to Help You Finding New Home</a></h3>
+						<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae. </p>
+
+						<a href="blog-post.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+					</div>
+
+				</div>
+				<!-- Blog Post / End -->
+
+			</div>
+
+			<div class="col-md-4">
+
+				<!-- Blog Post -->
+				<div class="blog-post">
+					
+					<!-- Img -->
+					<a href="blog-post.html" class="post-img">
+						<img src="images/blog-post-02.jpg" alt="">
+					</a>
+					
+					<!-- Content -->
+					<div class="post-content">
+						<h3><a href="#">Bedroom Colors You'll Never Regret</a></h3>
+						<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae. </p>
+
+						<a href="blog-post.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+					</div>
+
+				</div>
+				<!-- Blog Post / End -->
+
+			</div>
+
+			<div class="col-md-4">
+
+				<!-- Blog Post -->
+				<div class="blog-post">
+					
+					<!-- Img -->
+					<a href="blog-post.html" class="post-img">
+						<img src="images/blog-post-03.jpg" alt="">
+					</a>
+					
+					<!-- Content -->
+					<div class="post-content">
+						<h3><a href="#">What to Do a Year Before Buying Apartment</a></h3>
+						<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae. </p>
+
+						<a href="blog-post.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+					</div>
+
+				</div>
+				<!-- Blog Post / End -->
+
+			</div>
+
+		</div>
+	</div>
+</section>
+<!-- Fullwidth Section / End -->
+
+
+<!-- Flip banner -->
+<a href="listings-half-map-grid-compact.html" class="flip-banner parallax" data-background="images/flip-banner-bg.jpg" data-color="#fa5b0f" data-color-opacity="0.9" data-img-width="2500" data-img-height="1600">
+	<div class="flip-banner-content">
+		<h2 class="flip-visible">We help people and homes find each other</h2>
+		<h2 class="flip-hidden">Browse Properties <i class="sl sl-icon-arrow-right"></i></h2>
+	</div>
+</a>
+<!-- Flip banner / End -->
+
+<!-- The Modal -->
+<div id="myModal" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" style="width:40%;">
+    <span class="close">&times;</span>
+
+   <span style="color:black">Pay My rent is Comming soon!...</span>
+  
+
+</div>
+</div>
+
+
+<!-- Footer
+================================================== -->
+<div id="footer" class="sticky-footer">
+	<!-- Main -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-6">
+				<img class="footer-logo" src="images/rm_logo.png" alt="">
+				<br><br>
+				<p>Simple and search for your property.</p>
+			</div>
+
+			<div class="col-md-4 col-sm-6 ">
+				<h4>Helpful Links</h4>
+				<ul class="footer-links">
+					<li><a href="login-register.html">Login</a></li>
+					<li><a href="login-register.html">Sign Up</a></li>
+					<li><a href="my-profile.html">My Account</a></li>
+					
+					<li><a href="myprivacy.html">Privacy Policy</a></li>
+				</ul>
+
+				<ul class="footer-links">
+					<!-- <li><a href="#">FAQ</a></li> -->
+					<li><a href="blog.html">Blog</a></li>
+					<li><a href="how_it_works.html">How It Works</a></li>
+					<li><a href="tandc.html">Terms and condition</a></li>
+					
+				</ul>
+				<div class="clearfix"></div>
+			</div>		
+
+			<div class="col-md-3  col-sm-12">
+				<h4>Contact Us</h4>
+				<div class="text-widget">
+					<span>12345 Little Lonsdale St, Melbourne</span> <br>
+					Phone: <span>Tel: +91-9884379333/9811448697 </span><br>
+					E-Mail:<span> <a href="#">Rentmatics@gmail.com</a> </span><br>
+				</div>
+
+				<ul class="social-icons margin-top-20">
+					<li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+					<li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+					<li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+				</ul>
+
+			</div>
+
+		</div>
+		
+		<!-- Copyright -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="copyrights">© 2016 Rentmatics. All Rights Reserved.</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+<!-- Footer / End -->
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+      <!-- <script>
+google.maps.event.addDomListener(window, 'load', initialize);
+function initialize() {
+var input = document.getElementById('tags');
+
+var autocomplete = new google.maps.places.Autocomplete(input);
+autocomplete.addListener('place_changed', function () {
+
+var place = autocomplete.getPlace();
+var aaa = place["address_components"];
+console.log(aaa[0].long_name)
+
+// place variable will have all the information you are looking for.
+console.log(place.geometry['location'].lat());
+console.log(place.geometry['location'].lng());
+});
+}
+</script>
+ -->
+
+
+<!-- Scripts
+================================================== -->
+<!-- <script type="text/javascript"  src="scripts/jquery-min.js"></script> -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<!-- <script type="text/javascript" src="scripts/jquery.min.js"></script> -->
+<script type="text/javascript"  src="scripts/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.js"></script>
+<!-- <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script> -->
+<script type="text/javascript" src="scripts/login.js"></script>
+
+
+<script>
+         var Tagname = new Array();
+         var Tags = new Array();
+
+         $(document).ready(function(){
+         $.ajax({
+          type: "GET",
+          url: "http://localhost:8083/GetCities",
+          contentType:"application/json; charset=utf-8",
+         
+         success: function(responsee){
+         
+         var availableTags = JSON.parse(responsee)
+         Tags = availableTags
+         for (i = 0; i < Tags.length; i++) { 
+           Tagname[i] = Tags[i].City
+         }
+         
+         
+         //Implement Action to Html page
+         $( "#tags" ).autocomplete({
+           source: Tagname
+            
+         
+          });
+         }
+         
+         });
+         });
+         
+         
+      </script>
+
+
+<!-- Style Switcher
+================================================== -->
+<script src="scripts/switcher.js"></script>
+
+
+
+</div>
+
+</body>
+</html>
