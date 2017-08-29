@@ -237,7 +237,7 @@ func GetSinglehome_DbFav(homeid int, Login string) (Data1 Model.Home_single) {
 		}
 
 		var Count int
-		query := "SELECT COUNT(*) FROM wishlist WHERE wishlist.loginid ='" + Login + "'" + "and wishlist.homeid = '" + fmt.Sprintf("%v", Data.Id)
+		query := "SELECT COUNT(*) FROM wishlist WHERE wishlist.loginid ='" + Login + "'" + "and wishlist.homeid = " + fmt.Sprintf("%v", Data.Id)
 		row := OpenConnection["Rentmatics"].QueryRow(query)
 		row.Scan(
 			&Count,
