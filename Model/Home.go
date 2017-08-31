@@ -19,6 +19,14 @@ type Home struct {
 	House_type       string
 	Bhk              int
 	Bed              int
+	Avail_bed        int
+	Avail_room       int
+	Booked_bed       int
+	Booked_bhk       int
+	Booked_room      int
+	Booked_home      bool
+	Booked_Allbeds   bool
+	Booked_AllRooms  bool
 	Distance         string
 	Furnish_type     string
 	Secutity_deposit float64
