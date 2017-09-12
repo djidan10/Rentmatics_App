@@ -8,11 +8,9 @@ import (
 	"net/http"
 )
 
-func Getvacatedetails(w http.ResponseWriter, r *http.Request) {
-	Data := Db.GetAllVacatedetails()
-
+func GetOwners(w http.ResponseWriter, r *http.Request) {
+	Data := Db.GetAllOwner()
 	Senddata, err := json.Marshal(Data)
-
 	if err != nil {
 		panic(err)
 	}
@@ -24,20 +22,19 @@ func Getvacatedetails(w http.ResponseWriter, r *http.Request) {
 
 }
 
-type Vacatesingle struct {
-	Vacateid int
+type Ownersingle struct {
+	Ownerid int
 }
 
-func Getsinglevacate(w http.ResponseWriter, r *http.Request) {
+func GetsingleOwner(w http.ResponseWriter, r *http.Request) {
 
-	var GetVacate Vacatesingle
-	err := json.NewDecoder(r.Body).Decode(&GetVacate)
+	var GetOwner Ownersingle
+	err := json.NewDecoder(r.Body).Decode(&GetOwner)
 	if err != nil {
 		fmt.Println("err", err)
 	}
 
-	Data := Db.GetSinglevacate_Db(GetVacate.Vacateid)
-
+	Data := Db.GetSingleOwner_Db(GetOwner.Ownerid)
 	Senddata, err := json.Marshal(Data)
 
 	if err != nil {

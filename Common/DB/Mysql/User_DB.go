@@ -4,9 +4,6 @@ import (
 	Model "Rentmatics_App/Model"
 	_ "database/sql"
 	"fmt"
-	//	"strconv"
-
-	//"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
 )

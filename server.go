@@ -85,8 +85,8 @@ func Serve() bool {
 	router.HandleFunc("/Login", Service.Login)
 	router.HandleFunc("/Logout", Service.Userlogout)
 	//router.HandleFunc("/Changepassword", Service.change)
-	//Notify
 
+	//Notify
 	router.HandleFunc("/Notifyme", Service.Notification)
 
 	//payment
@@ -121,9 +121,12 @@ func Serve() bool {
 	router.HandleFunc("/GetRequestdetails", Service.GetRequest)
 	router.HandleFunc("/GetSingleRequest", Service.GetsingleRequest)
 
+	//Owner Request
+	router.HandleFunc("/GetOwnerdetails", Service.GetOwners)
+	router.HandleFunc("/GetSingleOwner", Service.GetsingleOwner)
+
 	//For HTTPS
 
-	//
 	// Default server - non-trusted for debugging
 	serverhttp := func() {
 		fmt.Println("Server should be available at http", config.Port)
