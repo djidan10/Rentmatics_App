@@ -101,6 +101,26 @@ func Serve() bool {
 	router.HandleFunc("/Myprofile", Service.Profileinsert)
 	router.HandleFunc("/GetProfile", Service.Getprofile)
 
+	//Tenants
+	router.HandleFunc("/GetTenant", Service.GetTenant)
+	router.HandleFunc("/GetIndiviualTenant", Service.GetSingleTenant)
+
+	//Complaint
+	router.HandleFunc("/GetComplaint", Service.GetComplaint)
+	router.HandleFunc("/GetSingleComplaint", Service.GetsingleComplaint)
+
+	//Vacate
+	router.HandleFunc("/Getvacatedetails", Service.Getvacatedetails)
+	router.HandleFunc("/GetSinglevacate", Service.Getsinglevacate)
+
+	//Activites
+	router.HandleFunc("/GetActivitiesdetails", Service.GetActivity)
+	router.HandleFunc("/GetSingleActivity", Service.GetsingleActivity)
+
+	//Tenant Request
+	router.HandleFunc("/GetRequestdetails", Service.GetRequest)
+	router.HandleFunc("/GetSingleRequest", Service.GetsingleRequest)
+
 	//For HTTPS
 
 	//
