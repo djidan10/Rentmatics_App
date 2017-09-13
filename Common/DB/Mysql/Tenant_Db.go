@@ -20,6 +20,7 @@ func GetAllTenantdetails() (Temprentarray []Model.Tenant) {
 
 		rows.Scan(
 			&Data.Tenant_id,
+			&Data.Homeid,
 			&Data.First_Name,
 			&Data.Last_Name,
 			&Data.Email_Id,
@@ -51,8 +52,8 @@ func GetAllTenantdetails() (Temprentarray []Model.Tenant) {
 	return Temprentarray
 }
 
-func GetSingleTenant_Db(Tenantid int) (Data Model.Tenant) {
-
+func GetSingleTenant_Db(Tenantid int) (Datasend Model.Tenantsend) {
+	var Data Model.Tenant
 	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from tenant where id=?", Tenantid)
 	fmt.Println(err)
@@ -61,6 +62,7 @@ func GetSingleTenant_Db(Tenantid int) (Data Model.Tenant) {
 
 		rows.Scan(
 			&Data.Tenant_id,
+			&Data.Homeid,
 			&Data.First_Name,
 			&Data.Last_Name,
 			&Data.Email_Id,
@@ -87,5 +89,10 @@ func GetSingleTenant_Db(Tenantid int) (Data Model.Tenant) {
 		)
 
 	}
+	Data1 := GetSinglehome_Db(Data.Homeid)
+	Datasend.Tenantdetails = Data
+	Datasend.Homedetails = Data1
+	fmt.Println(Data1)
+
 	return
 }

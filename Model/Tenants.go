@@ -1,5 +1,19 @@
 package Model
 
+type RentLogin struct {
+	Username string
+	Password string
+}
+
+type Loginsend struct {
+	Role string
+}
+
+type Tenantsend struct {
+	Tenantdetails Tenant
+	Homedetails   Home_single
+}
+
 type Tenant struct {
 	Tenant_id          int
 	Homeid             int
