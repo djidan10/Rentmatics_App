@@ -3,6 +3,7 @@ package Model
 type Home struct {
 	Id               int
 	Housename        string
+	Ownerid          int
 	Adress1          string
 	Adress2          string
 	City             string

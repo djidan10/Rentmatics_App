@@ -20,3 +20,8 @@ type Owner struct {
 	Voter_Card         string
 	Aggrement          string
 }
+
+type Ownersend struct {
+	OwnerData Owner
+	HomeData  []RentSend
+}

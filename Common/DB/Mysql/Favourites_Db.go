@@ -35,6 +35,7 @@ func GetFavourites(Favuser int) (Temprentarray []Model.RentSendFav) {
 		rows.Scan(
 			&Data.Id,
 			&Data.Housename,
+			&Data.Ownerid,
 			&Data.Adress1,
 			&Data.Adress2,
 			&Data.City,
