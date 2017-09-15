@@ -125,6 +125,10 @@ func Serve() bool {
 	router.HandleFunc("/GetOwnerdetails", Service.GetOwners)
 	router.HandleFunc("/GetSingleOwner", Service.GetsingleOwner)
 
+	//Executive request
+	router.HandleFunc("/GetExecutivedetails", Service.GetExecutive)
+	router.HandleFunc("/GetSingleExecutive", Service.GetsingleExecutive)
+
 	//For HTTPS
 
 	// Default server - non-trusted for debugging

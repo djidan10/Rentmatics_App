@@ -13,6 +13,46 @@ import (
 	"strconv"
 )
 
+func GetExecutive(w http.ResponseWriter, r *http.Request) {
+	Data := Db.GetAllExecutive()
+	Senddata, err := json.Marshal(Data)
+	if err != nil {
+		panic(err)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+
+	w.Write(Senddata)
+
+}
+
+type Executivesingle struct {
+	Executiveid int
+}
+
+func GetsingleExecutive(w http.ResponseWriter, r *http.Request) {
+
+	var GetExecutive Executivesingle
+	err := json.NewDecoder(r.Body).Decode(&GetExecutive)
+	if err != nil {
+		fmt.Println("err", err)
+	}
+
+	Data := Db.GetSingleExecutive_Db(GetExecutive.Executiveid)
+	Senddata, err := json.Marshal(Data)
+
+	if err != nil {
+		panic(err)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+
+	w.Write(Senddata)
+
+}
+
 func Auth(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("inside Rent")
 

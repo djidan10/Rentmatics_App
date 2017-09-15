@@ -54,6 +54,7 @@ func GetWishDB(Loginid string) (Temprentarray []Model.RentSend) {
 			rows.Scan(
 				&Data.Id,
 				&Data.Housename,
+				&Data.Executive_id,
 				&Data.Ownerid,
 				&Data.Adress1,
 				&Data.Adress2,

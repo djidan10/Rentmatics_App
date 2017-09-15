@@ -11,6 +11,79 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 )
 
+//Get Home details based on Address
+func GetAllExecutive() (Temprentarray []Model.Executivedetails) {
+
+	var Data Model.Executivedetails
+	rows, err := OpenConnection["Rentmatics"].Query("Select * from  executive")
+	fmt.Println(err)
+
+	for rows.Next() {
+
+		rows.Scan(
+
+			&Data.Executive_id,
+			&Data.First_Name,
+			&Data.Last_Name,
+			&Data.Email_Id,
+			&Data.Contact,
+			&Data.Alernate_Contact,
+			&Data.DOB,
+			&Data.Permanent_Address1,
+			&Data.Permanent_Address2,
+			&Data.Permanent_Area,
+			&Data.Permanent_City,
+			&Data.Permanent_Pin,
+			&Data.Executive_img,
+			&Data.Pan_Card,
+			&Data.Aadhar_Card,
+			&Data.Voter_Card,
+			&Data.Aggrement,
+		)
+
+		Temprentarray = append(Temprentarray, Data)
+	}
+
+	return Temprentarray
+}
+
+func GetSingleExecutive_Db(executiveid int) (Datasend Model.Executivesend) {
+
+	var Data Model.Executivedetails
+	// query
+	rows, err := OpenConnection["Rentmatics"].Query("Select * from  executive where id=?", executiveid)
+	fmt.Println(err)
+
+	for rows.Next() {
+
+		rows.Scan(
+
+			&Data.Executive_id,
+			&Data.First_Name,
+			&Data.Last_Name,
+			&Data.Email_Id,
+			&Data.Contact,
+			&Data.Alernate_Contact,
+			&Data.DOB,
+			&Data.Permanent_Address1,
+			&Data.Permanent_Address2,
+			&Data.Permanent_Area,
+			&Data.Permanent_City,
+			&Data.Permanent_Pin,
+			&Data.Executive_img,
+			&Data.Pan_Card,
+			&Data.Aadhar_Card,
+			&Data.Voter_Card,
+			&Data.Aggrement,
+		)
+
+	}
+	GetAllhome := GetHomeDetils_DBwithExecutiveid(Data.Executive_id)
+	Datasend.ExecutiveData = Data
+	Datasend.HomeData = GetAllhome
+	return
+}
+
 func Inserthome_DB(Homeinsert Model.HomeInsert, Imageurl []string) {
 	var Homedata Model.Home
 	fmt.Println("inside  insidekfhlsalhf", Homeinsert.City)
