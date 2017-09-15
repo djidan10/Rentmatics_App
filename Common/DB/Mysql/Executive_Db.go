@@ -38,7 +38,6 @@ func GetAllExecutive() (Temprentarray []Model.Executivedetails) {
 			&Data.Pan_Card,
 			&Data.Aadhar_Card,
 			&Data.Voter_Card,
-			&Data.Aggrement,
 		)
 
 		Temprentarray = append(Temprentarray, Data)
@@ -74,7 +73,6 @@ func GetSingleExecutive_Db(executiveid int) (Datasend Model.Executivesend) {
 			&Data.Pan_Card,
 			&Data.Aadhar_Card,
 			&Data.Voter_Card,
-			&Data.Aggrement,
 		)
 
 	}

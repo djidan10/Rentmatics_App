@@ -572,7 +572,7 @@ func GetHomeDetils_DBwithExecutiveid(Executiveid int) (Temprentarray []Model.Ren
 
 	//	City, _ := strconv.Atoi(Cit)
 	//fmt.Println("id..............", City)
-	rows, err := OpenConnection["Rentmatics"].Query("Select * from home where ownerid=?", Executiveid)
+	rows, err := OpenConnection["Rentmatics"].Query("Select * from home where executiveid=?", Executiveid)
 	fmt.Println(err)
 
 	for rows.Next() {

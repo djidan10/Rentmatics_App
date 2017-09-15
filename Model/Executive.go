@@ -34,7 +34,6 @@ type Executivedetails struct {
 	Pan_Card           string
 	Aadhar_Card        string
 	Voter_Card         string
-	Aggrement          string
 }
 
 type Executivesend struct {
