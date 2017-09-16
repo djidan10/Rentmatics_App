@@ -82,6 +82,38 @@ func GetSingleExecutive_Db(executiveid int) (Datasend Model.Executivesend) {
 	return
 }
 
+func GetIndivualExecutive_Db(executiveid int) (Data Model.Executivedetails) {
+
+	// query
+	rows, err := OpenConnection["Rentmatics"].Query("Select * from  executive where id=?", executiveid)
+	fmt.Println(err)
+
+	for rows.Next() {
+
+		rows.Scan(
+
+			&Data.Executive_id,
+			&Data.First_Name,
+			&Data.Last_Name,
+			&Data.Email_Id,
+			&Data.Contact,
+			&Data.Alernate_Contact,
+			&Data.DOB,
+			&Data.Permanent_Address1,
+			&Data.Permanent_Address2,
+			&Data.Permanent_Area,
+			&Data.Permanent_City,
+			&Data.Permanent_Pin,
+			&Data.Executive_img,
+			&Data.Pan_Card,
+			&Data.Aadhar_Card,
+			&Data.Voter_Card,
+		)
+
+	}
+
+	return
+}
 func Inserthome_DB(Homeinsert Model.HomeInsert, Imageurl []string) {
 	var Homedata Model.Home
 	fmt.Println("inside  insidekfhlsalhf", Homeinsert.City)

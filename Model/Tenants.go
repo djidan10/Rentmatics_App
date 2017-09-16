@@ -13,6 +13,7 @@ type Tenantsend struct {
 	Tenantdetails        Tenant
 	Homedetails          Home_single
 	TenantPaymentdetails []Tenantpayment
+	Executivedetail      Executivedetails
 }
 
 type Tenant struct {

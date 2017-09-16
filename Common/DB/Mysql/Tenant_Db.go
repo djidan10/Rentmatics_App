@@ -122,6 +122,8 @@ func GetSingleTenant_Db(Tenantid int) (Datasend Model.Tenantsend) {
 		Tenantpay1 = append(Tenantpay1, Tenatpay)
 	}
 
+	Datasend.Executivedetail = GetIndivualExecutive_Db(Data.Executiveid)
+
 	Data1 := GetSinglehome_Db(Data.Homeid)
 	Datasend.Tenantdetails = Data
 	Datasend.Homedetails = Data1
