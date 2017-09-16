@@ -23,6 +23,21 @@ func GetComplaint(w http.ResponseWriter, r *http.Request) {
 	w.Write(Senddata)
 
 }
+func Getpendingstatus(w http.ResponseWriter, r *http.Request) {
+	Data := Db.GetAllPendingComplaint()
+
+	Senddata, err := json.Marshal(Data)
+
+	if err != nil {
+		panic(err)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+
+	w.Write(Senddata)
+
+}
 
 type Complaintviewid struct {
 	Complaintid int

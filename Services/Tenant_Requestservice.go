@@ -24,6 +24,22 @@ func GetRequest(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func GetPendingrequest(w http.ResponseWriter, r *http.Request) {
+	Data := Db.GetAllpendingrequest()
+
+	Senddata, err := json.Marshal(Data)
+
+	if err != nil {
+		panic(err)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+
+	w.Write(Senddata)
+
+}
+
 type Requestsingle struct {
 	Requestid int
 }

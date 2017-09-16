@@ -107,6 +107,7 @@ func Serve() bool {
 
 	//Complaint
 	router.HandleFunc("/GetComplaint", Service.GetComplaint)
+	router.HandleFunc("/GetAllpendingComplaints", Service.Getpendingstatus)
 	router.HandleFunc("/GetSingleComplaint", Service.GetsingleComplaint)
 
 	//Vacate
@@ -119,6 +120,7 @@ func Serve() bool {
 
 	//Tenant Request
 	router.HandleFunc("/GetRequestdetails", Service.GetRequest)
+	router.HandleFunc("/GetRequestPendingdetails", Service.GetPendingrequest)
 	router.HandleFunc("/GetSingleRequest", Service.GetsingleRequest)
 
 	//Owner Request
