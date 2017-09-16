@@ -57,8 +57,8 @@ func GetAllPendingComplaint() (Temprentarray []Model.Complaints) {
 
 	return Temprentarray
 }
-func GetSingleComplaint_Db(Complaintid int) (Data Model.Complaints) {
-
+func GetSingleComplaint_Db(Complaintid int) (Datasend Model.Complaintsend) {
+	var Data Model.Complaints
 	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from complaint where id=?", Complaintid)
 	fmt.Println(err)
@@ -76,5 +76,7 @@ func GetSingleComplaint_Db(Complaintid int) (Data Model.Complaints) {
 		)
 
 	}
+	Datasend.ComplaintsDetails = Data
+	Datasend.Tenantdetails = GetIndivualTenant_Db(Data.Tenant_Id)
 	return
 }

@@ -67,7 +67,8 @@ func GetAllpendingrequest() (Temprentarray []Model.Request) {
 	return Temprentarray
 }
 
-func GetSingleRequest_Db(Requestid int) (Data Model.Request) {
+func GetSingleRequest_Db(Requestid int) (Datasend Model.Requestsend) {
+	var Data Model.Request
 
 	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  request where id=?", Requestid)
@@ -90,5 +91,7 @@ func GetSingleRequest_Db(Requestid int) (Data Model.Request) {
 		)
 
 	}
+	Datasend.Resquestdetails = Data
+	Datasend.Tenantdetails = GetIndivualTenant_Db(Data.Tenant_Id)
 	return
 }

@@ -70,6 +70,10 @@ type Complaints struct {
 	Complaint_status      string
 	Complaint_solvedDate  string
 }
+type Complaintsend struct {
+	ComplaintsDetails Complaints
+	Tenantdetails     Tenant
+}
 
 type Vacate struct {
 	Vacate_id        int
@@ -104,4 +108,9 @@ type Request struct {
 	Request_description string
 	Approve_Date        string
 	Status              string
+}
+
+type Requestsend struct {
+	Resquestdetails Request
+	Tenantdetails   Tenant
 }
