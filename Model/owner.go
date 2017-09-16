@@ -25,3 +25,16 @@ type Ownersend struct {
 	OwnerData Owner
 	HomeData  []RentSend
 }
+
+type Ownercomplaints struct {
+	Ownercom_id   int
+	Ownerid       int
+	Executiveid   int
+	Tenantid      int
+	Homeid        int
+	Loginid       string
+	ComplaintDate string
+	Message       string
+	Status        string
+	Approvedate   string
+}
