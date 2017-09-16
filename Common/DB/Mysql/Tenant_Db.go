@@ -89,9 +89,37 @@ func GetSingleTenant_Db(Tenantid int) (Datasend Model.Tenantsend) {
 		)
 
 	}
+
+	row1, err := OpenConnection["Rentmatics"].Query("select * from tenant_payment where tenant_id=?", Data.Tenant_id)
+	fmt.Println("err", err)
+	var Tenantpay1 []Model.Tenantpayment
+
+	for row1.Next() {
+		var Tenatpay Model.Tenantpayment
+
+		row1.Scan(
+
+			&Tenatpay.Tenantpaymentid,
+			&Tenatpay.Tenant_id,
+			&Tenatpay.Home_id,
+			&Tenatpay.Owner_id,
+			&Tenatpay.Loginid,
+			&Tenatpay.Executiveid,
+			&Tenatpay.Lastmonth_paiddate,
+			&Tenatpay.Duedate,
+			&Tenatpay.RentAmount,
+			&Tenatpay.Status,
+			&Tenatpay.PaymentDetails,
+			&Tenatpay.TransactionDetails,
+		)
+
+		Tenantpay1 = append(Tenantpay1, Tenatpay)
+	}
+
 	Data1 := GetSinglehome_Db(Data.Homeid)
 	Datasend.Tenantdetails = Data
 	Datasend.Homedetails = Data1
+	Datasend.TenantPaymentdetails = Tenantpay1
 	fmt.Println(Data1)
 
 	return

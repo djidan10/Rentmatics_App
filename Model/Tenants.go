@@ -10,8 +10,9 @@ type Loginsend struct {
 }
 
 type Tenantsend struct {
-	Tenantdetails Tenant
-	Homedetails   Home_single
+	Tenantdetails        Tenant
+	Homedetails          Home_single
+	TenantPaymentdetails []Tenantpayment
 }
 
 type Tenant struct {
@@ -40,6 +41,21 @@ type Tenant struct {
 	Aadhar_Card        string
 	Voter_Card         string
 	Aggrement          string
+}
+
+type Tenantpayment struct {
+	Tenantpaymentid    int
+	Tenant_id          int
+	Home_id            int
+	Owner_id           int
+	Loginid            string
+	Executiveid        int
+	Lastmonth_paiddate string
+	Duedate            string
+	RentAmount         string
+	Status             string
+	PaymentDetails     string
+	TransactionDetails string
 }
 
 type Complaints struct {
