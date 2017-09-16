@@ -38,5 +38,12 @@ type Executivedetails struct {
 
 type Executivesend struct {
 	ExecutiveData Executivedetails
-	HomeData      []RentSend
+	HomeData      []RentSendTenant
+}
+
+type RentSendTenant struct {
+	//Cityname       string
+	RentFullStruct Home
+	RentFullimages []Home_images
+	Tenantdetails  Tenant
 }

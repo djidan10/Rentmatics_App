@@ -18,6 +18,9 @@ type Tenantsend struct {
 type Tenant struct {
 	Tenant_id          int
 	Homeid             int
+	Executiveid        int
+	Ownerid            int
+	Loginid            string
 	First_Name         string
 	Last_Name          string
 	Email_Id           string

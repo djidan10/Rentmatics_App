@@ -565,10 +565,10 @@ func GetHomeDetils_DBwithOwnerid(Ownerid int) (Temprentarray []Model.RentSend) {
 }
 
 //Get Home details based on Address
-func GetHomeDetils_DBwithExecutiveid(Executiveid int) (Temprentarray []Model.RentSend) {
+func GetHomeDetils_DBwithExecutiveid(Executiveid int) (Temprentarray []Model.RentSendTenant) {
 
 	var Data Model.Home
-	var TempRentStruct Model.RentSend
+	var TempRentStruct Model.RentSendTenant
 
 	//	City, _ := strconv.Atoi(Cit)
 	//fmt.Println("id..............", City)
@@ -637,6 +637,7 @@ func GetHomeDetils_DBwithExecutiveid(Executiveid int) (Temprentarray []Model.Ren
 
 		TempRentStruct.RentFullStruct = Data
 		TempRentStruct.RentFullimages = Rentimgarray
+		TempRentStruct.Tenantdetails = GetIndivualTenant_Db(Data.Executive_id)
 
 		Temprentarray = append(Temprentarray, TempRentStruct)
 	}
