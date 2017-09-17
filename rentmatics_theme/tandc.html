@@ -17,6 +17,34 @@
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
 <script>
+//Logout the User
+function logout() {
+   
+
+     $.ajax({
+        type: "GET",
+        url: "http://localhost:8083/Logout",
+
+        success: function(responsee) {
+             document.getElementById("loginhiden").style.display = "inline";
+                document.getElementById("account").style.display = "none";
+                location.reload(true);
+
+    
+        }
+
+    });
+
+}
+
+
+
+function Payalert(){
+	alert("PayMyRent is coming Soon!Please wait")
+
+}
+
+
 var loginidd="";
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
@@ -76,11 +104,11 @@ $(document).ready(function(){
          <!-- Main Navigation -->
 				<nav id="navigation" class="style-1">
 					<ul id="responsive">
-            <li><a  href="index-2.html">Home</a></li>
-            <li><a href="how_it_works.html">How It Works </a>
+            <li><a  href="index.html">Home</a></li>
+             <li><a href="how_it_works.html">How It Works </a>
               <ul>
-                <li><a href="owners.html">Owners</a> </li>
-                <li><a href="tenants.html">Tenants</a></li>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>

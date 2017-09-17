@@ -1,0 +1,38 @@
+<html>
+<head>
+ <script src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+	var url1="";
+		 window.onload = function () {
+                var url = document.location.href,
+                  params = url.split('?')[1].split('&'),
+                  data = {}, tmp;
+              for (var i = 0, l = params.length; i < l; i++) {
+                  tmp = params[i].split('=');
+                  data[tmp[0]] = tmp[1];
+                 }
+                 console.log("query data=");
+                 console.log(data);
+                 url1="http://localhost:8083/PaymentResponse/"+data["loginid"]+"/"+data["homeid"]+"/"+data["payment_id"]+"/"+data["payment_request_id"]+"/"
+
+                 console.log(url);
+                  $.ajax({
+               type: "GET",
+               url: url1,
+               contentType:"application/json; charset=utf-8",
+               
+         
+           success: function(responsee){
+           document.location.href = "http://localhost:8083/rentmatics_theme/";
+         				
+          
+      }
+  });
+
+             }
+	</script>
+</head>
+<body>
+<h1>LOADING....</h1>
+</body>
+</html>

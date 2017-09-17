@@ -16,10 +16,44 @@
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
 <script type="text/javascript" src="scripts/login.js"></script>
+
+
 <script>
+//Logout the User
+function logout() {
+   
+
+     $.ajax({
+        type: "GET",
+        url: "http://localhost:8083/Logout",
+
+        success: function(responsee) {
+             document.getElementById("loginhiden").style.display = "inline";
+                document.getElementById("account").style.display = "none";
+                location.reload(true);
+
+    
+        }
+
+    });
+
+}
+function Payalert(){
+  alert("PayMyRent is coming Soon!Please wait")
+
+}
 var loginidd="";
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
+    var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items: 3,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 1000,
+            autoplayHoverPause: true
+        });
  if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
   
    }else{
@@ -46,7 +80,7 @@ function Login() {
 
     $.ajax({
         type: "POST",
-        url: "http://176.111.105.86:8083/Login",
+        url: "http://localhost:8083/Login",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Rentmatics),
 
@@ -57,11 +91,13 @@ function Login() {
                 $("#login").html("MyAccount");
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
+              window.location.href = document.referrer;
             } else {
                 alert("Incorect Username and Password")
 
             } }
     });
+
 }
 
 
@@ -85,7 +121,7 @@ function SignupRent() {
 
     $.ajax({
         type: "POST",
-        url: "http://176.111.105.86:8083/User",
+        url: "http://localhost:8083/User",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Rentmatics),
 
@@ -97,7 +133,7 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-              document.location.href = "index-2.html";
+           window.location.href = document.referrer;
         }
     });
 }
@@ -206,7 +242,7 @@ function onSignIn(googleUser) {
 
     $.ajax({
         type: "POST",
-        url: "http://176.111.105.86:8083/User",
+        url: "http://localhost:8083/User",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Gmail),
 
@@ -218,7 +254,7 @@ function onSignIn(googleUser) {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-              document.location.href = "index-2.html";
+           window.location.href = document.referrer;
 
 
 
@@ -299,7 +335,7 @@ function onSignIn(googleUser) {
 
     $.ajax({
         type: "POST",
-        url: "http://176.111.105.86:8083/User",
+        url: "http://localhost:8083/User",
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Facebook),
 
@@ -311,7 +347,7 @@ function onSignIn(googleUser) {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-              document.location.href = "index-2.html";
+           window.location.href = document.referrer;
 
 
 
@@ -388,11 +424,12 @@ function Getwish() {
          <!-- Main Navigation -->
         <nav id="navigation" class="style-1">
           <ul id="responsive">
-            <li><a  href="index-2.html">Home</a></li>
-            <li><a href="how_it_works.html">How It Works </a>
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="howitworks.html">How It Works </a>
               <ul>
-                <li><a href="owners.html">Owners</a> </li>
-                <li><a href="tenants.html">Tenants</a></li>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
@@ -651,7 +688,7 @@ function Getwish() {
 <script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
 <script type="text/javascript" src="scripts/tooltips.min.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
-<script type="text/javascript" src="scripts/login.js"></script>
+<!-- <script type="text/javascript" src="scripts/login.js"></script> -->
 
 
 
@@ -663,32 +700,6 @@ function Getwish() {
 ================================================== -->
 <script src="scripts/switcher.js"></script>
 
-<div id="style-switcher">
-	<h2>Color Switcher <a href="#"><i class="sl sl-icon-settings"></i></a></h2>
-	
-	<div>
-		<ul class="colors" id="color1">
-			<li><a href="#" class="blue" title="Blue"></a></li>
-			<li><a href="#" class="green" title="Green"></a></li>
-			<li><a href="#" class="orange" title="Orange"></a></li>
-			<li><a href="#" class="navy" title="Navy"></a></li>
-			<li><a href="#" class="yellow" title="Yellow"></a></li>
-			<li><a href="#" class="peach" title="Peach"></a></li>
-			<li><a href="#" class="beige" title="Beige"></a></li>
-			<li><a href="#" class="purple" title="Purple"></a></li>
-			<li><a href="#" class="celadon" title="Celadon"></a></li>
-			<li><a href="#" class="pink" title="Pink"></a></li>
-			<li><a href="#" class="red" title="Red"></a></li>
-			<li><a href="#" class="brown" title="Brown"></a></li>
-			<li><a href="#" class="cherry" title="Cherry"></a></li>
-			<li><a href="#" class="cyan" title="Cyan"></a></li>
-			<li><a href="#" class="gray" title="Gray"></a></li>
-			<li><a href="#" class="olive" title="Olive"></a></li>
-		</ul>
-	</div>
-		
-</div>
-<!-- Style Switcher / End -->
 
 
 </div>

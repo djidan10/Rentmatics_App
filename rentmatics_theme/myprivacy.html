@@ -17,6 +17,29 @@
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
 <script>
+function Payalert(){
+	alert("PayMyRent is coming Soon!Please wait")
+
+}
+//Logout the User
+function logout() {
+   
+
+     $.ajax({
+        type: "GET",
+        url: "http://localhost:8083/Logout",
+
+        success: function(responsee) {
+             document.getElementById("loginhiden").style.display = "inline";
+                document.getElementById("account").style.display = "none";
+                location.reload(true);
+
+    
+        }
+
+    });
+
+}
 var loginidd="";
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
@@ -76,11 +99,12 @@ $(document).ready(function(){
          <!-- Main Navigation -->
 				<nav id="navigation" class="style-1">
 					<ul id="responsive">
-            <li><a  href="index-2.html">Home</a></li>
-            <li><a href="how_it_works.html">How It Works </a>
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="howitwork.html">How It Works </a>
               <ul>
-                <li><a href="owners.html">Owners</a> </li>
-                <li><a href="tenants.html">Tenants</a></li>
+                  <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
@@ -314,7 +338,7 @@ If you choose to visit the website, your visit and any dispute over privacy is s
          $(document).ready(function(){
          $.ajax({
           type: "GET",
-          url: "http://176.111.105.86:8083/GetCities",
+          url: "http://localhost:8083/GetCities",
           contentType:"application/json; charset=utf-8",
          
          success: function(responsee){

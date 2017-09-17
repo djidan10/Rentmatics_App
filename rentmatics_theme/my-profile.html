@@ -11,10 +11,30 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
+
     
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
 <script>
+//Logout the User
+function logout() {
+   
+
+     $.ajax({
+        type: "GET",
+        url: "http://localhost:8083/Logout",
+
+        success: function(responsee) {
+             document.getElementById("loginhiden").style.display = "inline";
+                document.getElementById("account").style.display = "none";
+                location.reload(true);
+
+    
+        }
+
+    });
+
+}
 var loginidd="";
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
@@ -24,8 +44,180 @@ $(document).ready(function(){
        $("#login").html("MyAccount");
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.display = "inline";
+                 Loginid = cooki
+                 alert("inside");
+                 alert(cooki);
+
+
+    var Getprofile ={
+      
+      "Loginid":Loginid
+     
+
+
+     };
+   
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:8083/GetProfile",
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(Getprofile),
+
+   success: function(responsee){
+
+
+     var searchout = JSON.parse(responsee);
+     alert(searchout.Name);
+     var responsename =searchout.Name
+     var responsetittle =searchout.Tittle
+     var responsephone =searchout.Phone
+     var responsemail =searchout.Email
+     var responseabout =searchout.About
+     var responsetwitter =searchout.Twiter
+     var responsefacebook =searchout.Facebook
+     var responsegoogle =searchout.Google
+
+    $("#Pname").val(responsename);
+    $("#Ptittle").val(responsetittle);
+    $("#Pphone").val(responsephone);
+    $("#Pemail").val(responsemail);
+    $("#Pabout").val(responseabout);
+    $("#Ptwitter").val(responsetwitter);
+    $("#Pfacebook").val(responsefacebook);
+    $("#Pgoogle").val(responsegoogle);
+         
+       
+
+ }
+
+});
+
+     
     }
 });
+
+
+//Logout the User
+function logout() {
+	
+
+
+   // $.removeCookie('RentmaticsCookie');
+    delete_cookie("RentmaticsCookie");
+     $.ajax({
+        type: "GET",
+        url: "http://localhost:8083/Logout",
+
+
+        success: function(responsee) {
+        	localStorage.removeItem("LoginID");
+           document.getElementById("loginhiden").style.display = "inline";
+            document.getElementById("account").style.visibility = "hidden";
+
+    
+        }
+
+    });
+
+}
+function Payalert(){
+	alert("PayMyRent is coming Soon!Please wait")
+
+}
+
+function myprofile(){
+
+alert("inside profile");
+
+
+   if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+
+
+    alert("Please Signin to create profile");
+    document.location.href = "login-register.html";
+  
+   }else{
+   	alert("asdf");
+
+
+    
+
+    var getname =  document.getElementById('Pname').value;
+    var gettittle = document.getElementById('Ptittle').value;
+    var getphone = document.getElementById('Pphone').value;
+    var getemail =document.getElementById('Pemail').value;
+    var getabout =document.getElementById('Pabout').value;
+    var gettwiter =document.getElementById('Ptwitter').value;
+    var getfacebook =document.getElementById('Pfacebook').value;
+    var getgoogle =document.getElementById('Pgoogle').value;
+
+    console.log(getname,gettittle,getphone,getemail,getabout,gettwiter);
+
+
+      var Profile ={
+      "Id": null,
+      "Loginid":cooki,
+      "Name":getname,
+      "Tittle":gettittle,
+      "Phone":getphone,
+      "Email":getemail,
+      "About":getabout,
+      "Twiter":gettwiter,
+      "Facebook":getfacebook,
+      "Google":getgoogle
+
+
+     };
+   
+    $.ajax({
+      type: "POST",
+      url: "http://localhost:8083/Myprofile",
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(Profile),
+
+   success: function(responsee){
+
+     var searchout = JSON.parse(responsee);
+     var responsename =searchout.Name
+     var responsetittle =searchout.Tittle
+     var responsephone =searchout.Phone
+     var responsemail =searchout.Email
+     var responseabout =searchout.About
+     var responsetwitter =searchout.Twiter
+     var responsefacebook =searchout.Facebook
+     var responsegoogle =searchout.Google
+
+
+     // localStorage.setItem("LoginID", cooki);
+     // localStorage.setItem("LoginID", cooki);
+     // localStorage.setItem("LoginID", cooki);
+     // localStorage.setItem("LoginID", cooki);
+     // localStorage.setItem("LoginID", cooki);
+     // localStorage.setItem("LoginID", cooki);
+     // localStorage.setItem("LoginID", cooki);
+     // localStorage.setItem("LoginID", cooki);
+     // localStorage.setItem("LoginID", cooki);
+     // localStorage.setItem("LoginID", cooki);
+
+    $("#Pname").html(responsename);
+    $("#Ptittle").html(responsetittle);
+    $("#Pphone").html(responsephone);
+    $("#Pemail").html(responsemail);
+    $("#Pabout").html(responseabout);
+    $("#Ptwitter").html(responsetwitter);
+    $("#Pfacebook").html(responsefacebook);
+    $("#Pgoogle").html(responsegoogle);
+         
+       
+
+ }
+
+});
+}
+
+
+}
+
 
 </script>
 
@@ -73,11 +265,12 @@ $(document).ready(function(){
          <!-- Main Navigation -->
 				<nav id="navigation" class="style-1">
 					<ul id="responsive">
-            <li><a  href="index-2.html">Home</a></li>
-            <li><a href="how_it_works.html">How It Works </a>
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="howitwork.html">How It Works </a>
               <ul>
-                <li><a href="owners.html">Owners</a> </li>
-                <li><a href="tenants.html">Tenants</a></li>
+              <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
@@ -98,8 +291,7 @@ $(document).ready(function(){
             <ul>
                     <li><a href="my-profile.html">My Profile</a></li>
                     <li><a href="my-bookmarks.html">My Wish List</a></li>
-                    <li><a href="change-password.html">Change Password</a></li>
-                   
+                    <li><a href="javascript:logout()">Logout</a></li>
                   </ul> 
                 </li> 
           </ul>
@@ -112,227 +304,103 @@ $(document).ready(function(){
 <!-- Header Container / End -->
 
 
+
+<br>
 <br>
 
 <!-- Content
 ================================================== -->
 <div class="container">
-
-	<!-- Blog Posts -->
-	<div class="blog-page">
 	<div class="row">
+
+
+		<!-- Widget -->
+		<div class="col-md-4">
+			<div class="sidebar left">
+
+				<div class="my-account-nav-container">
+					
+					<ul class="my-account-nav">
+						<li class="sub-nav-title">Manage Account</li>
+						<li><a href="my-profile.html" class="current"><i class="sl sl-icon-user"></i> My Profile</a></li>
+						<li><a href="my-bookmarks.html"><i class="sl sl-icon-star"></i> Bookmarked Listings</a></li>
+					</ul>
+					
+					<!-- <ul class="my-account-nav">
+						<li class="sub-nav-title">Manage Listings</li>
+						<li><a href="my-properties.html"><i class="sl sl-icon-docs"></i> My Properties</a></li>
+						<li><a href="submit-property.html"><i class="sl sl-icon-action-redo"></i> Submit New Property</a></li>
+					</ul>
+ -->
+					<ul class="my-account-nav">
+						<li><a href="change-password.html"><i class="sl sl-icon-lock"></i> Change Password</a></li>
+						<li><a href="javascript:logout()"><i class="sl sl-icon-power"></i> Log Out</a></li>
+					</ul>
+
+				</div>
+
+			</div>
+		</div>
+
 		<div class="col-md-8">
+			<div class="row">
 
-			<!-- Blog Post -->
-			<div class="blog-post">
+
+				<div class="col-md-8 my-profile">
+					<h4 class="margin-top-0 margin-bottom-30">My Account</h4>
+
+					<label>Your Name</label>
+					<input  type="text" id="Pname">
+
+					<label>Your Title</label>
+					<input  type="text" id="Ptittle">
+
+					<label>Phone</label>
+					<input  type="text" id="Pphone">
+
+					<label>Email</label>
+					<input  type="text" id="Pemail">
+
+
+					<h4 class="margin-top-50 margin-bottom-25">About Me</h4>
+					<textarea name="about"  cols="30" rows="10" id="Pabout">Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper</textarea>
 				
-				<!-- Img -->
-				<a href="blog-post.html" class="post-img">
-					<img src="images/blog-post-01a.jpg" alt="">
-				</a>
-				
-				<!-- Content -->
-				<div class="post-content">
-					<h3><a href="blog-post.html">8 Tips to Help You Finding New Home</a></h3>
 
-					<ul class="post-meta">
-						<li>Novemer 12, 2016</li>
-						<li><a href="#">5 Comments</a></li>
-					</ul>
+					<h4 class="margin-top-50 margin-bottom-0">Social</h4>
 
-					<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue dapibus facilisis.</p>
+					<label><i class="fa fa-twitter"></i> Twitter</label>
+					<input  type="text" id="Ptwitter">
 
-					<a href="blog-post.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
+					<label><i class="fa fa-facebook-square"></i> Facebook</label>
+					<input  type="text" id="Pfacebook">
+
+					<label><i class="fa fa-google-plus"></i> Google+</label>
+					<input  type="text" id="Pgoogle">
+
+
+					<button class="button margin-top-20 margin-bottom-20" onclick="myprofile()">Save Changes</button>
 				</div>
+<!-- 
+				<div class="col-md-4">
+					
+					<div class="edit-profile-photo">
+						<img src="images/agent-02.jpg" alt="">
+						<div class="change-photo-btn">
+							<div class="photoUpload">
+							    <span><i class="fa fa-upload"></i> Upload Photo</span>
+							    <input type="file" class="upload" />
+							</div>
+						</div>
+					</div>
+
+				</div> -->
+
 
 			</div>
-			<!-- Blog Post / End -->
-
-
-			<!-- Blog Post -->
-			<div class="blog-post">
-				
-				<!-- Img -->
-				<a href="blog-post.html" class="post-img">
-					<img src="images/blog-post-02a.jpg" alt="">
-				</a>
-				
-				<!-- Content -->
-				<div class="post-content">
-					<h3><a href="blog-post.html">Bedroom Colors You'll Never Regret</a></h3>
-
-					<ul class="post-meta">
-						<li>November 9, 2016</li>
-						<li><a href="#">5 Comments</a></li>
-					</ul>
-
-					<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue dapibus facilisis.</p>
-
-					<a href="blog-post.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
-				</div>
-
-			</div>
-			<!-- Blog Post / End -->
-
-
-			<!-- Blog Post -->
-			<div class="blog-post">
-				
-				<!-- Img -->
-				<a href="blog-post.html" class="post-img">
-					<img src="images/blog-post-03a.jpg" alt="">
-				</a>
-				
-				<!-- Content -->
-				<div class="post-content">
-					<h3><a href="blog-post.html">What to Do a Year Before Buying Apartment</a></h3>
-
-					<ul class="post-meta">
-						<li>October 26, 2016</li>
-						<li><a href="#">3 Comments</a></li>
-					</ul>
-
-					<p>Nam nisl lacus, dignissim ac tristique ut, scelerisque eu massa. Vestibulum ligula nunc, rutrum in malesuada vitae, tempus sed augue. Curabitur quis lectus quis augue dapibus facilisis.</p>
-
-					<a href="blog-post.html" class="read-more">Read More <i class="fa fa-angle-right"></i></a>
-				</div>
-
-			</div>
-			<!-- Blog Post / End -->
-
-
-			<!-- Pagination -->
-			<div class="clearfix"></div>
-			<div class="pagination-container">
-				<nav class="pagination">
-					<ul>
-						<li><a href="#" class="current-page">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-					</ul>
-				</nav>
-
-				<nav class="pagination-next-prev">
-					<ul>
-						<li><a href="#" class="prev">Previous</a></li>
-						<li><a href="#" class="next">Next</a></li>
-					</ul>
-				</nav>
-			</div>
-			<div class="clearfix"></div>
-
 		</div>
 
-	<!-- Blog Posts / End -->
-
-
-	<!-- Widgets -->
-	<div class="col-md-4">
-		<div class="sidebar right">
-
-			<!-- Widget -->
-			<div class="widget">
-				<h3 class="margin-top-0 margin-bottom-25">Search Blog</h3>
-				<div class="search-blog-input">
-					<div class="input"><input class="search-field" type="text" placeholder="Type and hit enter" value=""/></div>
-				</div>
-				<div class="clearfix"></div>
-			</div>
-			<!-- Widget / End -->
-
-
-			<!-- Widget -->
-			<div class="widget">
-				<h3>Got any questions?</h3>
-				<div class="info-box margin-bottom-10">
-					<p>If you are having any questions, please feel free to ask.</p>
-					<a href="contact.html" class="button fullwidth margin-top-20"><i class="fa fa-envelope-o"></i> Drop Us a Line</a>
-				</div>
-			</div>
-			<!-- Widget / End -->
-
-
-			<!-- Widget -->
-			<div class="widget">
-
-				<h3>Popular Posts</h3>
-				<ul class="widget-tabs">
-
-					<!-- Post #1 -->
-					<li>
-						<div class="widget-content">
-								<div class="widget-thumb">
-								<a href="blog-full-width-single-post.html"><img src="images/blog-widget-03.jpg" alt=""></a>
-							</div>
-							
-							<div class="widget-text">
-								<h5><a href="blog-full-width-single-post.html">What to Do a Year Before Buying Apartment </a></h5>
-								<span>October 26, 2016</span>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</li>
-					
-					<!-- Post #2 -->
-					<li>
-						<div class="widget-content">
-							<div class="widget-thumb">
-								<a href="blog-full-width-single-post.html"><img src="images/blog-widget-02.jpg" alt=""></a>
-							</div>
-							
-							<div class="widget-text">
-								<h5><a href="blog-full-width-single-post.html">Bedroom Colors You'll Never Regret</a></h5>
-								<span>November 9, 2016</span>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</li>
-					
-					<!-- Post #3 -->
-					<li>
-						<div class="widget-content">
-							<div class="widget-thumb">
-								<a href="blog-full-width-single-post.html"><img src="images/blog-widget-01.jpg" alt=""></a>
-							</div>
-							
-							<div class="widget-text">
-								<h5><a href="blog-full-width-single-post.html">8 Tips to Help You Finding New Home</a></h5>
-								<span>November 12, 2016</span>
-							</div>
-							<div class="clearfix"></div>
-						</div>
-					</li>
-
-				</ul>
-
-			</div>
-			<!-- Widget / End-->
-
-
-			<!-- Widget -->
-			<div class="widget">
-				<h3 class="margin-top-0 margin-bottom-25">Social</h3>
-				<ul class="social-icons rounded">
-					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-					<li><a class="linkedin" href="#"><i class="icon-linkedin"></i></a></li>
-				</ul>
-
-			</div>
-			<!-- Widget / End-->
-
-			<div class="clearfix"></div>
-			<div class="margin-bottom-40"></div>
-		</div>
 	</div>
-	</div>
-	<!-- Sidebar / End -->
-
-
 </div>
-</div>
-
 
 
 
@@ -348,6 +416,7 @@ $(document).ready(function(){
 
 </div>
 </div>
+
 <!-- Footer
 ================================================== -->
 <div class="margin-top-55"></div>

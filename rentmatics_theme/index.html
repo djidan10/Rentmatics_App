@@ -6,41 +6,24 @@
 <title>Rentmatics</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+      <meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
+      <meta name="author" content="">
+      <script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+      <meta name="google-signin-client_id" content="512343144553-4uoof7pml3lajhivpajgru0jo2u6mdnh.apps.googleusercontent.com">
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
 <link rel="stylesheet" href="css/jquery-ui.css">
-<style>
-         .ui-autocomplete {
-         color: black;
-         font-family: font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-         line-height: 2.5;
-         font-size:14.9px;
-         border-radius: 0px;
-         border: 3px solid #454545;
-         }
-         .ui-state-active,
-         .ui-widget-content .ui-state-active,
-         .ui-widget-header .ui-state-active,
-         a.ui-button:active,
-         .ui-button:active,
-         .ui-button.ui-state-active:hover {
-         background-color:  #fa5b0f;
-         border-color: #eceff1;
-         }
-         
-         ul.dropdown-menu>li>a:hover{
-         background: #fa5b0f !important;
-         }
-      </style>
- <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&sensor=false"></script> -->
- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
 
-
-<script type="text/javascript" src="scripts/jquery.min.js"></script>
-<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
 <script>
 var loginidd="";
 var cooki=$.cookie('RentmaticsCookie');
@@ -54,26 +37,39 @@ $(document).ready(function(){
                 localStorage.setItem("LoginID", cooki);
     }
 });
+
+//Logout the User
+function logout() {
+   
+
+     $.ajax({
+        type: "GET",
+        url: "http://localhost:8083/Logout",
+
+        success: function(responsee) {
+             document.getElementById("loginhiden").style.display = "inline";
+                document.getElementById("account").style.display = "none";
+                location.reload(true);
+
+    
+        }
+
+    });
+
+}
+function Payalert(){
+	alert("PayMyRent is coming Soon!Please wait")
+
+}
 window.onload = function () {
 	$.ajax({
          type: "GET",
-         url: "http://176.111.105.86:8083/GetAllhomedetails",
+         url: "http://localhost:8083/GetAllhomedetails",
          
-        
-
-         success: function(responsee){
-   
-          
-    
-      var searchout = JSON.parse(responsee);
+      	success: function(responsee){
+ 			var searchout = JSON.parse(responsee);
             Getresponse(searchout)
-          }
-
-
-});
-
-
-
+          }});
 }
 
 //Common function for s=Displaying Response
@@ -83,36 +79,22 @@ function Getresponse(searchout){
   var property =searchout.length +" Results Found ";
  for (k=0;k<searchout.length;k++){
     cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,cooki);
-    console.log(cardstring)
-  }
+   }
 
   document.getElementById("listContainer").innerHTML=cardstring;
-
- // for (l=0;l<searchout.length;l++){
- //    GetLiked("colorid"+searchout[l].RentFullStruct.Id);
- //  }
-
-
- for(j=0;j<searchout.length;j++){
- console.log(searchout[j].RentFullimages.length);
+	for(j=0;j<searchout.length;j++){
  var finalDiv="";
-
  var Singlesliderstart2="<img src='";
  var Singlesliderend = "' alt='"+"'>";
  var bhk1 =" Bhk"
- 
- 
-  for (i=0;i<searchout[j].RentFullimages.length;i++){
+ for (i=0;i<searchout[j].RentFullimages.length;i++){
   	finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
    }
-    
   var ID = searchout[j].RentFullStruct.Id;
   var Liked = searchout[j].RentFullStruct.Liked;
-  // GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
-  
- var mapview = searchout[j].Cityname;
+  var mapview = searchout[j].Cityname;
  var City =searchout[j].Cityname
- var Rent = "$ "+searchout[j].RentFullStruct.Month_rent;
+ var Rent = "₹ "+searchout[j].RentFullStruct.Month_rent;
  var Housename = searchout[j].RentFullStruct.Housename;
  var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
  var Address1 = searchout[j].RentFullStruct.Adress1;
@@ -147,15 +129,9 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
     var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
       src=src.replace("&amp;","&")
       console.log(src)
-        // document.getElementById("map-canvas").setAttribute("src",src);
-//var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
-// document.getElementById("maprightview").setAttribute("src",src);
-// document.getElementById("mapscroll").setAttribute("src",src);
-// document.getElementById("getUrl"+ ID).setAttribute("href",url);
+      
 
-
-}
-}
+}}
 
 //For Slider
  function Getjavascript(Dyid,loginid){
@@ -171,8 +147,9 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 "</div>"+
 "<div class='listing-img-content'>"+
 
-"<span class='listing-price' id='Housename"+Dyid+"' ></span>"+
-"<span class='listing-price' id='Rent"+Dyid+"' ></span>"+
+"<span class='listing-price' style='font-size:17px;margin-left:5px' id='Housename"+Dyid+"' ></span>"+
+"<br>"+
+"<span class='listing-price' style='font-size:17px;margin-left:5px' id='Rent"+Dyid+"' ></span>"+
 "<ul class='listing-hidden-content'>"+
 "<li>BHK <span id='bhk"+Dyid+"'></span></li>"+
 "<li>Furnished <span id='furnishtype"+Dyid+"'>3</span></li>"+
@@ -213,10 +190,10 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 				
 				<!-- Logo -->
 				<div id="logo" class="margin-top-10">
-					<a href="index-2.html"><img src="images/rm_logo.png" alt=""></a>
+					<a href="index.html"><img src="images/rm_logo.png" alt=""></a>
 
 					<!-- Logo for Sticky Header -->
-					<a href="index-2.html" class="sticky-logo"><img src="images/rm_logo.png" alt=""></a>
+					<a href="index.html" class="sticky-logo"><img src="images/rm_logo.png" alt=""></a>
 				</div>
 				
 			</div>
@@ -234,7 +211,7 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 					</li>
 
 				
-					<li class="with-btn"><a href="owners.html" class="button border">For Owners</a></li>
+					<li class="with-btn"><a href="owner.html" class="button border">For Owners</a></li>
 				</ul>
 			</div>
 			<!-- Right Side Content / End -->
@@ -253,16 +230,16 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 			<div class="container">
 					<ul id="responsive">
 
-						<li><a class="current" href="index-2.html">Home</a>
+						<li><a class="current" href="index.html">Home</a>
 							
 						</li>
 
-						<li><a href="how_it_works.html">How It Works </a>
+						<li><a href="howitwork.html">How It Works </a>
 							<ul>
-								<li><a href="owners.html">Owners</a>
+								<li><a href="owner.html">Owners</a>
 									
 								</li>
-								<li><a href="tenants.html">Tenants</a>
+								<li><a href="tenats.html">Tenants</a>
 									
 								</li>
 							
@@ -282,7 +259,7 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 
 							
 							
-						 <li><a href="#" style="visibility:hidden">Forrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</a></li>
+						 <li><a href="#" style="visibility:hidden">Forrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</a></li>
 
 
                    	<li style="display:none" id="account"><a href="#">My Account</a>
@@ -321,7 +298,7 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 
 <!-- Banner
 ================================================== -->
-<div class="parallax" data-background="images/jumbo-banner.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
+<div class="parallax" data-background="images/jumbo-banner.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="3500" data-img-height="3600">
 
 	<div class="container">
 		<div class="row">
@@ -350,7 +327,7 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 						
 
 						<!-- Main Search Input -->
-						<div class="col-md-6">
+						<div class="col-md-7">
 							<div class="main-search-input">
 								 <input type="text"  placeholder="Search by locality, landmark or office location"  id="tags" >
 								<button class="button" onclick="Gethomes()"><i class="fa fa-search"></i></button>
@@ -439,17 +416,21 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 		</div>
 		
 		<!-- Carousel -->
+		
 		 <div class="col-md-12" id="listContainer">
-		 <div class="carousel">
+		 <!-- <div class="owl-carousel owl-theme" > -->
+		 <!-- <div class="carousel"> -->
+		 <div class="carousel owl-carousel owl-theme">
 
 
-		 <div >
 		 </div>
-		</div>
+		 	</div>
+		 <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div><div class="owl-buttons"><div class="owl-prev"></div><div class="owl-next"></div></div></div>
 				
-	
+
 
 	</div>
+</div>
 </div>
 <!-- Featured / End -->
 
@@ -875,7 +856,7 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 
 <!-- Footer
 ================================================== -->
-<div id="footer" class="sticky-footer">
+<div id="footer" >
 	<!-- Main -->
 	<div class="container">
 		<div class="row">
@@ -944,10 +925,12 @@ google.maps.event.addDomListener(window, 'load', initialize);
 function initialize() {
 var input = document.getElementById('tags');
 
+
 var autocomplete = new google.maps.places.Autocomplete(input);
 autocomplete.addListener('place_changed', function () {
 
 var place = autocomplete.getPlace();
+alert(place)
 var aaa = place["address_components"];
 console.log(aaa[0].long_name)
 

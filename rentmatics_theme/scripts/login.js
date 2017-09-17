@@ -75,6 +75,51 @@ function SignupRent() {
 
 
 
+//Redirect to wishlist page
+
+function Getwish() {
+    alert("inside wish " + loginidd);
+    url = "wishlist.html";
+    document.location.href = url;
+
+}
+
+
+
+
+   
+
+
+
+//Post Data to Next page
+function Gethomes() {
+
+   // alert(loginidvalue);
+
+    var cities = document.getElementById('tags').value;
+  
+ 
+  var partsOfStr = cities.split(',');
+   alert(partsOfStr[0])
+
+
+    // for (i = 0; i < Tags.length; i++) {
+    //     if (cities == Tags[i].City) {
+      
+
+             url = 'listings-half-map-grid-compact.html?Id=' + partsOfStr[0];
+     document.location.href = url;
+    //     }
+    // }
+}
+
+function Payalert(){
+    alert("Pay Myrent Comminng Soon!...please wait")
+}
+
+
+
+
 //For Google User-Signin
 var auth2; // The Sign-In object.
 var googleUser; // The current user.
@@ -133,13 +178,13 @@ var refreshValues = function() {
     }
 }
 
-function GsignOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function() {
-        console.log('User signed out.');
+// function GsignOut() {
+//     var auth2 = gapi.auth2.getAuthInstance();
+//     auth2.signOut().then(function() {
+//         console.log('User signed out.');
 
-    });
-}
+//     });
+// }
 
 
 
@@ -271,68 +316,6 @@ function testAPI() {
 
 
 
-
-
-
-//Redirect to wishlist page
-
-function Getwish() {
-    alert("inside wish " + loginidd);
-    url = "wishlist.html";
-    document.location.href = url;
-
-}
-
-
-
-//Logout the User
-function logout() {
-
-    GsignOut();
-   // $.removeCookie('RentmaticsCookie');
-    delete_cookie("RentmaticsCookie");
-     $.ajax({
-        type: "GET",
-        url: "http://localhost:8083/Logout",
-
-        success: function(responsee) {
-            document.getElementById("Userdetails").style.visibility = "hidden";
-            document.getElementById("wishlist").style.visibility = "hidden";
-            document.getElementById("logout").style.visibility = "hidden";
-            document.getElementById("loginhide").style.visibility = "visible";
-            document.getElementById("signuphide").style.visibility = "visible";
-
-    
-        }
-
-    });
-
-}
-
-
-
-//Post Data to Next page
-function Gethomes() {
-
-   // alert(loginidvalue);
-
-    var cities = document.getElementById('tags').value;
-
-
-
-    for (i = 0; i < Tags.length; i++) {
-        if (cities == Tags[i].City) {
-      
-
-             url = 'listings-half-map-grid-compact.html?Id=' + encodeURIComponent(Tags[i].Id);
-            document.location.href = url;
-        }
-    }
-}
-
-function Payalert(){
-    alert("Pay Myrent Comminng Soon!...please wait")
-}
 
 
 

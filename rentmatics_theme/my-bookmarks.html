@@ -11,6 +11,7 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
+
     
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
@@ -19,6 +20,15 @@ var loginidd="";
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
  if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+
+ 	cardstring="No wish list found"
+ 	document.getElementById("hidenid").style.display = "none";
+
+
+ 	
+document.getElementById("listContainer1").innerHTML=cardstring;
+
+
   
    }else{
        $("#login").html("MyAccount");
@@ -26,17 +36,196 @@ $(document).ready(function(){
                 document.getElementById("account").style.display = "inline";
     }
 });
-var check = function() {
-	
 
-  if (document.getElementById('password').value == document.getElementById('confirmpassword').value) {
-    document.getElementById('message').style.color = 'green';
-    document.getElementById('message').innerHTML = 'matching';
-  } else {
-    document.getElementById('message').style.color = 'red';
-    document.getElementById('message').innerHTML = 'not matching';
-  }
+//Logout the User
+function logout() {
+   
+
+     $.ajax({
+        type: "GET",
+        url: "http://localhost:8083/Logout",
+
+        success: function(responsee) {
+             document.getElementById("loginhiden").style.display = "inline";
+                document.getElementById("account").style.display = "none";
+                location.reload(true);
+
+    
+        }
+
+    });
+
 }
+function Payalert(){
+	alert("PayMyRent is coming Soon!Please wait")
+
+}
+window.onload = function () {
+
+  
+    
+
+      var s={
+          "Loginid" :cooki
+        };
+
+   $.ajax({
+         type: "POST",
+      
+          url: "http://localhost:8083/Wishlist",
+          contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+         success: function(responsee){
+   
+            var searchout = JSON.parse(responsee);
+            if (searchout == null){
+
+              alert("No wishlist Found");
+          //url = 'working.html?loginid='+loginid;
+          
+          console.log("*************wish url*******************")
+          
+            }
+            else{
+
+            Getresponse(searchout)
+          }
+}
+
+});
+}
+
+
+
+
+
+//Common function for s=Displaying Response
+function Getresponse(searchout){
+	
+  var cardstring ="";
+  var property =searchout.length +" Results Found ";
+ for (k=0;k<searchout.length;k++){
+    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,cooki);
+    console.log(cardstring)
+  }
+
+  document.getElementById("listContainer1").innerHTML=cardstring;
+
+ // for (l=0;l<searchout.length;l++){
+ //    GetLiked("colorid"+searchout[l].RentFullStruct.Id);
+ //  }
+
+
+
+
+
+
+
+
+ for(j=0;j<searchout.length;j++){
+ console.log(searchout[j].RentFullimages.length);
+ var finalDiv="";
+
+
+ var bhk1 =" Bhk"
+ 
+ 
+  for (i=0;i<searchout[j].RentFullimages.length;i++){
+  	finalDiv= searchout[j].RentFullimages[0].Picture_url;
+   }
+    
+  
+
+ 
+  var ID = searchout[j].RentFullStruct.Id;
+    var Liked = searchout[j].RentFullStruct.Liked;
+  //GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
+  
+ var mapview = searchout[j].Cityname;
+ var City =searchout[j].Cityname
+ var Rent = "$ "+searchout[j].RentFullStruct.Month_rent;
+ var Housename = searchout[j].RentFullStruct.Housename;
+ var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
+ var Address1 = searchout[j].RentFullStruct.Adress1;
+ var Address2 = searchout[j].RentFullStruct.Adress2;
+ var pin = searchout[j].RentFullStruct.Pin;
+ var state = searchout[j].RentFullStruct.State;
+ var country = searchout[j].RentFullStruct.Country;
+ var housetype =searchout[j].RentFullStruct.House_type
+ var tenantType =searchout[j].RentFullStruct.Tenant_type
+ var furnishingType =searchout[j].RentFullStruct.Furnish_type
+ var bedType =searchout[j].RentFullStruct.Bed
+
+
+
+
+
+
+$("#property").html(property);
+$("#Rent"+ID).html(Rent);
+$("#Housename"+ID).html(Housename);
+$("#bhk"+ID).html(bhk);
+$("#bed"+ID).html(bedType);
+$("#Address1"+ID).html(Address1);
+$("#Address2"+ID).html(Address2);
+$("#pin"+ID).html(pin);
+$("#state"+ID).html(state);
+$("#country"+ID).html(country);
+$("#city"+ID).html(City);
+$("#houseType"+ID).html(housetype);
+$("#tenantType"+ID).html(tenantType);
+$("#furnishtype"+ID).html(furnishingType);
+//$("#rentimage1"+ID).html(finalDiv);
+document.getElementById("rentimage1"+ ID).setAttribute("src",finalDiv);
+
+ url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
+
+//document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+    var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
+      src=src.replace("&amp;","&")
+      console.log(src)
+        // document.getElementById("map-canvas").setAttribute("src",src);
+//var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
+// document.getElementById("maprightview").setAttribute("src",src);
+// document.getElementById("mapscroll").setAttribute("src",src);
+document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+
+}
+}
+
+
+
+
+ //For Slider
+ function Getjavascript(Dyid,loginid){
+  var str= 
+  
+"<tr>"+
+"<td class='title-container'>"+
+
+"<img  style='height:30%;width:30%'  id='rentimage1"+Dyid+"'"+
+">"+
+
+"<div class='title'>"+
+"<a id='getUrl"+Dyid+"'>"+
+"<h4 id='Housename"+Dyid+"' >"+
+"</h4>"+
+"<span id='Address1"+Dyid+"'></span>"+
+"<span id='Address2"+Dyid+"'></span>"+
+"<span class='table-property-price' id='Rent"+Dyid+"'>$535,000</span>"+
+
+"</div>"+
+"</a>"+
+"</td>"+
+"</tr>";
+
+  return str;
+
+ }
+
 </script>
 
 </head>
@@ -83,11 +272,12 @@ var check = function() {
          <!-- Main Navigation -->
 				<nav id="navigation" class="style-1">
 					<ul id="responsive">
-            <li><a  href="index-2.html">Home</a></li>
-            <li><a href="how_it_works.html">How It Works </a>
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="howitwork.html">How It Works </a>
               <ul>
-                <li><a href="owners.html">Owners</a> </li>
-                <li><a href="tenants.html">Tenants</a></li>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
@@ -108,8 +298,7 @@ var check = function() {
             <ul>
                     <li><a href="my-profile.html">My Profile</a></li>
                     <li><a href="my-bookmarks.html">My Wish List</a></li>
-                    <li><a href="javascript:logout()">Logout</a></li>
-                    
+                   <li><a href="javascript:logout()">Logout</a></li>
                   </ul> 
                 </li> 
           </ul>
@@ -123,6 +312,8 @@ var check = function() {
 
 
 <br>
+<br>
+
 
 <!-- Content
 ================================================== -->
@@ -139,13 +330,13 @@ var check = function() {
 					<ul class="my-account-nav">
 						<li class="sub-nav-title">Manage Account</li>
 						<li><a href="my-profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
-						<li><a href="my-bookmarks.html"><i class="sl sl-icon-star"></i> Bookmarked Listings</a></li>
+						<li><a href="my-bookmarks.html" class="current"><i class="sl sl-icon-star"></i> Bookmarked Listings</a></li>
 					</ul>
 					
 					
 
 					<ul class="my-account-nav">
-						<li><a href="change-password.html"  class="current"><i class="sl sl-icon-lock"></i> Change Password</a></li>
+						<li><a href="change-password.html"><i class="sl sl-icon-lock"></i> Change Password</a></li>
 						<li><a href="#"><i class="sl sl-icon-power"></i> Log Out</a></li>
 					</ul>
 
@@ -155,35 +346,20 @@ var check = function() {
 		</div>
 
 		<div class="col-md-8">
-			<div class="row">
-				<div class="col-md-6  my-profile">
-					<h4 class="margin-top-0 margin-bottom-30">Change Password</h4>
+			<table class="manage-table bookmarks-table responsive-table">
 
-					<label>Current Password</label>
-					<input type="password">
+				<tr id="hidenid">
+					<th ><i class="fa fa-file-text" ></i> Property</th>
+					
+				</tr>
+				<tr  id="listContainer1"></tr>
 
-					<label>New Password</label>
-					<input type="password" id="password">
 
-					<label>Confirm New Password</label >
-					<input type="password"  id="confirmpassword"  onkeyup="check()">
-					<span id='message'></span>
-
-					<a href="submit-property.html" class="margin-top-20 button">Save Changes</a>
-				</div>
-
-				<div class="col-md-6">
-					<div class="notification notice">
-						<p>Your password should be at least 12 random characters long to be safe</p>
-					</div>
-				</div>
-
-			</div>
+			</table>
 		</div>
 
 	</div>
 </div>
-
 
 
 <!-- The Modal -->
@@ -198,9 +374,6 @@ var check = function() {
 
 </div>
 </div>
-
-<!-- Footer
-================================================== -->
 <div class="margin-top-55"></div>
 
 
@@ -264,7 +437,6 @@ var check = function() {
 	</div>
 
 </div>
-<!-- Footer / End -->
 
 
 <!-- Back To Top Button -->
