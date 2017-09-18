@@ -99,7 +99,7 @@ type Home_single struct {
 	Home_Data    Home
 	Home_images  []Home_images
 	Liked        bool
-	Ownerdetails Owner
+	Ownerdetails Ownersend
 }
 type Filter struct {
 	F_Loginid        string

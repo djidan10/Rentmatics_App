@@ -42,5 +42,5 @@ type Ownercomplaints struct {
 type RentSendOwner struct {
 	RentFullStruct Home
 	RentFullimages []Home_images
-	Ownerdetails   Owner
+	Ownerdetails   Ownersend
 }
