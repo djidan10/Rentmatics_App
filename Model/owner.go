@@ -38,3 +38,9 @@ type Ownercomplaints struct {
 	Status        string
 	Approvedate   string
 }
+
+type RentSendOwner struct {
+	RentFullStruct Home
+	RentFullimages []Home_images
+	Ownerdetails   Owner
+}

@@ -38,6 +38,12 @@ type Home struct {
 	Latitude         float64
 	Longitude        float64
 	Liked            bool
+	Squarefeet       string
+	Likecount        string
+	Rating           string
+	Totalfloors      string
+	Facing           string
+	Parking          string
 }
 
 type HomeInsert struct {
@@ -89,10 +95,11 @@ type RentSendall struct {
 }
 
 type Home_single struct {
-	Cityname    string
-	Home_Data   Home
-	Home_images []Home_images
-	Liked       bool
+	Cityname     string
+	Home_Data    Home
+	Home_images  []Home_images
+	Liked        bool
+	Ownerdetails Owner
 }
 type Filter struct {
 	F_Loginid        string

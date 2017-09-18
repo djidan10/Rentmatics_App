@@ -96,6 +96,12 @@ func GetHomeDetils_DB(City string) (Temprentarray []Model.RentSend) {
 			&Data.Description,
 			&Data.Latitude,
 			&Data.Longitude,
+			&Data.Squarefeet,
+			&Data.Likecount,
+			&Data.Rating,
+			&Data.Totalfloors,
+			&Data.Facing,
+			&Data.Parking,
 		)
 
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
@@ -173,6 +179,12 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 			&Data.Description,
 			&Data.Latitude,
 			&Data.Longitude,
+			&Data.Squarefeet,
+			&Data.Likecount,
+			&Data.Rating,
+			&Data.Totalfloors,
+			&Data.Facing,
+			&Data.Parking,
 		)
 		//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", Data.Cityid)
 		//		row.Scan(&Data1.Cityname)
@@ -194,6 +206,7 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 
 		Data1.Home_Data = Data
 		Data1.Home_images = Rentimgarray
+		Data1.Ownerdetails = GetSingleOwner_Db(Data.Ownerid)
 		fmt.Println("end of Data", Data1)
 
 	}
@@ -247,6 +260,12 @@ func GetSinglehome_DbFav(homeid int, Login string) (Data1 Model.Home_single) {
 			&Data.Description,
 			&Data.Latitude,
 			&Data.Longitude,
+			&Data.Squarefeet,
+			&Data.Likecount,
+			&Data.Rating,
+			&Data.Totalfloors,
+			&Data.Facing,
+			&Data.Parking,
 		)
 		//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", Data.Cityid)
 		//		row.Scan(&Data1.Cityname)
@@ -280,6 +299,7 @@ func GetSinglehome_DbFav(homeid int, Login string) (Data1 Model.Home_single) {
 
 		Data1.Home_Data = Data
 		Data1.Home_images = Rentimgarray
+		Data1.Ownerdetails = GetSingleOwner_Db(Data.Ownerid)
 		fmt.Println("end of Data", Data1)
 
 	}
@@ -379,6 +399,12 @@ func GetFilter_Db(Filt Model.Filter) (Temprentarray []Model.RentSend) {
 			&Data.Description,
 			&Data.Latitude,
 			&Data.Longitude,
+			&Data.Squarefeet,
+			&Data.Likecount,
+			&Data.Rating,
+			&Data.Totalfloors,
+			&Data.Facing,
+			&Data.Parking,
 		)
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
 		fmt.Println("err", err)
@@ -453,6 +479,12 @@ func GetallhomedetailsDB() (Temprentarray []Model.RentSend) {
 			&Data.Description,
 			&Data.Latitude,
 			&Data.Longitude,
+			&Data.Squarefeet,
+			&Data.Likecount,
+			&Data.Rating,
+			&Data.Totalfloors,
+			&Data.Facing,
+			&Data.Parking,
 		)
 
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
@@ -485,10 +517,10 @@ func GetallhomedetailsDB() (Temprentarray []Model.RentSend) {
 }
 
 //Get Home details based on Address
-func GetHomeDetils_DBwithOwnerid(Ownerid int) (Temprentarray []Model.RentSend) {
+func GetHomeDetils_DBwithOwnerid(Ownerid int) (Temprentarray []Model.RentSendOwner) {
 
 	var Data Model.Home
-	var TempRentStruct Model.RentSend
+	var TempRentStruct Model.RentSendOwner
 
 	//	City, _ := strconv.Atoi(Cit)
 	//fmt.Println("id..............", City)
@@ -534,6 +566,12 @@ func GetHomeDetils_DBwithOwnerid(Ownerid int) (Temprentarray []Model.RentSend) {
 			&Data.Description,
 			&Data.Latitude,
 			&Data.Longitude,
+			&Data.Squarefeet,
+			&Data.Likecount,
+			&Data.Rating,
+			&Data.Totalfloors,
+			&Data.Facing,
+			&Data.Parking,
 		)
 
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
@@ -557,6 +595,7 @@ func GetHomeDetils_DBwithOwnerid(Ownerid int) (Temprentarray []Model.RentSend) {
 
 		TempRentStruct.RentFullStruct = Data
 		TempRentStruct.RentFullimages = Rentimgarray
+		TempRentStruct.Ownerdetails = GetSingleOwner_Db(Data.Ownerid)
 
 		Temprentarray = append(Temprentarray, TempRentStruct)
 	}
@@ -614,6 +653,12 @@ func GetHomeDetils_DBwithExecutiveid(Executiveid int) (Temprentarray []Model.Ren
 			&Data.Description,
 			&Data.Latitude,
 			&Data.Longitude,
+			&Data.Squarefeet,
+			&Data.Likecount,
+			&Data.Rating,
+			&Data.Totalfloors,
+			&Data.Facing,
+			&Data.Parking,
 		)
 
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)

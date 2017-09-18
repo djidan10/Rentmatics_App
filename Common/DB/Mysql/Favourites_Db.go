@@ -69,6 +69,12 @@ func GetFavourites(Favuser int) (Temprentarray []Model.RentSendFav) {
 			&Data.Description,
 			&Data.Latitude,
 			&Data.Longitude,
+			&Data.Squarefeet,
+			&Data.Likecount,
+			&Data.Rating,
+			&Data.Totalfloors,
+			&Data.Facing,
+			&Data.Parking,
 		)
 
 		//		row := OpenConnection["Rentmatics"].QueryRow("Select cities from cities where cityid=?", Data.Cityid)

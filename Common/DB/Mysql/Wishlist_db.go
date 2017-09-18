@@ -88,6 +88,12 @@ func GetWishDB(Loginid string) (Temprentarray []Model.RentSend) {
 				&Data.Description,
 				&Data.Latitude,
 				&Data.Longitude,
+				&Data.Squarefeet,
+				&Data.Likecount,
+				&Data.Rating,
+				&Data.Totalfloors,
+				&Data.Facing,
+				&Data.Parking,
 			)
 
 			rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)

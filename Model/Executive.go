@@ -42,7 +42,6 @@ type Executivesend struct {
 }
 
 type RentSendTenant struct {
-	//Cityname       string
 	RentFullStruct Home
 	RentFullimages []Home_images
 	Tenantdetails  Tenant
