@@ -3,7 +3,6 @@ package Mysql
 import (
 	Model "Rentmatics_App/Model"
 	_ "database/sql"
-	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -19,8 +18,13 @@ func InserUser(Userdata Model.User) (Userinfo Model.UserResponse) {
 	if Count == 0 {
 
 		row, err := OpenConnection["Rentmatics"].Exec("insert into userdata (username,password,loginid,login_type) values (?,?,?,?)", Userdata.Username, Userdata.Password, Userdata.Loginid, Userdata.Logintype)
-		fmt.Println("successfully inserted", row, err)
+		if err != nil {
+			log.Error("Error -DB: User", err, row)
+		}
 		rows, err := OpenConnection["Rentmatics"].Query("select username,loginid from userdata where loginid=?", Userdata.Loginid)
+		if err != nil {
+			log.Error("Error -DB: User", err)
+		}
 		for rows.Next() {
 
 			rows.Scan(
@@ -43,7 +47,7 @@ func InserUser(Userdata Model.User) (Userinfo Model.UserResponse) {
 			)
 
 		}
-		fmt.Println("@@@@@@@@@@@", Userinfo)
+
 		Userinfo.Status = "Already_Exist"
 		return Userinfo
 
@@ -51,7 +55,10 @@ func InserUser(Userdata Model.User) (Userinfo Model.UserResponse) {
 }
 func GetUSer(User1 Model.LoginUser) (Userinfo Model.UserResponse) {
 	var Getuser Model.Getlogin
-	rows, _ := OpenConnection["Rentmatics"].Query("select username,loginid,password from userdata where username=?", User1.Username)
+	rows, err := OpenConnection["Rentmatics"].Query("select username,loginid,password from userdata where username=?", User1.Username)
+	if err != nil {
+		log.Error("Error -DB: Get User", err)
+	}
 	for rows.Next() {
 
 		rows.Scan(

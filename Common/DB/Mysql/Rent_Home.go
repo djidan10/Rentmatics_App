@@ -14,8 +14,9 @@ func GetHomeDetilswithFav(Cityid string, Login string) []Model.RentSend {
 	var ResultFav []Model.RentSend
 
 	rows, err := OpenConnection["Rentmatics"].Query("Select homeid from wishlist where loginid=?", Login)
-	fmt.Println(err)
-
+	if err != nil {
+		log.Error("Error -DB: All Home", err)
+	}
 	for rows.Next() {
 		var homeid int
 		rows.Scan(
@@ -23,7 +24,6 @@ func GetHomeDetilswithFav(Cityid string, Login string) []Model.RentSend {
 		)
 
 		homeidd = append(homeidd, homeid)
-		fmt.Println("***********homeidd", homeidd)
 
 	}
 
@@ -33,13 +33,10 @@ func GetHomeDetilswithFav(Cityid string, Login string) []Model.RentSend {
 
 		for _, v1 := range homeidd {
 			if v.RentFullStruct.Id == v1 {
-
-				//v.RentFullStruct.Liked = true
 				ResultFav[k].RentFullStruct.Liked = true
 
 			}
 
-			fmt.Println("inside if ", v1, v.RentFullStruct.Id)
 		}
 
 	}
@@ -52,10 +49,10 @@ func GetHomeDetils_DB(City string) (Temprentarray []Model.RentSend) {
 	var Data Model.Home
 	var TempRentStruct Model.RentSend
 
-	//	City, _ := strconv.Atoi(Cit)
-	//fmt.Println("id..............", City)
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from home where city=?", City)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: All Home", err)
+	}
 
 	for rows.Next() {
 
@@ -105,7 +102,9 @@ func GetHomeDetils_DB(City string) (Temprentarray []Model.RentSend) {
 		)
 
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
-		fmt.Println("err", err)
+		if err != nil {
+			log.Error("Error -DB: All Home", err)
+		}
 		var Rentimgarray []Model.Home_images
 
 		for rows.Next() {
@@ -120,9 +119,6 @@ func GetHomeDetils_DB(City string) (Temprentarray []Model.RentSend) {
 			Rentimgarray = append(Rentimgarray, Rentimage)
 		}
 
-		//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", City)
-		//		row.Scan(&TempRentStruct.Cityname)
-
 		TempRentStruct.RentFullStruct = Data
 		TempRentStruct.RentFullimages = Rentimgarray
 
@@ -135,10 +131,10 @@ func GetHomeDetils_DB(City string) (Temprentarray []Model.RentSend) {
 //Get single home based on id
 func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 	var Data Model.Home
-
-	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from home where id=?", homeid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: All Home", err)
+	}
 
 	for rows.Next() {
 
@@ -186,10 +182,11 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 			&Data.Facing,
 			&Data.Parking,
 		)
-		//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", Data.Cityid)
-		//		row.Scan(&Data1.Cityname)
+
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
-		fmt.Println("err", err)
+		if err != nil {
+			log.Error("Error -DB: All Home", err)
+		}
 		var Rentimgarray []Model.Home_images
 
 		for rows.Next() {
@@ -219,7 +216,9 @@ func GetSinglehome_DbFav(homeid int, Login string) (Data1 Model.Home_single) {
 
 	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from home where id=?", homeid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: All Home", err)
+	}
 
 	for rows.Next() {
 
@@ -267,10 +266,11 @@ func GetSinglehome_DbFav(homeid int, Login string) (Data1 Model.Home_single) {
 			&Data.Facing,
 			&Data.Parking,
 		)
-		//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", Data.Cityid)
-		//		row.Scan(&Data1.Cityname)
+
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
-		fmt.Println("err", err)
+		if err != nil {
+			log.Error("Error -DB: All Home", err)
+		}
 		var Rentimgarray []Model.Home_images
 
 		for rows.Next() {
@@ -300,7 +300,6 @@ func GetSinglehome_DbFav(homeid int, Login string) (Data1 Model.Home_single) {
 		Data1.Home_Data = Data
 		Data1.Home_images = Rentimgarray
 		Data1.Ownerdetails = GetSingleOwner_Db(Data.Ownerid)
-		fmt.Println("end of Data", Data1)
 
 	}
 	return
@@ -313,7 +312,9 @@ func GetFilterwithFav(Filtstr Model.Filter) []Model.RentSend {
 	var ResultFav []Model.RentSend
 
 	rows, err := OpenConnection["Rentmatics"].Query("Select homeid from wishlist where loginid=?", Filtstr.F_Loginid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: All Home", err)
+	}
 
 	for rows.Next() {
 		var homeid int
@@ -322,7 +323,6 @@ func GetFilterwithFav(Filtstr Model.Filter) []Model.RentSend {
 		)
 
 		homeidd = append(homeidd, homeid)
-		fmt.Println("***********homeidd", homeidd)
 
 	}
 
@@ -338,7 +338,6 @@ func GetFilterwithFav(Filtstr Model.Filter) []Model.RentSend {
 
 			}
 
-			fmt.Println("inside if ", v1, v.RentFullStruct.Id)
 		}
 
 	}
@@ -349,16 +348,12 @@ func GetFilter_Db(Filt Model.Filter) (Temprentarray []Model.RentSend) {
 	var Data Model.Home
 
 	var TempRentStruct Model.RentSend
-
 	fmt.Sprintf("%.6f", Filt.F_Monthrent_Min)
 	Query := "Select * from home where month_rent BETWEEN " + fmt.Sprintf("%v", Filt.F_Monthrent_Min) + " and " + fmt.Sprintf("%v", Filt.F_Monthrent_Max) + " OR tenant_type='" + Filt.F_Tenant_type + "'  OR booking_type= '" + Filt.F_Bookingtype + "'  OR house_type= '" + Filt.F_Housetype + "'  OR furnish_type= '" + Filt.F_Furnished_type + "'  OR distance= '" + Filt.F_Distance + "'  OR bhk= " + fmt.Sprintf("%v", Filt.F_Bhk) + "  OR bed= " + fmt.Sprintf("%v", Filt.F_Bed)
-
-	//	Query := "Select * from home where month_rent BETWEEN " + fmt.Sprintf("%v", Filt.F_Monthrent_Min) + " and " + fmt.Sprintf("%v", Filt.F_Monthrent_Max) + " and tenant_type='" + Filt.F_Tenant_type + "' and booking_type= '" + Filt.F_Bookingtype + "' and house_type= '" + Filt.F_Housetype + "' and furnish_type= '" + Filt.F_Furnished_type + "' and distance= '" + Filt.F_Distance + "' and bhk= " + fmt.Sprintf("%v", Filt.F_Bhk) + " and bed= " + fmt.Sprintf("%v", Filt.F_Bed)
-
-	fmt.Println("querrr", Query)
 	rows, err := OpenConnection["Rentmatics"].Query(Query)
-
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Filter Home", err)
+	}
 
 	for rows.Next() {
 
@@ -407,7 +402,9 @@ func GetFilter_Db(Filt Model.Filter) (Temprentarray []Model.RentSend) {
 			&Data.Parking,
 		)
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
-		fmt.Println("err", err)
+		if err != nil {
+			log.Error("Error -DB: All Home", err)
+		}
 		var Rentimgarray []Model.Home_images
 
 		for rows.Next() {
@@ -421,8 +418,6 @@ func GetFilter_Db(Filt Model.Filter) (Temprentarray []Model.RentSend) {
 
 			Rentimgarray = append(Rentimgarray, Rentimage)
 		}
-		//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", Data.Cityid)
-		//		row.Scan(&TempRentStruct.Cityname)
 
 		TempRentStruct.RentFullStruct = Data
 		TempRentStruct.RentFullimages = Rentimgarray
@@ -438,7 +433,9 @@ func GetallhomedetailsDB() (Temprentarray []Model.RentSend) {
 	var TempRentStruct Model.RentSend
 
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from home")
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: All Home", err)
+	}
 
 	for rows.Next() {
 
@@ -502,9 +499,6 @@ func GetallhomedetailsDB() (Temprentarray []Model.RentSend) {
 
 			Rentimgarray = append(Rentimgarray, Rentimage)
 		}
-
-		//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", Data.Cityid)
-		//		row.Scan(&TempRentStruct.Cityname)
 
 		TempRentStruct.RentFullStruct = Data
 		TempRentStruct.RentFullimages = Rentimgarray
@@ -522,8 +516,6 @@ func GetHomeDetils_DBwithOwnerid(Ownerid int) (Temprentarray []Model.RentSend) {
 	var Data Model.Home
 	var TempRentStruct Model.RentSend
 
-	//	City, _ := strconv.Atoi(Cit)
-	//fmt.Println("id..............", City)
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from home where ownerid=?", Ownerid)
 	fmt.Println(err)
 
@@ -575,7 +567,9 @@ func GetHomeDetils_DBwithOwnerid(Ownerid int) (Temprentarray []Model.RentSend) {
 		)
 
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
-		fmt.Println("err", err)
+		if err != nil {
+			log.Error("Error -DB: All Home", err)
+		}
 		var Rentimgarray []Model.Home_images
 
 		for rows.Next() {
@@ -589,9 +583,6 @@ func GetHomeDetils_DBwithOwnerid(Ownerid int) (Temprentarray []Model.RentSend) {
 
 			Rentimgarray = append(Rentimgarray, Rentimage)
 		}
-
-		//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", City)
-		//		row.Scan(&TempRentStruct.Cityname)
 
 		TempRentStruct.RentFullStruct = Data
 		TempRentStruct.RentFullimages = Rentimgarray
@@ -608,10 +599,10 @@ func GetHomeDetils_DBwithExecutiveid(Executiveid int) (Temprentarray []Model.Ren
 	var Data Model.Home
 	var TempRentStruct Model.RentSendTenant
 
-	//	City, _ := strconv.Atoi(Cit)
-	//fmt.Println("id..............", City)
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from home where executiveid=?", Executiveid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: All Home", err)
+	}
 
 	for rows.Next() {
 
@@ -661,7 +652,9 @@ func GetHomeDetils_DBwithExecutiveid(Executiveid int) (Temprentarray []Model.Ren
 		)
 
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
-		fmt.Println("err", err)
+		if err != nil {
+			log.Error("Error -DB: All Home", err)
+		}
 		var Rentimgarray []Model.Home_images
 
 		for rows.Next() {
@@ -675,9 +668,6 @@ func GetHomeDetils_DBwithExecutiveid(Executiveid int) (Temprentarray []Model.Ren
 
 			Rentimgarray = append(Rentimgarray, Rentimage)
 		}
-
-		//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", City)
-		//		row.Scan(&TempRentStruct.Cityname)
 
 		TempRentStruct.RentFullStruct = Data
 		TempRentStruct.RentFullimages = Rentimgarray

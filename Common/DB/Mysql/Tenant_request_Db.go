@@ -5,8 +5,6 @@ import (
 	_ "database/sql"
 
 	_ "github.com/go-sql-driver/mysql"
-
-	"fmt"
 )
 
 //Get Home details based on Address
@@ -14,7 +12,9 @@ func GetAllRequestdetails() (Temprentarray []Model.Request) {
 
 	var Data Model.Request
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  request")
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Tenant Request", err)
+	}
 
 	for rows.Next() {
 
@@ -43,7 +43,9 @@ func GetAllpendingrequest() (Temprentarray []Model.Request) {
 
 	var Data Model.Request
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  request where status=?", "pending")
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Tenant Request", err)
+	}
 
 	for rows.Next() {
 
@@ -69,10 +71,10 @@ func GetAllpendingrequest() (Temprentarray []Model.Request) {
 
 func GetSingleRequest_Db(Requestid int) (Datasend Model.Requestsend) {
 	var Data Model.Request
-
-	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  request where id=?", Requestid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Tenant Request", err)
+	}
 
 	for rows.Next() {
 

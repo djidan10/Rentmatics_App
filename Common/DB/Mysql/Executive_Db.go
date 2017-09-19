@@ -3,10 +3,7 @@ package Mysql
 import (
 	Model "Rentmatics_App/Model"
 	_ "database/sql"
-	"fmt"
 	"strconv"
-
-	//"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -16,7 +13,9 @@ func GetAllExecutive() (Temprentarray []Model.Executivedetails) {
 
 	var Data Model.Executivedetails
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  executive")
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: All Executibe", err)
+	}
 
 	for rows.Next() {
 
@@ -49,10 +48,10 @@ func GetAllExecutive() (Temprentarray []Model.Executivedetails) {
 func GetSingleExecutive_Db(executiveid int) (Datasend Model.Executivesend) {
 
 	var Data Model.Executivedetails
-	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  executive where id=?", executiveid)
-	fmt.Println(err)
-
+	if err != nil {
+		log.Error("Error -DB: All Executibe", err)
+	}
 	for rows.Next() {
 
 		rows.Scan(
@@ -84,9 +83,10 @@ func GetSingleExecutive_Db(executiveid int) (Datasend Model.Executivesend) {
 
 func GetIndivualExecutive_Db(executiveid int) (Data Model.Executivedetails) {
 
-	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  executive where id=?", executiveid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: All Executibe", err)
+	}
 
 	for rows.Next() {
 
@@ -116,15 +116,6 @@ func GetIndivualExecutive_Db(executiveid int) (Data Model.Executivedetails) {
 }
 func Inserthome_DB(Homeinsert Model.HomeInsert, Imageurl []string) {
 	var Homedata Model.Home
-	fmt.Println("inside  insidekfhlsalhf", Homeinsert.City)
-
-	// Get City ID
-	//row := OpenConnection["Rentmatics"].QueryRow("Select  from cities where cities=?", Homeinsert.City)
-
-	//	var Cit int
-	//	row.Scan(
-	//		&Cit,
-	//	)
 	Homedata.Housename = Homeinsert.Housename
 	Homedata.Adress1 = Homeinsert.Adress1
 	Homedata.Adress2 = Homeinsert.Adress2
@@ -149,14 +140,18 @@ func Inserthome_DB(Homeinsert Model.HomeInsert, Imageurl []string) {
 	Homedata.Description = Homeinsert.Description
 
 	rows, err := OpenConnection["Rentmatics"].Exec("insert into renthome (housename,adress1,adress2,city,state,country,pin,phonenumber,month_rent,tenant_type,booking_type,house_type,bhk,bed,distance,furnish_type,secutity_deposit,listing,Amenities,Description) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Homedata.Housename, Homedata.Adress1, Homedata.Adress2, Homedata.City, Homedata.State, Homedata.Country, Homedata.Pin, Homedata.Phone_number, Homedata.Month_rent, Homedata.Tenant_type, Homedata.Booking_type, Homedata.House_type, Homedata.Bhk, Homedata.Bed, Homedata.Distance, Homedata.Furnish_type, Homedata.Secutity_deposit, Homedata.Listing, Homedata.Amenities, Homedata.Description)
-	fmt.Println("successfully inserted", rows, err)
+	if err != nil {
+		log.Error("Error -DB: Executive insert")
+	}
 
 	var pictureurl Model.Home_images
 	pictureurl.Home_id, _ = rows.LastInsertId()
 
 	for _, pictureurl.Picture_url = range Imageurl {
 		rows, err := OpenConnection["Rentmatics"].Exec("insert into pictures_url (home_id,image) values (?,?)", pictureurl.Home_id, pictureurl.Picture_url)
-		fmt.Println("successfully inserted", rows, err)
+		if err != nil {
+			log.Error("Error -DB: Executive insert picture", err, rows)
+		}
 	}
 
 }
@@ -165,7 +160,9 @@ func Inserthome_DB(Homeinsert Model.HomeInsert, Imageurl []string) {
 func Checklogin_DB(User Model.Login) (Uservalid Model.LoginData) {
 
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from roles where username=?", User.Username)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Check login", err)
+	}
 
 	for rows.Next() {
 

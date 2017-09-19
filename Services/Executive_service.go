@@ -13,16 +13,15 @@ import (
 	"strconv"
 )
 
+//Get All Executive Details
 func GetExecutive(w http.ResponseWriter, r *http.Request) {
 	Data := Db.GetAllExecutive()
 	Senddata, err := json.Marshal(Data)
 	if err != nil {
-		panic(err)
+		log.Error("Error on Fetching All Executive Details", err)
 	}
-
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
-
 	w.Write(Senddata)
 
 }
@@ -31,28 +30,27 @@ type Executivesingle struct {
 	Executiveid int
 }
 
+//Get Particular Executive Details
 func GetsingleExecutive(w http.ResponseWriter, r *http.Request) {
 
 	var GetExecutive Executivesingle
 	err := json.NewDecoder(r.Body).Decode(&GetExecutive)
 	if err != nil {
-		fmt.Println("err", err)
+		log.Error("Error on Fetching All Executive Details", err)
 	}
-
 	Data := Db.GetSingleExecutive_Db(GetExecutive.Executiveid)
 	Senddata, err := json.Marshal(Data)
-
 	if err != nil {
-		panic(err)
+		log.Error("Cannot mashal executive value from databse", err)
 	}
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
-
 	w.Write(Senddata)
 
 }
 
+//Auth For login executive
 func Auth(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("inside Rent")
 
@@ -80,6 +78,8 @@ func Auth(w http.ResponseWriter, r *http.Request) {
 
 	}
 }
+
+//Executive Upload
 func InsertHomeDetails(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("inside GetImage")
 	var ImageurlFinal []string
@@ -166,60 +166,19 @@ func InsertHomeDetails(w http.ResponseWriter, r *http.Request) {
 
 }
 
-/*
-type HomeInsert struct {
-	Housename        string
-	Adress1          string
-	Adress2          string
-	Cityname         string
-	State            string
-	Country          string
-	Pin              string
-	Phone_number     string
-	Month_rent       string
-	Tenant_type      string
-	Booking_type     string
-	House_type       string
-	Bhk              string
-	Bed              string
-	Distance         string
-	Furnish_type     string
-	Secutity_deposit string
-	Listing          string
-	Amenities        string
-	Description      string
-}
-*/
+//Once Executive upload data Mail go to Rentmatics owner
 func SendEmail(Userdata Model.HomeInsert, ImageurlFinal []string) {
 	var ToString = "sandhiyabalakrishnan6@gmail.cpm"
 
 	auth := smtp.PlainAuth("", "rentmatics@gmail.com", "RENTMATICS2017", "smtp.gmail.com")
 	var receiptent = "To:" + ToString + "\r\n"
 	to := []string{ToString}
-	msg := []byte(receiptent + "Subject: RENTMATICS NOTIFICATION!\n" + "Phone Number : " + Userdata.Phone_number + "\n" + "Monthly Rent : " + Userdata.Month_rent + "\r\n" + "Tenent Type : " + Userdata.Tenant_type + "\r\n" + "Booking Type : " + Userdata.Booking_type + "\r\n" + "House Type : " + Userdata.House_type + "\r\n" + "BHK : " + Userdata.Bhk + "\r\n" + "No of Beds : " + Userdata.Bed + "\r\n" + "Distance : " + Userdata.Distance + "\r\n" + "Furnish Type : " + Userdata.Furnish_type + "\r\n" + "Security Deposit : " + Userdata.Secutity_deposit + "\r\n" + "Listing : " + Userdata.Listing + "\r\n" + "Amenities : " + Userdata.Amenities + "\r\n" + "Description : " + Userdata.Description + "\r\n" + "Currently We are working under this area,Rentmatics comre to you as soon!\r\n")
-
-	fmt.Println("msg body", msg)
-	//			+"Monthly Rent : "+Userdata.Month_rent+"\r\n"
-	//			+"Tenent Type : "+Userdata.Tenant_type+"\r\n"
-	//			+"Booking Type : "+Userdata.Booking_type+"\r\n"
-	//			+"House Type : "+Userdata.House_type+"\r\n"
-	//			+"BHK : "+Userdata.Bhk+"\r\n"
-	//			+"No of Beds : "+Userdata.Bed+"\r\n"
-	//			+"Distance : "+Userdata.Distance+"\r\n"+"Furnish Type : "+Userdata.Furnish_type+"\r\n"+"Security Deposit : "+Userdata.Secutity_deposit+"\r\n"
-	//
-	//
-	//			+"Listing : "+Userdata.Listing+"\r\n"+"Amenities : "+Userdata.Amenities+"\r\n"+"Description : "+Userdata.Description+"\r\n"+"Currently We are working under this area,Rentmatics comre to you as soon!\r\n")
-	//
-	//
-
-	//
-
-	//	"House Name : "+Userdata.Housename+"\n"+"Address : "+Userdata.Adress1+" "+Userdata.Adress2+" "+Userdata.Cityname+" "+Userdata.State+" "+Userdata.Country+" "+Userdata.Pin+" "+"\n"
-
+	msg := []byte(receiptent + "Subject: RENTMATICS NOTIFICATION!\n" + "Executive Sucessfully uploaded one home details please login to admin and see details!\r\n")
+	log.Info(msg)
 	err := smtp.SendMail("smtp.gmail.com:587", auth, "rentmatics@gmail.com", to, msg)
 
 	if err != nil {
-		fmt.Println(err)
+		log.Error("smtp Error please check executive mail part", err)
 	}
-	fmt.Println("finished mailing")
+	log.Info("Succesfully Mailed")
 }

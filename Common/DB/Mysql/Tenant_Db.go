@@ -5,8 +5,6 @@ import (
 	_ "database/sql"
 
 	_ "github.com/go-sql-driver/mysql"
-
-	"fmt"
 )
 
 //Get Home details based on Address
@@ -14,7 +12,9 @@ func GetAllTenantdetails() (Temprentarray []Model.Tenant) {
 
 	var Data Model.Tenant
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from tenant")
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Tenant", err)
+	}
 
 	for rows.Next() {
 
@@ -57,9 +57,10 @@ func GetAllTenantdetails() (Temprentarray []Model.Tenant) {
 
 func GetSingleTenant_Db(Tenantid int) (Datasend Model.Tenantsend) {
 	var Data Model.Tenant
-	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from tenant where id=?", Tenantid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Tenant", err)
+	}
 
 	for rows.Next() {
 
@@ -97,7 +98,9 @@ func GetSingleTenant_Db(Tenantid int) (Datasend Model.Tenantsend) {
 	}
 
 	row1, err := OpenConnection["Rentmatics"].Query("select * from tenant_payment where tenant_id=?", Data.Tenant_id)
-	fmt.Println("err", err)
+	if err != nil {
+		log.Error("Error -DB: Tenant", err)
+	}
 	var Tenantpay1 []Model.Tenantpayment
 
 	for row1.Next() {
@@ -123,21 +126,20 @@ func GetSingleTenant_Db(Tenantid int) (Datasend Model.Tenantsend) {
 	}
 
 	Datasend.Executivedetail = GetIndivualExecutive_Db(Data.Executiveid)
-
 	Data1 := GetSinglehome_Db(Data.Homeid)
 	Datasend.Tenantdetails = Data
 	Datasend.Homedetails = Data1
 	Datasend.TenantPaymentdetails = Tenantpay1
-	fmt.Println(Data1)
 
 	return
 }
 
 func GetIndivualTenant_Db(Tenantid int) (Data Model.Tenant) {
 
-	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from tenant where id=?", Tenantid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Tenant", err)
+	}
 
 	for rows.Next() {
 

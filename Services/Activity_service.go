@@ -2,24 +2,24 @@ package Services
 
 import (
 	Db "Rentmatics_App/Common/DB/Mysql"
-	//	Model "Rentmatics_App/Model"
+	"Rentmatics_App/Logger"
 	"encoding/json"
-	"fmt"
 	"net/http"
 )
 
+var (
+	log = Logger.NewLogger("Rentmaticsservice")
+)
+
 func GetActivity(w http.ResponseWriter, r *http.Request) {
+	//Connecting Database
 	Data := Db.GetAllActivitydetails()
-
 	Senddata, err := json.Marshal(Data)
-
 	if err != nil {
-		panic(err)
+		log.Error("Cannot unmarshal the Activity data from database", err)
 	}
-
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
-
 	w.Write(Senddata)
 
 }
@@ -33,20 +33,17 @@ func GetsingleActivity(w http.ResponseWriter, r *http.Request) {
 	var GetActivity Activitysingle
 	err := json.NewDecoder(r.Body).Decode(&GetActivity)
 	if err != nil {
-		fmt.Println("err", err)
+		log.Error("Error on Get particular details", err)
 	}
-
+	//Connecting Database
 	Data := Db.GetSingleActivity_Db(GetActivity.Activityid)
-
 	Senddata, err := json.Marshal(Data)
 
 	if err != nil {
-		panic(err)
+		log.Error(err)
 	}
-
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
-
 	w.Write(Senddata)
 
 }

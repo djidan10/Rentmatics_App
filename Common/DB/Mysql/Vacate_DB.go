@@ -5,8 +5,6 @@ import (
 	_ "database/sql"
 
 	_ "github.com/go-sql-driver/mysql"
-
-	"fmt"
 )
 
 //Get Home details based on Address
@@ -14,7 +12,9 @@ func GetAllVacatedetails() (Temprentarray []Model.Vacate) {
 
 	var Data Model.Vacate
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  vacate")
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Vacate", err)
+	}
 
 	for rows.Next() {
 
@@ -38,7 +38,9 @@ func GetSinglevacate_Db(vacateid int) (Data Model.Vacate) {
 
 	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from vacate where id=?", vacateid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Vacate", err)
+	}
 
 	for rows.Next() {
 

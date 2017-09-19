@@ -1,12 +1,7 @@
 package Mysql
 
 import (
-	//	Model "Rentmatics_App/Model"
 	_ "database/sql"
-	"fmt"
-	//	"strconv"
-
-	//"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -21,11 +16,13 @@ func Insertsubscribtion(Subuser string) {
 	if Count == 0 {
 
 		row, err := OpenConnection["Rentmatics"].Exec("insert into subscriber (loginid) values (?,)", Subuser)
-		fmt.Println("successfully inserted", row, err)
+		if err != nil {
+			log.Error("Error -DB: All Home", err, row)
+		}
 
 	} else {
 
-		fmt.Println("Already Exist")
+		log.Info("Already Exist")
 
 	}
 }

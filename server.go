@@ -1,16 +1,12 @@
 package main
 
 import (
-	"crypto/tls"
-
-	"encoding/json"
-
-	"fmt"
-
-	"net/http"
-
 	Model "Rentmatics_App/Model"
 	Service "Rentmatics_App/Services"
+	"crypto/tls"
+	"encoding/json"
+	"fmt"
+	"net/http"
 
 	"github.com/gorilla/mux"
 )
@@ -28,6 +24,7 @@ func Error(w http.ResponseWriter, err int, msg string) {
 	w.Header().Set("Content-Type", contenttypeJSON)
 	w.WriteHeader(err)
 	json.NewEncoder(w).Encode(e)
+
 }
 
 func Serve() bool {

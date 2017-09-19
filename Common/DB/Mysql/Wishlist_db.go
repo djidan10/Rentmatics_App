@@ -4,8 +4,6 @@ import (
 	Model "Rentmatics_App/Model"
 	_ "database/sql"
 	"fmt"
-	//	"strconv"
-
 	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -14,16 +12,16 @@ import (
 func Insertwishlist(Wishinfo Model.Wishlist) {
 	var Count int
 
-	//query := "SELECT COUNT(*) FROM wishlist WHERE wishlist.loginid ='" + Wishinfo.Loginid + "' and wishlist.homeid = " + Wishinfo.Homeid
 	query := "SELECT COUNT(*) FROM wishlist WHERE wishlist.loginid ='" + Wishinfo.Loginid + "' and wishlist.homeid = " + fmt.Sprintf("%v", Wishinfo.Homeid)
-
 	row := OpenConnection["Rentmatics"].QueryRow(query)
 	row.Scan(
 		&Count,
 	)
 	if Count == 0 {
 		row, err := OpenConnection["Rentmatics"].Exec("insert into wishlist (homeid,loginid) values (?,?)", Wishinfo.Homeid, Wishinfo.Loginid)
-		fmt.Println("successfully inserted", row, err)
+		if err != nil {
+			log.Error("Error -DB: Wishlist", err, row)
+		}
 
 	}
 }
@@ -38,7 +36,9 @@ func GetWishDB(Loginid string) (Temprentarray []Model.RentSend) {
 	var TempRentStruct Model.RentSend
 
 	rows, err := OpenConnection["Rentmatics"].Query("Select homeid from wishlist where loginid=?", Loginid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: Wishlist", err)
+	}
 
 	for rows.Next() {
 
@@ -46,8 +46,10 @@ func GetWishDB(Loginid string) (Temprentarray []Model.RentSend) {
 			&Homeid,
 		)
 
-		rows, err1 := OpenConnection["Rentmatics"].Query("Select * from home where id=?", Homeid)
-		fmt.Println(err1)
+		rows, err := OpenConnection["Rentmatics"].Query("Select * from home where id=?", Homeid)
+		if err != nil {
+			log.Error("Error -DB: Wishlist", err)
+		}
 
 		for rows.Next() {
 
@@ -97,7 +99,10 @@ func GetWishDB(Loginid string) (Temprentarray []Model.RentSend) {
 			)
 
 			rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
-			fmt.Println("err", err)
+			if err != nil {
+				log.Error("Error -DB: Wishlist", err)
+			}
+
 			var Rentimgarray []Model.Home_images
 
 			for rows.Next() {
@@ -112,9 +117,6 @@ func GetWishDB(Loginid string) (Temprentarray []Model.RentSend) {
 				Rentimgarray = append(Rentimgarray, Rentimage)
 			}
 
-			//			row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", Data.Cityid)
-			//			row.Scan(&TempRentStruct.Cityname)
-
 			TempRentStruct.RentFullStruct = Data
 			TempRentStruct.RentFullimages = Rentimgarray
 
@@ -126,9 +128,10 @@ func GetWishDB(Loginid string) (Temprentarray []Model.RentSend) {
 
 func Deletewishlist(Wishinfo Model.WishlistDelete) {
 	Query := "delete from wishlist where homeid=" + strconv.Itoa(Wishinfo.Homeid) + "  and loginid='" + Wishinfo.Loginid + "'"
-	fmt.Println("inside delete", Query)
 
 	row, err := OpenConnection["Rentmatics"].Exec(Query)
-	fmt.Println("successfully Deleted", row, err)
+	if err != nil {
+		log.Error("Error -DB: Delete Wishlist", err, row)
+	}
 
 }

@@ -46,9 +46,8 @@ func GetAllOwner() (Temprentarray []Model.Owner) {
 	return Temprentarray
 }
 
-func GetSingleOwner_Db(Ownerid int) (Datasend Model.Ownersend) {
+func GetSingleOwner_Db(Ownerid int) (Data Model.Owner) {
 
-	var Data Model.Owner
 	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  owner where id=?", Ownerid)
 	fmt.Println(err)
@@ -78,8 +77,5 @@ func GetSingleOwner_Db(Ownerid int) (Datasend Model.Ownersend) {
 		)
 
 	}
-	GetAllhome := GetHomeDetils_DBwithOwnerid(Data.Owner_id)
-	Datasend.OwnerData = Data
-	Datasend.HomeData = GetAllhome
 	return
 }

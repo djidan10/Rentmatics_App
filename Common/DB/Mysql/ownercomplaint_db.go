@@ -5,8 +5,6 @@ import (
 	_ "database/sql"
 
 	_ "github.com/go-sql-driver/mysql"
-
-	"fmt"
 )
 
 //Get Home details based on Address
@@ -14,7 +12,9 @@ func GetAllOwnercomplaint() (Temprentarray []Model.Ownercomplaints) {
 
 	var Data Model.Ownercomplaints
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  ownercomplaint")
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -DB: All Owners", err)
+	}
 
 	for rows.Next() {
 
@@ -40,10 +40,10 @@ func GetAllOwnercomplaint() (Temprentarray []Model.Ownercomplaints) {
 
 func GetSingleOwnercomplaint_Db(Ownerid int) (Data Model.Ownercomplaints) {
 
-	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  ownercomplaint where Id=?", Ownerid)
-	fmt.Println(err)
-
+	if err != nil {
+		log.Error("Error -DB: Get Single owner", err)
+	}
 	for rows.Next() {
 
 		rows.Scan(

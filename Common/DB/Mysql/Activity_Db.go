@@ -6,7 +6,11 @@ import (
 
 	_ "github.com/go-sql-driver/mysql"
 
-	"fmt"
+	"Rentmatics_App/Logger"
+)
+
+var (
+	log = Logger.NewLogger("RentmaticsDB")
 )
 
 //Get Home details based on Address
@@ -14,8 +18,9 @@ func GetAllActivitydetails() (Temprentarray []Model.Activity) {
 
 	var Data Model.Activity
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  activities")
-	fmt.Println(err)
-
+	if err != nil {
+		log.Error("Error -Db:Activity", err)
+	}
 	for rows.Next() {
 
 		rows.Scan(
@@ -28,7 +33,6 @@ func GetAllActivitydetails() (Temprentarray []Model.Activity) {
 			&Data.Activity_Description,
 			&Data.Activity_Status,
 		)
-
 		Temprentarray = append(Temprentarray, Data)
 	}
 
@@ -37,12 +41,12 @@ func GetAllActivitydetails() (Temprentarray []Model.Activity) {
 
 func GetSingleActivity_Db(Activityid int) (Data Model.Activity) {
 
-	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from  activities where id=?", Activityid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -Db:Activity")
+	}
 
 	for rows.Next() {
-
 		rows.Scan(
 			&Data.Activity_id,
 			&Data.Home_id,

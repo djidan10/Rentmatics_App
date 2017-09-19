@@ -5,8 +5,6 @@ import (
 	_ "database/sql"
 
 	_ "github.com/go-sql-driver/mysql"
-
-	"fmt"
 )
 
 //Get Home details based on Address
@@ -14,8 +12,9 @@ func GetAllComplaint() (Temprentarray []Model.Complaints) {
 
 	var Data Model.Complaints
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from complaint")
-	fmt.Println(err)
-
+	if err != nil {
+		log.Error("Error -Db:Tenant Complaint", err)
+	}
 	for rows.Next() {
 
 		rows.Scan(
@@ -34,11 +33,14 @@ func GetAllComplaint() (Temprentarray []Model.Complaints) {
 	return Temprentarray
 }
 
+//Get All pending Complaint
 func GetAllPendingComplaint() (Temprentarray []Model.Complaints) {
 
 	var Data Model.Complaints
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from complaint where complaint_status =?", "pending")
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -Db:Tenant Pending Complaint", err)
+	}
 
 	for rows.Next() {
 
@@ -57,11 +59,14 @@ func GetAllPendingComplaint() (Temprentarray []Model.Complaints) {
 
 	return Temprentarray
 }
+
+//Get Simple Complaint
 func GetSingleComplaint_Db(Complaintid int) (Datasend Model.Complaintsend) {
 	var Data Model.Complaints
-	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from complaint where id=?", Complaintid)
-	fmt.Println(err)
+	if err != nil {
+		log.Error("Error -Db:Tenant SingleComplaint", err)
+	}
 
 	for rows.Next() {
 
