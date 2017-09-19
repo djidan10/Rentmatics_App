@@ -216,14 +216,18 @@ $(document).ready(function(){
 
          bed1 = searchout.Home_Data.Bed;
          
-          var secutity_deposit = "- ₹ "+searchout.Home_Data.Secutity_deposit;
-           Availbed = searchout.Home_Data.Avail_bed;
+          var secutity_deposit = " ₹ "+searchout.Home_Data.Secutity_deposit;
+           Availbed = searchout.Home_Data.Avail_bed +"  Beds";
             var City1 =searchout.Home_Data.City;
             var District =searchout.District;
 
-            Availroom = searchout.Home_Data.Avail_room;
-             var bedrent = "- ₹ "+searchout.Home_Data.Bed_rent;
-             var bhkrent = "- ₹ "+searchout.Home_Data.Bhk_rent;
+            Availroom = searchout.Home_Data.Avail_room + "  Rooms";
+             var bedrent = " ₹ "+searchout.Home_Data.Bed_rent;
+             var bhkrent = " ₹ "+searchout.Home_Data.Bhk_rent;
+              var Squarefeet = searchout.Home_Data.Squarefeet;
+               var Totalfloors = searchout.Home_Data.Totalfloors;
+                var Facing =searchout.Home_Data.Facing;
+                 var Parking =searchout.Home_Data.Parking;
 
          
          // var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
@@ -237,7 +241,12 @@ $(document).ready(function(){
            var list=list+"<li>"+Amenties1[i]+"</li>";
          
          }
-          $("#tenant1").html(tenant1);
+          $("#Squarefeet").html(Squarefeet);
+           $("#Parking").html(Parking);
+          $("#Totalfloors").html(Totalfloors);
+           $("#Facing").html(Facing);
+
+            $("#Totalfloors").html(Totalfloors);
            $("#bhk3").html(bhk1);
           $("#tenant2").html(tenant1);
        
@@ -679,69 +688,70 @@ document.getElementById("imageslider").innerHTML=image;
   <div class="row">
 
     <!-- Property Description -->
-    <div  >
+    <div>
 
 
 <div class="col-md-8" >
 
         <!-- Blog Post -->
- <div class="blog-post" style="background-color:#70c39e;color:white;font-family:Hanken;font-size:15px;border-style: solid;box-shadow: 10px 10px 5px #888888;">
-          
-          <!-- Img -->
-        
-          
-          <!-- Content -->
+ <div class="blog-post" style="font-family:Hanken;font-size:15px;margin-top:20px;border-style: solid;box-shadow: 10px 10px 5px #888888;">
+ 
           <div class="post-content">
+          <b> <h3  style="margin-top:-10px;font-size:30px"> House Details</h3></b>
+
+            <div class="row room_bed_margin">
+
+          <div class="col-md-6 col-sm-6">
+          <div class="col-md-2 col-sm-2">
+          <img src="images/img.jpg" class="img img-responsive ownr_img" style="height:30px;">
+          </div><b style="margin-top:-10px;">HouseName</b><br>
+          <sapn id="Housename1" ></sapn><br><br>
+
+
+          <i class="im im-icon-Door" aria-hidden="true"  style=" font-size: 1.5em;margin-left:15px;"></i><b style="margin-left:15px;">BHK</b><br>
+            <span style="margin-left:50px;" id="bhk1"></span><br> <br>
+    
+          <i class="im im-icon-Address-Book" aria-hidden="true"  style=" font-size: 1.5em;margin-left:15px;"></i><b style="margin-left:15px;">Address</b><br>
+             
+          <span style="margin-left:50px;" id="city2"></span><span>,</span><span id="District"> Bangalore</span><br><br>
+
+
+           <i class="im im-icon-Dropbox" aria-hidden="true"  style=" font-size: 1.5em;margin-left:15px;"  ></i><b style="margin-left:15px;">Security Deposit</b><br>
+           <span style="margin-left:50px;" id="security"></span><br><br>
+
+            <i class="im im-icon-Landscape-2" aria-hidden="true"  style=" font-size: 1.5em;margin-left:15px;"  ></i><b style="margin-left:15px;">Area</b><br>
+           <span style="margin-left:50px;" id="Squarefeet"></span><br><br>
+
+             <i class="im im-icon-Sunrise" aria-hidden="true"  style=" font-size: 1.5em;margin-left:15px;"  ></i><b style="margin-left:15px;">Facing</b><br>
+           <span style="margin-left:50px;" id="Facing"></span>
            
+         
+            
            
-      <b> <h3  style="margin-top:-10px;font-size:30px"> House Details</h3></b>
-      <br>
-
-
-            <div class="col-md-4 col-sm-4 col-xs-4" style="font-size:18px">
-            <sapn id="Housename1"></sapn><br>
-            <span id="bhk1"></span><br>   
-          <span id="city2"></span><span>,</span><span id="District"> Bangalore</span><br>
-           <h3 style="visibility:hidden">sssssssssssssssssssssss</h3>
-        
-        </div>
-        <div class="col-md-6 col-sm-6 col-xs-6" style="margin-top:-50px;margin-left:50px">
-          <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-6">
-              <!-- <img src="img.jpg" class="img img-responsive ownr_img"> -->
-                <!-- <span class="label label-danger for_boys ">Only For <span id="tenant1"></span></span> -->
-                 <i class="fa fa-bed i_bed" aria-hidden="true"  style=" font-size: 2.5em;color:white;margin-left:20px"  ></i>
-                <h5 style="margin-left:-5px;font-size:15px"><b>Available Beds - </b><b><span id="tableavailbed"></span></b></h5> 
-                <br>
-                    
-            </div>
-               <div class="col-md-6 col-sm-6 col-xs-6">
-              <!-- <img src="img.jpg" class="img img-responsive ownr_img"> -->
-                <!-- <span class="label label-danger for_boys ">Only For <span id="tenant1"></span></span> -->
-                 <i class="im im-icon-Door" aria-hidden="true"  style=" font-size: 2.5em;"  ></i>
-
-                <h5 style="margin-left:-10px;font-size:15px" ><b>Available Rooms - </b>  <b>  <span id="tableavailroom"></span></b></h5> 
-                <br>
-                <div>
-                         <h5 style="margin-left:-100px;font-size:15px" ><b>Security Deposit </b> <span style="visibility:hidden">a</span><b><span id="security"></span></b></h5>
-                        <h5 style="margin-left:-100px;font-size:15px" ><b>Bed Rent      </b><span style="visibility:hidden">aaaaaaaa</span><b><span id="bed_rent"></span></b></h5>
-                        <h5 style="margin-left:-100px;font-size:15px" ><b>Room Rent    </b> <span style="visibility:hidden">aaaaaa</span><b><span id="bhk_rent"></span></b></h5> </b>
-                        </div>
-            </div>
-
-      
           </div>
+          <div class="col-md-6 col-sm-6" style="margin-top:-2%;">
+              <i class="fa fa-bed i_bed" aria-hidden="true" style="font-size: 1.5em;"></i><b>Bed Available</b><br>
+            <span style="margin-left:42px;" id="tableavailbed"></span><br><br>
+
+            <i class="im  im-icon-Dollar" aria-hidden="true"  style=" font-size: 1.5em;"></i></i><b style="margin-left:15px;">Bed Rent</b><br>
+            <span style="margin-left:40px" id="bed_rent"></span><br><br>
+            <i class="im im-icon-Warehouse" aria-hidden="true"  style=" font-size: 1.5em;"></i><b style="margin-left:15px;">Room Available</b><br>
+              <span style="margin-left:40px" id="tableavailroom"></span><br><br>
+
+
+             <i class="im  im-icon-Dollar" aria-hidden="true"  style=" font-size: 1.5em;"  ></i><b style="margin-left:15px;">Room Rent</b><br>
+              <span  style="margin-left:40px" id="bhk_rent"></span><br><br>
+              <i class="im  im-icon-Car-2" aria-hidden="true"  style=" font-size: 1.5em;"  ></i><b style="margin-left:15px;">Parking</b><br>
+              <span  style="margin-left:40px" id="Parking"></span><br><br>
+
+              <i class="im  im-icon-Building" aria-hidden="true"  style=" font-size: 1.5em;"  ></i><b style="margin-left:15px;">Total Floors</b><br>
+              <span  style="margin-left:40px" id="Totalfloors"></span>
+
+          </div>
+          
         </div>
-   
-
-        </div>
-        <!-- Blog Post / End -->
-
-      </div>
-
-
-
-
+     </div>
+</div>
 
 
 

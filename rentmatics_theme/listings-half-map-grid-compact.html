@@ -225,7 +225,7 @@ function Getresponse(searchout){
  var Singlesliderstart2="<img src='";
  var Singlesliderend = "' alt='"+"'>";
  var bhk1 =" Bhk"
- 
+ var Rating ="";
  
   for (i=0;i<searchout[j].RentFullimages.length;i++){
   	finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
@@ -237,6 +237,7 @@ function Getresponse(searchout){
   var ID = searchout[j].RentFullStruct.Id;
     var Liked = searchout[j].RentFullStruct.Liked;
   GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
+  
   
  var mapview = searchout[j].Cityname;
  var City =searchout[j].RentFullStruct.City
@@ -255,13 +256,73 @@ function Getresponse(searchout){
  var Availbed =searchout[j].RentFullStruct.Avail_bed
   var bedrent =  "₹ "+ searchout[j].RentFullStruct.Bed_rent
   var deposit =  "₹ "+ searchout[j].RentFullStruct.Secutity_deposit;
+  var Squarefeet =searchout[j].RentFullStruct.Squarefeet +"/sqft";
+  var Likecount =searchout[j].RentFullStruct.Likecount ;
+   Rating =searchout[j].RentFullStruct.Rating ;
+  var Totalfloors =searchout[j].RentFullStruct.Totalfloors ;
+  var Facing =searchout[j].RentFullStruct.Facing ;
+
+  if (Rating == 2){
+    document.getElementById("star1"+ID).style.color = "#fa5b0f";
+    document.getElementById("star2").style.color = "#fa5b0f";
+  
+ }else if (Rating == 2.5){
+   document.getElementById("star1"+ID).style.color = "#fa5b0f";
+   document.getElementById("star2"+ID).style.color = "#fa5b0f";
+   document.getElementById("star3"+ID).style.display = "none";
+    document.getElementById("star2.5"+ID).style.display = "inline";
+
+
+  }else if (Rating == 3){
+    document.getElementById("star1"+ID).style.color = "#fa5b0f";
+    document.getElementById("star2"+ID).style.color = "#fa5b0f";
+    document.getElementById("star3"+ID).style.color = "#fa5b0f";
+  
+
+  }else if (Rating == 3.5){
+    alert("inside 3.4")
+    document.getElementById("star1"+ID).style.color = "#fa5b0f";
+    document.getElementById("star2"+ID).style.color = "#fa5b0f";
+    document.getElementById("star3"+ID).style.color = "#fa5b0f";
+    document.getElementById("star3.5"+ID).style.display = "inline";
+    document.getElementById("star4"+ID).style.display = "none";
+
+
+  }else if (Rating == 4){
+     document.getElementById("star1"+ID).style.color = "#fa5b0f";
+    document.getElementById("star2"+ID).style.color = "#fa5b0f";
+    document.getElementById("star3"+ID).style.color = "#fa5b0f";
+     document.getElementById("star4"+ID).style.color = "#fa5b0f";
+
+  }else if (Rating == 4.5){
+    document.getElementById("star1"+ID).style.color = "#fa5b0f";
+    document.getElementById("star2"+ID).style.color = "#fa5b0f";
+    document.getElementById("star3"+ID).style.color = "#fa5b0f";
+     document.getElementById("star4"+ID).style.color = "#fa5b0f";
+     document.getElementById("star4.5"+ID).style.display = "inline";
+     document.getElementById("star5"+ID).style.display = "none";
+   
+
+  }else{
+
+  document.getElementById("star1"+ID).style.color = "#fa5b0f";
+    document.getElementById("star2"+ID).style.color = "#fa5b0f";
+    document.getElementById("star3"+ID).style.color = "#fa5b0f";
+     document.getElementById("star4"+ID).style.color = "#fa5b0f";
+     document.getElementById("star5"+ID).style.color = "#fa5b0f";
+  }
+  
 
 
 
 
 
 
-
+$("#Squarefeet"+ID).html(Squarefeet);
+$("#Likecount"+ID).html(Likecount);
+$("#Rating"+ID).html(Rating);
+$("#Totalfloors"+ID).html(Totalfloors);
+$("#Facing"+ID).html(Facing);
 $("#deposit"+ID).html(deposit);
 $("#property").html(property);
 $("#Rent"+ID).html(Rent);
@@ -427,14 +488,24 @@ if (liked == true){
 "</a>"+
 
 "<ul class='listing-details' style='height:40px'>"+
+"<li id='star1"+Dyid+"'><span class='prop-mark-fav' style='margin-left:9px;' ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
+"<li  id='star1.5"+Dyid+"' style='display:none'><span class='prop-mark-fav' style='color:#fa5b0f;' ><i class=' fa fa-star-half-o'  style='font-size: 1.0em;'  ></i></span></li>"+
 
-"<li><span class='prop-mark-fav' style='margin-left:9px;color:#fa5b0f' ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
-"<li><span class='prop-mark-fav' style='color:#fa5b0f' ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
-"<li><span class='prop-mark-fav' style='color:#fa5b0f' ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
-"<li><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
-"<li><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
-"<li><span class='prop-mark-fav' style='font-size:12px' >4 Ratings</span></li>"+
-"<li><span class='prop-mark-fav' style='font-size:12px'' >1234<i style=' margin-left:2px' class='sl sl-icon-like'></i></span></li>"+
+"<li id='star2"+Dyid+"'><span class='prop-mark-fav' ><i class='fa fa-star'   style='font-size: 1.0em;margin-left:'  ></i></span></li>"+
+
+"<li id='star2.5"+Dyid+"' style='display:none'><span class='prop-mark-fav' style='color:#fa5b0f' ><i class='fa fa-star-half-o'   style='font-size: 1.0em;'  ></i></span></li>"+
+"<li id='star3"+Dyid+"'><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'   ></i></span></li>"+
+
+
+"<li id='star3.5"+Dyid+"' style='display:none'><span class='prop-mark-fav'  ><i class=' fa fa-star-half-o'   style='font-size: 1.0em;color:#fa5b0f;'  ></i></span></li>"+
+
+"<li id='star4"+Dyid+"'><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
+
+"<li  id='star4.5"+Dyid+"' style='display:none'><span class='prop-mark-fav'  ><i class=' fa fa-star-half-o'   style='font-size: 1.0em;color:#fa5b0f;'></i></span></li>"+
+
+
+"<li id='star5"+Dyid+"'><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
+"<li><span class='prop-mark-fav' style='font-size:12px;'  ><i style=' margin-left:90px' class='sl sl-icon-like' ></i></span>     <span id='Likecount"+Dyid+"'></span></li>"+
 
 
 
@@ -450,12 +521,17 @@ if (liked == true){
 
 "<div class='listing-content'>"+
 "<div>"+
-"<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:18px;font-family: Hanken;'></span>"+
+"<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:18px;font-family: Hanken;'></span>"+"<span id='Squarefeet"+Dyid+"' style='margin-left:38%;font-size:15px;font-family: Hanken;'></span>"+
 "<br>"+
+
+
+
+
 
 "<i class='fa fa-map-marker' style='margin-left:6%;'><span id='city1"+Dyid+"' style='margin-left:4px;font-family: Hanken;'></span></i>"+ 
 
 "<br>"+
+
 
 
  
