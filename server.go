@@ -123,6 +123,7 @@ func Serve() bool {
 	//Owner Request
 	router.HandleFunc("/GetOwnerdetails", Service.GetOwners)
 	router.HandleFunc("/GetSingleOwner", Service.GetsingleOwner)
+	router.HandleFunc("/Ownertoexecutive", Service.Ownertoexecutive)
 
 	//Executive request
 	router.HandleFunc("/GetExecutivedetails", Service.GetExecutive)

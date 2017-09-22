@@ -214,7 +214,7 @@ var delete_cookie = function(name) {
 var email = "";
 
 function onSignIn(googleUser) {
-    alert("inside google")
+    
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + profile.getName());
@@ -363,7 +363,6 @@ function onSignIn(googleUser) {
 //Redirect to wishlist page
 
 function Getwish() {
-    alert("inside wish " + loginidd);
     url = "wishlist.html";
     document.location.href = url;
 
@@ -425,7 +424,7 @@ function Getwish() {
         <nav id="navigation" class="style-1">
           <ul id="responsive">
             <li><a  href="index.html">Home</a></li>
-            <li><a href="howitworks.html">How It Works </a>
+            <li><a href="howitwork.html">How It Works </a></li>
               <ul>
                 <li><a href="owner.html">Owners</a> </li>
                 <li><a href="tenats.html">Tenants</a></li>
@@ -433,7 +432,7 @@ function Getwish() {
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
-           <li><a javascript:Payalert()>Pay Myrent</a></li>
+           <li><a href="javascript:Payalert()">Pay Myrent</a></li>
           </ul>
       </nav>
       <div class="clearfix"></div>
@@ -688,7 +687,7 @@ function Getwish() {
 <script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
 <script type="text/javascript" src="scripts/tooltips.min.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
-<!-- <script type="text/javascript" src="scripts/login.js"></script> -->
+<script type="text/javascript" src="scripts/login.js"></script>
 
 
 

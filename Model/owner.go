@@ -44,3 +44,11 @@ type RentSendOwner struct {
 	RentFullimages []Home_images
 	Ownerdetails   Ownersend
 }
+
+type OwnertoExecutive struct {
+	Name       string
+	Email      string
+	Phone      string
+	Tenanttype string
+	Address    string
+}

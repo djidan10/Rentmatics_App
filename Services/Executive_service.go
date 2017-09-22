@@ -5,12 +5,12 @@ import (
 	Model "Rentmatics_App/Model"
 	"encoding/json"
 	"fmt"
-	"io"
+	//"io"
 	"net/http"
 	"net/smtp"
-	"os"
-	"path/filepath"
-	"strconv"
+	//"os"
+	//"path/filepath"
+	//"strconv"
 )
 
 //Get All Executive Details
@@ -82,40 +82,57 @@ func Auth(w http.ResponseWriter, r *http.Request) {
 //Executive Upload
 func InsertHomeDetails(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("inside GetImage")
-	var ImageurlFinal []string
-	var Imageurl string
+	//	var ImageurlFinal []string
+	//	var Imageurl string
+
 	var Userdata Model.HomeInsert
 
 	r.ParseMultipartForm(32 << 20)
 	r.ParseForm()
 
-	Userdata.Housename = r.Form["housename"][0]
+	//  Userdata.Housename = r.Form["housename"][0]
+	Userdata.Housename = r.Form["houseownername"][0]
+	Userdata.Houseownername = r.Form["housename"][0]
 	Userdata.Adress1 = r.Form["address1"][0]
 	Userdata.Adress2 = r.Form["address2"][0]
-	fmt.Println("********addess2********", Userdata.Adress2)
 	Userdata.City = r.Form["city"][0]
-	Userdata.Pin = r.Form["pin"][0]
-
+	Userdata.District = r.Form["district"][0]
 	Userdata.State = r.Form["state"][0]
-	Userdata.Country = "India"
-
+	Userdata.Country = r.Form["country"][0]
+	Userdata.Pin = r.Form["pin"][0]
 	Userdata.Phone_number = r.Form["phonenumber"][0]
-	Userdata.Month_rent = r.Form["monthrent"][0]
-	Userdata.Tenant_type = r.Form["gettenant"][0]
-
-	fmt.Println("***************", Userdata.Tenant_type)
-	Userdata.Booking_type = r.Form["getbook"][0]
-	Userdata.House_type = r.Form["gethouse"][0]
-	Userdata.Furnish_type = r.Form["getfurnished"][0]
-	Userdata.Distance = r.Form["getdistance"][0]
-	fmt.Println("********Distance********", Userdata.Distance)
-
-	Userdata.Bhk = r.Form["bhk"][0]
+	Userdata.Email = r.Form["email"][0]
+	Userdata.Secutity_deposit = r.Form["securitydeposit"][0]
+	Userdata.Month_rent = r.Form["monthlyrent"][0]
+	Userdata.Bed_rent = r.Form["bedrent"][0]
+	Userdata.Bhk_rent = r.Form["bhkrent"][0]
 	Userdata.Bed = r.Form["bed"][0]
-	Userdata.Secutity_deposit = r.Form["security"][0]
+	Userdata.Bhk = r.Form["bhk"][0]
+	Userdata.Availble_Bed = r.Form["availbed"][0]
+	Userdata.Avail_room = r.Form["availbhk"][0]
+	Userdata.Booked_bed = r.Form["bookbed"][0]
+	Userdata.Booked_bhk = r.Form["bookbhk"][0]
+	Userdata.Tenant_type = r.Form["tenant"][0]
+	Userdata.Furnish_type = r.Form["furnishtype"][0]
+	Userdata.Booking_type = r.Form["booking"][0]
+	Userdata.House_type = r.Form["housetype"][0]
+	Userdata.Distance = r.Form["distance"][0]
+	Userdata.Latitude = r.Form["lalitude"][0]
+	Userdata.Longitude = r.Form["longitude"][0]
 	Userdata.Listing = r.Form["listing"][0]
+	Userdata.Squarefeet = r.Form["sqft"][0]
+	Userdata.Description = r.Form["description"][0]
+	Userdata.Parking = r.Form["parking"][0]
+	Userdata.Facing = r.Form["facing"][0]
+	Userdata.Totalfloors = r.Form["tnf"][0]
+	Userdata.Likecount = r.Form["like"][0]
+	Userdata.Rating = r.Form["rate"][0]
+	Userdata.Liked = "false"
+	fmt.Println(Userdata.Housename, Userdata.Houseownername, Userdata.Adress1, Userdata.Adress2, Userdata.City)
+	fmt.Println(Userdata.District, Userdata.State)
+
 	//Userdata.Amenities = r.Form["amenities"][0]
-	Amin := r.Form["groupsolo"]
+	Amin := r.Form["groupamen"]
 	fmt.Println(Amin)
 	var Amenities string
 	for k, v := range Amin {
@@ -129,40 +146,38 @@ func InsertHomeDetails(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(Amenities)
 	Userdata.Amenities = Amenities
 
-	Userdata.Description = r.Form["description"][0]
-
 	//Insert image in Database
 	//Create Directory
-	newpath := filepath.Join("Houseimage/", Userdata.Housename, "/")
-	os.MkdirAll(newpath, os.ModePerm)
-	for i := 0; i <= 5; i++ {
+	//	newpath := filepath.Join("Houseimage/", Userdata.Housename, "/")
+	//	os.MkdirAll(newpath, os.ModePerm)
+	//	for i := 0; i <= 5; i++ {
 
-		file, handler, err := r.FormFile("uploadfile" + strconv.Itoa(i))
-		if err != nil {
-			fmt.Println("data error image", err)
-			return
-		}
-		fmt.Println("handler", handler)
-		defer file.Close()
+	//		file, handler, err := r.FormFile("uploadfile" + strconv.Itoa(i))
+	//		if err != nil {
+	//			fmt.Println("data error image", err)
+	//			return
+	//		}
+	//		fmt.Println("handler", handler)
+	//		defer file.Close()
 
-		Imageurl = "Houseimage/" + Userdata.Housename + "/" + handler.Filename
+	//		Imageurl = "Houseimage/" + Userdata.Housename + "/" + handler.Filename
 
-		f, err := os.OpenFile(Imageurl, os.O_WRONLY|os.O_CREATE, 0666)
-		if err != nil {
-			fmt.Println(err)
-			return
-		}
-		defer f.Close()
+	//		f, err := os.OpenFile(Imageurl, os.O_WRONLY|os.O_CREATE, 0666)
+	//		if err != nil {
+	//			fmt.Println(err)
+	//			return
+	//		}
+	//		defer f.Close()
 
-		io.Copy(f, file)
+	//		io.Copy(f, file)
 
-	}
-	ImageurlFinal = append(ImageurlFinal, "http://localhost:8083/"+Imageurl)
-	fmt.Println("imageurl", ImageurlFinal)
+	//	}
+	//	/ImageurlFinal = append(ImageurlFinal, "http://localhost:8083/"+Imageurl)
+	//fmt.Println("imageurl", ImageurlFinal)
 
-	SendEmail(Userdata, ImageurlFinal)
-
-	Db.Inserthome_DB(Userdata, ImageurlFinal)
+	//	  SendEmail(Userdata, ImageurlFinal)
+	//Db.Inserthome_DB(Userdata, ImageurlFinal)
+	Db.Inserthome_DB(Userdata)
 
 }
 

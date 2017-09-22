@@ -96,7 +96,7 @@ $(document).ready(function(){
 
          temp = params[i].split("=");
          if ( [temp[0]] == "Id" ) { sval = temp[1]; }
-       } 	
+       }  
 
 
 var sval = sval.replace("%20", " ");
@@ -116,14 +116,14 @@ var sval = sval.replace("%20", " ");
             var searchout = JSON.parse(responsee);
             if (searchout == null){
 
-          url = 'working.html'; 	 	 	 
+          url = 'working.html';        
         
            document.location.href = url;
          }
             else{
 
-		
-			var searchout = JSON.parse(responsee);
+    
+      var searchout = JSON.parse(responsee);
             Getresponse(searchout)
           }
 }
@@ -197,7 +197,7 @@ for (var i = 0, l = elements.length; i < l; i++)
 
 //Common function for s=Displaying Response
 function Getresponse(searchout){
-	
+  
   var cardstring ="";
   var property =searchout.length +" Results Found ";
  for (k=0;k<searchout.length;k++){
@@ -228,7 +228,7 @@ function Getresponse(searchout){
  var Rating ="";
  
   for (i=0;i<searchout[j].RentFullimages.length;i++){
-  	finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
+    finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
    }
     
   
@@ -263,53 +263,53 @@ function Getresponse(searchout){
   var Facing =searchout[j].RentFullStruct.Facing ;
 
   if (Rating == 2){
-    document.getElementById("star1"+ID).style.color = "#fa5b0f";
-    document.getElementById("star2").style.color = "#fa5b0f";
+    document.getElementById("star1"+ID).style.color = "#cc22c3";
+    document.getElementById("star2").style.color = "#cc22c3";
   
  }else if (Rating == 2.5){
-   document.getElementById("star1"+ID).style.color = "#fa5b0f";
-   document.getElementById("star2"+ID).style.color = "#fa5b0f";
+   document.getElementById("star1"+ID).style.color = "#cc22c3";
+   document.getElementById("star2"+ID).style.color = "#cc22c3";
    document.getElementById("star3"+ID).style.display = "none";
     document.getElementById("star2.5"+ID).style.display = "inline";
 
 
   }else if (Rating == 3){
-    document.getElementById("star1"+ID).style.color = "#fa5b0f";
-    document.getElementById("star2"+ID).style.color = "#fa5b0f";
-    document.getElementById("star3"+ID).style.color = "#fa5b0f";
+    document.getElementById("star1"+ID).style.color = "#cc22c3";
+    document.getElementById("star2"+ID).style.color = "#cc22c3";
+    document.getElementById("star3"+ID).style.color = "#cc22c3";
   
 
   }else if (Rating == 3.5){
-    alert("inside 3.4")
-    document.getElementById("star1"+ID).style.color = "#fa5b0f";
-    document.getElementById("star2"+ID).style.color = "#fa5b0f";
-    document.getElementById("star3"+ID).style.color = "#fa5b0f";
+  
+    document.getElementById("star1"+ID).style.color = "#cc22c3";
+    document.getElementById("star2"+ID).style.color = "#cc22c3";
+    document.getElementById("star3"+ID).style.color = "#cc22c3";
     document.getElementById("star3.5"+ID).style.display = "inline";
     document.getElementById("star4"+ID).style.display = "none";
 
 
   }else if (Rating == 4){
-     document.getElementById("star1"+ID).style.color = "#fa5b0f";
-    document.getElementById("star2"+ID).style.color = "#fa5b0f";
-    document.getElementById("star3"+ID).style.color = "#fa5b0f";
-     document.getElementById("star4"+ID).style.color = "#fa5b0f";
+     document.getElementById("star1"+ID).style.color = "#cc22c3";
+    document.getElementById("star2"+ID).style.color = "#cc22c3";
+    document.getElementById("star3"+ID).style.color = "#cc22c3";
+     document.getElementById("star4"+ID).style.color = "#cc22c3";
 
   }else if (Rating == 4.5){
-    document.getElementById("star1"+ID).style.color = "#fa5b0f";
-    document.getElementById("star2"+ID).style.color = "#fa5b0f";
-    document.getElementById("star3"+ID).style.color = "#fa5b0f";
-     document.getElementById("star4"+ID).style.color = "#fa5b0f";
+    document.getElementById("star1"+ID).style.color = "#cc22c3";
+    document.getElementById("star2"+ID).style.color = "#cc22c3";
+    document.getElementById("star3"+ID).style.color = "#cc22c3";
+     document.getElementById("star4"+ID).style.color = "#cc22c3";
      document.getElementById("star4.5"+ID).style.display = "inline";
      document.getElementById("star5"+ID).style.display = "none";
    
 
   }else{
 
-  document.getElementById("star1"+ID).style.color = "#fa5b0f";
-    document.getElementById("star2"+ID).style.color = "#fa5b0f";
-    document.getElementById("star3"+ID).style.color = "#fa5b0f";
-     document.getElementById("star4"+ID).style.color = "#fa5b0f";
-     document.getElementById("star5"+ID).style.color = "#fa5b0f";
+  document.getElementById("star1"+ID).style.color = "#cc22c3";
+    document.getElementById("star2"+ID).style.color = "#cc22c3";
+    document.getElementById("star3"+ID).style.color = "#cc22c3";
+     document.getElementById("star4"+ID).style.color = "#cc22c3";
+     document.getElementById("star5"+ID).style.color = "#cc22c3";
   }
   
 
@@ -359,24 +359,23 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 }
 }
 function Addfav(getid,getlogin,colorid){
-	alert("inside wish");
-	alert( colorid.style.color);
-	alert(cooki);
+  
+
 
 
 
    if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
-    alert("inside nodata");
+   
     var url2 = "login-register.html";
-    alert(url2);
+ 
     document.location.href = url2;
 
   
         }
       else{
-            alert(cooki);
+         
                if (colorid.style.color == "white" || colorid.style.color == undefined ){
-                alert("inside black")
+               
                     colorid.style.color="red";  
                       var s={
           "Id": null,
@@ -392,7 +391,7 @@ function Addfav(getid,getlogin,colorid){
          data: JSON.stringify(s),
 
          success: function(responsee){
-              alert("success");
+            
            var searchout = JSON.parse(responsee);
           
           
@@ -489,19 +488,19 @@ if (liked == true){
 
 "<ul class='listing-details' style='height:40px'>"+
 "<li id='star1"+Dyid+"'><span class='prop-mark-fav' style='margin-left:9px;' ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
-"<li  id='star1.5"+Dyid+"' style='display:none'><span class='prop-mark-fav' style='color:#fa5b0f;' ><i class=' fa fa-star-half-o'  style='font-size: 1.0em;'  ></i></span></li>"+
+"<li  id='star1.5"+Dyid+"' style='display:none'><span class='prop-mark-fav' style='color:#cc22c3;' ><i class=' fa fa-star-half-o'  style='font-size: 1.0em;'  ></i></span></li>"+
 
 "<li id='star2"+Dyid+"'><span class='prop-mark-fav' ><i class='fa fa-star'   style='font-size: 1.0em;margin-left:'  ></i></span></li>"+
 
-"<li id='star2.5"+Dyid+"' style='display:none'><span class='prop-mark-fav' style='color:#fa5b0f' ><i class='fa fa-star-half-o'   style='font-size: 1.0em;'  ></i></span></li>"+
+"<li id='star2.5"+Dyid+"' style='display:none'><span class='prop-mark-fav' style='color:#cc22c3' ><i class='fa fa-star-half-o'   style='font-size: 1.0em;'  ></i></span></li>"+
 "<li id='star3"+Dyid+"'><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'   ></i></span></li>"+
 
 
-"<li id='star3.5"+Dyid+"' style='display:none'><span class='prop-mark-fav'  ><i class=' fa fa-star-half-o'   style='font-size: 1.0em;color:#fa5b0f;'  ></i></span></li>"+
+"<li id='star3.5"+Dyid+"' style='display:none'><span class='prop-mark-fav'  ><i class=' fa fa-star-half-o'   style='font-size: 1.0em;color:#cc22c3;'  ></i></span></li>"+
 
 "<li id='star4"+Dyid+"'><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
 
-"<li  id='star4.5"+Dyid+"' style='display:none'><span class='prop-mark-fav'  ><i class=' fa fa-star-half-o'   style='font-size: 1.0em;color:#fa5b0f;'></i></span></li>"+
+"<li  id='star4.5"+Dyid+"' style='display:none'><span class='prop-mark-fav'  ><i class=' fa fa-star-half-o'   style='font-size: 1.0em;color:#cc22c3;'></i></span></li>"+
 
 
 "<li id='star5"+Dyid+"'><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
@@ -521,7 +520,7 @@ if (liked == true){
 
 "<div class='listing-content'>"+
 "<div>"+
-"<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:18px;font-family: Hanken;'></span>"+"<span id='Squarefeet"+Dyid+"' style='margin-left:38%;font-size:15px;font-family: Hanken;'></span>"+
+"<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:18px;font-family: Hanken;'></span>"+"<br><span id='Squarefeet"+Dyid+"' style='margin-left:6%;font-size:15px;font-family: Hanken;'></span>"+
 "<br>"+
 
 
@@ -547,8 +546,8 @@ if (liked == true){
 // "<span id='deposit"+Dyid+"' style='margin-left:11px;font-size:15px;'></span>"+
 // "<br>"+
 
-"<b><span id='availbed"+Dyid+"' style='margin-left:6%;color:#fa5b0f;font-size:15px;'></span>"+
-"<span style='color:#fa5b0f;font-size:15px;font-family: Hanken;' >  Bed Available</span></b>"+
+"<b><span id='availbed"+Dyid+"' style='margin-left:6%;color:#cc22c3;font-size:15px;'></span>"+
+"<span style='color:#cc22c3;font-size:15px;font-family: Hanken;' >  Bed Available</span></b>"+
 
 
 
@@ -650,7 +649,7 @@ $.ajax({
       data: JSON.stringify(s),
 
   success: function(responsee){
-    alert("responsee"+responsee)
+    
     var aaa = JSON.parse(responsee)
    
  
@@ -699,55 +698,55 @@ $.ajax({
 ================================================== -->
 <header id="header-container" class="fullwidth">
 
-	<!-- Topbar -->
-	<div id="top-bar">
-		<div class="container">
+  <!-- Topbar -->
+  <div id="top-bar">
+    <div class="container">
       <!-- Left Side Content -->
-			<div class="left-side">
-				<ul class="top-bar-menu">
-				    <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+      <div class="left-side">
+        <ul class="top-bar-menu">
+            <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
           <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
-				</ul>
+        </ul>
       </div>
-			<div class="right-side">
+      <div class="right-side">
         <ul class="social-icons">
           <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
           <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
           <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
           </ul>
-			</div>
-		</div>
-	</div>
-	<div class="clearfix"></div>
-	<div id="header">
-		<div class="container">
-			<div class="left-side">
-				 <div id="logo">
-					<a href="index.html"><img src="images/rm_logo.png" alt=""></a>
-				 </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="header">
+    <div class="container">
+      <div class="left-side">
+         <div id="logo">
+          <a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+         </div>
          <!-- Mobile Navigation -->
-				<div class="menu-responsive">
-					<i class="fa fa-reorder menu-trigger"></i>
-				</div>
+        <div class="menu-responsive">
+          <i class="fa fa-reorder menu-trigger"></i>
+        </div>
          <!-- Main Navigation -->
-				<nav id="navigation" class="style-1">
-					<ul id="responsive">
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
             <li><a  href="index.html">Home</a></li>
-            <li><a href="howitwork.html">How It Works </a>
+            <li><a href="howitwork.html">How It Works </a></li>
               <ul>
                 <li><a href="owner.html">Owners</a> </li>
                 <li><a href="tenats.html">Tenants</a></li>
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
-           <li><a javascript:Payalert()>Pay Myrent</a></li>
-			    </ul>
-			</nav>
-			<div class="clearfix"></div>
-			</div>
-			<div class="right-side">
+           <li><a href="javascript:Payalert()">Pay Myrent</a></li>
+          </ul>
+      </nav>
+      <div class="clearfix"></div>
+      </div>
+      <div class="right-side">
 
-				<nav id="navigation" class="style-1">
+        <nav id="navigation" class="style-1">
           <ul id="responsive">
           <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
            <li id="loginhiden">
@@ -763,8 +762,8 @@ $.ajax({
                 </li> 
           </ul>
        </nav>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 </header>
 
@@ -778,7 +777,7 @@ $.ajax({
 ================================================== -->
 <div class="fs-container">
 
-	<div class="fs-inner-container">
+  <div class="fs-inner-container">
   <!-- <div class="fs-inner-container"> -->
 
     <!-- Map -->
@@ -798,273 +797,273 @@ $.ajax({
   <!-- </div> -->
 
 
-	
-		 
-				 <!-- <div> -->
+  
+     
+         <!-- <div> -->
             <!-- <iframe  id="map-canvas" frameborder="0" style="border:0"   allowfullscreen="">
             </iframe> -->
          <!--  <iframe id="map-canvas" frameborder="0" style="border:0" allowfullscreen=""    
           src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q=electronic city ,Banglore,India">
             </iframe> -->
-		    <!-- Map Navigation -->
-			<!-- <a href="#" id="geoLocation" title="Your location"></a>
-			<ul id="mapnav-buttons" class="top">
-			    <li><a href="#" id="prevpoint" title="Previous point on map">Prev</a></li>
-			    <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
-			</ul> -->
-		<!-- </div> -->
+        <!-- Map Navigation -->
+      <!-- <a href="#" id="geoLocation" title="Your location"></a>
+      <ul id="mapnav-buttons" class="top">
+          <li><a href="#" id="prevpoint" title="Previous point on map">Prev</a></li>
+          <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
+      </ul> -->
+    <!-- </div> -->
 
-	</div>
-
-
-	<div class="fs-inner-container">
-		<div class="fs-content">
-
-			<!-- Search -->
-			<section >
-
-				<div class="row">
-					<div class="col-md-12">
-
-						
-
-						<!-- Form -->
-						<div>
+  </div>
 
 
-							<!-- Row With Forms -->
-							<div class="row with-forms">
+  <div class="fs-inner-container">
+    <div class="fs-content">
 
-								<!-- Main Search Input -->
-							<!-- 	<div class="col-fs-6">
-									<input type="text" placeholder="Enter address e.g. street, city or state" value=""/>
-								</div> -->
-		<a href="#" class="more-search-options-trigger margin-top-20" data-open-title="Filter Options" data-close-title="Less Options" style="margin-left:70%;"></a>
+      <!-- Search -->
+      <section >
 
-							<div class="more-search-options relative" >
-								<div class="more-search-options-container margin-top-30" style="margin-left:5%;">
-								
-								<!-- Property Type -->
-								<div class="row with-forms">
-								<div class="col-fs-3">
-									<select data-placeholder="Tenant Type" class="chosen-select-no-single" id="tenantType">
-										<option >Tenant Type </option>	
-										<option value="Girls">Girls</option>
-										<option value="Boys">Boys</option>
-										<option value="Family">Family</option>
-										
-									</select>
-								</div>
-								<div class="col-fs-2" style="width:47%">
-									<select data-placeholder="House Type" class="chosen-select-no-single" id="houseType">
-										<option>House Type </option>	
-										<option value="Apartment">Apartment</option>
-										<option value="Independent">Independent House</option>
-										<option value="Villa">Villa</option>
-										
-									</select>
-								</div>
-								</div>
+        <div class="row">
+          <div class="col-md-12">
 
-							
-							<!-- Row With Forms / End -->
+            
+
+            <!-- Form -->
+            <div>
 
 
-							<!-- Row With Forms -->
-							<div class="row with-forms">
+              <!-- Row With Forms -->
+              <div class="row with-forms">
 
-								<!-- Min Price -->
-								<div class="col-fs-3">
-									
-									<!-- Select Input -->
-									<div class="select-input disabled-first-option">
-										<input type="text" placeholder="Min Rent" data-unit="$" id="getmin">
-										<select>	
-											<option>Min </option>
-											<option value="5000">5000</option>
-											<option value="7500">7500</option>
-											<option value="10000">10000</option>
-											<option value="12500">12500</option>
-											<option value="15000">15000</option>
-											<option value="20000">20000</option>
-											<option value="25000">25000</option>
-											<option value="30000">30000+</option>
-										</select>
-									</div>
-									<!-- Select Input / End -->
+                <!-- Main Search Input -->
+              <!--  <div class="col-fs-6">
+                  <input type="text" placeholder="Enter address e.g. street, city or state" value=""/>
+                </div> -->
+    <a href="#" class="more-search-options-trigger margin-top-20" data-open-title="Filter Options" data-close-title="Less Options" style="margin-left:70%;"></a>
 
-								</div>
+              <div class="more-search-options relative" >
+                <div class="more-search-options-container margin-top-30" style="margin-left:5%;">
+                
+                <!-- Property Type -->
+                <div class="row with-forms">
+                <div class="col-fs-3">
+                  <select data-placeholder="Tenant Type" class="chosen-select-no-single" id="tenantType">
+                    <option >Tenant Type </option>  
+                    <option value="Girls">Girls</option>
+                    <option value="Boys">Boys</option>
+                    <option value="Family">Family</option>
+                    
+                  </select>
+                </div>
+                <div class="col-fs-2" style="width:47%">
+                  <select data-placeholder="House Type" class="chosen-select-no-single" id="houseType">
+                    <option>House Type </option>  
+                    <option value="Apartment">Apartment</option>
+                    <option value="Independent">Independent House</option>
+                    <option value="Villa">Villa</option>
+                    
+                  </select>
+                </div>
+                </div>
 
-								<!-- Max Price -->
-								<div class="col-fs-3" style="width:47%">
-									
-									<!-- Select Input -->
-									<div class="select-input disabled-first-option">
-										<input type="text" placeholder="Max Rent"  data-unit="$" id="getmax">
-										<select>	
-											<option>Max </option>
-											<option value="7500">7500</option>
-											<option value="10000">10000</option>
-											<option value="12500">12500</option>
-											<option value="15000">15000</option>
-											<option value="20000">20000</option>
-											<option value="25000">25000</option>
-											<option value="30000">30000+</option>
-										</select>
-									</div>
-									<!-- Select Input / End -->
-
-								</div>
-								</div>
-	<!-- Row With Forms -->
-
-							<div class="row with-forms">
-
-								
-								<!-- Property Type -->
-								<div class="col-fs-3">
-									<select data-placeholder="Furnished Type" class="chosen-select-no-single" id="furnishingType">
-										<option >Furnished Type</option>	
-										<option value="Fully Furnished">Fully Furnished</option>
-										<option value="Semi Furnished">Semi Furnished</option>
-										<option value="Unfurnished">UnFurnished</option>
-										
-									</select>
-								</div>
-								<div class="col-fs-3" style="width:47%">
-									<select data-placeholder="Booking Type" class="chosen-select-no-single" id="bookingType" >
-										<option>Booking Type </option>	
-										<option value="Shared Room">Shared Room</option>
-										<option value="Private Room">Private Room</option>
-										<option value="Entire House">Entire House</option>
-										
-									</select>
-								</div>
-
-							</div>
-							<!-- Row With Forms / End -->
+              
+              <!-- Row With Forms / End -->
 
 
+              <!-- Row With Forms -->
+              <div class="row with-forms">
 
-							<div class="row with-forms">
-								<!-- Min Price -->
-								<div class="col-fs-3">
-									
-									<!-- Select Input -->
-									<div class="select-input disabled-first-option">
-										<input type="text" placeholder="Distance" data-unit="KM" id="distance">
-										<select  >	
-										<option label="blank"></option>	
-											<option>Distance </option>
-											<option value="1">1 Km</option>
-											<option value="2">2 Km</option>	
-											<option value="3">3 Km</option>	
-											<option value="4">4 Km</option>	
-											<option value="5">5 Km</option>	
-											
-										</select>
-									</div>
-									<!-- Select Input / End -->
+                <!-- Min Price -->
+                <div class="col-fs-3">
+                  
+                  <!-- Select Input -->
+                  <div class="select-input disabled-first-option">
+                    <input type="text" placeholder="Min Rent" data-unit="$" id="getmin">
+                    <select>  
+                      <option>Min </option>
+                      <option value="5000">5000</option>
+                      <option value="7500">7500</option>
+                      <option value="10000">10000</option>
+                      <option value="12500">12500</option>
+                      <option value="15000">15000</option>
+                      <option value="20000">20000</option>
+                      <option value="25000">25000</option>
+                      <option value="30000">30000+</option>
+                    </select>
+                  </div>
+                  <!-- Select Input / End -->
 
-								</div>
+                </div>
 
-	<!-- Row With Forms -->
-									<div class="row with-forms">
-										<!-- Rooms Area -->
-										<div class="col-fs-3" style="width:46%">
-											<select data-placeholder="BHK" class="chosen-select-no-single" id="getbhk">
-												<option label="blank"></option>	
-												<option>Bhk </option>	
-												<option value="1">1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
-											</select>
-										</div>
+                <!-- Max Price -->
+                <div class="col-fs-3" style="width:47%">
+                  
+                  <!-- Select Input -->
+                  <div class="select-input disabled-first-option">
+                    <input type="text" placeholder="Max Rent"  data-unit="$" id="getmax">
+                    <select>  
+                      <option>Max </option>
+                      <option value="7500">7500</option>
+                      <option value="10000">10000</option>
+                      <option value="12500">12500</option>
+                      <option value="15000">15000</option>
+                      <option value="20000">20000</option>
+                      <option value="25000">25000</option>
+                      <option value="30000">30000+</option>
+                    </select>
+                  </div>
+                  <!-- Select Input / End -->
 
-										</div>
-										</div>
-		<div class="row with-forms" style="display:none">
+                </div>
+                </div>
+  <!-- Row With Forms -->
 
-										<!-- Min Area -->
-										<div class="col-fs-3">
-											<select data-placeholder="Beds" class="chosen-select-no-single" id="getbed">
-												<option label="blank"></option>	
-												<option>Beds </option>	
-												<option value="1" >1</option>
-												<option value="2">2</option>
-												<option value="3">3</option>
-												<option value="4">4</option>
-												<option value="5">5</option>
-											</select>
-										</div>
+              <div class="row with-forms">
+
+                
+                <!-- Property Type -->
+                <div class="col-fs-3">
+                  <select data-placeholder="Furnished Type" class="chosen-select-no-single" id="furnishingType">
+                    <option >Furnished Type</option>  
+                    <option value="Fully Furnished">Fully Furnished</option>
+                    <option value="Semi Furnished">Semi Furnished</option>
+                    <option value="Unfurnished">UnFurnished</option>
+                    
+                  </select>
+                </div>
+                <div class="col-fs-3" style="width:47%">
+                  <select data-placeholder="Booking Type" class="chosen-select-no-single" id="bookingType" >
+                    <option>Booking Type </option>  
+                    <option value="Shared Room">Shared Room</option>
+                    <option value="Private Room">Private Room</option>
+                    <option value="Entire House">Entire House</option>
+                    
+                  </select>
+                </div>
+
+              </div>
+              <!-- Row With Forms / End -->
+
+
+
+              <div class="row with-forms">
+                <!-- Min Price -->
+                <div class="col-fs-3">
+                  
+                  <!-- Select Input -->
+                  <div class="select-input disabled-first-option">
+                    <input type="text" placeholder="Distance" data-unit="KM" id="distance">
+                    <select  >  
+                    <option label="blank"></option> 
+                      <option>Distance </option>
+                      <option value="1">1 Km</option>
+                      <option value="2">2 Km</option> 
+                      <option value="3">3 Km</option> 
+                      <option value="4">4 Km</option> 
+                      <option value="5">5 Km</option> 
+                      
+                    </select>
+                  </div>
+                  <!-- Select Input / End -->
+
+                </div>
+
+  <!-- Row With Forms -->
+                  <div class="row with-forms">
+                    <!-- Rooms Area -->
+                    <div class="col-fs-3" style="width:46%">
+                      <select data-placeholder="BHK" class="chosen-select-no-single" id="getbhk">
+                        <option label="blank"></option> 
+                        <option>Bhk </option> 
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                    </div>
+
+                    </div>
+                    </div>
+    <div class="row with-forms" style="display:none">
+
+                    <!-- Min Area -->
+                    <div class="col-fs-3">
+                      <select data-placeholder="Beds" class="chosen-select-no-single" id="getbed">
+                        <option label="blank"></option> 
+                        <option>Beds </option>  
+                        <option value="1" >1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                      </select>
+                    </div>
  </div>
-								    
+                    
 
-									<!-- Checkboxes -->
-									<div class="checkboxes in-row">
-								
-										<input id="check-2" type="checkbox" name="check">
-										<label for="check-2">Air Conditioning</label>
+                  <!-- Checkboxes -->
+                  <div class="checkboxes in-row">
+                
+                    <input id="check-2" type="checkbox" name="check">
+                    <label for="check-2">Air Conditioning</label>
 
-										<input id="check-3" type="checkbox" name="check">
-										<label for="check-3">Swimming Pool</label>
+                    <input id="check-3" type="checkbox" name="check">
+                    <label for="check-3">Swimming Pool</label>
 
-										<input id="check-4" type="checkbox" name="check" >
-										<label for="check-4">Central Heating</label>
+                    <input id="check-4" type="checkbox" name="check" >
+                    <label for="check-4">Central Heating</label>
 
-										<input id="check-5" type="checkbox" name="check">
-										<label for="check-5">Laundry Room</label>	
-
-
-										<input id="check-6" type="checkbox" name="check">
-										<label for="check-6">Gym</label>
-
-										<input id="check-7" type="checkbox" name="check">
-										<label for="check-7">Alarm</label>
-
-										<input id="check-8" type="checkbox" name="check">
-										<label for="check-8">Window Covering</label>
-								
-									</div>
-									<!-- Checkboxes / End -->
-
-										<button class="button fs-map-btn" onclick="GetFilterhome()">Search</button>
-
-													</div>
-								</div>
-
-							</div>
-						
-
-						</div>
-						<!-- Box / End -->
-					</div>
-			
-
-			</section>
-			<!-- Search / End -->
+                    <input id="check-5" type="checkbox" name="check">
+                    <label for="check-5">Laundry Room</label> 
 
 
+                    <input id="check-6" type="checkbox" name="check">
+                    <label for="check-6">Gym</label>
 
-			<!-- Listings Container -->
-			<div class="row fs-listings">
+                    <input id="check-7" type="checkbox" name="check">
+                    <label for="check-7">Alarm</label>
 
-				<!-- Displaying -->
-				<div class="col-md-12">
-					<p class="showing-results" id="property"></p>
-				</div>
+                    <input id="check-8" type="checkbox" name="check">
+                    <label for="check-8">Window Covering</label>
+                
+                  </div>
+                  <!-- Checkboxes / End -->
+
+                    <button class="button fs-map-btn" onclick="GetFilterhome()">Search</button>
+
+                          </div>
+                </div>
+
+              </div>
+            
+
+            </div>
+            <!-- Box / End -->
+          </div>
+      
+
+      </section>
+      <!-- Search / End -->
+
+
+
+      <!-- Listings Container -->
+      <div class="row fs-listings">
+
+        <!-- Displaying -->
+        <div class="col-md-12">
+          <p class="showing-results" id="property"></p>
+        </div>
                 
                 <div class="listings-container grid-layout" id="listContainer">
 
 
 
                  </div>
-				
+        
 
-		</div>
-	</div>
+    </div>
+  </div>
 
 </div>
 

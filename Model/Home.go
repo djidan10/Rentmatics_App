@@ -11,7 +11,7 @@ type Home struct {
 	District         string
 	State            string
 	Country          string
-	Pin              int
+	Pin              string
 	Phone_number     string
 	Month_rent       float64
 	Bed_rent         float64
@@ -25,10 +25,6 @@ type Home struct {
 	Avail_room       int
 	Booked_bed       int
 	Booked_bhk       int
-	Booked_room      int
-	Booked_home      bool
-	Booked_Allbeds   bool
-	Booked_AllRooms  bool
 	Distance         string
 	Furnish_type     string
 	Secutity_deposit float64
@@ -47,30 +43,47 @@ type Home struct {
 }
 
 type HomeInsert struct {
+	//Id               int
 	Housename        string
+	Houseownername   string
+	ExecutiveID      string
+	Ownerid          string
 	Adress1          string
 	Adress2          string
 	City             string
+	District         string
 	State            string
 	Country          string
 	Pin              string
 	Phone_number     string
+	Email            string
+	Secutity_deposit string
 	Month_rent       string
 	Bed_rent         string
 	Bhk_rent         string
+	Bhk              string
+	Bed              string
+	Availble_Bed     string
+	Avail_room       string
+	Booked_bed       string
+	Booked_bhk       string
 	Tenant_type      string
 	Booking_type     string
 	House_type       string
-	Bhk              string
-	Bed              string
 	Distance         string
 	Furnish_type     string
-	Secutity_deposit string
 	Listing          string
 	Amenities        string
 	Description      string
-	Latitude         float64
-	Longitude        float64
+	Latitude         string
+	Longitude        string
+	Liked            string
+	Squarefeet       string
+	Likecount        string
+	Rating           string
+	Totalfloors      string
+	Facing           string
+	Parking          string
 }
 
 type Home_images struct {

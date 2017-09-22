@@ -930,7 +930,7 @@ var autocomplete = new google.maps.places.Autocomplete(input);
 autocomplete.addListener('place_changed', function () {
 
 var place = autocomplete.getPlace();
-alert(place)
+
 var aaa = place["address_components"];
 console.log(aaa[0].long_name)
 
@@ -963,39 +963,7 @@ console.log(place.geometry['location'].lng());
 <!-- <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script> -->
 <script type="text/javascript" src="scripts/login.js"></script>
 
-<!-- 
-<script>
-         var Tagname = new Array();
-         var Tags = new Array();
 
-         $(document).ready(function(){
-         $.ajax({
-          type: "GET",
-          url: "http://176.111.105.86:8083/GetCities",
-          contentType:"application/json; charset=utf-8",
-         
-         success: function(responsee){
-         
-         var availableTags = JSON.parse(responsee)
-         Tags = availableTags
-         for (i = 0; i < Tags.length; i++) { 
-           Tagname[i] = Tags[i].City
-         }
-         
-         
-         //Implement Action to Html page
-         $( "#tags" ).autocomplete({
-           source: Tagname
-            
-         
-          });
-         }
-         
-         });
-         });
-         
-         
-      </script> -->
 
 
 <!-- Style Switcher

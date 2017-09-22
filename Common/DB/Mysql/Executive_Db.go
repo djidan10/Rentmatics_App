@@ -3,6 +3,7 @@ package Mysql
 import (
 	Model "Rentmatics_App/Model"
 	_ "database/sql"
+	"fmt"
 	"strconv"
 
 	_ "github.com/go-sql-driver/mysql"
@@ -114,45 +115,37 @@ func GetIndivualExecutive_Db(executiveid int) (Data Model.Executivedetails) {
 
 	return
 }
-func Inserthome_DB(Homeinsert Model.HomeInsert, Imageurl []string) {
-	var Homedata Model.Home
-	Homedata.Housename = Homeinsert.Housename
-	Homedata.Adress1 = Homeinsert.Adress1
-	Homedata.Adress2 = Homeinsert.Adress2
-	Homedata.City = Homeinsert.City
-	Homedata.State = Homeinsert.State
-	Homedata.Country = Homeinsert.Country
-	Homedata.Pin, _ = strconv.Atoi(Homeinsert.Pin)
-	Homedata.Phone_number = Homeinsert.Phone_number
-	Homedata.Month_rent, _ = strconv.ParseFloat(Homeinsert.Month_rent, 5)
-	Homedata.Bed_rent, _ = strconv.ParseFloat(Homeinsert.Bed_rent, 5)
-	Homedata.Month_rent, _ = strconv.ParseFloat(Homeinsert.Bhk_rent, 5)
-	Homedata.Tenant_type = Homeinsert.Tenant_type
-	Homedata.Booking_type = Homeinsert.Booking_type
-	Homedata.House_type = Homeinsert.House_type
-	Homedata.Bhk, _ = strconv.Atoi(Homeinsert.Bhk)
-	Homedata.Bed, _ = strconv.Atoi(Homeinsert.Bed)
-	Homedata.Furnish_type = Homeinsert.Furnish_type
-	Homedata.Secutity_deposit, _ = strconv.ParseFloat(Homeinsert.Secutity_deposit, 5)
-	Homedata.Distance = Homeinsert.Distance
-	Homedata.Listing = Homeinsert.Listing
-	Homedata.Amenities = Homeinsert.Amenities
-	Homedata.Description = Homeinsert.Description
 
-	rows, err := OpenConnection["Rentmatics"].Exec("insert into renthome (housename,adress1,adress2,city,state,country,pin,phonenumber,month_rent,tenant_type,booking_type,house_type,bhk,bed,distance,furnish_type,secutity_deposit,listing,Amenities,Description) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Homedata.Housename, Homedata.Adress1, Homedata.Adress2, Homedata.City, Homedata.State, Homedata.Country, Homedata.Pin, Homedata.Phone_number, Homedata.Month_rent, Homedata.Tenant_type, Homedata.Booking_type, Homedata.House_type, Homedata.Bhk, Homedata.Bed, Homedata.Distance, Homedata.Furnish_type, Homedata.Secutity_deposit, Homedata.Listing, Homedata.Amenities, Homedata.Description)
+//func Inserthome_DB(Homedata Model.HomeInsert, Imageurl []string) {
+func Inserthome_DB(Homedata Model.HomeInsert) {
+	fmt.Println("inside execitive")
+	Executiveid, _ := strconv.Atoi(Homedata.ExecutiveID)
+	Ownerid, _ := strconv.Atoi(Homedata.Ownerid)
+	Bed, _ := strconv.Atoi(Homedata.Bed)
+	Bhk, _ := strconv.Atoi(Homedata.Bhk)
+	Bookbed, _ := strconv.Atoi(Homedata.Booked_bed)
+	Availbed, _ := strconv.Atoi(Homedata.Availble_Bed)
+	Availroom, _ := strconv.Atoi(Homedata.Avail_room)
+	Bookbhk, _ := strconv.Atoi(Homedata.Booked_bhk)
+	Monthlyrent, _ := strconv.ParseFloat(Homedata.Month_rent, 32)
+	Bhkrent, _ := strconv.ParseFloat(Homedata.Bhk_rent, 32)
+	Bedrent, _ := strconv.ParseFloat(Homedata.Bed_rent, 32)
+	Securitydeposit, _ := strconv.ParseFloat(Homedata.Secutity_deposit, 32)
+
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into home (housename,executiveid,ownerid,adress1,adress2,city,district,state,country,pin,phonenumber,month_rent,bed_rent,bhk_rent,tenant_type,booking_type,house_type,bhk,bed,Avail_bed,Avail_room,Booked_bed,Booked_bhk,distance,furnish_type,secutity_deposit,listing,Amenities,Description,latitude,longitude,Squarefeet,Likecount,Rating,Totalfloors,Facing,Parking) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Homedata.Housename, Homedata.Houseownername, Executiveid, Ownerid, Homedata.Adress1, Homedata.Adress2, Homedata.City, Homedata.District, Homedata.State, Homedata.Country, Homedata.Pin, Homedata.Phone_number, Monthlyrent, Bedrent, Bhkrent, Homedata.Tenant_type, Homedata.Booking_type, Homedata.House_type, Bhk, Bed, Availbed, Availroom, Bookbed, Bookbhk, Homedata.Distance, Homedata.Furnish_type, Securitydeposit, Homedata.Listing, Homedata.Amenities, Homedata.Description, Homedata.Latitude, Homedata.Longitude, Homedata.Squarefeet, Homedata.Likecount, Homedata.Rating, Homedata.Totalfloors, Homedata.Facing, Homedata.Parking)
 	if err != nil {
-		log.Error("Error -DB: Executive insert")
+		log.Error("Error -DB: Executive insert", rows)
 	}
 
-	var pictureurl Model.Home_images
-	pictureurl.Home_id, _ = rows.LastInsertId()
+	//	var pictureurl Model.Home_images
+	//	pictureurl.Home_id, _ = rows.LastInsertId()
 
-	for _, pictureurl.Picture_url = range Imageurl {
-		rows, err := OpenConnection["Rentmatics"].Exec("insert into pictures_url (home_id,image) values (?,?)", pictureurl.Home_id, pictureurl.Picture_url)
-		if err != nil {
-			log.Error("Error -DB: Executive insert picture", err, rows)
-		}
-	}
+	//	for _, pictureurl.Picture_url = range Imageurl {
+	//		rows, err := OpenConnection["Rentmatics"].Exec("insert into pictures_url (home_id,image) values (?,?)", pictureurl.Home_id, pictureurl.Picture_url)
+	//		if err != nil {
+	//			log.Error("Error -DB: Executive insert picture", err, rows)
+	//		}
+	//	}
 
 }
 

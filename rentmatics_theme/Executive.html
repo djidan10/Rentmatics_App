@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Findeo</title>
+<meta charset="utf-8">
+
+
+<!-- CSS
+================================================== -->
+
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+<!-- <style type="text/css">
+  .row1
+{
+  border:1px solid black;  
+   margin-top:10px; 
+
+}
+</style>
+ -->
+</head>
+
+<body>
+
+<!-- Wrapper -->
+
+
+
+
+   <!-- data-background="images/jumbo-banner.jpg" -->
+
+
+<!-- Content
+================================================== -->
+
+<div class="blue-grey lighten-5" >
+
+ <div class="row " style="margin-left:200px;">
+    <form class="col s8 row1 blue-grey lighten-5" action="http://localhost:8083/GetImage" method="POST" enctype="multipart/form-data"  name="myform" novalidate>
+    <h3>Insert Your Best Rentspace</h3>
+     
+     
+      <div class="row">
+       <div class="input-field">
+          <input name="housename" type="text" class="validate">
+          <label for="last_name1"><b>House owner Name</b></label>
+        </div>
+      </div>
+
+      <div class="row">
+       <div class="input-field">
+          <input name="executiveid" type="text" class="validate">
+          <label for="last_name1"><b>ExecutiveID</b></label>
+        </div>
+      </div>
+
+      <div class="row">
+       <div class="input-field">
+          <input name="ownerid" type="text" class="validate">
+          <label for="last_name1"><b>OwnerID</b></label>
+        </div>
+      </div>
+        <div class="row">
+       <div class="input-field">
+          <input name=houseownername type="text" class="validate">
+          <label for="last_name"><b>House Name</b></label>
+        </div>
+      </div>
+     
+       <div class="row">
+       <div class="input-field">
+          <input name="address1" type="text" class="validate">
+          <label for="last_name"><b>Address1</b></label>
+        </div>
+      </div>
+     
+       <div class="row">
+       <div class="input-field">
+          <input name="address2" type="text" class="validate">
+          <label for="last_name"><b>Address2</b></label>
+        </div>
+      </div>
+     
+  <div class="input-field">
+    <select name="city">
+      <option value="" disabled selected>State</option>
+      <option value="1">State 1</option>
+      <option value="2">State 2</option>
+      <option value="3">State 3</option>
+    </select>
+  </div>
+  <div class="input-field">
+    <select name="district">
+      <option value="" disabled selected>State</option>
+      <option value="1">State 1</option>
+      <option value="2">State 2</option>
+      <option value="3">State 3</option>
+    </select>
+  </div>
+  <div class="input-field">
+    <select name="state">
+      <option value="" disabled selected>State</option>
+      <option value="1">State 1</option>
+      <option value="2">State 2</option>
+      <option value="3">State 3</option>
+    </select>
+  </div>
+
+    <div class="input-field">
+    <select name="country">
+      <option value="" disabled selected>State</option>
+      <option value="1">State 1</option>
+      <option value="2">State 2</option>
+      <option value="3">State 3</option>
+    </select>
+  </div>
+
+ 
+       <div class="row">
+       <div class="input-field">
+          <input name="pin" type="text" class="validate">
+          <label for="last_name"><b>pin</b></label>
+        </div>
+      </div>
+
+      <div class="row">
+       <div class="input-field">
+          <input name="phonenumber" type="text" class="validate">
+          <label for="last_name"><b>Phonenumber</b></label>
+        </div>
+      </div>
+
+       <div class="row">
+       <div class="input-field">
+          <input name="email" type="text" class="validate">
+          <label for="last_name"><b>Email</b></label>
+        </div>
+      </div>
+
+
+       <div class="row">
+       <div class="input-field">
+          <input name="securitydeposit" type="text" class="validate">
+          <label for="last_name"><b>Security Deposit</b></label>
+        </div>
+      </div>
+        <div class="row">
+       <div class="input-field">
+          <input name="monthlyrent" type="text" class="validate">
+          <label for="last_name"><b>Monthly  Rent</b></label>
+        </div>
+      </div>
+
+        <div class="row">
+       <div class="input-field">
+          <input name="bedrent" type="text" class="validate">
+          <label for="last_name"><b>Bed  Rent</b></label>
+        </div>
+      </div>
+
+      <div class="row">
+       <div class="input-field">
+          <input name="bhkrent" type="text" class="validate">
+          <label for="last_name"><b>Bhk  Rent</b></label>
+        </div>
+      </div>
+     
+       <div class="input-field">
+    <select name="bed">
+      <option value="" disabled selected>Bed</option>
+      <option value="1">State 1</option>
+      <option value="2">State 2</option>
+      <option value="3">State 3</option>
+    </select>
+  </div>
+
+
+  <div class="input-field">
+    <select name="bhk">
+      <option value="" disabled selected>Bhk</option>
+      <option value="1">State 1</option>
+      <option value="2">State 2</option>
+      <option value="3">State 3</option>
+    </select>
+  </div>
+
+
+
+     <div class="row">
+       <div class="input-field">
+          <input name="availbed" type="text" class="validate">
+          <label for="last_name"><b>Available Bed</b></label>
+        </div>
+      </div>
+     
+      <div class="row">
+       <div class="input-field">
+          <input name="availbhk" type="text" class="validate">
+          <label for="last_name"><b>Available Bhk</b></label>
+        </div>
+      </div>
+     
+      
+      <div class="row">
+       <div class="input-field">
+          <input name="bookbed" type="text" class="validate">
+          <label for="last_name"><b>Booked Bed</b></label>
+        </div>
+      </div>
+     
+      
+      <div class="row">
+       <div class="input-field">
+          <input name="bookbhk" type="text" class="validate">
+          <label for="last_name"><b>Booked bhk</b></label>
+        </div>
+      </div>
+     
+      
+
+
+ <div class="input-field" required>
+    <select name="furnishtype">
+      <option value=""  disabled selected>Furnished Type</option>
+        
+                        
+                    <option value="Fully Furnished">Fully Furnished</option>
+                    <option value="Semi Furnished">Semi Furnished</option>
+                    <option value="Unfurnished">UnFurnished</option>
+                    
+                            </select>
+  </div>
+
+
+  <div class="input-field" required>
+    <select name="tenant">
+      <option value=""  disabled selected>Tenant type</option>
+        
+                        
+                    <option value="Girls">Girls</option>
+                    <option value="Boys">Boys</option>
+                    <option value="Family">Family</option>
+                    
+                            </select>
+  </div>
+
+
+
+  <div class="input-field" required>
+    <select name ="booking">
+      <option value=""  disabled selected>Booking type</option>
+        
+                        
+                    <option value="Shared Room">Shared Room</option>
+                    <option value="Private Room">Private Room</option>
+                    <option value="Entire House">Entire House</option>
+                    
+                            </select>
+  </div>
+
+
+  <div class="input-field" required>
+    <select name="housetype">
+      <option value=""  disabled selected>House type</option>
+        
+                        
+                    <option value="Apartment">Apartment</option>
+                    <option value="Independent House">Independent House</option>
+                    <option value="Villa">Villa</option>
+                    
+                            </select>
+  </div>
+
+
+  <div>
+
+ <label><h6><b>Distance</b></h6></label>
+
+    <p class="range-field">
+      <input type="range" id="test5" min="0" max="5" name="distance"/>
+
+    </p>
+</div>     
+
+
+ <div class="row">
+       <div class="input-field">
+          <input id="last_name" type="text" class="validate" name="lalitude">
+          <label><b>Latitude</b></label>
+        </div>
+      </div>
+       <div class="row">
+       <div class="input-field">
+          <input id="last_name" type="text" class="validate" name="longitude">
+          <label ><b>Longitude</b></label>
+        </div>
+      </div>
+ <div class="row">
+      <div class="input-field">
+          <input id="last_name" type="text" class="validate" name="sqft">
+          <label ><b>Squarefeet</b></label>
+        </div>
+      </div>
+ <div class="row">
+      <div class="input-field">
+          <input id="last_name" type="text" class="validate" name="tnf">
+          <label ><b>Totalfloors</b></label>
+        </div>
+      </div>
+       <div class="row">
+    <div class="input-field">
+          <input id="last_name" type="text" class="validate" name="like">
+          <label ><b>Likecount</b></label>
+        </div>
+      </div>
+       <div class="row">
+        <div class="input-field">
+          <input id="last_name" type="text" class="validate" name="rate">
+          <label ><b>Rating</b></label>
+        </div>
+      </div>
+
+  <div class="input-field" required>
+    <select name ="facing">
+      <option value=""  disabled selected>Facing</option>
+        
+                        
+                    <option value="East">East</option>
+                    <option value="West">West</option>
+                    <option value="North">North</option>
+                    <option value="South">South</option>
+                    
+       </select>
+  </div>
+
+    <div class="input-field" required>
+    <select name ="parking">
+      <option value=""  disabled selected>Parking</option>
+        
+                        
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  
+                    
+                            </select>
+  </div>
+
+
+  <div class="row">
+
+
+ 
+  <label ><h6><b>Amenties</b></h6></label>
+  <br>
+  <p>
+       <input type="checkbox" class="filled-in" id="Amen1" value="Air Conditioning" name="groupamen"  />
+      <label for="Amen1">Air Conditioning</label>
+    </p>
+
+    <p>
+        <input type="checkbox" class="filled-in" id="Amen2" vlaue="Swimming Pool" name="groupamen"  />
+      <label for="Amen2">Swimming Pool</label>
+    </p>
+    <p>
+      <input type="checkbox" class="filled-in" id="Amen3" value="Central Heating" name="groupamen" />
+      <label for="Amen3">Central Heating</label>
+    </p>
+    <p>
+      <input type="checkbox" class="filled-in" id="Amen4" value="Laundry Room" name="groupamen"/>
+      <label for="Amen4">Laundry Room</label>
+    </p>
+    
+    <p>
+      <input type="checkbox" class="filled-in" id="Amen5" value="Gym" name="groupamen" />
+      <label for="Amen5">Gym</label>
+    </p>
+    <p>
+      <input type="checkbox" class="filled-in" id="Amen6" value="Alarm" name="groupamen"/>
+      <label for="Amen6">Alarm</label>
+    </p>
+  
+                
+
+ </div>
+
+<div class="row">
+ 
+      <div class="row">
+        <div class="input-field col s12">
+         
+          <textarea id="icon_prefix2" class="materialize-textarea" name="listing"></textarea>
+          <label for="icon_prefix2"><b>Listing</b></label>
+        </div>
+      </div>
+ 
+  </div>
+        
+
+<div class="row">
+   
+      <div class="row">
+        <div class="input-field col s12">
+         
+          <textarea id="icon_prefix2" class="materialize-textarea" name="description"></textarea>
+          <label for="icon_prefix2"><b>Description</b></label>
+        </div>
+      </div>
+ 
+  </div>
+
+
+
+   
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file"  name="uploadfile0" >
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+      <div class="file-field input-field">
+      <div class="btn">
+        <span>File1</span>
+        <input type="file"  name="uploadfile1" >
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file"  name="uploadfile2" >
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+      <div class="file-field input-field">
+      <div class="btn">
+        <span>File1</span>
+        <input type="file"  name="uploadfile3" >
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+
+   
+    <div class="file-field input-field">
+      <div class="btn">
+        <span>File</span>
+        <input type="file"  name="uploadfile4" >
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+      <div class="file-field input-field">
+      <div class="btn">
+        <span>File1</span>
+        <input type="file"  name="uploadfile5" >
+      </div>
+      <div class="file-path-wrapper">
+        <input class="file-path validate" type="text">
+      </div>
+    </div>
+
+
+
+<!-- <a class="waves-effect waves-light btn">Submit</a> -->
+  <button class="btn waves-effect waves-light" style ="margin-left:5%;" type="submit"  >upload
+ 
+  </button> 
+
+<br>
+   </form>
+
+</div>
+</div>
+
+  
+
+
+
+
+<!-- Footer / End -->
+
+
+<!-- Back To Top Button -->
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+  <script>
+    $(document).ready(function() {
+    $('select').material_select();
+  });
+        </script>
+
+
+
+<!-- Wrapper / End -->
+
+
+</body>
+</html>

@@ -2,6 +2,7 @@ package Services
 
 import (
 	Db "Rentmatics_App/Common/DB/Mysql"
+	Model "Rentmatics_App/Model"
 	"encoding/json"
 	"net/http"
 )
@@ -41,5 +42,17 @@ func GetsingleOwner(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
 
 	w.Write(Senddata)
+
+}
+
+//Get Single Owner Details
+func Ownertoexecutive(w http.ResponseWriter, r *http.Request) {
+
+	var GetOwnerExecutive Model.OwnertoExecutive
+	err := json.NewDecoder(r.Body).Decode(&GetOwnerExecutive)
+	if err != nil {
+		log.Error("Error - Owner single", err)
+	}
+	Db.GetOwnerExecutive_Db(GetOwnerExecutive)
 
 }

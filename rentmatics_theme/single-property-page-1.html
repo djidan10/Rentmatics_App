@@ -174,8 +174,7 @@ $(document).ready(function(){
        }  
  loginid  = Loginid
     
-        
-           alert(homeid);
+
          
             var Home={
                    "Id" :parseInt(homeid)
@@ -286,19 +285,19 @@ var image =
 "<div class='col-md-12'>"+
 "<div class='property-slider default'>"+
 "<a href='"+searchout.Home_images[0].Picture_url+"' data-background-image='"+searchout.Home_images[0].Picture_url+"' class='item mfp-gallery'></a>"+
+"<a href='"+searchout.Home_images[1].Picture_url+"' data-background-image='"+searchout.Home_images[1].Picture_url+"' class='item mfp-gallery'></a>"+
+"<a href='"+searchout.Home_images[0].Picture_url+"' data-background-image='"+searchout.Home_images[2].Picture_url+"' class='item mfp-gallery'></a>"+
+"<a href='"+searchout.Home_images[1].Picture_url+"' data-background-image='"+searchout.Home_images[0].Picture_url+"' class='item mfp-gallery'></a>"+
 "<a href='"+searchout.Home_images[0].Picture_url+"' data-background-image='"+searchout.Home_images[0].Picture_url+"' class='item mfp-gallery'></a>"+
-"<a href='"+searchout.Home_images[0].Picture_url+"' data-background-image='"+searchout.Home_images[0].Picture_url+"' class='item mfp-gallery'></a>"+
-"<a href='"+searchout.Home_images[0].Picture_url+"' data-background-image='"+searchout.Home_images[0].Picture_url+"' class='item mfp-gallery'></a>"+
-"<a href='"+searchout.Home_images[0].Picture_url+"' data-background-image='"+searchout.Home_images[0].Picture_url+"' class='item mfp-gallery'></a>"+
-"<a href='"+searchout.Home_images[0].Picture_url+"' data-background-image='"+searchout.Home_images[0].Picture_url+"' class='item mfp-gallery'></a>"+
+"<a href='"+searchout.Home_images[1].Picture_url+"' data-background-image='"+searchout.Home_images[0].Picture_url+"' class='item mfp-gallery'></a>"+
 "</div>"+
 "<div class='property-slider-nav'>"+
 "<div class='item'><img src='"+searchout.Home_images[0].Picture_url+"' alt=''></div>"+
+"<div class='item'><img src='"+searchout.Home_images[1].Picture_url+"' alt=''></div>"+
 "<div class='item'><img src='"+searchout.Home_images[0].Picture_url+"' alt=''></div>"+
+"<div class='item'><img src='"+searchout.Home_images[1].Picture_url+"' alt=''></div>"+
 "<div class='item'><img src='"+searchout.Home_images[0].Picture_url+"' alt=''></div>"+
-"<div class='item'><img src='"+searchout.Home_images[0].Picture_url+"' alt=''></div>"+
-"<div class='item'><img src='"+searchout.Home_images[0].Picture_url+"' alt=''></div>"+
-"<div class='item'><img src='"+searchout.Home_images[0].Picture_url+"' alt=''></div>"+
+"<div class='item'><img src='"+searchout.Home_images[1].Picture_url+"' alt=''></div>"+
 "</div>"+
 "</div"+
 "</div>";
@@ -348,7 +347,7 @@ document.getElementById("imageslider").innerHTML=image;
          
              var authkey="150219AJLZP0ww58ff3960";
          var sendotp=  "http://api.msg91.com/api/sendotp.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&message=Your%20otp%20is%20"+dynamicotp+"&sender=Rentmatics&otp="+dynamicotp;
-         console.log(sendotp)
+        
          
 
 
@@ -362,8 +361,7 @@ document.getElementById("imageslider").innerHTML=image;
          
             
               otp = JSON.parse(responsee);
-               alert(otp)
-              console.log(otp)
+              
             
           }
          
@@ -374,8 +372,7 @@ document.getElementById("imageslider").innerHTML=image;
 
 
          function ScheduleVisit(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime){
-           alert("inside schedule Visit");
-           alert(homeid);
+         
             var schedule ={
               
                "Schedulehomeid":parseInt(homeid),
@@ -418,7 +415,7 @@ document.getElementById("imageslider").innerHTML=image;
            success: function(responsee){
             
               Scheuleresponse = JSON.parse(responsee);
-              alert("Succesfully updated")
+             
               console.log(Scheuleresponse)
               if (Scheuleresponse.type == "success"){
                   $('#myModal').modal('hide');
@@ -429,8 +426,7 @@ document.getElementById("imageslider").innerHTML=image;
          
               }
               else{
-                alert("Invalidotp")
-                  $('#myModal').modal('show');
+                                  $('#myModal').modal('show');
 
                document.getElementById("invalidotp").style.visibility = "visible"; 
          
@@ -442,7 +438,7 @@ document.getElementById("imageslider").innerHTML=image;
          }
 
         function resend(){
-          alert("resend");
+     
            var dynamicotp=parseInt(Math.random() * (2999 - 2000) + 2000);
              //Schedulephone="7418924864"
          
@@ -454,12 +450,12 @@ document.getElementById("imageslider").innerHTML=image;
               
          
            success: function(responsee){
-            alert("inside sucess resend");
+            
 
             
               otp = JSON.parse(responsee);
-               alert(otp)
-              console.log(otp)
+               
+              
              }
          
          });
@@ -475,7 +471,7 @@ document.getElementById("imageslider").innerHTML=image;
          //Book The House
          
              function booknow(){
-              alert(homeid);
+            
          
                var Bookname = document.getElementById('bookuser').value;
                var Bookphone = document.getElementById('bookphone').value;
@@ -534,7 +530,7 @@ document.getElementById("imageslider").innerHTML=image;
 
          
         function logout(){ 
-          alert("logout");
+         
        
          
           $.ajax({
@@ -610,7 +606,7 @@ document.getElementById("imageslider").innerHTML=image;
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
-           <li><a javascript:Payalert()>Pay Myrent</a></li>
+           <li><a href="javascript:Payalert()">Pay Myrent</a></li>
           </ul>
       </nav>
       <div class="clearfix"></div>
@@ -653,7 +649,7 @@ document.getElementById("imageslider").innerHTML=image;
         
         <a href="istings-half-map-grid-compact.html" class="back-to-listings"></a>
         <div class="property-title col-md-12">
-          <h2 id="Housename" style="margin-right:80%"><span class="property-badge"></span></h2>
+          <h4 id="Housename" style="margin-right:80%;font-size:20px;"><span class="property-badge"></span></h4>
           <span>
             <a href="#location" class="listing-address">
               <i class="fa fa-map-marker">   <span id="Address"></span> <span id="Address1"></span></i>
@@ -708,10 +704,11 @@ document.getElementById("imageslider").innerHTML=image;
           <sapn id="Housename1" ></sapn><br><br>
 
 
-          <i class="im im-icon-Door" aria-hidden="true"  style=" font-size: 1.5em;margin-left:15px;"></i><b style="margin-left:15px;">BHK</b><br>
-            <span style="margin-left:50px;" id="bhk1"></span><br> <br>
+          <i class="im im-icon-Door" aria-hidden="true"  style=" font-size: 1.5em;margin-left:15px;"></i>
+          <b style="margin-left:15px;">BHK</b><br>
+            <span style="margin-left:52px;" id="bhk1"></span><br> <br>
     
-          <i class="im im-icon-Address-Book" aria-hidden="true"  style=" font-size: 1.5em;margin-left:15px;"></i><b style="margin-left:15px;">Address</b><br>
+          <i class="im im-icon-Address-Book" aria-hidden="true"  style=" font-size: 1.5em;margin-left:17px;"></i><b style="margin-left:17px;">Address</b><br>
              
           <span style="margin-left:50px;" id="city2"></span><span>,</span><span id="District"> Bangalore</span><br><br>
 
@@ -818,7 +815,7 @@ document.getElementById("imageslider").innerHTML=image;
 <div class="col-md-6" style="border-style: solid;box-shadow: 10px 10px 5px #888888;" >
 
         <!-- Blog Post -->
-        <div class="blog-post" style="background-color:#70c39e">
+        <div class="blog-post" style="background-color:#93178d">
           
           <!-- Img -->
         
@@ -1013,21 +1010,6 @@ document.getElementById("imageslider").innerHTML=image;
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- Footer
 ================================================== -->
 <div id="footer" >
@@ -1053,7 +1035,7 @@ document.getElementById("imageslider").innerHTML=image;
         <ul class="footer-links">
           <!-- <li><a href="#">FAQ</a></li> -->
           <li><a href="blog.html">Blog</a></li>
-          <li><a href="how_it_works.html">How It Works</a></li>
+         <li><a href="howitwork.html">How It Works </a></li>
           <li><a href="tandc.html">Terms and condition</a></li>
           
         </ul>

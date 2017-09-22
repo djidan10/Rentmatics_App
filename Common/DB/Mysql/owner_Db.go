@@ -79,3 +79,13 @@ func GetSingleOwner_Db(Ownerid int) (Data Model.Owner) {
 	}
 	return
 }
+
+//func Inserthome_DB(Homedata Model.HomeInsert, Imageurl []string) {
+func GetOwnerExecutive_Db(Homedata Model.OwnertoExecutive) {
+
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into ownertoexecutive (Name,Email,phone,Tenanttype,Address) values (?,?,?,?,?)", Homedata.Name, Homedata.Email, Homedata.Phone, Homedata.Tenanttype, Homedata.Address)
+	if err != nil {
+		log.Error("Error -DB: Executive insert", rows)
+	}
+
+}

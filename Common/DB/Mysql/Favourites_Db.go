@@ -57,10 +57,7 @@ func GetFavourites(Favuser int) (Temprentarray []Model.RentSendFav) {
 			&Data.Avail_room,
 			&Data.Booked_bed,
 			&Data.Booked_bhk,
-			&Data.Booked_room,
-			&Data.Booked_home,
-			&Data.Booked_Allbeds,
-			&Data.Booked_AllRooms,
+
 			&Data.Distance,
 			&Data.Furnish_type,
 			&Data.Secutity_deposit,
