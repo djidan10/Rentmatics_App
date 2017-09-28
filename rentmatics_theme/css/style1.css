@@ -1640,17 +1640,7 @@ input:checked + .swtich-slider:before {
     margin: 0;
     line-height: 64px;
 }
-.jumbo-banner-section{
-    background-image: url('../img/banner1.jpg');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 480px;
-    padding-top: 60px;
-    padding-bottom: 60px;
-    display: table;
-    width: 100%;
-}
+/*      */
 .inrv{
     display: table-cell;
     width: 100%;

@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Findeo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+<link rel="stylesheet" href="css/style1.css"> 
+ <!-- Google font Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
+    <!-- Fontawesome Icons -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+
+ <link href="css/bootstrap.min.css" rel="stylesheet">
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<style>
+	.jumbo-banner-section{
+    background-image: url('images/banner1.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 480px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: table;
+    width: 100%;
+}
+</style>
+<script>
+//Logout the User
+function logout() {
+   
+
+     $.ajax({
+        type: "GET",
+        url: "http://176.111.105.86:8083/Logout",
+
+        success: function(responsee) {
+             document.getElementById("loginhiden").style.display = "inline";
+                document.getElementById("account").style.display = "none";
+                location.reload(true);
+
+    
+        }
+
+    });
+
+}
+function Payalert(){
+	alert("PayMyRent is coming Soon!Please wait")
+
+}
+
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.visibility = "visible";
+                localStorage.setItem("LoginID", cooki);
+    }
+});
+
+
+function Notification(){
+  alert("inside notification")
+    var Availname =  document.getElementById('getname1').value;
+    var AvailEmail =  document.getElementById('getemail1').value
+    var Avaiphone =  document.getElementById('getphone1').value;
+    var Availtenant =  document.getElementById('gettenant1').value;
+    var Availiabity =  document.getElementById('availaibity1').value;
+    var Availcity =  document.getElementById('getcity1').value;
+     
+console.log("Availabity");
+console.log(Availname)
+    var s ={
+      "Notifyname":Availname,
+      "NotifyEmail":AvailEmail,
+      "Notifyphone":Avaiphone,
+      "Notifytenenattype":Availtenant,
+      "Notifyavailibity":Availiabity,
+      "NotifyCity":Availcity,
+     };
+    
+$.ajax({
+      type: "POST",
+      url: "http://176.111.105.86:8083/Notifyme",
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(s),
+
+  success: function(responsee){
+    alert("responsee"+responsee)
+     window.history.back()
+    
+
+   
+ 
+ }
+
+});
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+
+<!-- Header Container
+================================================== -->
+
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth">
+
+  <!-- Topbar -->
+  <div id="top-bar">
+    <div class="container">
+      <!-- Left Side Content -->
+      <div class="left-side">
+        <ul class="top-bar-menu">
+            <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+          <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
+        </ul>
+      </div>
+      <div class="right-side">
+        <ul class="social-icons">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="header">
+    <div class="container">
+      <div class="left-side">
+         <div id="logo">
+          <a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+         </div>
+         <!-- Mobile Navigation -->
+        <div class="menu-responsive">
+          <i class="fa fa-reorder menu-trigger"></i>
+        </div>
+         <!-- Main Navigation -->
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="howitwork.html">How It Works </a>
+              <ul>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+             </ul>
+            </li>
+           <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+           <li><a href="javascript:Payalert()">Pay Myrent</a></li>
+          </ul>
+      </nav>
+      <div class="clearfix"></div>
+      </div>
+      <div class="right-side">
+
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+          <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
+           <li id="loginhiden">
+          <a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
+          </li>
+           <li style="display:none" id="account"><a href="#">My Account</a>
+            <ul>
+                    <li><a href="my-profile.html">My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                   <li><a href="javascript:logout()">Logout</a></li>
+                   
+                  </ul> 
+                </li> 
+          </ul>
+       </nav>
+    </div>
+  </div>
+</div>
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+
+<!-- Titlebar
+================================================== -->
+<!-- Jumbo banner
+    ===================================-->
+   <!-- Jumbo banner
+    ===================================-->
+    <div class="jumbo-banner-section">
+        <div class="inrv">
+            <div class="container txtr">
+                <div class="rtbox">
+                    <div class="row">
+                      <div class="col-md-4">
+                            <b style="font-size:25px;">Notify When me Available</b>
+                            
+ 
+      <!--  <div class="testimonial-box">
+          <div class="testimonial"> -->
+        <!-- Icon Box -->
+        <div class="icon-box-1 alternative">
+
+          <div style="margin-right:70px;">
+            <img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/save.png">
+          </div>
+
+          <h3 style="margin-right:70px;"><b>Find a Space</b></h3>
+          <p style="margin-right:70px;color:white">Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a mall to do some shopping?</p>
+        </div>
+      </div>
+<!-- 
+    </div>
+          </div>    
+        -->
+                        
+                        <div class="col-md-8 txtr" >
+                            <div class="form-container-rt">
+
+
+                            <form action="" method="post" onsubmit="Notification();return false;">
+                           <div class="form-group">
+                                        <input type="text" placeholder="Name" class="rpfi" id="getname1" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="email" placeholder="Email" class="rpfi" id="getemail1" required>
+                                    </div>
+                                     <div class="flx form-group">
+          <div class="flx selUni mr15">
+            <select class="rpfs" >
+              <option>+91</option>
+              <option>+92</option>
+              <option>+93</option>
+            </select>
+            <span class="selChev"><i class="fa fa-chevron-down"></i></span>
+          </div>
+          <div class="flx1">
+            <input type="text" placeholder="Phone" class="rpfi" id="getphone1" pattern="^(0|[1-9][0-9]*)$" required>  
+          </div>
+        </div>
+                                    <div class="form-group">
+                <div class="flx selUni">
+                  <select class="rpfs" id="gettenant1" required>
+                    <option >Need For</option >
+                    <option value="Singles">Singles</option>
+                    <option value="bachelors">Group of Singles</option>
+                    <option value="Family">Family</option>
+                  </select>
+                  <span class="selChev"><i class="fa fa-chevron-down"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="flx selUni">
+                  <select class="rpfs" id="availaibity1" required>
+                    <option  value="Need Immediately" >Need Immediately</option>
+                    <option value="Next Week">Next Week</option>
+                    <option value="15th of this month">15th of this month</option>
+                    <option value="1st of next month">1st of next month</option>
+                    <option value="15th of next month">15th of next month</option>
+                    <option value="Within a month">Within a month</option>
+                    <option value="In 2 months">In 2 months</option>
+                    <option value="No time in mind">No time in mind</option>
+                  </select>
+                  <span class="selChev"><i class="fa fa-chevron-down"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="flx selUni">
+                  <select class="rpfs" id="getcity1" required>
+                    <option >Select City</option>
+                    <option value="Sarjapur Road"></option>
+                    <option value="Whitefield">Whitefield</option>
+                    <option value="Bannerghatta Road">Bannerghatta Road</option>
+                    <option value="Electronic City">Electronic City</option>
+                    <option value="HSR Layout">HSR Layout</option>
+                    <option value="Jayanagar">Jayanagar</option>
+                    <option value="JP Nagar">JP Nagar</option>
+                    <option value="Hosur Road">Hosur Road</option>
+                  </select>
+                  <span class="selChev"><i class="fa fa-chevron-down"></i></span>
+                </div>
+              </div>
+               <div>
+          <button type="submit" class="btn btn-lg btn-block btn-notify" >Notify me when available</button>
+        </div>
+ </form>
+       
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+            </div>
+        </div>
+    </div>
+
+	
+
+
+<!-- Content
+================================================== -->
+<div class="container">
+			
+<!-- Content
+================================================== -->
+<!-- Fullwidth Section -->
+<section class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50" data-background-color="#ffffff">
+
+	<!-- Content -->
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-4">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					<div class="icon-container">
+						<i class="im im-icon-Checked-User"></i>
+					</div>
+
+					<h3>VERIFIED TENANTS</h3>
+					<p>Through strict tenant screening process we ensure your property is in the right hands.</p>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					<div class="icon-container">
+						<i class="im im-icon-Cloud-Computer"></i>
+					</div>
+
+					<h3>DAMAGES COVERED</h3>
+					<p>Get peace of mind by availing our house insurance service for any unforeseen damages.</p>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					<div class="icon-container">
+						<i class="im im-icon-Idea"></i>
+					</div>
+
+					<h3>HASSLE FREE RENTING</h3>
+					<p>No more managing multiple calls and visits to property. We do all that for you.</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
+</section>
+<!-- Fullwidth Section / End -->
+
+
+</div>
+<!-- Footer
+<!-- Footer
+================================================== -->
+<div class="margin-top-55"></div>
+
+
+<!-- Footer
+================================================== -->
+<div id="footer"  style="background-color:#484848;color:white" >
+  <!-- Main -->
+  <div class="container" >
+    <div class="row">
+      <div class="col-md-5 col-sm-6">
+        <img class="footer-logo" src="images/rm_logo.png"  alt="">
+        <br><br>
+        <p style="font-family:Hanken;font-size:20px;">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 ">
+        <h4  style="color:white;font-family:Hanken;font-size:21px">Helpful Links</h4>
+        <ul class="footer-links">
+           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Login/Signup</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="about.html"  style="color:white">About</a></li>
+         
+         
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="myprivacy.html"  style="color:white">Privacy Policy</a></li>
+        </ul>
+
+        <ul class="footer-links">
+          <!-- <li><a href="#">FAQ</a></li> -->
+          <li  style="color:white;font-family:Hanken;font-size:17px"> <a href="blog.html"  style="color:white">Blog</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="howitwork.html"  style="color:white">How It Works</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="tandc.html"  style="color:white">Terms and condition</a></li>
+          
+        </ul>
+        <div class="clearfix"></div>
+      </div>    
+
+      <div class="col-md-3  col-sm-12">
+        <h4  style="color:white;font-family:Hanken;font-size:21px">Contact Us</h4>
+        <div class="text-widget">
+          <span  style="color:white;font-family:Hanken;font-size:17px">12345 Little Lonsdale St, Melbourne</span> <br>
+          Phone: <span  style="color:white;font-family:Hanken;font-size:17px">Tel: +91-9884379333/9811448697 </span><br>
+          E-Mail:<span  style="color:white;font-family:Hanken;font-size:17px"> <a href="#" style="font-family:Hanken;font-size:17px;">Rentmatics@gmail.com</a> </span><br>
+        </div>
+
+        <ul class="social-icons margin-top-20">
+          <li ><a class="facebook" href="https://www.facebook.com/Rentmatics/" ><i class="icon-facebook" ></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+        </ul>
+
+      </div>
+
+    </div>
+    
+    <!-- Copyright -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="copyrights" style="color:white">© 2016 Rentmatics. All Rights Reserved.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer / End -->
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+ <script src="scripts/bootstrap.min.js"></script>  
+
+
+
+
+
+
+</div>
+<!-- Wrapper / End -->
+
+
+</body>
+</html>

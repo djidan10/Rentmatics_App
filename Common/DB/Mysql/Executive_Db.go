@@ -116,8 +116,8 @@ func GetIndivualExecutive_Db(executiveid int) (Data Model.Executivedetails) {
 	return
 }
 
-//func Inserthome_DB(Homedata Model.HomeInsert, Imageurl []string) {
-func Inserthome_DB(Homedata Model.HomeInsert) {
+func Inserthome_DB(Homedata Model.HomeInsert, Imageurl []string) {
+
 	fmt.Println("inside execitive")
 	Executiveid, _ := strconv.Atoi(Homedata.ExecutiveID)
 	Ownerid, _ := strconv.Atoi(Homedata.Ownerid)
@@ -132,20 +132,21 @@ func Inserthome_DB(Homedata Model.HomeInsert) {
 	Bedrent, _ := strconv.ParseFloat(Homedata.Bed_rent, 32)
 	Securitydeposit, _ := strconv.ParseFloat(Homedata.Secutity_deposit, 32)
 
-	rows, err := OpenConnection["Rentmatics"].Exec("insert into home (housename,executiveid,ownerid,adress1,adress2,city,district,state,country,pin,phonenumber,month_rent,bed_rent,bhk_rent,tenant_type,booking_type,house_type,bhk,bed,Avail_bed,Avail_room,Booked_bed,Booked_bhk,distance,furnish_type,secutity_deposit,listing,Amenities,Description,latitude,longitude,Squarefeet,Likecount,Rating,Totalfloors,Facing,Parking) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Homedata.Housename, Homedata.Houseownername, Executiveid, Ownerid, Homedata.Adress1, Homedata.Adress2, Homedata.City, Homedata.District, Homedata.State, Homedata.Country, Homedata.Pin, Homedata.Phone_number, Monthlyrent, Bedrent, Bhkrent, Homedata.Tenant_type, Homedata.Booking_type, Homedata.House_type, Bhk, Bed, Availbed, Availroom, Bookbed, Bookbhk, Homedata.Distance, Homedata.Furnish_type, Securitydeposit, Homedata.Listing, Homedata.Amenities, Homedata.Description, Homedata.Latitude, Homedata.Longitude, Homedata.Squarefeet, Homedata.Likecount, Homedata.Rating, Homedata.Totalfloors, Homedata.Facing, Homedata.Parking)
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into home (housename,executiveid,ownerid,adress1,adress2,city,district,state,country,pin,phonenumber,month_rent,bed_rent,bhk_rent,tenant_type,booking_type,house_type,bhk,bed,Avail_bed,Avail_room,Booked_bed,Booked_bhk,distance,furnish_type,secutity_deposit,listing,Amenities,Description,latitude,longitude,Squarefeet,Totalfloors,Facing,Parking) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Homedata.Housename, Executiveid, Ownerid, Homedata.Adress1, Homedata.Adress2, Homedata.City, Homedata.District, Homedata.State, Homedata.Country, Homedata.Pin, Homedata.Phone_number, Monthlyrent, Bedrent, Bhkrent, Homedata.Tenant_type, Homedata.Booking_type, Homedata.House_type, Bhk, Bed, Availbed, Availroom, Bookbed, Bookbhk, Homedata.Distance, Homedata.Furnish_type, Securitydeposit, Homedata.Listing, Homedata.Amenities, Homedata.Description, Homedata.Latitude, Homedata.Longitude, Homedata.Squarefeet, Homedata.Totalfloors, Homedata.Facing, Homedata.Parking)
+
 	if err != nil {
-		log.Error("Error -DB: Executive insert", rows)
+		log.Error("Error -DB: Executive insert", err)
 	}
 
-	//	var pictureurl Model.Home_images
-	//	pictureurl.Home_id, _ = rows.LastInsertId()
+	var pictureurl Model.Home_images
+	pictureurl.Home_id, _ = rows.LastInsertId()
 
-	//	for _, pictureurl.Picture_url = range Imageurl {
-	//		rows, err := OpenConnection["Rentmatics"].Exec("insert into pictures_url (home_id,image) values (?,?)", pictureurl.Home_id, pictureurl.Picture_url)
-	//		if err != nil {
-	//			log.Error("Error -DB: Executive insert picture", err, rows)
-	//		}
-	//	}
+	for _, pictureurl.Picture_url = range Imageurl {
+		rows, err := OpenConnection["Rentmatics"].Exec("insert into pictures_url (home_id,image) values (?,?)", pictureurl.Home_id, pictureurl.Picture_url)
+		if err != nil {
+			log.Error("Error -DB: Executive insert picture", err, rows)
+		}
+	}
 
 }
 

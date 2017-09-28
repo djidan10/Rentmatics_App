@@ -46,6 +46,43 @@ func GetHomeDetilswithFav(Cityid string, Login string) []Model.RentSend {
 	return ResultFav
 }
 
+func GetAllHomeDetilswithFav(Login string) []Model.RentSend {
+	var homeidd []int
+	var ResultFav []Model.RentSend
+
+	rows, err := OpenConnection["Rentmatics"].Query("Select homeid from wishlist where loginid=?", Login)
+	fmt.Println(err)
+
+	for rows.Next() {
+		var homeid int
+		rows.Scan(
+			&homeid,
+		)
+
+		homeidd = append(homeidd, homeid)
+		fmt.Println("***********homeidd", homeidd)
+
+	}
+
+	ResultFav = GetallhomedetailsDB()
+
+	for k, v := range ResultFav {
+
+		for _, v1 := range homeidd {
+			if v.RentFullStruct.Id == v1 {
+
+				//v.RentFullStruct.Liked = true
+				ResultFav[k].RentFullStruct.Liked = true
+
+			}
+
+			fmt.Println("inside if ", v1, v.RentFullStruct.Id)
+		}
+
+	}
+	return ResultFav
+}
+
 //Get Home details based on Address
 func GetHomeDetils_DB(City string) (Temprentarray []Model.RentSend) {
 
@@ -93,8 +130,6 @@ func GetHomeDetils_DB(City string) (Temprentarray []Model.RentSend) {
 			&Data.Latitude,
 			&Data.Longitude,
 			&Data.Squarefeet,
-			&Data.Likecount,
-			&Data.Rating,
 			&Data.Totalfloors,
 			&Data.Facing,
 			&Data.Parking,
@@ -172,8 +207,6 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 			&Data.Latitude,
 			&Data.Longitude,
 			&Data.Squarefeet,
-			&Data.Likecount,
-			&Data.Rating,
 			&Data.Totalfloors,
 			&Data.Facing,
 			&Data.Parking,
@@ -249,8 +282,6 @@ func GetSinglehome_DbFav(homeid int, Login string) (Data1 Model.Home_single) {
 			&Data.Latitude,
 			&Data.Longitude,
 			&Data.Squarefeet,
-			&Data.Likecount,
-			&Data.Rating,
 			&Data.Totalfloors,
 			&Data.Facing,
 			&Data.Parking,
@@ -384,8 +415,6 @@ func GetFilter_Db(Filt Model.Filter) (Temprentarray []Model.RentSend) {
 			&Data.Latitude,
 			&Data.Longitude,
 			&Data.Squarefeet,
-			&Data.Likecount,
-			&Data.Rating,
 			&Data.Totalfloors,
 			&Data.Facing,
 			&Data.Parking,
@@ -460,8 +489,6 @@ func GetallhomedetailsDB() (Temprentarray []Model.RentSend) {
 			&Data.Latitude,
 			&Data.Longitude,
 			&Data.Squarefeet,
-			&Data.Likecount,
-			&Data.Rating,
 			&Data.Totalfloors,
 			&Data.Facing,
 			&Data.Parking,
@@ -543,8 +570,6 @@ func GetHomeDetils_DBwithOwnerid(Ownerid int) (Temprentarray []Model.RentSend) {
 			&Data.Latitude,
 			&Data.Longitude,
 			&Data.Squarefeet,
-			&Data.Likecount,
-			&Data.Rating,
 			&Data.Totalfloors,
 			&Data.Facing,
 			&Data.Parking,
@@ -626,8 +651,6 @@ func GetHomeDetils_DBwithExecutiveid(Executiveid int) (Temprentarray []Model.Ren
 			&Data.Latitude,
 			&Data.Longitude,
 			&Data.Squarefeet,
-			&Data.Likecount,
-			&Data.Rating,
 			&Data.Totalfloors,
 			&Data.Facing,
 			&Data.Parking,

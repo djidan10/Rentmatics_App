@@ -26,3 +26,14 @@ type Getlogin struct {
 	Loginid  string
 	Password string
 }
+
+type Changepass struct {
+	Loginid     string
+	OldPassword string
+	Newpassword string
+}
+
+type Subscribeuser struct {
+	Sub_City  string
+	Sub_Email string
+}

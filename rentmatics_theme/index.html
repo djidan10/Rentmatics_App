@@ -25,6 +25,8 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
 
 <script>
+
+//Foe Login
 var loginidd="";
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
@@ -44,7 +46,7 @@ function logout() {
 
      $.ajax({
         type: "GET",
-        url: "http://localhost:8083/Logout",
+        url: "http://176.111.105.86:8083/Logout",
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";
@@ -57,14 +59,28 @@ function logout() {
     });
 
 }
+//Payment coming soon
 function Payalert(){
 	alert("PayMyRent is coming Soon!Please wait")
 
 }
+
+//Geting all home data
 window.onload = function () {
+
+	 var s={
+          
+          "Loginid":cooki
+
+        };
+
+
+
 	$.ajax({
-         type: "GET",
-         url: "http://localhost:8083/GetAllhomedetails",
+         type: "POST",
+         url: "http://176.111.105.86:8083/GetAllhomedetails",
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
          
       	success: function(responsee){
  			var searchout = JSON.parse(responsee);
@@ -72,7 +88,9 @@ window.onload = function () {
           }});
 }
 
-//Common function for s=Displaying Response
+
+
+//Common function for=Displaying Response
 function Getresponse(searchout){
 	
   var cardstring ="";
@@ -90,9 +108,9 @@ function Getresponse(searchout){
  for (i=0;i<searchout[j].RentFullimages.length;i++){
   	finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
    }
-  var ID = searchout[j].RentFullStruct.Id;
-  var Liked = searchout[j].RentFullStruct.Liked;
-  var mapview = searchout[j].Cityname;
+ var ID = searchout[j].RentFullStruct.Id;
+ var Liked = searchout[j].RentFullStruct.Liked;
+ var mapview = searchout[j].Cityname;
  var City =searchout[j].Cityname
  var Rent = "₹ "+searchout[j].RentFullStruct.Month_rent;
  var Housename = searchout[j].RentFullStruct.Housename;
@@ -131,9 +149,11 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
       console.log(src)
       
 
-}}
+}}		
 
-//For Slider
+
+
+// image  card all home
  function Getjavascript(Dyid,loginid){
  
   var rentimage = 
@@ -170,13 +190,9 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
  }
 </script>
 </head>
-
 <body>
-
 <!-- Wrapper -->
 <div id="wrapper">
-
-
 <!-- Header Container
 ================================================== -->
 <header id="header-container" class="header-style-2">
@@ -184,14 +200,11 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 	<!-- Header -->
 	<div id="header">
 		<div class="container">
-			
 			<!-- Left Side Content -->
 			<div class="left-side">
-				
 				<!-- Logo -->
 				<div id="logo" class="margin-top-10">
 					<a href="index.html"><img src="images/rm_logo.png" alt=""></a>
-
 					<!-- Logo for Sticky Header -->
 					<a href="index.html" class="sticky-logo"><img src="images/rm_logo.png" alt=""></a>
 				</div>
@@ -230,39 +243,19 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 			<div class="container">
 					<ul id="responsive">
 
-						<li><a class="current" href="index.html">Home</a>
-							
-						</li>
-
+						<li><a class="current" href="index.html">Home</a></li>
 						<li><a href="howitwork.html">How It Works </a>
 							<ul>
-								<li><a href="owner.html">Owners</a>
-									
-								</li>
-								<li><a href="tenats.html">Tenants</a>
-									
-								</li>
+								<li><a href="owner.html">Owners</a></li>
+								<li><a href="tenats.html">Tenants</a></li>
 							
 							</ul>
 						</li>
 
-                          <li><a href="listings-half-map-grid-compact.html">Find Room</a>
-					
-						</li>
-
-						<li><a href="javascript:Payalert()" >Pay MyRent</a>
-						
-						</li>
-
-                            
-
-
-							
-							
-						 <li><a href="#" style="visibility:hidden">Forrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</a></li>
-
-
-                   	<li style="display:none" id="account"><a href="#">My Account</a>
+                          <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+						  <li><a href="javascript:Payalert()" >Pay MyRent</a></li>
+						  <li><a href="#" style="visibility:hidden">Forrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</a></li>
+						  <li style="display:none" id="account"><a href="#">My Account</a>
 									<ul>
 										<li><a href="my-profile.html">My Profile</a></li>
 										<li><a href="my-bookmarks.html">My Wish List</a></li>
@@ -270,21 +263,10 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 									
 									</ul>	
 								</li>
-
-                     
-
-
-
-
-						<li id="loginhiden">
+								<li id="loginhiden">
 					<a href="login-register.html" class="sign-in"  ><i class="fa fa-user"></i> Log In / Register</a>
 				</li>
-				  
-					
-
-				<!-- Header Widget -->
-				
-			</div>
+		<!-- Header Widget --></div>
 		</nav>
 		<div class="clearfix"></div>
 		<!-- Main Navigation / End -->
@@ -304,17 +286,17 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 		<div class="row">
 			<div class="col-md-12">
 				
-				<div class="search-container" style="margin-left:13%">
+				<div class="search-container" style="margin-left:13%;height:600px">
 
 					<!-- Form -->
 					<h2 style="margin-left:14%">Find Your Best Rentspace</h2>
 
 					<!-- Row With Forms -->
-					<div class="row with-forms">	
+					<div class="row with-forms" >	
 
 						<!-- Property Type -->
 							<div class="col-md-2">
-							<select data-placeholder="Any Type" class="chosen-select-no-single" >
+							<select data-placeholder="Any Type" class="chosen-select-no-single" style="font-family:Hanken;font-size:20px;" >
 								<option>Boys</option>
 								<option>Girls</option>
 								<option>Family</option>
@@ -329,7 +311,8 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 						<!-- Main Search Input -->
 						<div class="col-md-7">
 							<div class="main-search-input">
-								 <input type="text"  placeholder="Search by locality, landmark or office location"  id="tags" >
+							
+								 <input type="text" style="font-family:Hanken;font-size:17px;"  placeholder="Search by locality, landmark or office location"  id="tags"  required="">
 								<button class="button" onclick="Gethomes()"><i class="fa fa-search"></i></button>
 							</div>
 						</div>
@@ -853,65 +836,68 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 </div>
 </div>
 
+<!-- Footer
+================================================== -->
+<div class="margin-top-55"></div>
+
 
 <!-- Footer
 ================================================== -->
-<div id="footer" >
-	<!-- Main -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-5 col-sm-6">
-				<img class="footer-logo" src="images/rm_logo.png" alt="">
-				<br><br>
-				<p>Simple and search for your property.</p>
-			</div>
+<div id="footer"  style="background-color:#484848;color:white" >
+  <!-- Main -->
+  <div class="container" >
+    <div class="row">
+      <div class="col-md-5 col-sm-6">
+        <img class="footer-logo" src="images/rm_logo.png"  alt="">
+        <br><br>
+        <p style="font-family:Hanken;font-size:20px;">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+      </div>
 
-			<div class="col-md-4 col-sm-6 ">
-				<h4>Helpful Links</h4>
-				<ul class="footer-links">
-					<li><a href="login-register.html">Login</a></li>
-					<li><a href="login-register.html">Sign Up</a></li>
-					<li><a href="my-profile.html">My Account</a></li>
-					
-					<li><a href="myprivacy.html">Privacy Policy</a></li>
-				</ul>
+      <div class="col-md-4 col-sm-6 ">
+        <h4  style="color:white;font-family:Hanken;font-size:21px">Helpful Links</h4>
+        <ul class="footer-links">
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Login/Signup</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="about.html"  style="color:white">About</a></li>
+         
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="myprivacy.html"  style="color:white">Privacy Policy</a></li>
+        </ul>
 
-				<ul class="footer-links">
-					<!-- <li><a href="#">FAQ</a></li> -->
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="how_it_works.html">How It Works</a></li>
-					<li><a href="tandc.html">Terms and condition</a></li>
-					
-				</ul>
-				<div class="clearfix"></div>
-			</div>		
+        <ul class="footer-links">
+          <!-- <li><a href="#">FAQ</a></li> -->
+          <li  style="color:white;font-family:Hanken;font-size:17px"> <a href="blog.html"  style="color:white">Blog</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="howitwork.html"  style="color:white">How It Works</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="tandc.html"  style="color:white">Terms and condition</a></li>
+          
+        </ul>
+        <div class="clearfix"></div>
+      </div>    
 
-			<div class="col-md-3  col-sm-12">
-				<h4>Contact Us</h4>
-				<div class="text-widget">
-					<span>12345 Little Lonsdale St, Melbourne</span> <br>
-					Phone: <span>Tel: +91-9884379333/9811448697 </span><br>
-					E-Mail:<span> <a href="#">Rentmatics@gmail.com</a> </span><br>
-				</div>
+      <div class="col-md-3  col-sm-12">
+        <h4  style="color:white;font-family:Hanken;font-size:21px">Contact Us</h4>
+        <div class="text-widget">
+          <span  style="color:white;font-family:Hanken;font-size:17px">12345 Little Lonsdale St, Melbourne</span> <br>
+          Phone: <span  style="color:white;font-family:Hanken;font-size:17px">Tel: +91-9884379333/9811448697 </span><br>
+          E-Mail:<span  style="color:white;font-family:Hanken;font-size:17px"> <a href="#" style="font-family:Hanken;font-size:17px;">Rentmatics@gmail.com</a> </span><br>
+        </div>
 
-				<ul class="social-icons margin-top-20">
-					<li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
-					<li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
-					<li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
-				</ul>
+        <ul class="social-icons margin-top-20">
+          <li ><a class="facebook" href="https://www.facebook.com/Rentmatics/" ><i class="icon-facebook" ></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+        </ul>
 
-			</div>
+      </div>
 
-		</div>
-		
-		<!-- Copyright -->
-		<div class="row">
-			<div class="col-md-12">
-				<div class="copyrights">© 2016 Rentmatics. All Rights Reserved.</div>
-			</div>
-		</div>
+    </div>
+    
+    <!-- Copyright -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="copyrights" style="color:white">© 2016 Rentmatics. All Rights Reserved.</div>
+      </div>
+    </div>
 
-	</div>
+  </div>
 
 </div>
 <!-- Footer / End -->

@@ -39,103 +39,107 @@
 <div class="blue-grey lighten-5" >
 
  <div class="row " style="margin-left:200px;">
-    <form class="col s8 row1 blue-grey lighten-5" action="http://localhost:8083/GetImage" method="POST" enctype="multipart/form-data"  name="myform" novalidate>
+    <form class="col s8 row1 blue-grey lighten-5" action="http://176.111.105.86:8083/GetImage" method="POST" enctype="multipart/form-data"  name="myform" novalidate>
     <h3>Insert Your Best Rentspace</h3>
      
      
       <div class="row">
        <div class="input-field">
-          <input name="housename" type="text" class="validate">
+          <input name="housename" type="text" class="validate" required>
           <label for="last_name1"><b>House owner Name</b></label>
         </div>
       </div>
 
       <div class="row">
        <div class="input-field">
-          <input name="executiveid" type="text" class="validate">
+          <input name="executiveid" type="text" class="validate" required>
           <label for="last_name1"><b>ExecutiveID</b></label>
         </div>
       </div>
 
       <div class="row">
        <div class="input-field">
-          <input name="ownerid" type="text" class="validate">
+          <input name="ownerid" type="text" class="validate" required>
           <label for="last_name1"><b>OwnerID</b></label>
         </div>
       </div>
         <div class="row">
        <div class="input-field">
-          <input name=houseownername type="text" class="validate">
+          <input name=houseownername type="text" class="validate" required>
           <label for="last_name"><b>House Name</b></label>
         </div>
       </div>
      
        <div class="row">
        <div class="input-field">
-          <input name="address1" type="text" class="validate">
+          <input name="address1" type="text" class="validate" required>
           <label for="last_name"><b>Address1</b></label>
         </div>
       </div>
      
        <div class="row">
        <div class="input-field">
-          <input name="address2" type="text" class="validate">
+          <input name="address2" type="text" class="validate" required>
           <label for="last_name"><b>Address2</b></label>
         </div>
       </div>
      
   <div class="input-field">
-    <select name="city">
-      <option value="" disabled selected>State</option>
-      <option value="1">State 1</option>
-      <option value="2">State 2</option>
-      <option value="3">State 3</option>
+    <select name="city" required>
+      <option value="" disabled selected>city</option>
+      <option value="Sarjapur Road"></option>
+                    <option value="Whitefield">Whitefield</option>
+                    <option value="Bannerghatta Road">Bannerghatta Road</option>
+                    <option value="Electronic City">Electronic City</option>
+                    <option value="HSR Layout">HSR Layout</option>
+                    <option value="Jayanagar">Jayanagar</option>
+                    <option value="JP Nagar">JP Nagar</option>
+                    <option value="Hosur Road">Hosur Road</option>
     </select>
   </div>
   <div class="input-field">
-    <select name="district">
-      <option value="" disabled selected>State</option>
-      <option value="1">State 1</option>
-      <option value="2">State 2</option>
-      <option value="3">State 3</option>
+    <select name="district" required>
+      <option value="" disabled selected>district</option>
+      <option value="Bangalore"> Bangalore</option>
+      <option value="Chennai">Chennai</option>
+     
     </select>
   </div>
-  <div class="input-field">
-    <select name="state">
+  <div class="input-field" >
+    <select name="state" required>
       <option value="" disabled selected>State</option>
-      <option value="1">State 1</option>
-      <option value="2">State 2</option>
-      <option value="3">State 3</option>
+      <option value="TamilNadu">TamilNadu</option>
+      <option value="Karnataka">Karnataka</option>
+     
     </select>
   </div>
 
     <div class="input-field">
-    <select name="country">
-      <option value="" disabled selected>State</option>
-      <option value="1">State 1</option>
-      <option value="2">State 2</option>
-      <option value="3">State 3</option>
+    <select name="country" required>
+      <option value="" disabled selected>country</option>
+      <option value="India">India</option>
+      
     </select>
   </div>
 
  
-       <div class="row">
+       <div class="row" >
        <div class="input-field">
-          <input name="pin" type="text" class="validate">
+          <input name="pin" type="text" class="validate" required>
           <label for="last_name"><b>pin</b></label>
         </div>
       </div>
 
       <div class="row">
        <div class="input-field">
-          <input name="phonenumber" type="text" class="validate">
+          <input name="phonenumber" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
           <label for="last_name"><b>Phonenumber</b></label>
         </div>
       </div>
 
        <div class="row">
        <div class="input-field">
-          <input name="email" type="text" class="validate">
+          <input name="email" type="text" class="validate" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required>
           <label for="last_name"><b>Email</b></label>
         </div>
       </div>
@@ -143,47 +147,53 @@
 
        <div class="row">
        <div class="input-field">
-          <input name="securitydeposit" type="text" class="validate">
+          <input name="securitydeposit" pattern="^(0|[1-9][0-9]*)$" type="text" class="validate" required>
           <label for="last_name"><b>Security Deposit</b></label>
         </div>
       </div>
         <div class="row">
        <div class="input-field">
-          <input name="monthlyrent" type="text" class="validate">
+          <input name="monthlyrent"  pattern="^(0|[1-9][0-9]*)$" type="text" class="validate" required> 
           <label for="last_name"><b>Monthly  Rent</b></label>
         </div>
       </div>
 
         <div class="row">
        <div class="input-field">
-          <input name="bedrent" type="text" class="validate">
+          <input name="bedrent" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
           <label for="last_name"><b>Bed  Rent</b></label>
         </div>
       </div>
 
       <div class="row">
        <div class="input-field">
-          <input name="bhkrent" type="text" class="validate">
+          <input name="bhkrent" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
           <label for="last_name"><b>Bhk  Rent</b></label>
         </div>
       </div>
      
        <div class="input-field">
-    <select name="bed">
+    <select name="bed" required>
       <option value="" disabled selected>Bed</option>
-      <option value="1">State 1</option>
-      <option value="2">State 2</option>
-      <option value="3">State 3</option>
+      <option value="1"> 1 Bed</option>
+      <option value="2"> 2 Bed</option>
+      <option value="3"> 3 Bed</option>
+      <option value="4"> 4 Bed</option>
+      <option value="5"> 5 Bed</option>
+      <option value="6"> 6 Bed</option>
     </select>
   </div>
 
 
   <div class="input-field">
-    <select name="bhk">
+    <select name="bhk" required>
       <option value="" disabled selected>Bhk</option>
-      <option value="1">State 1</option>
-      <option value="2">State 2</option>
-      <option value="3">State 3</option>
+      <option value="1"> 1 BHK</option>
+      <option value="2"> 2 BHK</option>
+      <option value="3"> 3 BHK</option>
+      <option value="4"> 4 BHK</option>
+      <option value="5"> 5 BHK</option>
+      <option value="6"> 6 BHK</option>
     </select>
   </div>
 
@@ -191,14 +201,14 @@
 
      <div class="row">
        <div class="input-field">
-          <input name="availbed" type="text" class="validate">
+          <input name="availbed" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
           <label for="last_name"><b>Available Bed</b></label>
         </div>
       </div>
      
       <div class="row">
        <div class="input-field">
-          <input name="availbhk" type="text" class="validate">
+          <input name="availbhk" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
           <label for="last_name"><b>Available Bhk</b></label>
         </div>
       </div>
@@ -206,7 +216,7 @@
       
       <div class="row">
        <div class="input-field">
-          <input name="bookbed" type="text" class="validate">
+          <input name="bookbed" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
           <label for="last_name"><b>Booked Bed</b></label>
         </div>
       </div>
@@ -214,7 +224,7 @@
       
       <div class="row">
        <div class="input-field">
-          <input name="bookbhk" type="text" class="validate">
+          <input name="bookbhk" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
           <label for="last_name"><b>Booked bhk</b></label>
         </div>
       </div>
@@ -223,7 +233,7 @@
 
 
  <div class="input-field" required>
-    <select name="furnishtype">
+    <select name="furnishtype" required>
       <option value=""  disabled selected>Furnished Type</option>
         
                         
@@ -236,7 +246,7 @@
 
 
   <div class="input-field" required>
-    <select name="tenant">
+    <select name="tenant" required>
       <option value=""  disabled selected>Tenant type</option>
         
                         
@@ -250,7 +260,7 @@
 
 
   <div class="input-field" required>
-    <select name ="booking">
+    <select name ="booking" required>
       <option value=""  disabled selected>Booking type</option>
         
                         
@@ -263,7 +273,7 @@
 
 
   <div class="input-field" required>
-    <select name="housetype">
+    <select name="housetype" required>
       <option value=""  disabled selected>House type</option>
         
                         
@@ -288,43 +298,32 @@
 
  <div class="row">
        <div class="input-field">
-          <input id="last_name" type="text" class="validate" name="lalitude">
+          <input id="last_name" type="text" class="validate" name="lalitude"  required>
           <label><b>Latitude</b></label>
         </div>
       </div>
        <div class="row">
        <div class="input-field">
-          <input id="last_name" type="text" class="validate" name="longitude">
+          <input id="last_name" type="text" class="validate" name="longitude" required>
           <label ><b>Longitude</b></label>
         </div>
       </div>
  <div class="row">
       <div class="input-field">
-          <input id="last_name" type="text" class="validate" name="sqft">
+          <input id="last_name" type="text" class="validate" name="sqft" pattern="^(0|[1-9][0-9]*)$" required>
           <label ><b>Squarefeet</b></label>
         </div>
       </div>
  <div class="row">
       <div class="input-field">
-          <input id="last_name" type="text" class="validate" name="tnf">
+          <input id="last_name" type="text" class="validate" name="tnf" pattern="^(0|[1-9][0-9]*)$" required>
           <label ><b>Totalfloors</b></label>
         </div>
       </div>
-       <div class="row">
-    <div class="input-field">
-          <input id="last_name" type="text" class="validate" name="like">
-          <label ><b>Likecount</b></label>
-        </div>
-      </div>
-       <div class="row">
-        <div class="input-field">
-          <input id="last_name" type="text" class="validate" name="rate">
-          <label ><b>Rating</b></label>
-        </div>
-      </div>
+       
 
   <div class="input-field" required>
-    <select name ="facing">
+    <select name ="facing" required>
       <option value=""  disabled selected>Facing</option>
         
                         
@@ -337,7 +336,7 @@
   </div>
 
     <div class="input-field" required>
-    <select name ="parking">
+    <select name ="parking" required>
       <option value=""  disabled selected>Parking</option>
         
                         
@@ -355,33 +354,86 @@
  
   <label ><h6><b>Amenties</b></h6></label>
   <br>
-  <p>
-       <input type="checkbox" class="filled-in" id="Amen1" value="Air Conditioning" name="groupamen"  />
-      <label for="Amen1">Air Conditioning</label>
+ 
+
+
+
+        <p>
+        <input type="checkbox" class="filled-in" id="Amen1" value="Sofa" name="groupamen"  />
+      <label for="Amen1">Sofa</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen2" value="Wifi" name="groupamen"  />
+      <label for="Amen2">Wifi</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen3" value="Television" name="groupamen"  />
+      <label for="Amen3">Television</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen4" value="Dish" name="groupamen"  />
+      <label for="Amen4">Dish</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen5" value="Washing Machine" name="groupamen"  />
+      <label for="Amen5">Washing Machine</label>
     </p>
 
+
+        <p>
+        <input type="checkbox" class="filled-in" id="Amen6" value="Western Toilet" name="groupamen"  />
+      <label for="Amen6">Western Toilet</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen7" value="Solar Heater" name="groupamen"  />
+      <label for="Amen7">Solar Heater</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen8" value="Geyser" name="groupamen"  />
+      <label for="Amen8">Geyser</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen9" value="Fridge" name="groupamen"  />
+      <label for="Amen9">Fridge</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen10" value="LPG Gas Stove" name="groupamen"  />
+      <label for="Amen10">LPG Gas Stove</label>
+    </p>
+
+
+        <p>
+        <input type="checkbox" class="filled-in" id="Amen11" value="Crockery Set" name="groupamen"  />
+      <label for="Amen11">Crockery Set</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen12" value="Wardrobes" name="groupamen"  />
+      <label for="Amen12">Wardrobes</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen13" value="Laptop Table + Chair" name="groupamen"  />
+      <label for="Amen13">Laptop Table + Chair</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen14" value="Side table" name="groupamen"  />
+      <label for="Amen14">Side table</label>
+    </p>
+     <p>
+        <input type="checkbox" class="filled-in" id="Amen15" value="LPG Gas Stove" name="groupamen"  />
+      <label for="Amen15">Lift</label>
+    </p>
+
+
+
     <p>
-        <input type="checkbox" class="filled-in" id="Amen2" vlaue="Swimming Pool" name="groupamen"  />
-      <label for="Amen2">Swimming Pool</label>
+        <input type="checkbox" class="filled-in" id="Amen16" value="Swimming Pool" name="groupamen"  />
+      <label for="Amen16">Swimming Pool</label>
     </p>
     <p>
-      <input type="checkbox" class="filled-in" id="Amen3" value="Central Heating" name="groupamen" />
-      <label for="Amen3">Central Heating</label>
-    </p>
-    <p>
-      <input type="checkbox" class="filled-in" id="Amen4" value="Laundry Room" name="groupamen"/>
-      <label for="Amen4">Laundry Room</label>
+      <input type="checkbox" class="filled-in" id="Amen17" value="Gym" name="groupamen" />
+      <label for="Amen17">Gym</label>
     </p>
     
-    <p>
-      <input type="checkbox" class="filled-in" id="Amen5" value="Gym" name="groupamen" />
-      <label for="Amen5">Gym</label>
-    </p>
-    <p>
-      <input type="checkbox" class="filled-in" id="Amen6" value="Alarm" name="groupamen"/>
-      <label for="Amen6">Alarm</label>
-    </p>
-  
                 
 
  </div>

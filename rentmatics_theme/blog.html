@@ -19,7 +19,8 @@ var loginidd="";
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
  if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
-  
+  cardstring="No wish list found"
+ 	document.getElementById("hidenid").style.display = "none";
    }else{
        $("#login").html("MyAccount");
                 document.getElementById("loginhiden").style.display = "none";
@@ -32,7 +33,7 @@ function logout() {
 
      $.ajax({
         type: "GET",
-        url: "http://localhost:8083/Logout",
+        url: "http://176.111.105.86:8083/Logout",
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";
@@ -59,60 +60,57 @@ function Payalert(){
 <!-- Wrapper -->
 <div id="wrapper">
 
-<!-- Header Container
-================================================== -->
 <header id="header-container" class="fullwidth">
 
-	<!-- Topbar -->
-	<div id="top-bar">
-		<div class="container">
+  <!-- Topbar -->
+  <div id="top-bar">
+    <div class="container">
       <!-- Left Side Content -->
-			<div class="left-side">
-				<ul class="top-bar-menu">
-				    <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+      <div class="left-side">
+        <ul class="top-bar-menu">
+            <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
           <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
-				</ul>
+        </ul>
       </div>
-			<div class="right-side">
+      <div class="right-side">
         <ul class="social-icons">
           <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
           <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
           <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
           </ul>
-			</div>
-		</div>
-	</div>
-	<div class="clearfix"></div>
-	<div id="header">
-		<div class="container">
-			<div class="left-side">
-				 <div id="logo">
-					<a href="index.html"><img src="images/rm_logo.png" alt=""></a>
-				 </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="header">
+    <div class="container">
+      <div class="left-side">
+         <div id="logo">
+          <a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+         </div>
          <!-- Mobile Navigation -->
-				<div class="menu-responsive">
-					<i class="fa fa-reorder menu-trigger"></i>
-				</div>
+        <div class="menu-responsive">
+          <i class="fa fa-reorder menu-trigger"></i>
+        </div>
          <!-- Main Navigation -->
-				<nav id="navigation" class="style-1">
-					<ul id="responsive">
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
             <li><a  href="index.html">Home</a></li>
             <li><a href="howitwork.html">How It Works </a>
               <ul>
-            <li><a href="owner.html">Owners</a> </li>
+                <li><a href="owner.html">Owners</a> </li>
                 <li><a href="tenats.html">Tenants</a></li>
-
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
            <li><a href="javascript:Payalert()">Pay Myrent</a></li>
-			    </ul>
-			</nav>
-			<div class="clearfix"></div>
-			</div>
-			<div class="right-side">
+          </ul>
+      </nav>
+      <div class="clearfix"></div>
+      </div>
+      <div class="right-side">
 
-				<nav id="navigation" class="style-1">
+        <nav id="navigation" class="style-1">
           <ul id="responsive">
           <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
            <li id="loginhiden">
@@ -122,14 +120,14 @@ function Payalert(){
             <ul>
                     <li><a href="my-profile.html">My Profile</a></li>
                     <li><a href="my-bookmarks.html">My Wish List</a></li>
-                    <li><a href="change-password.html">Change Password</a></li>
+                   <li><a href="javascript:logout()">Logout</a></li>
                    
                   </ul> 
                 </li> 
           </ul>
        </nav>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 </header>
 <div class="clearfix"></div>
@@ -360,18 +358,7 @@ function Payalert(){
 
 
 
-<!-- The Modal -->
-<div id="myModal1" class="modal">
 
-  <!-- Modal content -->
-  <div class="modal-content" style="width:40%;">
-    <span class="close">&times;</span>
-
-   <span style="color:black">Pay My rent is Comming soon!...</span>
-  
-
-</div>
-</div>
 <!-- Footer
 ================================================== -->
 <div class="margin-top-55"></div>
@@ -379,62 +366,62 @@ function Payalert(){
 
 <!-- Footer
 ================================================== -->
-<div id="footer" class="sticky-footer">
-	<!-- Main -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-5 col-sm-6">
-				<img class="footer-logo" src="images/rm_logo.png" alt="">
-				<br><br>
-				<p>Simple and search for your property.</p>
-			</div>
+<div id="footer"  style="background-color:#484848;color:white" >
+  <!-- Main -->
+  <div class="container" >
+    <div class="row">
+      <div class="col-md-5 col-sm-6">
+        <img class="footer-logo" src="images/rm_logo.png"  alt="">
+        <br><br>
+        <p style="font-family:Hanken;font-size:20px;">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+      </div>
 
-			<div class="col-md-4 col-sm-6 ">
-				<h4>Helpful Links</h4>
-				<ul class="footer-links">
-					<li><a href="login-register.html">Login</a></li>
-					<li><a href="login-register.html">Sign Up</a></li>
-					<li><a href="my-profile.html">My Account</a></li>
-					
-					<li><a href="myprivacy.html">Privacy Policy</a></li>
-				</ul>
+      <div class="col-md-4 col-sm-6 ">
+        <h4  style="color:white;font-family:Hanken;font-size:21px">Helpful Links</h4>
+        <ul class="footer-links">
+           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Login/Signup</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="about.html"  style="color:white">About</a></li>
+         
+         
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="myprivacy.html"  style="color:white">Privacy Policy</a></li>
+        </ul>
 
-				<ul class="footer-links">
-					<!-- <li><a href="#">FAQ</a></li> -->
-					<li><a href="blog.html">Blog</a></li>
-					<li><a href="howitwork.html">How It Works</a></li>
-					<li><a href="tandc.html">Terms and condition</a></li>
-					
-				</ul>
-				<div class="clearfix"></div>
-			</div>		
+        <ul class="footer-links">
+          <!-- <li><a href="#">FAQ</a></li> -->
+          <li  style="color:white;font-family:Hanken;font-size:17px"> <a href="blog.html"  style="color:white">Blog</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="howitwork.html"  style="color:white">How It Works</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="tandc.html"  style="color:white">Terms and condition</a></li>
+          
+        </ul>
+        <div class="clearfix"></div>
+      </div>    
 
-			<div class="col-md-3  col-sm-12">
-				<h4>Contact Us</h4>
-				<div class="text-widget">
-					<span>12345 Little Lonsdale St, Melbourne</span> <br>
-					Phone: <span>Tel: +91-9884379333/9811448697 </span><br>
-					E-Mail:<span> <a href="#">Rentmatics@gmail.com</a> </span><br>
-				</div>
+      <div class="col-md-3  col-sm-12">
+        <h4  style="color:white;font-family:Hanken;font-size:21px">Contact Us</h4>
+        <div class="text-widget">
+          <span  style="color:white;font-family:Hanken;font-size:17px">12345 Little Lonsdale St, Melbourne</span> <br>
+          Phone: <span  style="color:white;font-family:Hanken;font-size:17px">Tel: +91-9884379333/9811448697 </span><br>
+          E-Mail:<span  style="color:white;font-family:Hanken;font-size:17px"> <a href="#" style="font-family:Hanken;font-size:17px;">Rentmatics@gmail.com</a> </span><br>
+        </div>
 
-				<ul class="social-icons margin-top-20">
-					<li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
-					<li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
-					<li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
-				</ul>
+        <ul class="social-icons margin-top-20">
+          <li ><a class="facebook" href="https://www.facebook.com/Rentmatics/" ><i class="icon-facebook" ></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+        </ul>
 
-			</div>
+      </div>
 
-		</div>
-		
-		<!-- Copyright -->
-		<div class="row">
-			<div class="col-md-12">
-				<div class="copyrights">© 2016 Rentmatics. All Rights Reserved.</div>
-			</div>
-		</div>
+    </div>
+    
+    <!-- Copyright -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="copyrights" style="color:white">© 2016 Rentmatics. All Rights Reserved.</div>
+      </div>
+    </div>
 
-	</div>
+  </div>
 
 </div>
 <!-- Footer / End -->
@@ -461,83 +448,11 @@ function Payalert(){
 
 
 
-<!-- Style Switcher
-================================================== -->
-<script src="scripts/switcher.js"></script>
 
-<div id="style-switcher">
-	<h2>Color Switcher <a href="#"><i class="sl sl-icon-settings"></i></a></h2>
-	
-	<div>
-		<ul class="colors" id="color1">
-			<li><a href="#" class="blue" title="Blue"></a></li>
-			<li><a href="#" class="green" title="Green"></a></li>
-			<li><a href="#" class="orange" title="Orange"></a></li>
-			<li><a href="#" class="navy" title="Navy"></a></li>
-			<li><a href="#" class="yellow" title="Yellow"></a></li>
-			<li><a href="#" class="peach" title="Peach"></a></li>
-			<li><a href="#" class="beige" title="Beige"></a></li>
-			<li><a href="#" class="purple" title="Purple"></a></li>
-			<li><a href="#" class="celadon" title="Celadon"></a></li>
-			<li><a href="#" class="pink" title="Pink"></a></li>
-			<li><a href="#" class="red" title="Red"></a></li>
-			<li><a href="#" class="brown" title="Brown"></a></li>
-			<li><a href="#" class="cherry" title="Cherry"></a></li>
-			<li><a href="#" class="cyan" title="Cyan"></a></li>
-			<li><a href="#" class="gray" title="Gray"></a></li>
-			<li><a href="#" class="olive" title="Olive"></a></li>
-		</ul>
-	</div>
-		
-</div>
-<!-- Style Switcher / End -->
 
 
 </div>
 <!-- Wrapper / End -->
-<script>
-
-
-
-
-
-
-// Get the modal
-var modal = document.getElementById('myModal');
-var modal1 = document.getElementById('myModal1');
-var btn = document.getElementById("myBtn");
-var pop = document.getElementById("mypop");
-var span = document.getElementsByClassName("close")[0];
-btn.onclick = function() {
- 
-   Schedule1()
-
-   modal.style.display = "block";
- 
-   
-   
-}
-
-pop.onclick = function() {
- 
-  
-
-   modal1.style.display = "block";
- 
-   
-   
-}
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-    modal.style.display = "none";
-    modal1.style.display = "none";
-}
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
-</script>
 
 </body>
 </html>

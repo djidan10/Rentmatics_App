@@ -5,12 +5,12 @@ import (
 	Model "Rentmatics_App/Model"
 	"encoding/json"
 	"fmt"
-	//"io"
+	"io"
 	"net/http"
 	"net/smtp"
-	//"os"
-	//"path/filepath"
-	//"strconv"
+	"os"
+	"path/filepath"
+	"strconv"
 )
 
 //Get All Executive Details
@@ -82,8 +82,8 @@ func Auth(w http.ResponseWriter, r *http.Request) {
 //Executive Upload
 func InsertHomeDetails(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("inside GetImage")
-	//	var ImageurlFinal []string
-	//	var Imageurl string
+	var ImageurlFinal []string
+	var Imageurl string
 
 	var Userdata Model.HomeInsert
 
@@ -93,6 +93,8 @@ func InsertHomeDetails(w http.ResponseWriter, r *http.Request) {
 	//  Userdata.Housename = r.Form["housename"][0]
 	Userdata.Housename = r.Form["houseownername"][0]
 	Userdata.Houseownername = r.Form["housename"][0]
+	Userdata.ExecutiveID = r.Form["executiveid"][0]
+	Userdata.Ownerid = r.Form["ownerid"][0]
 	Userdata.Adress1 = r.Form["address1"][0]
 	Userdata.Adress2 = r.Form["address2"][0]
 	Userdata.City = r.Form["city"][0]
@@ -125,8 +127,6 @@ func InsertHomeDetails(w http.ResponseWriter, r *http.Request) {
 	Userdata.Parking = r.Form["parking"][0]
 	Userdata.Facing = r.Form["facing"][0]
 	Userdata.Totalfloors = r.Form["tnf"][0]
-	Userdata.Likecount = r.Form["like"][0]
-	Userdata.Rating = r.Form["rate"][0]
 	Userdata.Liked = "false"
 	fmt.Println(Userdata.Housename, Userdata.Houseownername, Userdata.Adress1, Userdata.Adress2, Userdata.City)
 	fmt.Println(Userdata.District, Userdata.State)
@@ -148,36 +148,37 @@ func InsertHomeDetails(w http.ResponseWriter, r *http.Request) {
 
 	//Insert image in Database
 	//Create Directory
-	//	newpath := filepath.Join("Houseimage/", Userdata.Housename, "/")
-	//	os.MkdirAll(newpath, os.ModePerm)
-	//	for i := 0; i <= 5; i++ {
+	newpath := filepath.Join("Houseimage/", Userdata.Housename, "/")
+	os.MkdirAll(newpath, os.ModePerm)
+	for i := 0; i <= 5; i++ {
 
-	//		file, handler, err := r.FormFile("uploadfile" + strconv.Itoa(i))
-	//		if err != nil {
-	//			fmt.Println("data error image", err)
-	//			return
-	//		}
-	//		fmt.Println("handler", handler)
-	//		defer file.Close()
+		file, handler, err := r.FormFile("uploadfile" + strconv.Itoa(i))
+		if err != nil {
+			fmt.Println("data error image", err)
+			return
+		}
 
-	//		Imageurl = "Houseimage/" + Userdata.Housename + "/" + handler.Filename
+		defer file.Close()
 
-	//		f, err := os.OpenFile(Imageurl, os.O_WRONLY|os.O_CREATE, 0666)
-	//		if err != nil {
-	//			fmt.Println(err)
-	//			return
-	//		}
-	//		defer f.Close()
+		Imageurl = "Houseimage/" + Userdata.Housename + "/" + handler.Filename
 
-	//		io.Copy(f, file)
+		f, err := os.OpenFile(Imageurl, os.O_WRONLY|os.O_CREATE, 0666)
+		if err != nil {
+			fmt.Println(err)
+			return
+		}
+		defer f.Close()
 
-	//	}
-	//	/ImageurlFinal = append(ImageurlFinal, "http://localhost:8083/"+Imageurl)
-	//fmt.Println("imageurl", ImageurlFinal)
+		io.Copy(f, file)
+		fmt.Println("Imageurl", Imageurl)
+		ImageurlFinal = append(ImageurlFinal, "http://176.111.105.86:8083/"+Imageurl)
 
-	//	  SendEmail(Userdata, ImageurlFinal)
-	//Db.Inserthome_DB(Userdata, ImageurlFinal)
-	Db.Inserthome_DB(Userdata)
+	}
+
+	fmt.Println("imageurl", ImageurlFinal)
+
+	SendEmail(Userdata, ImageurlFinal)
+	Db.Inserthome_DB(Userdata, ImageurlFinal)
 
 }
 

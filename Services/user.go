@@ -77,22 +77,17 @@ func Login(w http.ResponseWriter, r *http.Request) {
 }
 func Changepassword(w http.ResponseWriter, r *http.Request) {
 
-	var User1 Model.User
+	var User1 Model.Changepass
 	err := json.NewDecoder(r.Body).Decode(&User1)
 	if err != nil {
 		log.Error("Error - Change password", err)
 	}
-	Data := Db.InserUser(User1)
+	Data := Db.InsertChangepassword(User1)
 	Senddata, err := json.Marshal(Data)
 	if err != nil {
 		log.Error("Error - Change password", err)
 	}
-	cookie := &http.Cookie{
-		Name:  "RentmaticsCookie",
-		Value: Data.Loginid,
-		Path:  "/",
-	}
-	http.SetCookie(w, cookie)
+
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
 	w.Write(Senddata)

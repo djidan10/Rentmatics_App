@@ -3,6 +3,7 @@ package Mysql
 import (
 	Model "Rentmatics_App/Model"
 	_ "database/sql"
+	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -43,7 +44,8 @@ func Insertprofile(Profileresponse Model.Profile) (Profilesend Model.Profile) {
 
 		return Profilesend
 	} else {
-		Queryupdate := "UPDATE profile SET name= " + Profileresponse.Name + " ,tittle=" + Profileresponse.Tittle + " ,phone= '" + Profileresponse.Phone + "' ,email= '" + Profileresponse.Email + "' ,about= '" + Profileresponse.About + "' ,twitter= '" + Profileresponse.Twiter + "'  ,facebook= '" + Profileresponse.Facebook + "'  ,google= " + Profileresponse.Google + "'  where loginid= " + Profileresponse.Loginid
+		Queryupdate := "UPDATE profile SET name=' " + Profileresponse.Name + " ' , tittle= '" + Profileresponse.Tittle + "' ,phone= '" + Profileresponse.Phone + "' ,email= '" + Profileresponse.Email + "' ,about= '" + Profileresponse.About + "' ,twitter= '" + Profileresponse.Twiter + "'  ,facebook= '" + Profileresponse.Facebook + "'  ,google= '" + Profileresponse.Google + "'  where loginid= '" + Profileresponse.Loginid + "'"
+		fmt.Println(Queryupdate)
 		row, err := OpenConnection["Rentmatics"].Exec(Queryupdate)
 		if err != nil {
 			log.Error("Error -DB: update Profile", err, row)

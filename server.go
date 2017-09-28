@@ -81,7 +81,7 @@ func Serve() bool {
 	router.HandleFunc("/User", Service.Userdata)
 	router.HandleFunc("/Login", Service.Login)
 	router.HandleFunc("/Logout", Service.Userlogout)
-	//router.HandleFunc("/Changepassword", Service.change)
+	router.HandleFunc("/Changepassword", Service.Changepassword)
 
 	//Notify
 	router.HandleFunc("/Notifyme", Service.Notification)

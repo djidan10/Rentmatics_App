@@ -4,6 +4,7 @@ import (
 	Db "Rentmatics_App/Common/DB/Mysql"
 	Model "Rentmatics_App/Model"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -12,12 +13,31 @@ type Cityy struct {
 	Loginid string
 }
 
+type LoginHome struct {
+	Loginid string
+}
+
 //Get All Home Detials without service id
 func Getallhomedetails(w http.ResponseWriter, r *http.Request) {
-	Data := Db.GetallhomedetailsDB()
-	Senddata, err := json.Marshal(Data)
+
+	var LoginData LoginHome
+	var Data []Model.RentSend
+	err := json.NewDecoder(r.Body).Decode(&LoginData)
 	if err != nil {
-		log.Error("Cannot fetch Data All home details", err)
+		log.Error("Error:Marshal Data", err)
+	}
+
+	if LoginData.Loginid == "" {
+		Data = Db.GetallhomedetailsDB()
+
+	} else {
+		Data = Db.GetAllHomeDetilswithFav(LoginData.Loginid)
+
+	}
+	Senddata, err := json.Marshal(Data)
+
+	if err != nil {
+		log.Error("Error on send home details", err)
 	}
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
@@ -66,8 +86,12 @@ func GetIndivual_home(w http.ResponseWriter, r *http.Request) {
 		log.Error("Error-Indivual home", err)
 	}
 	if Homeid.Loginid == "" {
+		fmt.Println("inside non fav")
+
 		Data = Db.GetSinglehome_Db(Homeid.Id)
 	} else {
+
+		fmt.Println("inside  fav")
 		Data = Db.GetSinglehome_DbFav(Homeid.Id, Homeid.Loginid)
 	}
 	Senddata, err := json.Marshal(Data)
@@ -81,6 +105,8 @@ func GetIndivual_home(w http.ResponseWriter, r *http.Request) {
 
 }
 func GetFilter(w http.ResponseWriter, r *http.Request) {
+	log.Info("inside filter")
+
 	var Filt Model.Filter
 	err := json.NewDecoder(r.Body).Decode(&Filt)
 	if err != nil {

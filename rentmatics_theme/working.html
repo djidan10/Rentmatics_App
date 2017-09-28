@@ -29,7 +29,7 @@ function logout() {
 
      $.ajax({
         type: "GET",
-        url: "http://localhost:8083/Logout",
+        url: "http://176.111.105.86:8083/Logout",
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";
@@ -67,27 +67,26 @@ $(document).ready(function(){
 
   
       function Postsubscriber(){
-        alert("POst subscriber")
+    
          Subscriberemail = document.getElementById('subemail').value;
+         
+          City = localStorage.getItem("Getcity");
+          var Subscriber={
+         "Sub_City" : City,
+          "Sub_Email" :Subscriberemail
 
-         var Subscriber={
-          "Email" :Subscriberemail
-
-        };
+ };
 
    $.ajax({
       type: "POST",
-      url: "http://localhost:8081/Postsubscriber",
+      url: "http://176.111.105.86:8083/Postsubscriber",
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(Subscriber),
 
   success: function(responsee){
    
-console.log("succesfully updated")
-url = 'index.html?loginid='+loginid;
-          console.log("*************wish url*******************")
-          console.log(url)
-           document.location.href = url;
+alert("succesfully updated will come to you soon!")
+document.location.href = "index.html";
       }
     });
     }
@@ -109,39 +108,39 @@ url = 'index.html?loginid='+loginid;
 ================================================== -->
 <header id="header-container" class="fullwidth">
 
-	<!-- Topbar -->
-	<div id="top-bar">
-		<div class="container">
+  <!-- Topbar -->
+  <div id="top-bar">
+    <div class="container">
       <!-- Left Side Content -->
-			<div class="left-side">
-				<ul class="top-bar-menu">
-				    <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+      <div class="left-side">
+        <ul class="top-bar-menu">
+            <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
           <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
-				</ul>
+        </ul>
       </div>
-			<div class="right-side">
+      <div class="right-side">
         <ul class="social-icons">
           <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
           <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
           <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
           </ul>
-			</div>
-		</div>
-	</div>
-	<div class="clearfix"></div>
-	<div id="header">
-		<div class="container">
-			<div class="left-side">
-				 <div id="logo">
-					<a href="index.html"><img src="images/rm_logo.png" alt=""></a>
-				 </div>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="header">
+    <div class="container">
+      <div class="left-side">
+         <div id="logo">
+          <a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+         </div>
          <!-- Mobile Navigation -->
-				<div class="menu-responsive">
-					<i class="fa fa-reorder menu-trigger"></i>
-				</div>
+        <div class="menu-responsive">
+          <i class="fa fa-reorder menu-trigger"></i>
+        </div>
          <!-- Main Navigation -->
-				<nav id="navigation" class="style-1">
-					<ul id="responsive">
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
             <li><a  href="index.html">Home</a></li>
             <li><a href="howitwork.html">How It Works </a>
               <ul>
@@ -151,13 +150,13 @@ url = 'index.html?loginid='+loginid;
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
            <li><a href="javascript:Payalert()">Pay Myrent</a></li>
-			    </ul>
-			</nav>
-			<div class="clearfix"></div>
-			</div>
-			<div class="right-side">
+          </ul>
+      </nav>
+      <div class="clearfix"></div>
+      </div>
+      <div class="right-side">
 
-				<nav id="navigation" class="style-1">
+        <nav id="navigation" class="style-1">
           <ul id="responsive">
           <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
            <li id="loginhiden">
@@ -173,8 +172,8 @@ url = 'index.html?loginid='+loginid;
                 </li> 
           </ul>
        </nav>
-		</div>
-	</div>
+    </div>
+  </div>
 </div>
 </header>
 
@@ -186,24 +185,121 @@ url = 'index.html?loginid='+loginid;
 
 <!-- Content
 ================================================== -->
-<div class="container">
-<div class="row" >
-<br>
-<br>
-<br>
-<br>
-<br>
+
+<div class="parallax titlebar"
+  data-background="images/jumbo-banner.jpg"
+  data-color="#333333"
+  data-color-opacity="0.7"
+  data-img-width="800"
+  data-img-height="505">
+
+  <div id="titlebar">
+    <div class="container">
+      <div class="row">
+        <br>
+        <div class="col-md-12">
+        
+      
+         
+          <h5 style="color:white;font-size: 20px;font-family: Hanken;text-align:center;">We’re growing quickly but we haven’t started our services yet!
+Once we started we will get back to you,</h5> <p style="color:white;font-size: 20px;font-family: Hanken;margin-left:120px;">please enter your email ID</p>
 
 
-<p >
-<b>
-We’re growing quickly but we haven’t started our services yet!
-Once we started we will get back to you, <br>please enter your email ID</b></p>
-<input type="text" placeholder="enter your Email" id="subemail" style="width:600px"/>
- <a href="#" class="button btn btn-danger" onclick="Postsubscriber()" >Subscribe</a>
+<input type="text" placeholder="enter your Email" id="subemail" style="width:600px;margin-left:102px;"/>
+ <a href="javascript:Postsubscriber()" class="button btn btn-danger"  style="margin-left:100px;">Subscribe</a>
+          
+            <!-- Status -->
+          
+          
+          <!-- Row / End -->
+
+        </div>
+    
+
+    </div>  
+
+          
+          
+          <!-- Breadcrumbs -->
+          
+        </div>
+      </div>
+    </div>
+
+
+<!-- Footer
+================================================== -->
+<div class="margin-top-55"></div>
+
+
+<!-- Footer
+================================================== -->
+<div id="footer"  style="background-color:#484848;color:white" >
+  <!-- Main -->
+  <div class="container" >
+    <div class="row">
+      <div class="col-md-5 col-sm-6">
+        <img class="footer-logo" src="images/rm_logo.png"  alt="">
+        <br><br>
+        <p style="font-family:Hanken;font-size:20px;">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 ">
+        <h4  style="color:white;font-family:Hanken;font-size:21px">Helpful Links</h4>
+        <ul class="footer-links">
+         <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Login/Signup</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="about.html"  style="color:white">About</a></li>
+         
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Sign Up</a></li>
+         
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="myprivacy.html"  style="color:white">Privacy Policy</a></li>
+        </ul>
+
+        <ul class="footer-links">
+          <!-- <li><a href="#">FAQ</a></li> -->
+          <li  style="color:white;font-family:Hanken;font-size:17px"> <a href="blog.html"  style="color:white">Blog</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="howitwork.html"  style="color:white">How It Works</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="tandc.html"  style="color:white">Terms and condition</a></li>
+          
+        </ul>
+        <div class="clearfix"></div>
+      </div>    
+
+      <div class="col-md-3  col-sm-12">
+        <h4  style="color:white;font-family:Hanken;font-size:21px">Contact Us</h4>
+        <div class="text-widget">
+          <span  style="color:white;font-family:Hanken;font-size:17px">12345 Little Lonsdale St, Melbourne</span> <br>
+          Phone: <span  style="color:white;font-family:Hanken;font-size:17px">Tel: +91-9884379333/9811448697 </span><br>
+          E-Mail:<span  style="color:white;font-family:Hanken;font-size:17px"> <a href="#" style="font-family:Hanken;font-size:17px;">Rentmatics@gmail.com</a> </span><br>
+        </div>
+
+        <ul class="social-icons margin-top-20">
+          <li ><a class="facebook" href="https://www.facebook.com/Rentmatics/" ><i class="icon-facebook" ></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+        </ul>
+
+      </div>
+
+    </div>
+    
+    <!-- Copyright -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="copyrights" style="color:white">© 2016 Rentmatics. All Rights Reserved.</div>
+      </div>
+    </div>
+
+  </div>
+
 </div>
+<!-- Footer / End -->
 
-	</div>
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
 
 <!-- Scripts
 ================================================== -->

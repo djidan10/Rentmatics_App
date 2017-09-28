@@ -35,8 +35,6 @@ type Home struct {
 	Longitude        float64
 	Liked            bool
 	Squarefeet       string
-	Likecount        string
-	Rating           string
 	Totalfloors      string
 	Facing           string
 	Parking          string
@@ -79,8 +77,6 @@ type HomeInsert struct {
 	Longitude        string
 	Liked            string
 	Squarefeet       string
-	Likecount        string
-	Rating           string
 	Totalfloors      string
 	Facing           string
 	Parking          string

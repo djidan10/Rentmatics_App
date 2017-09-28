@@ -235,39 +235,7 @@ var Rentmatics ={
 };
 
 
-         function logout(){
-         
-         GsignOut();
-         
-         
-         // $.removeCookie('RentmaticsCookie');
-         delete_cookie("RentmaticsCookie");
-         
-         
-         
-          $.ajax({
-           type: "GET",
-           url: "http://localhost:8083/Logout",
-         
-         success: function(responsee){
-          document.getElementById("Userdetails").style.visibility = "hidden"; 
-         document.getElementById("wishlist").style.visibility = "hidden"; 
-         document.getElementById("logout").style.visibility = "hidden"; 
-         document.getElementById("loginhide").style.visibility = "visible";
-         document.getElementById("signuphide").style.visibility = "visible";  
-
-
-         document.getElementById("Userdetails1").style.visibility = "hidden"; 
-         document.getElementById("wishlist1").style.visibility = "hidden"; 
-         document.getElementById("logout1").style.visibility = "hidden"; 
-         document.getElementById("loginhide1").style.visibility = "visible";
-         document.getElementById("signuphide1").style.visibility = "visible";  
-         }
-         
-         });
-          
-         }
-
+     
 
               var email="";
          function onSignIn(googleUser) {

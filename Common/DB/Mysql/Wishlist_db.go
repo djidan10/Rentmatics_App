@@ -78,7 +78,6 @@ func GetWishDB(Loginid string) (Temprentarray []Model.RentSend) {
 				&Data.Avail_room,
 				&Data.Booked_bed,
 				&Data.Booked_bhk,
-
 				&Data.Distance,
 				&Data.Furnish_type,
 				&Data.Secutity_deposit,
@@ -88,8 +87,6 @@ func GetWishDB(Loginid string) (Temprentarray []Model.RentSend) {
 				&Data.Latitude,
 				&Data.Longitude,
 				&Data.Squarefeet,
-				&Data.Likecount,
-				&Data.Rating,
 				&Data.Totalfloors,
 				&Data.Facing,
 				&Data.Parking,

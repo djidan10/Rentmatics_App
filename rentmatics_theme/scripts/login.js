@@ -27,7 +27,7 @@ function Login() {
                 $("#login").html("MyAccount");
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
-                  document.location.href = "index-2.html";
+                   window.history.back();
             } else {
                 alert("Incorect Username and Password")
 
@@ -68,7 +68,7 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-              document.location.href = "index-2.html";
+              window.history.back();
         }
     });
 }
@@ -78,7 +78,7 @@ function SignupRent() {
 //Redirect to wishlist page
 
 function Getwish() {
-    alert("inside wish " + loginidd);
+   
     url = "wishlist.html";
     document.location.href = url;
 
@@ -95,22 +95,24 @@ function Getwish() {
 function Gethomes() {
 
    // alert(loginidvalue);
-
+var url =""
     var cities = document.getElementById('tags').value;
   
  
   var partsOfStr = cities.split(',');
-   alert(partsOfStr[0])
+  
+   if (partsOfStr  == null || partsOfStr  == ""){
+     url = 'listings-half-map-grid-compact.html' 
+   }else{
+    
+      url = 'listings-half-map-grid-compact.html?Id=' + partsOfStr[0];
+   localStorage.setItem("Getcity", partsOfStr[0]);
 
+   }
+  
 
-    // for (i = 0; i < Tags.length; i++) {
-    //     if (cities == Tags[i].City) {
-      
-
-             url = 'listings-half-map-grid-compact.html?Id=' + partsOfStr[0];
      document.location.href = url;
-    //     }
-    // }
+   
 }
 
 function Payalert(){
@@ -194,7 +196,7 @@ var delete_cookie = function(name) {
 var email = "";
 
 function onSignIn(googleUser) {
-    alert("inside google")
+    
     var profile = googleUser.getBasicProfile();
     console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
     console.log('Name: ' + profile.getName());
@@ -244,7 +246,7 @@ function onSignIn(googleUser) {
             document.getElementById("loginhide").style.display = "none";
             document.getElementById("signuphide").style.display = "none";
             document.getElementById("Userdetails").style.visibility = "visible";
-             document.location.href = "index-2.html";
+              window.history.back();
 
 
 
@@ -259,62 +261,6 @@ function signOut() {
         console.log('User signed out.');
     });
 }
-
-
-//FaceBook Login
-window.fbAsyncInit = function() {
-    FB.init({
-        appId: '837076093106264',
-        xfbml: true,
-        version: 'v2.9'
-    });
-    FB.AppEvents.logPageView();
-};
-
-(function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {
-        return;
-    }
-    js = d.createElement(s);
-    js.id = id;
-    //js.src = "//connect.facebook.net/en_US/sdk.js";
-    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1243386559017640";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-
-// This is called with the results from from FB.getLoginStatus().
-function statusChangeCallback(response) {
-    console.log('statusChangeCallback');
-    console.log(response);
-
-    if (response.status === 'connected') {
-        // Logged into your app and Facebook.
-        testAPI();
-    } else {
-
-
-    }
-}
-
-function checkLoginState() {
-    FB.getLoginStatus(function(response) {
-        statusChangeCallback(response);
-    });
-}
-
-
-function testAPI() {
-    console.log('Welcome!  Fetching your information.... ');
-    FB.api('/me', function(response) {
-        console.log('Successful login for: ' + response.name);
-        console.log(response);
-        document.getElementById('status').innerHTML =
-            'Thanks for logging in, ' + response.name + '!';
-    });
-}
-
-
 
 
 

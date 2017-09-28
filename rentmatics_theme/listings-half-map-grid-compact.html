@@ -29,7 +29,7 @@ function logout() {
 
      $.ajax({
         type: "GET",
-        url: "http://localhost:8083/Logout",
+        url: "http://176.111.105.86:8083/Logout",
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";
@@ -60,7 +60,7 @@ $(document).ready(function(){
  //Get All home based on Areas
  var Loginid = ""
  var tmp = ""
-   Loginid = localStorage.getItem("LoginID");
+  
 
     window.onload = function () {
 
@@ -70,9 +70,15 @@ $(document).ready(function(){
    
   var params = location.search.substr(location.search.indexOf("?")+1);
     if(params==""||params==null||params==undefined||params=="NODATA"){
-      $.ajax({
-         type: "GET",
-         url: "http://localhost:8083/GetAllhomedetails",
+var s={
+      "Loginid":cooki
+       };
+
+ $.ajax({
+         type: "POST",
+         url: "http://176.111.105.86:8083/GetAllhomedetails",
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
          
         
 
@@ -107,7 +113,7 @@ var sval = sval.replace("%20", " ");
 
    $.ajax({
          type: "POST",
-         url: "http://localhost:8083/Gethomedetails",
+         url: "http://176.111.105.86:8083/Gethomedetails",
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
@@ -262,56 +268,6 @@ function Getresponse(searchout){
   var Totalfloors =searchout[j].RentFullStruct.Totalfloors ;
   var Facing =searchout[j].RentFullStruct.Facing ;
 
-  if (Rating == 2){
-    document.getElementById("star1"+ID).style.color = "#cc22c3";
-    document.getElementById("star2").style.color = "#cc22c3";
-  
- }else if (Rating == 2.5){
-   document.getElementById("star1"+ID).style.color = "#cc22c3";
-   document.getElementById("star2"+ID).style.color = "#cc22c3";
-   document.getElementById("star3"+ID).style.display = "none";
-    document.getElementById("star2.5"+ID).style.display = "inline";
-
-
-  }else if (Rating == 3){
-    document.getElementById("star1"+ID).style.color = "#cc22c3";
-    document.getElementById("star2"+ID).style.color = "#cc22c3";
-    document.getElementById("star3"+ID).style.color = "#cc22c3";
-  
-
-  }else if (Rating == 3.5){
-  
-    document.getElementById("star1"+ID).style.color = "#cc22c3";
-    document.getElementById("star2"+ID).style.color = "#cc22c3";
-    document.getElementById("star3"+ID).style.color = "#cc22c3";
-    document.getElementById("star3.5"+ID).style.display = "inline";
-    document.getElementById("star4"+ID).style.display = "none";
-
-
-  }else if (Rating == 4){
-     document.getElementById("star1"+ID).style.color = "#cc22c3";
-    document.getElementById("star2"+ID).style.color = "#cc22c3";
-    document.getElementById("star3"+ID).style.color = "#cc22c3";
-     document.getElementById("star4"+ID).style.color = "#cc22c3";
-
-  }else if (Rating == 4.5){
-    document.getElementById("star1"+ID).style.color = "#cc22c3";
-    document.getElementById("star2"+ID).style.color = "#cc22c3";
-    document.getElementById("star3"+ID).style.color = "#cc22c3";
-     document.getElementById("star4"+ID).style.color = "#cc22c3";
-     document.getElementById("star4.5"+ID).style.display = "inline";
-     document.getElementById("star5"+ID).style.display = "none";
-   
-
-  }else{
-
-  document.getElementById("star1"+ID).style.color = "#cc22c3";
-    document.getElementById("star2"+ID).style.color = "#cc22c3";
-    document.getElementById("star3"+ID).style.color = "#cc22c3";
-     document.getElementById("star4"+ID).style.color = "#cc22c3";
-     document.getElementById("star5"+ID).style.color = "#cc22c3";
-  }
-  
 
 
 
@@ -341,11 +297,11 @@ $("#tenantType"+ID).html(tenantType);
 $("#furnishtype"+ID).html(furnishingType);
 $("#rentimage1"+ID).html(finalDiv);
 $("#availbed"+ID).html(Availbed);
- $("#bedrent"+ID).html(bedrent);
+ $("#bedrent"+ID).html(bedrent)
 
  url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
 document.getElementById("getUrl"+ ID).setAttribute("href",url);
-
+document.getElementById("getUrl1"+ ID).setAttribute("href",url);
     var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
       src=src.replace("&amp;","&")
     
@@ -380,22 +336,22 @@ function Addfav(getid,getlogin,colorid){
                       var s={
           "Id": null,
           "Homeid" :parseInt(getid),
-          "Loginid":Loginid
+          "Loginid":cooki
 
         };
 
    $.ajax({
          type: "POST",
-         url: "http://localhost:8083/Insertwishlist",
+         url: "http://176.111.105.86:8083/Insertwishlist",
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
          success: function(responsee){
             
-           var searchout = JSON.parse(responsee);
+           // var searchout = JSON.parse(responsee);
           
           
-            Getresponse(searchout)
+           //  Getresponse(searchout)
            
 }
 
@@ -412,7 +368,7 @@ else{
 
    $.ajax({
          type: "POST",
-         url: "http://localhost:8083/Deletewishlist",
+         url: "http://176.111.105.86:8083/Deletewishlist",
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
@@ -456,108 +412,49 @@ if (liked == true){
  
   var rentimage = 
     
-"<div class='listings-container list-layout'>"+
+"<div class='listings-container list-layout' style='margin-top:10px;'>"+
 "<div class='listing-item'>"+
 "<a class='listing-img-container' id='getUrl"+Dyid+"'>"+
 "<div style ='width=100%;height:100%;'id='rentimage1"+Dyid+"'"+
 "></div>"+
-
-
 "<div class='listing-badges'>"+
-// "<span class='prop-mark-fav' style='margin-bottom:25%;margin-right:80%;color:white' onclick='Addfav("+Dyid+",Loginid,this)'  ><i class='fa fa-heart' id='colorid"+Dyid+"'  style='font-size: 1.3em;color:white'  ></i></span>"+
-
-"<span class='prop-mark-fav'><i class='fa fa-heart' id='colorid"+Dyid+"' onclick='return  Addfav("+Dyid+",Loginid,this)' style='color:white;' ></i></span>"+
-
-
-"<span style='margin-right:75%' id='tenantType"+Dyid+"'></span>"+
+"<span class='prop-mark-fav' ><i class='fa fa-heart' id='colorid"+Dyid+"' onclick='return  Addfav("+Dyid+",Loginid,this)' style='color:white;' ></i></span>"+
+"<span style='margin-right:70%' id='tenantType"+Dyid+"'></span>"+
 "</div>"+
-
-
-
 "<div class='listing-img-content'>"+
-// "<div style='color:red;margin-bottom:25%;font-family: Hanken;font-size: 1.3em; outline-width: 20px;'  onclick='Addfav("+Dyid+",Loginid,this)' id='colorid"+Dyid+"' class='fa fa-heart'></div>"+
-
-
-
-
 "<span class='listing-price' id='Rent"+Dyid+"' style='font-size:20px;margin-left:-3%'></span>"+"<br>"+
 "<span class='listing-price' style='font-size:15px;margin-left:4%;font-family: Hanken;'> monthly</span>"+
 "</div>"+
-
 "</a>"+
 
-"<ul class='listing-details' style='height:40px'>"+
-"<li id='star1"+Dyid+"'><span class='prop-mark-fav' style='margin-left:9px;' ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
-"<li  id='star1.5"+Dyid+"' style='display:none'><span class='prop-mark-fav' style='color:#cc22c3;' ><i class=' fa fa-star-half-o'  style='font-size: 1.0em;'  ></i></span></li>"+
-
-"<li id='star2"+Dyid+"'><span class='prop-mark-fav' ><i class='fa fa-star'   style='font-size: 1.0em;margin-left:'  ></i></span></li>"+
-
-"<li id='star2.5"+Dyid+"' style='display:none'><span class='prop-mark-fav' style='color:#cc22c3' ><i class='fa fa-star-half-o'   style='font-size: 1.0em;'  ></i></span></li>"+
-"<li id='star3"+Dyid+"'><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'   ></i></span></li>"+
-
-
-"<li id='star3.5"+Dyid+"' style='display:none'><span class='prop-mark-fav'  ><i class=' fa fa-star-half-o'   style='font-size: 1.0em;color:#cc22c3;'  ></i></span></li>"+
-
-"<li id='star4"+Dyid+"'><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
-
-"<li  id='star4.5"+Dyid+"' style='display:none'><span class='prop-mark-fav'  ><i class=' fa fa-star-half-o'   style='font-size: 1.0em;color:#cc22c3;'></i></span></li>"+
-
-
-"<li id='star5"+Dyid+"'><span class='prop-mark-fav'  ><i class='fa fa-star'   style='font-size: 1.0em'  ></i></span></li>"+
-"<li><span class='prop-mark-fav' style='font-size:12px;'  ><i style=' margin-left:90px' class='sl sl-icon-like' ></i></span>     <span id='Likecount"+Dyid+"'></span></li>"+
-
-
-
-
-// "<li><i class='sl sl-icon-star' style='margin-left:9px;color:#fa5b0f'></i></li>"+
-// "<li><i class='sl sl-icon-star' style='color:#fa5b0f' ></i></li>"+
-// "<li><i class='sl sl-icon-star' style='color:#fa5b0f'></i></li>"+
-// "<li><i class='sl sl-icon-star' style='color:#fa5b0f'></i></li>"+
-// "<li><i class='sl sl-icon-star' style='color:#fa5b0f'></i></li>"+
-
-
-"</ul>"+
-
 "<div class='listing-content'>"+
-"<div>"+
-"<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:18px;font-family: Hanken;'></span>"+"<br><span id='Squarefeet"+Dyid+"' style='margin-left:6%;font-size:15px;font-family: Hanken;'></span>"+
-"<br>"+
+"<a  class='listing-content' id='getUrl1"+Dyid+"'>"+
+"<div style='margin-top:15px;'>"+
 
-
-
-
-
-"<i class='fa fa-map-marker' style='margin-left:6%;'><span id='city1"+Dyid+"' style='margin-left:4px;font-family: Hanken;'></span></i>"+ 
+"<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:17px;font-family:Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;color:black'></span>"+
 
 "<br>"+
-
-
-
- 
-"<span style='margin-left:6%;font-size:18px;font-family: Hanken;'>Rent starts from</span>"+
-
-
-"<span style='margin-left:6%;font-size:18px;font-family: Hanken;' id='bedrent"+Dyid+"'></span>"+"<span >/bed</span>"+
+"<i class='fa fa-map-marker' style='margin-left:5.7%;color:#fa5b0f'></i><span id='city1"+Dyid+"' style='margin-left:4px;font-family:Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;font-size:14px;color:black'></span>"+ 
 "<br>"+
- 
-
-// "<span style='font-size:15px;font-family: Hanken;margin-left:10px;' >  Security Deposit</span>"+
-
-// "<span id='deposit"+Dyid+"' style='margin-left:11px;font-size:15px;'></span>"+
-// "<br>"+
-
-"<b><span id='availbed"+Dyid+"' style='margin-left:6%;color:#cc22c3;font-size:15px;'></span>"+
-"<span style='color:#cc22c3;font-size:15px;font-family: Hanken;' >  Bed Available</span></b>"+
-
+"<span style='margin-left:6%;font-size:15px;font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;color:black'>Rent starts from</span>"+
+"<span style='margin-left:3%;font-size:15px;font-family:Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;color:black' id='bedrent"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
+"<br>"+
+"<span style='margin-left:6%;font-size:15px;font-family:  Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;color:black'>Security Deposit</span>"+
+"<span style='margin-left:3%;font-size:15px;font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;color:black' id='deposit"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
+"<br>"+
+ "<b><span id='availbed"+Dyid+"' style='margin-left:6%;font-size:15px;'></span>"+
+"<span style='font-size:15px;font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;'>  Bed Available</span></b>"+"<b id='Squarefeet"+Dyid+"' style='margin-left:10%;font-size:14px;font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;'></b>"+
 
 
 "</div>"+
 "<ul class='listing-details' >"+
-"<li><b id='houseType"+Dyid+"' style='font-family: Hanken;'>"+"</b></li>"+
-"<li><b id='bhk"+Dyid+"'  style='font-family: Hanken;'>"+"</b></li>"+
- "<li><b id='furnishtype"+Dyid+"' style='font-family: Hanken;'></b></li>"+
+"<li><b id='houseType"+Dyid+"' style='font-family:Hanken'>"+"</b></li>"+
+"<li><b id='bhk"+Dyid+"'  style='font-family:Hanken;margin-left:5px;'>"+"</b></li>"+
+ "<li><b id='furnishtype"+Dyid+"' style='font-family:Hanken;margin-left:5px;'></b></li>"+
 "</ul>"+
+"</a>"+ 
 "</div>"+
+
 "</div>";
 
 
@@ -566,6 +463,7 @@ if (liked == true){
  }
  
  //For Filter Get REsponse
+//For Filter Get REsponse
 function GetFilterhome(){
   
 
@@ -579,12 +477,7 @@ function GetFilterhome(){
     var getdistance =document.getElementById('distance').value;
     var getbhk =document.getElementById('getbhk').value;
      var getbed =document.getElementById('getbed').value;
-
-
-    
-  
-
-    //Calling Radio button Function
+     //Calling Radio button Function
     var tenantType=getRadiovalue(gettenanttype);
     var bookingtype=getRadiovalue(getbookingtype);
     var housetype=getRadiovalue(gethousetype);
@@ -607,7 +500,7 @@ function GetFilterhome(){
     console.log(Filter)
     $.ajax({
       type: "POST",
-      url: "http://localhost:8083/GetFilter",
+      url: "http://176.111.105.86:8083/GetFilter",
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(Filter),
 
@@ -644,7 +537,7 @@ function Notification(){
     
 $.ajax({
       type: "POST",
-      url: "http://localhost:8083/Notifyme",
+      url: "http://176.111.105.86:8083/Notifyme",
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(s),
 
@@ -663,7 +556,7 @@ $.ajax({
             
           $.ajax({
            type: "GET",
-           url: "http://localhost:8083/Logout",
+           url: "http://176.111.105.86:8083/Logout",
          
          success: function(responsee){
 
@@ -693,9 +586,6 @@ $.ajax({
 <!-- Wrapper -->
 <div id="wrapper">
 
-
-<!-- Header Container
-================================================== -->
 <header id="header-container" class="fullwidth">
 
   <!-- Topbar -->
@@ -732,7 +622,7 @@ $.ajax({
         <nav id="navigation" class="style-1">
           <ul id="responsive">
             <li><a  href="index.html">Home</a></li>
-            <li><a href="howitwork.html">How It Works </a></li>
+            <li><a href="howitwork.html">How It Works </a>
               <ul>
                 <li><a href="owner.html">Owners</a> </li>
                 <li><a href="tenats.html">Tenants</a></li>
@@ -769,6 +659,7 @@ $.ajax({
 
 
 
+
 <div class="clearfix"></div>
 <!-- Header Container / End -->
 
@@ -793,27 +684,7 @@ $.ajax({
           <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
       </ul>
     </div>
-
-  <!-- </div> -->
-
-
-  
-     
-         <!-- <div> -->
-            <!-- <iframe  id="map-canvas" frameborder="0" style="border:0"   allowfullscreen="">
-            </iframe> -->
-         <!--  <iframe id="map-canvas" frameborder="0" style="border:0" allowfullscreen=""    
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q=electronic city ,Banglore,India">
-            </iframe> -->
-        <!-- Map Navigation -->
-      <!-- <a href="#" id="geoLocation" title="Your location"></a>
-      <ul id="mapnav-buttons" class="top">
-          <li><a href="#" id="prevpoint" title="Previous point on map">Prev</a></li>
-          <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
-      </ul> -->
-    <!-- </div> -->
-
-  </div>
+ </div>
 
 
   <div class="fs-inner-container">
@@ -824,21 +695,14 @@ $.ajax({
 
         <div class="row">
           <div class="col-md-12">
-
-            
-
-            <!-- Form -->
             <div>
 
-
-              <!-- Row With Forms -->
               <div class="row with-forms">
+          
 
-                <!-- Main Search Input -->
-              <!--  <div class="col-fs-6">
-                  <input type="text" placeholder="Enter address e.g. street, city or state" value=""/>
-                </div> -->
-    <a href="#" class="more-search-options-trigger margin-top-20" data-open-title="Filter Options" data-close-title="Less Options" style="margin-left:70%;"></a>
+    <a href="#" class="more-search-options-trigger" style="margin-left:20px" data-open-title="Filter Options" data-close-title="Less Options"></a>
+
+     <span> <a href="notify.html" class="button medium" style="margin-left:570px;"><i style="font-size: 1.5em" class="im im-icon-Home-2"></i>Notify me</a></span>
 
               <div class="more-search-options relative" >
                 <div class="more-search-options-container margin-top-30" style="margin-left:5%;">
@@ -1052,10 +916,11 @@ $.ajax({
 
         <!-- Displaying -->
         <div class="col-md-12">
-          <p class="showing-results" id="property"></p>
+          <b class="showing-results" id="property" style="color:#fa5b0f;font-family:Hanken;font-size:20px;"></b>
         </div>
+        <br>
                 
-                <div class="listings-container grid-layout" id="listContainer">
+                <div class="listings-container list-layout" id="listContainer">
 
 
 
@@ -1067,18 +932,6 @@ $.ajax({
 
 </div>
 
-<!-- The Modal -->
-<div id="myModal1" class="modal">
-
-  <!-- Modal content -->
-  <div class="modal-content" style="width:40%;">
-    <span class="close">&times;</span>
-
-   <span style="color:black">Pay My rent is Comming soon!...</span>
-  
-
-</div>
-</div>
 
 <!-- Scripts
 ================================================== -->

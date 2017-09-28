@@ -3,6 +3,7 @@ package Mysql
 import (
 	Model "Rentmatics_App/Model"
 	_ "database/sql"
+	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -53,6 +54,7 @@ func InserUser(Userdata Model.User) (Userinfo Model.UserResponse) {
 
 	}
 }
+
 func GetUSer(User1 Model.LoginUser) (Userinfo Model.UserResponse) {
 	var Getuser Model.Getlogin
 	rows, err := OpenConnection["Rentmatics"].Query("select username,loginid,password from userdata where username=?", User1.Username)
@@ -78,6 +80,39 @@ func GetUSer(User1 Model.LoginUser) (Userinfo Model.UserResponse) {
 	} else {
 		Userinfo.Status = "Failure"
 		return
+	}
+
+}
+
+func InsertChangepassword(User1 Model.Changepass) (Userinfo string) {
+	var Getuser string
+	rows, err := OpenConnection["Rentmatics"].Query("select password from userdata where loginid=?", User1.Loginid)
+	if err != nil {
+		log.Error("Error -DB: Get User", err)
+	}
+	for rows.Next() {
+
+		rows.Scan(
+
+			&Getuser,
+		)
+
+	}
+	fmt.Println(Getuser)
+	fmt.Println(User1.OldPassword)
+	if User1.OldPassword == Getuser {
+
+		Queryupdate := "UPDATE  userdata SET password=' " + User1.Newpassword + " '  where loginid= '" + User1.Loginid + "'"
+
+		row, err := OpenConnection["Rentmatics"].Exec(Queryupdate)
+		if err != nil {
+			log.Error("Error -DB: update Profile", err, row)
+		}
+		return "success"
+
+	} else {
+
+		return "Failure"
 	}
 
 }
