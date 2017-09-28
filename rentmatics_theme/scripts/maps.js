@@ -43,7 +43,7 @@ var  locations1 =[];
        
 $.ajax({
 type: "GET",
-url: "http://localhost:8083/GetAllhomedetails",
+url: "http://176.111.105.86:8083/GetAllhomedetails",
 async: false,
 
 success: function(responsee){
