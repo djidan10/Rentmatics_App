@@ -56,3 +56,15 @@ func Ownertoexecutive(w http.ResponseWriter, r *http.Request) {
 	Db.GetOwnerExecutive_Db(GetOwnerExecutive)
 
 }
+
+//Get Single Owner Details
+func Insertowner(w http.ResponseWriter, r *http.Request) {
+
+	var InsOwner Model.Owner
+	err := json.NewDecoder(r.Body).Decode(&InsOwner)
+	if err != nil {
+		log.Error("Error - Owner single", err)
+	}
+	Db.Insertowner_Db(InsOwner)
+
+}

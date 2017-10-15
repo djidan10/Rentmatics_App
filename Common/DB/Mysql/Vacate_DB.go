@@ -57,3 +57,9 @@ func GetSinglevacate_Db(vacateid int) (Data Model.Vacate) {
 	}
 	return
 }
+
+func Insertvacate_Db(Vacatedata Model.Vacate) {
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into vacate (homeid,tenantid,Vacate_predate,Vacate_Date,Vacate_reason,Vacate_status) values (?,?,?,?,?,?)", Vacatedata.Home_id, Vacatedata.Tenant_Id, Vacatedata.Vacate_priordate, Vacatedata.Vacate_Date, Vacatedata.Vacate_reason, Vacatedata.Vacate_status)
+	log.Info("successfully inserted", rows, err)
+
+}

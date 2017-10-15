@@ -1,0 +1,393 @@
+<script type="text/javascript">
+
+function InsertTenantVacateDetails(){
+   var Vacate_Home_id    = document.getElementById('VacateHomeid').value;
+  var Vacate_Tenant_Id  = document.getElementById('VacateTenantId').value;
+  var Vacate_priordate  = document.getElementById('Vacatepriordate').value;
+  var Vacate_Date       = document.getElementById('VacateDate').value;
+  var Vacate_reason     = document.getElementById('Vacatereason').value;
+  var Vacate_status     = document.getElementById('Vacatestatus').value;
+         
+   var InsertVacateDetails={
+      "Home_id"    :parseInt(Vacate_Home_id),    
+      "Tenant_Id"    :parseInt(Vacate_Tenant_Id),   
+      "Vacate_priordate" :Vacate_priordate,
+      "Vacate_Date"      :Vacate_Date,
+      "Vacate_reason"    :Vacate_reason,
+       "Vacate_status"   :Vacate_status
+         
+         }
+   $.ajax({
+              
+               type: "POST",
+               url: "http://localhost:8083/Insertvacate",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(InsertVacateDetails),
+               success: function(responsee){
+             console.log("successfully inserted")
+         
+               } });
+                  }
+
+
+
+function InsertTenantActivityDetails(){
+   
+  var Home_id              = document.getElementById('Acthomeid').value;
+var Tenant_Id             = document.getElementById('Acttenantid').value;
+var Activity_Date         = document.getElementById('Actdate').value;
+var Activity_Tittle       = document.getElementById('Acttittle').value;
+var Participation_count   = document.getElementById('Actcount').value;
+var Activity_Description  = document.getElementById('Actdesc').value;
+var Activity_Status        = document.getElementById('Actststud').value;
+         
+   var InsertActivityDetails={
+     
+"Home_id"              : parseInt(Home_id),
+"Tenant_Id"            : parseInt(Tenant_Id),
+"Activity_Date"        : Activity_Date,
+"Activity_Tittle"      : Activity_Tittle,
+"Participation_count"  : Participation_count,
+"Activity_Description" : Activity_Description,
+"Activity_Status"      : Activity_Status
+         
+         }
+   $.ajax({
+              
+               type: "POST",
+               url: "http://localhost:8083/InsertAcivity",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(InsertActivityDetails),
+          success: function(responsee){
+             console.log("successfully inserted")
+         
+               } });   }
+
+
+
+
+
+   function InsertTenantComplaintDetails(){
+   
+  var Home_id              = document.getElementById('Comphomeid').value;
+var Tenant_Id             = document.getElementById('Comptenantid').value;
+var Comp_Date         = document.getElementById('Compdate').value;
+
+var Comp_Description  = document.getElementById('Compdesc').value;
+var Comp_Status        = document.getElementById('Compststud').value;
+var Comp_Solveddate        = document.getElementById('Compsolvedate').value;
+         
+   var InsertComplaintsDetails={
+     
+"Home_id"              : parseInt(Home_id),
+"Tenant_Id"            : parseInt(Tenant_Id),
+"Complaint_raisedDate"      : Comp_Date,
+"Complaint_Description"     : Comp_Description,
+"Complaint_status"          : Comp_Status,
+"Complaint_solvedDate"      : Comp_Solveddate
+         
+         }
+   $.ajax({
+              
+               type: "POST",
+               url: "http://localhost:8083/InsertComplaint",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(InsertComplaintsDetails),
+          success: function(responsee){
+             console.log("successfully inserted")
+         
+               } });   }
+
+
+
+ function InsertRequestDetails(){
+   
+var Home_id       = document.getElementById('Reqhomeid').value;
+var Tenant_Id      = document.getElementById('Reqtenantid').value;
+var Resquestername  = document.getElementById('Reqname').value;
+var Total_Request = document.getElementById('ReqCount').value;
+var Pending_Reques  = document.getElementById('Reqpending').value;
+var Solved_Request  = document.getElementById('Reqsolved').value;
+var Request_Date   = document.getElementById('ReqDate').value;
+var  Request_desc = document.getElementById('Reqdesc').value;
+var  Approve_Date = document.getElementById('ReqsApprovedate').value;
+var  Status     = document.getElementById('Reqstatus').value;
+
+         
+   var InsertrequestDetails={
+     
+"Home_id"               :parseInt(Home_id),
+"Tenant_Id"             :parseInt(Tenant_Id),
+"Resquestername"  :Resquestername,
+"Total_Request"  :parseInt(Total_Request),
+"Pending_Request"  :parseInt(Pending_Reques),
+"Solved_Request" :parseInt(Solved_Request),
+"Request_Date"      :Request_Date,
+"Request_description" Request_desc,
+"Approve_Date"      :Approve_Date,
+"Status"      :Status
+         
+         }
+   $.ajax({
+              
+               type: "POST",
+               url: "http://localhost:8083/InsertRequest",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(InsertrequestDetails),
+          success: function(responsee){
+             console.log("successfully inserted")
+         
+               } });   }
+
+
+   function InsertOwnerDetails(){
+   
+var Homeid            = document.getElementById('Homeid').value;
+var First_Name        = document.getElementById('firstname').value;
+var Last_Name       = document.getElementById('lastname').value;
+var Email_Id        = document.getElementById('emailid').value;
+var Contact       = document.getElementById('contact').value;
+var Alernate_Contact  = document.getElementById('Alternate').value;
+var DOB           = document.getElementById('dateob').value;
+var Permanent_Address1 = document.getElementById('Perm_A1').value;
+var Permanent_Address2 = document.getElementById('Perm_A2').value;
+var Permanent_Area    = document.getElementById('Perm_area').value;
+var  Permanent_City    = document.getElementById('Perm_city').value;
+var   Permanent_Pin     = document.getElementById('Perm_pin').value;
+var   Tenant_img        = document.getElementById('tenantimmg').value;
+var   Pan_Card           = document.getElementById('Pancard').value;
+var   Aadhar_Card         = document.getElementById('Adhar').value;
+var   Voter_Card         = document.getElementById('votercard').value;
+var   Aggrement          = document.getElementById('Agree').value;
+
+         
+   var InsertOwnerDetails={
+     
+"Homeid"               :parseInt(Home_id),
+"First_Name"             :First_Name,
+"Last_Name"       :Last_Name,
+"Email_Id"        :Email_Id,
+"Contact"           :Contact,
+"Alernate_Contact"      :Alernate_Contact,
+"DOB"           :DOB,
+"Permanent_Address1"      :Permanent_Address1,
+"Permanent_Address2"      :Permanent_Address2,
+"Permanent_Area"      :Permanent_Area,
+"Permanent_City"      :Permanent_City,
+"Permanent_Pin"      :Permanent_Pin,
+"Tenant_img"      :Tenant_img,
+"Pan_Card"      :Pan_Card,
+"Aadhar_Card"      :Aadhar_Card,
+"Voter_Card"      :Voter_Card,
+"Aggrement"      :Aggrement
+         
+         }
+   $.ajax({
+              
+               type: "POST",
+               url: "http://localhost:8083/InsertOwner",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(InsertOwnerDetails),
+          success: function(responsee){
+             console.log("successfully inserted")
+         
+               } });   }
+
+
+
+
+
+function InsertExecutiveDetails(){
+   
+var Homeid            = document.getElementById('Homeid').value;
+var First_Name        = document.getElementById('firstname').value;
+var Last_Name       = document.getElementById('lastname').value;
+var Email_Id        = document.getElementById('emailid').value;
+var Contact       = document.getElementById('contact').value;
+var Alernate_Contact  = document.getElementById('Alternate').value;
+var DOB           = document.getElementById('dateob').value;
+var Permanent_Address1 = document.getElementById('Perm_A1').value;
+var Permanent_Address2 = document.getElementById('Perm_A2').value;
+var Permanent_Area    = document.getElementById('Perm_area').value;
+var  Permanent_City    = document.getElementById('Perm_city').value;
+var   Permanent_Pin     = document.getElementById('Perm_pin').value;
+
+var   Pan_Card           = document.getElementById('Pancard').value;
+var   Aadhar_Card         = document.getElementById('Adhar').value;
+var   Voter_Card         = document.getElementById('votercard').value;
+
+
+         
+   var InsertExecutiveDetails={
+     
+"Homeid"               :parseInt(Home_id),
+"First_Name"             :First_Name,
+"Last_Name"       :Last_Name,
+"Email_Id"        :Email_Id,
+"Contact"           :Contact,
+"Alernate_Contact"      :Alernate_Contact,
+"DOB"           :DOB,
+"Permanent_Address1"      :Permanent_Address1,
+"Permanent_Address2"      :Permanent_Address2,
+"Permanent_Area"      :Permanent_Area,
+"Permanent_City"      :Permanent_City,
+"Permanent_Pin"      :Permanent_Pin,
+
+"Pan_Card"      :Pan_Card,
+"Aadhar_Card"      :Aadhar_Card,
+"Voter_Card"      :Voter_Card
+
+         
+         }
+   $.ajax({
+              
+               type: "POST",
+               url: "http://localhost:8083/InsertExecutiveDetails",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(InsertExecutiveDetails),
+          success: function(responsee){
+             console.log("successfully inserted")
+         
+               } });   }
+
+
+function Insertownercomplaints(){
+   
+var ownerid            = document.getElementById('ownerid').value;
+var Executiveid        = document.getElementById('Executiveid').value;
+var Tenantid       = document.getElementById('Tenantid').value;
+var Homeid        = document.getElementById('Homeid').value;
+var Loginid       = document.getElementById('Loginid').value;
+var ComplaintDate  = document.getElementById('ComplaintDate').value;
+var Message           = document.getElementById('Message').value;
+var Status = document.getElementById('Status').value;
+var  Permanent_City    = document.getElementById('Perm_city').value;
+var   Approvedate           = document.getElementById('Approvedate').value;
+
+var InsertownercomplaintsDetails={
+     
+"Ownerid"             :parseInt(Home_id),
+"Executiveid"  :parseInt(Home_id),
+"Tenantid"  :parseInt(Tenantid),
+"Homeid" :parseInt(Home_id),
+"Loginid"  :Loginid,
+"ComplaintDate"      :ComplaintDate,
+"Message"      :Message,
+"Status"      :Status,
+"Permanent_City"      :Permanent_City,
+"Approvedate"      :Approvedate
+         }
+   $.ajax({
+              
+               type: "POST",
+               url: "http://localhost:8083/Insertownercomplaints",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(InsertownercomplaintsDetails),
+          success: function(responsee){
+             console.log("successfully inserted")
+         
+               } });   }
+
+
+   function RentmaticsLogin() {
+    var loginuser = document.getElementById('uname').value;
+    var loginpass = document.getElementById('upass').value;
+    var Rentmatics = {
+        "Username": loginuser,
+        "Password": loginpass,
+
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8083/RentLogin",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Rentmatics),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+            if (searchout.Status == "Admin") {
+                document.location.href = "admin.html";
+             
+            } else if(searchout.Status == "Tenant") {
+              document.location.href = "tenant.html";
+                
+            }else if(searchout.Status == "Owner") {
+              document.location.href = "owner.html";
+                
+            }else if(searchout.Status == "Executive") {
+              document.location.href = "Executive.html";
+                
+            }else{
+              alert("Incorrect Username and password")
+            }
+
+
+             }
+    });
+
+}
+
+
+// Signup-Register the Rentmatics user
+function SignupRent() {
+    var signuser = document.getElementById('Susername').value;
+    var signpass = document.getElementById('cpassword').value;
+    var Signrole = document.getElementById('Role').value;
+    var Rentmatics = {
+        "Id ": "",
+        "Username": signuser,
+        "Password": signpass,
+        "Role": Signrole,
+        
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8083/RentUser",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Rentmatics),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            $("#login").html(loginidd);
+            
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+           window.history.back();
+        }
+    });
+}
+
+
+
+function logout() {
+   
+
+     $.ajax({
+        type: "GET",
+        url: "http://localhost:8083/RentUserlogout",
+
+        success: function(responsee) {
+             document.getElementById("loginhiden").style.display = "inline";
+                document.getElementById("account").style.display = "none";
+                location.reload(true);
+
+    
+        }
+
+    });
+
+}
+
+
+
+
+
+         </script>

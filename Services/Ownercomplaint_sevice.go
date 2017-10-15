@@ -2,6 +2,7 @@ package Services
 
 import (
 	Db "Rentmatics_App/Common/DB/Mysql"
+	Model "Rentmatics_App/Model"
 	"encoding/json"
 	"net/http"
 )
@@ -40,5 +41,17 @@ func GetSingleOwnercomplaint(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
 	w.Write(Senddata)
+
+}
+
+//Get Single Owner Details
+func Insertownercomplaints(w http.ResponseWriter, r *http.Request) {
+
+	var InsOwnercomp Model.Ownercomplaints
+	err := json.NewDecoder(r.Body).Decode(&InsOwnercomp)
+	if err != nil {
+		log.Error("Error - Owner single", err)
+	}
+	Db.Insertownercomplaints_Db(InsOwnercomp)
 
 }

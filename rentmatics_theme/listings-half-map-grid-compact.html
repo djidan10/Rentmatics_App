@@ -205,11 +205,16 @@ for (var i = 0, l = elements.length; i < l; i++)
 function Getresponse(searchout){
   
   var cardstring ="";
-  var property =searchout.length +" Results Found ";
- for (k=0;k<searchout.length;k++){
+  
+ console.log(searchout);
+  if( searchout != null  ){
+     var property =searchout.length +" Results Found ";
+    for (k=0;k<searchout.length;k++){
     cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,Loginid);
-   
+
   }
+
+  
 
   document.getElementById("listContainer").innerHTML=cardstring;
 
@@ -304,7 +309,7 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 document.getElementById("getUrl1"+ ID).setAttribute("href",url);
     var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
       src=src.replace("&amp;","&")
-    
+
         // document.getElementById("map-canvas").setAttribute("src",src);
 //var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
 // document.getElementById("maprightview").setAttribute("src",src);
@@ -313,6 +318,12 @@ document.getElementById("getUrl1"+ ID).setAttribute("href",url);
 
 
 }
+}
+else{
+ 
+   location.reload(true);
+ }
+
 }
 function Addfav(getid,getlogin,colorid){
   
@@ -431,24 +442,24 @@ if (liked == true){
 "<a  class='listing-content' id='getUrl1"+Dyid+"'>"+
 "<div style='margin-top:15px;'>"+
 
-"<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:17px;font-family:Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;color:black'></span>"+
+"<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:20px;font-family:Hanken;color:black'></span>"+
 
 "<br>"+
-"<i class='fa fa-map-marker' style='margin-left:5.7%;color:#fa5b0f'></i><span id='city1"+Dyid+"' style='margin-left:4px;font-family:Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;font-size:14px;color:black'></span>"+ 
+"<i class='fa fa-map-marker' style='margin-left:5.7%;color:#d71319'></i><span id='city1"+Dyid+"' style='margin-left:4px;font-family:Hanken;' font-size:11px;color:black'></span>"+ 
 "<br>"+
-"<span style='margin-left:6%;font-size:15px;font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;color:black'>Rent starts from</span>"+
-"<span style='margin-left:3%;font-size:15px;font-family:Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;color:black' id='bedrent"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
+"<span style='margin-left:6%;font-size:15px;font-family: Hanken;color:black'>Rent starts from</span>"+
+"<span style='margin-left:3%;font-size:15px;font-family:Hanken;color:black' id='bedrent"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
 "<br>"+
-"<span style='margin-left:6%;font-size:15px;font-family:  Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;color:black'>Security Deposit</span>"+
-"<span style='margin-left:3%;font-size:15px;font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;color:black' id='deposit"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
+"<span style='margin-left:6%;font-size:15px;font-family:Hanken;color:black'>Security Deposit</span>"+
+"<span style='margin-left:3%;font-size:15px;font-family:Hanken;color:black' id='deposit"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
 "<br>"+
  "<b><span id='availbed"+Dyid+"' style='margin-left:6%;font-size:15px;'></span>"+
-"<span style='font-size:15px;font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;'>  Bed Available</span></b>"+"<b id='Squarefeet"+Dyid+"' style='margin-left:10%;font-size:14px;font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;'></b>"+
+"<span style='font-size:15px;font-family:Hanken'>  Bed Available</span></b>"+"<b id='Squarefeet"+Dyid+"' style='margin-left:10%;font-size:14px;font-family: Hanken'></b>"+
 
 
 "</div>"+
 "<ul class='listing-details' >"+
-"<li><b id='houseType"+Dyid+"' style='font-family:Hanken'>"+"</b></li>"+
+"<li ><b id='houseType"+Dyid+"' style='font-family:Hanken;margin-left:10px;'>"+"</b></li>"+
 "<li><b id='bhk"+Dyid+"'  style='font-family:Hanken;margin-left:5px;'>"+"</b></li>"+
  "<li><b id='furnishtype"+Dyid+"' style='font-family:Hanken;margin-left:5px;'></b></li>"+
 "</ul>"+
@@ -470,28 +481,28 @@ function GetFilterhome(){
 
     var minrent =  document.getElementById('getmin').value;
     var maxrent = document.getElementById('getmax').value;
-    var gettenanttype = document.getElementsByName('tenantType');
-    var getbookingtype =document.getElementsByName('bookingType');
-    var gethousetype =document.getElementsByName('houseType');
-    var getfurnishingType =document.getElementsByName('furnishingType');
+    var gettenanttype = document.getElementById('tenantType').value;
+    var getbookingtype =document.getElementById('bookingType').value;
+    var gethousetype =document.getElementById('houseType').value;
+    var getfurnishingType =document.getElementById('furnishingType').value;
     var getdistance =document.getElementById('distance').value;
     var getbhk =document.getElementById('getbhk').value;
      var getbed =document.getElementById('getbed').value;
      //Calling Radio button Function
-    var tenantType=getRadiovalue(gettenanttype);
-    var bookingtype=getRadiovalue(getbookingtype);
-    var housetype=getRadiovalue(gethousetype);
-    var furnishingType=getRadiovalue(getfurnishingType);
+    // var tenantType=getRadiovalue(gettenanttype);
+    // var bookingtype=getRadiovalue(getbookingtype);
+    // var housetype=getRadiovalue(gethousetype);
+    // var furnishingType=getRadiovalue(getfurnishingType);
 
-  
+
   var Filter ={
       "F_Loginid" : cooki,
       "F_Monthrent_Min": parseInt(minrent),
       "F_Monthrent_Max": parseInt(maxrent),
-      "F_Tenant_type":tenantType,
-      "F_Bookingtype":bookingtype,
-      "F_Housetype":housetype,
-      "F_Furnished_type":furnishingType,
+      "F_Tenant_type":gettenanttype,
+      "F_Bookingtype":getbookingtype,
+      "F_Housetype":gethousetype,
+      "F_Furnished_type":getfurnishingType,
       "F_Distance":getdistance,
       "F_Bhk":parseInt(getbhk),
       "F_Bed":parseInt(getbed)
@@ -507,9 +518,10 @@ function GetFilterhome(){
    success: function(responsee){
 
      var searchout = JSON.parse(responsee);
+     console.log(searchout)
          
             Getresponse(searchout);
-
+ 
  }
 
 });
@@ -711,7 +723,7 @@ $.ajax({
                 <div class="row with-forms">
                 <div class="col-fs-3">
                   <select data-placeholder="Tenant Type" class="chosen-select-no-single" id="tenantType">
-                    <option >Tenant Type </option>  
+                    <option value="">Tenant Type </option>  
                     <option value="Girls">Girls</option>
                     <option value="Boys">Boys</option>
                     <option value="Family">Family</option>
@@ -720,7 +732,7 @@ $.ajax({
                 </div>
                 <div class="col-fs-2" style="width:47%">
                   <select data-placeholder="House Type" class="chosen-select-no-single" id="houseType">
-                    <option>House Type </option>  
+                    <option value="">House Type </option>  
                     <option value="Apartment">Apartment</option>
                     <option value="Independent">Independent House</option>
                     <option value="Villa">Villa</option>
@@ -743,7 +755,7 @@ $.ajax({
                   <div class="select-input disabled-first-option">
                     <input type="text" placeholder="Min Rent" data-unit="$" id="getmin">
                     <select>  
-                      <option>Min </option>
+                      <option value="5000">Min </option>
                       <option value="5000">5000</option>
                       <option value="7500">7500</option>
                       <option value="10000">10000</option>
@@ -765,7 +777,7 @@ $.ajax({
                   <div class="select-input disabled-first-option">
                     <input type="text" placeholder="Max Rent"  data-unit="$" id="getmax">
                     <select>  
-                      <option>Max </option>
+                      <option value="">Max </option>
                       <option value="7500">7500</option>
                       <option value="10000">10000</option>
                       <option value="12500">12500</option>
@@ -787,8 +799,8 @@ $.ajax({
                 <!-- Property Type -->
                 <div class="col-fs-3">
                   <select data-placeholder="Furnished Type" class="chosen-select-no-single" id="furnishingType">
-                    <option >Furnished Type</option>  
-                    <option value="Fully Furnished">Fully Furnished</option>
+                    <option value="">Furnished Type</option>  
+                    <option value="Furnished">Fully Furnished</option>
                     <option value="Semi Furnished">Semi Furnished</option>
                     <option value="Unfurnished">UnFurnished</option>
                     
@@ -796,7 +808,7 @@ $.ajax({
                 </div>
                 <div class="col-fs-3" style="width:47%">
                   <select data-placeholder="Booking Type" class="chosen-select-no-single" id="bookingType" >
-                    <option>Booking Type </option>  
+                    <option value="">Booking Type </option>  
                     <option value="Shared Room">Shared Room</option>
                     <option value="Private Room">Private Room</option>
                     <option value="Entire House">Entire House</option>
@@ -817,8 +829,8 @@ $.ajax({
                   <div class="select-input disabled-first-option">
                     <input type="text" placeholder="Distance" data-unit="KM" id="distance">
                     <select  >  
-                    <option label="blank"></option> 
-                      <option>Distance </option>
+                   
+                      <option value="1">Distance </option>
                       <option value="1">1 Km</option>
                       <option value="2">2 Km</option> 
                       <option value="3">3 Km</option> 
@@ -836,8 +848,8 @@ $.ajax({
                     <!-- Rooms Area -->
                     <div class="col-fs-3" style="width:46%">
                       <select data-placeholder="BHK" class="chosen-select-no-single" id="getbhk">
-                        <option label="blank"></option> 
-                        <option>Bhk </option> 
+                      
+                        <option >Bhk </option> 
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -848,13 +860,13 @@ $.ajax({
 
                     </div>
                     </div>
-    <div class="row with-forms" style="display:none">
+    <div class="row with-forms" >
 
                     <!-- Min Area -->
                     <div class="col-fs-3">
                       <select data-placeholder="Beds" class="chosen-select-no-single" id="getbed">
-                        <option label="blank"></option> 
-                        <option>Beds </option>  
+                        
+                        <option >Beds </option>  
                         <option value="1" >1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -864,6 +876,8 @@ $.ajax({
                     </div>
  </div>
                     
+
+
 
                   <!-- Checkboxes -->
                   <div class="checkboxes in-row">
@@ -893,7 +907,9 @@ $.ajax({
                   </div>
                   <!-- Checkboxes / End -->
 
-                    <button class="button fs-map-btn" onclick="GetFilterhome()">Search</button>
+
+
+                    <button class="button fs-map-btn" style="margin-right:20%" onclick="GetFilterhome()">Search</button>
 
                           </div>
                 </div>
@@ -916,7 +932,7 @@ $.ajax({
 
         <!-- Displaying -->
         <div class="col-md-12">
-          <b class="showing-results" id="property" style="color:#fa5b0f;font-family:Hanken;font-size:20px;"></b>
+          <b class="showing-results" id="property" style="color:#d71319;font-family:Hanken;font-size:20px;"></b>
         </div>
         <br>
                 

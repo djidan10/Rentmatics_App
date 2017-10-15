@@ -78,7 +78,7 @@ function SignupRent() {
 //Redirect to wishlist page
 
 function Getwish() {
-   
+    alert("inside wish " + loginidd);
     url = "wishlist.html";
     document.location.href = url;
 
@@ -100,7 +100,7 @@ var url =""
   
  
   var partsOfStr = cities.split(',');
-  
+   
    if (partsOfStr  == null || partsOfStr  == ""){
      url = 'listings-half-map-grid-compact.html' 
    }else{

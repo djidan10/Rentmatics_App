@@ -7,11 +7,30 @@ type User struct {
 	Loginid   string
 	Logintype string
 }
+
+type RentUser struct {
+	Username string
+	Password string
+	Role     string
+}
+
+type AdminResponse struct {
+	Username string
+	Role     string
+}
+
+type AdminLoginResponse struct {
+	Username string
+	Password string
+	Role     string
+}
+
 type UserResponse struct {
 	Username string
 	Loginid  string
 	Status   string
 }
+
 type LoginUser struct {
 	Username string
 	Password string

@@ -85,3 +85,9 @@ func GetSingleComplaint_Db(Complaintid int) (Datasend Model.Complaintsend) {
 	Datasend.Tenantdetails = GetIndivualTenant_Db(Data.Tenant_Id)
 	return
 }
+
+func InsertComplaints_Db(Complaintdata Model.Complaints) {
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into complaint (homeid,tenantid,complained_raiseddate,complaint_description,complaint_status,complaint_solveddate) values (?,?,?,?,?,?)", Complaintdata.Home_id, Complaintdata.Tenant_Id, Complaintdata.Complaint_raisedDate, Complaintdata.Complaint_Description, Complaintdata.Complaint_status, Complaintdata.Complaint_solvedDate)
+	log.Info("successfully inserted", rows, err)
+
+}

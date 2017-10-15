@@ -171,7 +171,7 @@ func InsertHomeDetails(w http.ResponseWriter, r *http.Request) {
 
 		io.Copy(f, file)
 		fmt.Println("Imageurl", Imageurl)
-		ImageurlFinal = append(ImageurlFinal, "http://176.111.105.86:8083/"+Imageurl)
+		ImageurlFinal = append(ImageurlFinal, "http://localhost:8083/"+Imageurl)
 
 	}
 
@@ -197,4 +197,16 @@ func SendEmail(Userdata Model.HomeInsert, ImageurlFinal []string) {
 		log.Error("smtp Error please check executive mail part", err)
 	}
 	log.Info("Succesfully Mailed")
+}
+
+func Insertexecutive(w http.ResponseWriter, r *http.Request) {
+
+	var InsExecutive Model.Executivedetails
+	err := json.NewDecoder(r.Body).Decode(&InsExecutive)
+	if err != nil {
+		log.Error("Error: Tenant vacate ", err)
+	}
+	//Insert Vacate Details
+	Db.InsertExecutive_Db(InsExecutive)
+
 }

@@ -79,9 +79,17 @@ func Serve() bool {
 	router.HandleFunc("/Deletewishlist", Service.DeleteWishlist)
 
 	router.HandleFunc("/User", Service.Userdata)
+
+	router.HandleFunc("/RentUser", Service.RentUserdata)
+	router.HandleFunc("/RentLogin", Service.RentLogin)
+	router.HandleFunc("/RentUserlogout", Service.RentUserlogout)
+
 	router.HandleFunc("/Login", Service.Login)
 	router.HandleFunc("/Logout", Service.Userlogout)
 	router.HandleFunc("/Changepassword", Service.Changepassword)
+	router.HandleFunc("/Forgotpassword", Service.Forgot)
+
+	router.HandleFunc("/RentLogin", Service.Login)
 
 	//Notify
 	router.HandleFunc("/Notifyme", Service.Notification)
@@ -106,32 +114,40 @@ func Serve() bool {
 	router.HandleFunc("/GetComplaint", Service.GetComplaint)
 	router.HandleFunc("/GetAllpendingComplaints", Service.Getpendingstatus)
 	router.HandleFunc("/GetSingleComplaint", Service.GetsingleComplaint)
+	router.HandleFunc("/InsertComplaint", Service.InsertComplaints)
 
 	//Vacate
 	router.HandleFunc("/Getvacatedetails", Service.Getvacatedetails)
 	router.HandleFunc("/GetSinglevacate", Service.Getsinglevacate)
+	router.HandleFunc("/Insertvacate", Service.InsertVacate)
 
 	//Activites
 	router.HandleFunc("/GetActivitiesdetails", Service.GetActivity)
 	router.HandleFunc("/GetSingleActivity", Service.GetsingleActivity)
+	router.HandleFunc("/InsertAcivity", Service.InsertActivity)
 
 	//Tenant Request
 	router.HandleFunc("/GetRequestdetails", Service.GetRequest)
 	router.HandleFunc("/GetRequestPendingdetails", Service.GetPendingrequest)
 	router.HandleFunc("/GetSingleRequest", Service.GetsingleRequest)
+	router.HandleFunc("/InsertRequest", Service.InsertRequest)
 
 	//Owner Request
 	router.HandleFunc("/GetOwnerdetails", Service.GetOwners)
 	router.HandleFunc("/GetSingleOwner", Service.GetsingleOwner)
+	router.HandleFunc("/InsertOwner", Service.Insertowner)
+
 	router.HandleFunc("/Ownertoexecutive", Service.Ownertoexecutive)
 
 	//Executive request
 	router.HandleFunc("/GetExecutivedetails", Service.GetExecutive)
 	router.HandleFunc("/GetSingleExecutive", Service.GetsingleExecutive)
+	router.HandleFunc("/InsertExecutive", Service.Insertexecutive)
 
 	//Owner complaints
 	router.HandleFunc("/GetAllownersComplaint", Service.GetOwnercomplaint)
 	router.HandleFunc("/Getsingleownercomplaint", Service.GetSingleOwnercomplaint)
+	router.HandleFunc("/Insertownercomplaints", Service.Insertownercomplaints)
 
 	//For HTTPS
 

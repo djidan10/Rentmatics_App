@@ -77,9 +77,7 @@ window.onload = function () {
               alert("No wishlist Found");
               document.getElementById("emptywish").style.display = "inline"; 
           //url = 'working.html?loginid='+loginid;
-          
-          console.log("*************wish url*******************")
-          
+      
             }
             else{
 
@@ -226,14 +224,20 @@ var s={
 "<tr>"+
 "<td class='title-container'>"+
 
-"<img  style='height:30%;width:30%'  id='rentimage1"+Dyid+"'"+
-">"+
 
-"<div class='title'>"+
-"<div class='notification closeable'>"+
+"<div style='margin-left:80% ' class='notification closeable'>"+
 "<a class='close' href='javascript:Deletefav("+Dyid+")'></a>"+
 "</div>"+
 "<a id='getUrl"+Dyid+"' style=''>"+
+"<img  style='height:30%;width:30%;margin-top:-10%'  id='rentimage1"+Dyid+"'"+
+">"+
+
+
+"<div class='title' style='margin-left:250px;margin-top:-120px'>"+
+
+
+
+
 "<h4 id='Housename"+Dyid+"' style='font-family:Hanken;margin-top:-50px;' >"+
 "</h4>"+
 
@@ -242,7 +246,7 @@ var s={
 "<span class='table-property-price' id='Rent"+Dyid+"'></span>"+
 
 "</div>"+
-"</a>"+
+
 "</td>"+
 "</tr>";
 
@@ -407,10 +411,6 @@ var s={
 
 </div>
 </div>
-<!-- Footer
-================================================== -->
-<div class="margin-top-55"></div>
-
 
 <!-- Footer
 ================================================== -->
@@ -419,17 +419,17 @@ var s={
   <div class="container" >
     <div class="row">
       <div class="col-md-5 col-sm-6">
-        <img class="footer-logo" src="images/rm_logo.png"  alt="">
+       <h2  style="color:white;font-family:Hanken;font-size:35px;margin-top:-1px"><b style="text-shadow: 1px 1px 2px black, 0 0 25px #d71319, 0 0 5px #d71319;">Rentmatics</b></h2>
+        <!-- <img class="footer-logo" src="images/rm_logo.png"  alt=""> -->
         <br><br>
-        <p style="font-family:Hanken;font-size:20px;">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+        <p style="font-family:Hanken;font-size:17px;margin-top:-45px">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
       </div>
 
       <div class="col-md-4 col-sm-6 ">
-        <h4  style="color:white;font-family:Hanken;font-size:21px">Helpful Links</h4>
+        <h4  style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Helpful Links</b></h4>
         <ul class="footer-links">
           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Login/Signup</a></li>
           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="about.html"  style="color:white">About</a></li>
-         
          
           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="myprivacy.html"  style="color:white">Privacy Policy</a></li>
         </ul>
@@ -445,7 +445,8 @@ var s={
       </div>    
 
       <div class="col-md-3  col-sm-12">
-        <h4  style="color:white;font-family:Hanken;font-size:21px">Contact Us</h4>
+       <h4  style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Contact Us</b></h4>
+       
         <div class="text-widget">
           <span  style="color:white;font-family:Hanken;font-size:17px">12345 Little Lonsdale St, Melbourne</span> <br>
           Phone: <span  style="color:white;font-family:Hanken;font-size:17px">Tel: +91-9884379333/9811448697 </span><br>
@@ -465,7 +466,7 @@ var s={
     <!-- Copyright -->
     <div class="row">
       <div class="col-md-12">
-        <div class="copyrights" style="color:white">© 2016 Rentmatics. All Rights Reserved.</div>
+        <div class="copyrights" style="color:white;font-family:Hanken;font-size:20px">© 2016 Rentmatics. All Rights Reserved.</div>
       </div>
     </div>
 
@@ -474,9 +475,9 @@ var s={
 </div>
 <!-- Footer / End -->
 
+
 <!-- Back To Top Button -->
 <div id="backtotop"><a href="#"></a></div>
-
 
 <!-- Scripts
 ================================================== -->

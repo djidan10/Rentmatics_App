@@ -2,6 +2,7 @@ package Services
 
 import (
 	Db "Rentmatics_App/Common/DB/Mysql"
+	Model "Rentmatics_App/Model"
 	"encoding/json"
 	"net/http"
 )
@@ -38,5 +39,17 @@ func Getsinglevacate(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
 	w.Write(Senddata)
+
+}
+
+func InsertVacate(w http.ResponseWriter, r *http.Request) {
+
+	var Insvacate Model.Vacate
+	err := json.NewDecoder(r.Body).Decode(&Insvacate)
+	if err != nil {
+		log.Error("Error: Tenant vacate ", err)
+	}
+	//Insert Vacate Details
+	Db.Insertvacate_Db(Insvacate)
 
 }

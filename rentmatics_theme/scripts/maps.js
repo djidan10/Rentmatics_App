@@ -68,11 +68,12 @@ for(var j=0;j<searchout.length;j++){
  var bedType =searchout[j].RentFullStruct.Bed
  var image = searchout[j].RentFullimages[0].Picture_url
  var geturl ="single-property-page-1.html?Id="+mapgetid
+ var lalitude =searchout[j].RentFullStruct.Latitude
+ var longitude =searchout[j].RentFullStruct.Longitude
 
-   locations1.push([locationData(geturl,Rent,bhk,image,Housename,Address2), 40.7427837, -73.11445617675781, 1, markerIcon]) 
+   locations1.push([locationData(geturl,Rent,bhk,image,Housename,Address2), lalitude, longitude, 1, markerIcon]) 
 }
-  console.log(locations1);
-  console.log("length"+locations1.length);
+  
   }
 
 });

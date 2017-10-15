@@ -64,3 +64,8 @@ func GetSingleOwnercomplaint_Db(Ownerid int) (Data Model.Ownercomplaints) {
 
 	return
 }
+
+func Insertownercomplaints_Db(Owncompdata Model.Ownercomplaints) {
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into ownercomplaint (Ownerid,Executiveid,Tenantid,Homeid,Loginid,ComplaintDate,Message,Status,Approvedate) values (?,?,?,?,?,?,?,?,?)", Owncompdata.Ownerid, Owncompdata.Executiveid, Owncompdata.Tenantid, Owncompdata.Homeid, Owncompdata.Loginid, Owncompdata.ComplaintDate, Owncompdata.Message, Owncompdata.Status, Owncompdata.Approvedate)
+	log.Info(rows, err)
+}

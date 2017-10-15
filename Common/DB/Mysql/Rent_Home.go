@@ -442,6 +442,7 @@ func GetFilter_Db(Filt Model.Filter) (Temprentarray []Model.RentSend) {
 
 		Temprentarray = append(Temprentarray, TempRentStruct)
 	}
+	fmt.Println("value", Temprentarray)
 
 	return Temprentarray
 }

@@ -61,3 +61,9 @@ func GetSingleActivity_Db(Activityid int) (Data Model.Activity) {
 	}
 	return
 }
+
+func InsertActivity_Db(Activitydata Model.Activity) {
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into activities (homeid,tenantid,activity_date,Activity_Tittle,Participation_count,Activity_Description,Activity_Status) values (?,?,?,?,?,?,?)", Activitydata.Home_id, Activitydata.Tenant_Id, Activitydata.Activity_Date, Activitydata.Activity_Tittle, Activitydata.Participation_count, Activitydata.Activity_Description, Activitydata.Activity_Status)
+	log.Info("successfully inserted", rows, err)
+
+}

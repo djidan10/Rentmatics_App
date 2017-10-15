@@ -97,3 +97,9 @@ func GetSingleRequest_Db(Requestid int) (Datasend Model.Requestsend) {
 	Datasend.Tenantdetails = GetIndivualTenant_Db(Data.Tenant_Id)
 	return
 }
+
+func InsertRequest_Db(Requestdata Model.Request) {
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into request (homeid,tenantid,Resquestername,Total_Request,Pending_Request,Solved_Request,Request_Date,Request_description,Approve_Date,Status) values (?,?,?,?,?,?,?,?,?,?)", Requestdata.Home_id, Requestdata.Tenant_Id, Requestdata.Resquestername, Requestdata.Total_Request, Requestdata.Pending_Request, Requestdata.Solved_Request, Requestdata.Request_Date, Requestdata.Request_description, Requestdata.Approve_Date, Requestdata.Status)
+	log.Info("successfully inserted", rows, err)
+
+}

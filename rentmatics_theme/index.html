@@ -7,15 +7,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+ <meta name="viewport" content="width=device-width, initial-scale=1">
       <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
-      <meta name="author" content="">
-      <script type="text/javascript" src="scripts/jquery.min.js"></script>
+<meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
+ <meta name="author" content="">
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
-      <meta name="google-signin-client_id" content="512343144553-4uoof7pml3lajhivpajgru0jo2u6mdnh.apps.googleusercontent.com">
-      <script src="https://apis.google.com/js/platform.js" async defer></script>
+ <meta name="google-signin-client_id" content="512343144553-4uoof7pml3lajhivpajgru0jo2u6mdnh.apps.googleusercontent.com">
+ <script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <!-- CSS
 ================================================== -->
@@ -36,6 +36,7 @@ $(document).ready(function(){
        $("#login").html("MyAccount");
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.display = "inline";
+                
                 localStorage.setItem("LoginID", cooki);
     }
 });
@@ -257,9 +258,9 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 						  <li><a href="#" style="visibility:hidden">Forrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr</a></li>
 						  <li style="display:none" id="account"><a href="#">My Account</a>
 									<ul>
-										<li><a href="my-profile.html">My Profile</a></li>
-										<li><a href="my-bookmarks.html">My Wish List</a></li>
-										<li><a href="javascript:logout()">Logout</a></li>
+										<li><a href="my-profile.html" style="font-family:Hanken;font-size:16px">My Profile</a></li>
+										<li><a href="my-bookmarks.html" style="font-family:Hanken;font-size:16px">My Wish List</a></li>
+										<li><a href="javascript:logout()" style="font-family:Hanken;font-size:16px">Logout</a></li>
 									
 									</ul>	
 								</li>
@@ -297,9 +298,9 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 						<!-- Property Type -->
 							<div class="col-md-2">
 							<select data-placeholder="Any Type" class="chosen-select-no-single" style="font-family:Hanken;font-size:20px;" >
-								<option>Boys</option>
-								<option>Girls</option>
-								<option>Family</option>
+								<option style="font-family:Hanken;font-size:20px;" >Boys</option>
+								<option style="font-family:Hanken;font-size:20px;" >Girls</option>
+								<option style="font-family:Hanken;font-size:20px;" >Family</option>
 								
 							</select>
 						</div>
@@ -391,60 +392,25 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 
 
 <!-- Featured -->
-<div class="container">
+<!-- <div class="container">
 	<div class="row">
 	
 		<div class="col-md-12">
 			<h3 class="headline margin-bottom-25 margin-top-65">Featured</h3>
 		</div>
 		
-		<!-- Carousel -->
 		
 		 <div class="col-md-12" id="listContainer">
-		 <!-- <div class="owl-carousel owl-theme" > -->
-		 <!-- <div class="carousel"> -->
 		 <div class="carousel owl-carousel owl-theme">
-
-
-		 </div>
+            </div>
 		 	</div>
 		 <div class="owl-controls clickable"><div class="owl-pagination"><div class="owl-page active"><span class=""></span></div><div class="owl-page"><span class=""></span></div></div><div class="owl-buttons"><div class="owl-prev"></div><div class="owl-next"></div></div></div>
 				
 
 
 	</div>
-</div>
-</div>
-<!-- Featured / End -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</div> -->
+<!-- </div> -->
 
 
 
@@ -815,7 +781,7 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
 
 
 <!-- Flip banner -->
-<a href="listings-half-map-grid-compact.html" class="flip-banner parallax" data-background="images/flip-banner-bg.jpg" data-color="#fa5b0f" data-color-opacity="0.9" data-img-width="2500" data-img-height="1600">
+<a href="listings-half-map-grid-compact.html" class="flip-banner parallax" data-background="images/flip-banner-bg.jpg" data-color="#d71319" data-color-opacity="0.9" data-img-width="2500" data-img-height="1600">
 	<div class="flip-banner-content">
 		<h2 class="flip-visible">We help people and homes find each other</h2>
 		<h2 class="flip-hidden">Browse Properties <i class="sl sl-icon-arrow-right"></i></h2>
@@ -848,13 +814,14 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
   <div class="container" >
     <div class="row">
       <div class="col-md-5 col-sm-6">
-        <img class="footer-logo" src="images/rm_logo.png"  alt="">
+       <h2  style="color:white;font-family:Hanken;font-size:35px;margin-top:-1px"><b style="text-shadow: 1px 1px 2px black, 0 0 25px #d71319, 0 0 5px #d71319;">Rentmatics</b></h2>
+        <!-- <img class="footer-logo" src="images/rm_logo.png"  alt=""> -->
         <br><br>
-        <p style="font-family:Hanken;font-size:20px;">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+        <p style="font-family:Hanken;font-size:17px;margin-top:-45px">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
       </div>
 
       <div class="col-md-4 col-sm-6 ">
-        <h4  style="color:white;font-family:Hanken;font-size:21px">Helpful Links</h4>
+        <h4  style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Helpful Links</b></h4>
         <ul class="footer-links">
           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Login/Signup</a></li>
           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="about.html"  style="color:white">About</a></li>
@@ -873,7 +840,8 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
       </div>    
 
       <div class="col-md-3  col-sm-12">
-        <h4  style="color:white;font-family:Hanken;font-size:21px">Contact Us</h4>
+       <h4  style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Contact Us</b></h4>
+       
         <div class="text-widget">
           <span  style="color:white;font-family:Hanken;font-size:17px">12345 Little Lonsdale St, Melbourne</span> <br>
           Phone: <span  style="color:white;font-family:Hanken;font-size:17px">Tel: +91-9884379333/9811448697 </span><br>
@@ -893,7 +861,7 @@ document.getElementById("getUrl"+ ID).setAttribute("href",url);
     <!-- Copyright -->
     <div class="row">
       <div class="col-md-12">
-        <div class="copyrights" style="color:white">© 2016 Rentmatics. All Rights Reserved.</div>
+        <div class="copyrights" style="color:white;font-family:Hanken;font-size:20px">© 2016 Rentmatics. All Rights Reserved.</div>
       </div>
     </div>
 

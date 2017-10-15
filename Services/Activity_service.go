@@ -3,6 +3,7 @@ package Services
 import (
 	Db "Rentmatics_App/Common/DB/Mysql"
 	"Rentmatics_App/Logger"
+	Model "Rentmatics_App/Model"
 	"encoding/json"
 	"net/http"
 )
@@ -45,5 +46,17 @@ func GetsingleActivity(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
 	w.Write(Senddata)
+
+}
+
+func InsertActivity(w http.ResponseWriter, r *http.Request) {
+
+	var InsActivity Model.Activity
+	err := json.NewDecoder(r.Body).Decode(&InsActivity)
+	if err != nil {
+		log.Error("Error: Tenant vacate ", err)
+	}
+	//Insert Vacate Details
+	Db.InsertActivity_Db(InsActivity)
 
 }

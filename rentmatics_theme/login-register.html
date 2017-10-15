@@ -3,7 +3,7 @@
 
 <!-- Basic Page Needs
 ================================================== -->
-<title>Findeo</title>
+<title>Rentmatics</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -390,6 +390,34 @@ function Getwish() {
 
 }
 
+function Forgot() {
+  var forgotid = document.getElementById('forgotid').value;
+
+ var Forgotemail =  {
+          "Email" :forgotid
+        }
+   $.ajax({
+        type: "POST",
+        url: "http://176.111.105.86:8083/Forgotpassword",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Forgotemail),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+           if (searchout == "Success"){
+            alert("Successfully sent to Your Email ID")
+            $('#myModal').modal('hide');
+              }else{
+                alert("Invalid mail ID")
+              }
+           }
+ });
+   
+
+}
+
+
+
 
 
 
@@ -418,7 +446,7 @@ function Getwish() {
       <div class="left-side">
         <ul class="top-bar-menu">
             <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
-          <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
+          <li><i class="fa fa-envelope"></i> <a href="#" style="font-size:12px;font-family:FontAwesome">Info@rentmatics.com</a></li>
         </ul>
       </div>
       <div class="right-side">
@@ -442,17 +470,17 @@ function Getwish() {
           <i class="fa fa-reorder menu-trigger"></i>
         </div>
          <!-- Main Navigation -->
-        <nav id="navigation" class="style-1">
+        <nav id="navigation" class="style-1" >
           <ul id="responsive">
-            <li><a  href="index.html">Home</a></li>
-            <li><a href="howitwork.html">How It Works </a>
+            <li><a  href="index.html" style="font-size:15px;font-family:FontAwesome">Home</a></li>
+            <li><a href="howitwork.html" style="font-size:15px;font-family:FontAwesome">How It Works </a>
               <ul>
-                <li><a href="owner.html">Owners</a> </li>
-                <li><a href="tenats.html">Tenants</a></li>
+                <li><a href="owner.html" style="font-size:15px;font-family:FontAwesome">Owners</a> </li>
+                <li><a href="tenats.html" style="font-size:15px;font-family:FontAwesome">Tenants</a></li>
              </ul>
             </li>
-           <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
-           <li><a href="javascript:Payalert()">Pay Myrent</a></li>
+           <li><a href="listings-half-map-grid-compact.html" style="font-size:15px;font-family:FontAwesome">Find Room</a></li>
+           <li><a href="javascript:Payalert()" style="font-size:15px;font-family:FontAwesome">Pay Myrent</a></li>
           </ul>
       </nav>
       <div class="clearfix"></div>
@@ -463,7 +491,7 @@ function Getwish() {
           <ul id="responsive">
           <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
            <li id="loginhiden">
-          <a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
+          <a href="login-register.html" class="sign-in" style="font-size:15px;font-family:FontAwesome"><i class="fa fa-user"></i> Log In / Register</a>
           </li>
            <li style="display:none" id="account"><a href="#">My Account</a>
             <ul>
@@ -490,7 +518,7 @@ function Getwish() {
 <div class="jumbo-banner-section">
         
   <div class="main agileits-w3layouts" style="margin-top:-80px">
-    <h2 style="color:white;text-align:center">RENTMATICS LOGIN</h2>
+  
     <div class="main-agileinfo" style="margin-top:70px"> 
       <div class="agileui-forms">
         <div class="container-form">
@@ -512,7 +540,7 @@ function Getwish() {
                       <label>Password</label>
                       <span></span>
                     </div>
-                    <a href="#" style="font-family:Hanken">forgot password?</a>                    
+                    <a href="#" style="font-family:Hanken"   data-toggle="modal" data-target="#myModal">forgot password?</a>                    
                     <input type="submit" value="Sign in" > 
                   </div>
                   <div class="social-grids">
@@ -546,7 +574,7 @@ function Getwish() {
                       <span></span>
                     </div>
                     <div class="styled-input">
-                      <input type="email" name="Email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="Semail" required="">
+                      <input type="email" name="Email"  id="Semail" required="">
                       <label>Email</label>
                       <span></span>
                     </div>
@@ -592,6 +620,43 @@ function Getwish() {
   </div>
   </div>  
 </div>
+
+
+
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Rentmatics</h3>
+        <button type="button" class="close" aria-label="Close" data-dismiss="modal" style="margin-top:-30px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <h4 style="font-family:Hanken">Enter your Rentmatics Email ID</h4>
+        <input type="text" id="forgotid" >
+          
+      </div>
+      <div class="modal-footer">
+       
+    <a href="#" class="button btn btn-danger" style="margin-left:3%;" onclick="Forgot()">Submit</a>
+   
+      </div>
+   
+  </div>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
 <!-- Footer
 ================================================== -->
 <div class="margin-top-55"></div>
@@ -604,17 +669,17 @@ function Getwish() {
   <div class="container" >
     <div class="row">
       <div class="col-md-5 col-sm-6">
-        <img class="footer-logo" src="images/rm_logo.png"  alt="">
+       <h2  style="color:white;font-family:Hanken;font-size:35px;margin-top:-1px"><b style="text-shadow: 1px 1px 2px black, 0 0 25px #d71319, 0 0 5px #d71319;">Rentmatics</b></h2>
+        <!-- <img class="footer-logo" src="images/rm_logo.png"  alt=""> -->
         <br><br>
-        <p style="font-family:Hanken;font-size:20px;">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+        <p style="font-family:Hanken;font-size:17px;margin-top:-45px">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
       </div>
 
       <div class="col-md-4 col-sm-6 ">
-        <h4  style="color:white;font-family:Hanken;font-size:21px">Helpful Links</h4>
+        <h4  style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Helpful Links</b></h4>
         <ul class="footer-links">
-           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Login/Signup</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Login/Signup</a></li>
           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="about.html"  style="color:white">About</a></li>
-         
          
           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="myprivacy.html"  style="color:white">Privacy Policy</a></li>
         </ul>
@@ -630,7 +695,8 @@ function Getwish() {
       </div>    
 
       <div class="col-md-3  col-sm-12">
-        <h4  style="color:white;font-family:Hanken;font-size:21px">Contact Us</h4>
+       <h4  style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Contact Us</b></h4>
+       
         <div class="text-widget">
           <span  style="color:white;font-family:Hanken;font-size:17px">12345 Little Lonsdale St, Melbourne</span> <br>
           Phone: <span  style="color:white;font-family:Hanken;font-size:17px">Tel: +91-9884379333/9811448697 </span><br>
@@ -650,7 +716,7 @@ function Getwish() {
     <!-- Copyright -->
     <div class="row">
       <div class="col-md-12">
-        <div class="copyrights" style="color:white">© 2016 Rentmatics. All Rights Reserved.</div>
+        <div class="copyrights" style="color:white;font-family:Hanken;font-size:20px">© 2016 Rentmatics. All Rights Reserved.</div>
       </div>
     </div>
 
@@ -659,8 +725,10 @@ function Getwish() {
 </div>
 <!-- Footer / End -->
 
+
 <!-- Back To Top Button -->
 <div id="backtotop"><a href="#"></a></div>
+
 
 
 <!-- Scripts

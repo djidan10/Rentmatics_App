@@ -2,6 +2,7 @@ package Services
 
 import (
 	Db "Rentmatics_App/Common/DB/Mysql"
+	Model "Rentmatics_App/Model"
 	"encoding/json"
 	"net/http"
 )
@@ -53,5 +54,17 @@ func GetsingleComplaint(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
 	w.Write(Senddata)
+
+}
+
+func InsertComplaints(w http.ResponseWriter, r *http.Request) {
+
+	var InsComplaint Model.Complaints
+	err := json.NewDecoder(r.Body).Decode(&InsComplaint)
+	if err != nil {
+		log.Error("Error: Tenant vacate ", err)
+	}
+	//Insert Vacate Details
+	Db.InsertComplaints_Db(InsComplaint)
 
 }

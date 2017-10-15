@@ -172,3 +172,9 @@ func Checklogin_DB(User Model.Login) (Uservalid Model.LoginData) {
 	return Uservalid
 
 }
+
+func InsertExecutive_Db(Executivedata Model.Executivedetails) {
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into executive (First_Name,Last_Name,Email_Id,Contact,Alernate_Contact,DOB,Permanent_Address1,Permanent_Address2,Permanent_Area,Permanent_City,Permanent_Pin,Pan_Card,Aadhar_Card,Voter_Card) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Executivedata.First_Name, Executivedata.Last_Name, Executivedata.Email_Id, Executivedata.Contact, Executivedata.Alernate_Contact, Executivedata.DOB, Executivedata.Permanent_Address1, Executivedata.Permanent_Address2, Executivedata.Permanent_Area, Executivedata.Permanent_City, Executivedata.Permanent_Pin, Executivedata.Pan_Card, Executivedata.Aadhar_Card, Executivedata.Voter_Card)
+	log.Info("successfully inserted", rows, err)
+
+}

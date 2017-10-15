@@ -368,7 +368,7 @@ document.getElementById("imageslider").innerHTML=image;
          
          
          function Schedule1(){
-         console.log("inside diqud0iq");
+        
          $('#myModal').modal('show');
               Schedulename = document.getElementById('schname').value;
               schedulemail = document.getElementById('schemail').value;
@@ -384,13 +384,14 @@ document.getElementById("imageslider").innerHTML=image;
              var dynamicotp=parseInt(Math.random() * (2999 - 2000) + 2000);
              var authkey="150219AJLZP0ww58ff3960";
              var sendotp=  "http://api.msg91.com/api/sendotp.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&message=Your%20otp%20is%20"+dynamicotp+"&sender=Rentmatics&otp="+dynamicotp;
-             console.log(sendotp);
-             // $.ajax({
-             //   type: "GET",
-             //   url: sendotp,
-             //   success: function(responsee){
-             //   otp = JSON.parse(responsee);
-             //   } });
+            
+             $.ajax({
+               type: "GET",
+               url: sendotp,
+               success: function(responsee){
+               otp = JSON.parse(responsee);
+              
+               } });
          
                 }
                 
@@ -425,6 +426,7 @@ document.getElementById("imageslider").innerHTML=image;
          
          
          function Otpauth(){
+
            var authkey="150219AJLZP0ww58ff3960";
            var getotp = document.getElementById('verifyotp').value;
            var verifyotp ="http://api.msg91.com/api/verifyRequestOTP.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&otp="+getotp;
@@ -434,7 +436,7 @@ document.getElementById("imageslider").innerHTML=image;
               
            success: function(responsee){
              Scheuleresponse = JSON.parse(responsee);
-             console.log(Scheuleresponse)
+            
               if (Scheuleresponse.type == "success"){
                   $('#myModal').modal('hide');
                   ScheduleVisit(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime)
@@ -549,7 +551,7 @@ function booknow(){
          }
 
 function Addfav(colorid){
-  alert(colorid)
+  
       if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
              var url2 = "login-register.html";
               document.location.href = url2;
@@ -867,19 +869,17 @@ return false;
 <div class="col-md-4" style="margin-left:535px;margin-top:-200px;width:365px;">
         <div class="rp-wl">
                   <div class="form-group">
-                     <button class="btn btn-default btn-lg btn-block btn-wishlist"><i class="fa fa-heart mr5" onclick="return Addfav(this)" style="color:black"  id="addwish"></i><b id="wishtext" style="font-family:Hanken">Save to Wish List</b></button>
+                     <button class="btn btn-default btn-lg btn-block btn-wishlist" onclick="return Addfav(this)" style="color:black"><i class="fa fa-heart mr5"   id="addwish"></i><b  id="wishtext" style="font-family:Hanken">Save to Wish List</b></button>
                   </div>
                   <p class="tc">Want to share this Rentspace</p>
                   <div class="flx socials">
-                     <div class="flx1">
-                        <a class="socIco"><i class="fa fa-facebook"></i></a>
-                     </div>
-                     <div class="flx1">
-                        <a class="socIco"><i class="fa fa-twitter"></i></a> 
-                     </div>
-                     <div class="flx1">
-                        <a class="socIco"><i class="fa fa-envelope"></i></a>  
-                     </div>
+ <!-- <div class="right-side"> -->
+        <ul class="social-icons" style="margin-top:-20px;margin-left:50px;">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
+
                    
                   </div>
                </div>
@@ -905,22 +905,23 @@ return false;
       <div class="sidebar sticky right">
         <div class="style-2 " >
           <!-- Tabs Navigation -->
-          <ul class="tabs-nav  tabs-container" style="border: 2px solid ash;background-color:#fa5b0f;color:white">
-             <li class="active" style="color:white"><a href="#tab1" style="color:white"><i style="color:white" class="fa fa-bed i_bed"></i>Bed Details</a></li>
-            <li style="margin-left:30px;color:white"><a style="color:white" href="#tab2"><i class="im im-icon-Warehouse"></i>Room Details</a></li>
+          <ul class="tabs-nav " style="border: 2px solid ash;color:white;">
+             <li class="active" style="color:white;background-color:#d71319;width:167.5px"><a href="#tab1" style="color:white"><i style="color:white" class="fa fa-bed i_bed"></i>Bed Details </a></li>
+
+            <li style="color:white;background-color:#d71319;width:164px"><a style="color:white;" href="#tab2"><i class="im im-icon-Warehouse"></i>Room Details</a></li>
             </ul>
 
-          <div class="tabs-container" style=" border: 2px solid ash;">
+          <div class="tabs-container" style=" border: 2px solid white;width:335px">
             <div class="tab-content" id="tab1">
              <div >
              <table >
     <tr>
           <th style="padding:15px;"> <b>Bed Available</b></th>
-          <th style="padding:15px;"><b >Bed Rent</b></th>
+          <th style="padding:12px;"><b >Bed Rent</b></th>
     </tr>
      <tr>
           <td style="padding:15px"> <i style="font-size: 1em" class="fa fa-bed i_bed"></i><span  id="tableavailbed"></span></td>
-          <td style="padding:15px"><i style="font-size: 1.5em;" class="im im-icon-Money-2"></i><span  id="bed_rent"></span> </td>
+          <td style="padding:15px;width:110px;"><i style="font-size: 1.5em;" class="im im-icon-Money-2"></i><span  id="bed_rent"></span> </td>
     </tr>
      </table>                 
      </div>
@@ -933,7 +934,7 @@ return false;
      </tr>
       <tr>
       <td style="padding:15px"><i  class="im im-icon-Door"></i> <span id="tableavailroom"></span></td>
-       <td style="padding:15px"><i style="font-size: 1.3em;" class="im im-icon-Money-2"></i><span   id="bhk_rent"></span>
+       <td style="padding:15px;width:110px;"><i style="font-size: 1.3em;" class="im im-icon-Money-2"></i><span   id="bhk_rent"></span>
        </td>
         </tr>
         </table>
@@ -948,40 +949,7 @@ return false;
     <div class="col-lg-4 col-md-5" >
       <div class="sidebar sticky right" style="visibility:hidden">
         <div class="style-2 " >
-          <!-- Tabs Navigation -->
-          <ul class="tabs-nav  tabs-container" style="border: 2px solid ash;background-color:#fa5b0f;color:white">
-             <li class="active" style="color:white"><a href="#tab1" style="color:white"><i style="color:white" class="fa fa-bed i_bed"></i>Bed Details</a></li>
-            <li style="margin-left:30px;color:white"><a style="color:white" href="#tab2"><i class="im im-icon-Warehouse"></i>Room Details</a></li>
-            </ul>
-
-          <div class="tabs-container" style=" border: 2px solid ash;">
-            <div class="tab-content" id="tab1">
-             <div >
-             <table >
-    <tr>
-          <th style="padding:15px;"> <b>Bed Available</b></th>
-          <th style="padding:15px;"><b >Bed Rent</b></th>
-    </tr>
-     <tr>
-          <td style="padding:15px"> <i style="font-size: 1em" class="fa fa-bed i_bed"></i><span  id="tableavailbed"></span></td>
-          <td style="padding:15px"><i style="font-size: 1.5em;" class="im im-icon-Money-2"></i><span  id="bed_rent"></span> </td>
-    </tr>
-     </table>                 
-     </div>
-     </div>
-     <div class="tab-content" id="tab2">
-<table >
-<tr>
-     <th style="padding:15px">  <b >Room Available</b></th>
-     <th style="padding:15px"> <b >Room Rent</b></th>
-     </tr>
-      <tr>
-      <td style="padding:15px"><i  class="im im-icon-Door"></i> <span id="tableavailroom"></span></td>
-       <td style="padding:15px"><i style="font-size: 1.3em;" class="im im-icon-Money-2"></i><span   id="bhk_rent"></span>
-       </td>
-        </tr>
-        </table>
-         </div>    
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   
         </div>
          </div>
  </div>
@@ -991,7 +959,7 @@ return false;
 
 
 <div class="col-md-8">
- <h4 class="headline margin-top-0 margin-bottom-20"><b >RENTMATICS HOME DETAILS</b></h4>
+ <h4 class="headline margin-top-0 margin-bottom-20" style="font-family:hanken"><b >RENTMATICS HOME DETAILS</b></h4>
         <!-- Blog Post -->
         <div class="blog-post">
           
@@ -1002,16 +970,16 @@ return false;
       
       <div>
       <details open>
-  <summary style="outline:none;"><b style="color:#fa5b0f;font-size:20px;" class="headline">House details</b></summary>
+  <summary style="outline:none;"><b style="color:#d71319;font-size:20px;font-family:hanken" class="headline">House details</b></summary>
  
           <div style="margin-top:20px;" >
         
-          <table>
+          <table style="font-family:hanken">
 
 
            <tr>
 
-      <th style="width:200px;">HouseName</th><th style="width:200px;text-align:center" id="Housename1" ></th>
+      <th style="width:200px;">HouseName</th><th style="width:200px;text-align:center;" id="Housename1" ></th>
       </tr>
 <tr>
        <div> <th >BHK</th> <th style="text-align:center"  id="bhk1"></th></div>
@@ -1034,16 +1002,16 @@ return false;
 
 
  <details >
-  <summary style="outline:none;"> <b style="color:#fa5b0f;font-size:20px;" class="headline">House Rules</b></summary>
-  <div style="margin-top:20px;" >
+  <summary style="outline:none;"> <b style="color:#d71319;font-size:20px;font-family:hanken" class="headline">House Rules</b></summary>
+  <div style="margin-top:20px;font-family:hanken" >
  <p>1. You shall take care of the home as your own<br>2. You shall look after you roommates like a family<br>3. You shall be good to neighbours & not wake them up midnight<br>4. You shall not host guests of opposite gender beyond 8 PM<br>5. You shall invite us on your birthday<br>6. You shall party hard but clean up afterwards<br>7. You shall introduce your roommates to The Big Bang Theor</</p>
  </div>
 </details>
 <br><br>
  <details>
 
-  <summary style="outline:none;"><b style="color:#fa5b0f;font-size:20px;" class="headline">Rent & Security Deposit - fine print</b></summary>
-  <div style="margin-top:20px;" >
+  <summary style="outline:none;"><b style="color:#d71319;font-size:20px;font-family:hanken" class="headline">Rent & Security Deposit - fine print</b></summary>
+  <div style="margin-top:20px;font-family:hanken" >
    <li> Security Deposit is refundable, unless you have damaged something in the house.</li>
 <li>You need to pay the rent in advance. Before 3rd of every month.</li>
 <li>Short-term stays aren't allowed. You must stay for at least 6 months.</li>
@@ -1118,7 +1086,7 @@ return false;
        
                  <input type="text" placeholder="Your name" id="schname" required>
               <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="schemail" required>
-            <input type="text" placeholder="Your Phone" id="schphone" pattern="^(0|[1-9][0-9]*)$" required>
+            <input type="text" placeholder="Your Phone" id="schphone" pattern="[0-9]{10}" required>
 
             <input type="text" class="datetimepicker7" placeholder="Pick your Date" id="schdate" required/>
 
@@ -1132,7 +1100,7 @@ return false;
              <form action="" method="post" onsubmit="booknow();return false;">
               <input type="text" placeholder="Your name" id="bookuser">
               <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="bookemail" required>
-            <input type="text" placeholder="Your Phone" id="bookphone" pattern="^(0|[1-9][0-9]*)$" required>
+            <input type="text" placeholder="Your Phone" id="bookphone" pattern="[0-9]{10}" required>
               
             <button type="submit" class="button btn btn-danger">Book Now</button>
               </form>
@@ -1160,7 +1128,7 @@ return false;
     <div class="modal-content">
       <div class="modal-header">
         <h3 class="modal-title" id="exampleModalLabel">Rentmatics verification</h3>
-        <button type="button" class="close" aria-label="Close">
+        <button type="button" class="close" aria-label="Close" data-dismiss="modal" style="margin-top:-30px;">
           <span aria-hidden="true">&times;</span>
         </button>
 
@@ -1174,8 +1142,8 @@ return false;
       </div>
       <div class="modal-footer">
        
-    <a href="#" class="button btn btn-danger" data-dismiss="modal" onclick="Otpauth()" style="margin-left:5%;">Submitotp</a>
-    <a href="#" class="button btn btn-danger" onclick="resend()" style="margin-left:10%;">Resendotp</a>
+    <a href="#" class="button btn btn-danger"  onclick="Otpauth()" style="margin-left:3%;">Submitotp</a>
+    <a href="#" class="button btn btn-danger" onclick="resend()" style="margin-left:8%;">Resendotp</a>
       </div>
    
   </div>
@@ -1188,6 +1156,7 @@ return false;
 <div class="margin-top-55"></div>
 </div>
 
+
 <!-- Footer
 ================================================== -->
 <div id="footer"  style="background-color:#484848;color:white" >
@@ -1195,17 +1164,17 @@ return false;
   <div class="container" >
     <div class="row">
       <div class="col-md-5 col-sm-6">
-        <img class="footer-logo" src="images/rm_logo.png"  alt="">
+       <h2  style="color:white;font-family:Hanken;font-size:35px;margin-top:-1px"><b style="text-shadow: 1px 1px 2px black, 0 0 25px #d71319, 0 0 5px #d71319;">Rentmatics</b></h2>
+        <!-- <img class="footer-logo" src="images/rm_logo.png"  alt=""> -->
         <br><br>
-        <p style="font-family:Hanken;font-size:20px;">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+        <p style="font-family:Hanken;font-size:17px;margin-top:-45px">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
       </div>
 
       <div class="col-md-4 col-sm-6 ">
-        <h4  style="color:white;font-family:Hanken;font-size:21px">Helpful Links</h4>
+        <h4  style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Helpful Links</b></h4>
         <ul class="footer-links">
           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Login/Signup</a></li>
           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="about.html"  style="color:white">About</a></li>
-         
          
           <li  style="color:white;font-family:Hanken;font-size:17px"><a href="myprivacy.html"  style="color:white">Privacy Policy</a></li>
         </ul>
@@ -1221,7 +1190,8 @@ return false;
       </div>    
 
       <div class="col-md-3  col-sm-12">
-        <h4  style="color:white;font-family:Hanken;font-size:21px">Contact Us</h4>
+       <h4  style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Contact Us</b></h4>
+       
         <div class="text-widget">
           <span  style="color:white;font-family:Hanken;font-size:17px">12345 Little Lonsdale St, Melbourne</span> <br>
           Phone: <span  style="color:white;font-family:Hanken;font-size:17px">Tel: +91-9884379333/9811448697 </span><br>
@@ -1241,7 +1211,7 @@ return false;
     <!-- Copyright -->
     <div class="row">
       <div class="col-md-12">
-        <div class="copyrights" style="color:white">© 2016 Rentmatics. All Rights Reserved.</div>
+        <div class="copyrights" style="color:white;font-family:Hanken;font-size:20px">© 2016 Rentmatics. All Rights Reserved.</div>
       </div>
     </div>
 
@@ -1249,6 +1219,10 @@ return false;
 
 </div>
 <!-- Footer / End -->
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
 
 
 <!-- Back To Top Button -->
