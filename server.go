@@ -8,6 +8,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"github.com/rs/cors"
+
 	"github.com/gorilla/mux"
 )
 
@@ -152,9 +154,16 @@ func Serve() bool {
 	//For HTTPS
 
 	// Default server - non-trusted for debugging
+
 	serverhttp := func() {
+		c := cors.New(cors.Options{
+			AllowedOrigins:   []string{"*", "http://develop.rentmatics.com"},
+			AllowCredentials: true,
+		})
+		handler := c.Handler(router)
+
 		fmt.Println("Server should be available at http", config.Port)
-		fmt.Println(http.ListenAndServe(config.Port, router))
+		fmt.Println(http.ListenAndServe(config.Port, handler))
 	}
 
 	// Setup TLS parameters for trusted server implementation
