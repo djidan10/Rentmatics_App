@@ -40,7 +40,13 @@ func Getallhomedetails(w http.ResponseWriter, r *http.Request) {
 		log.Error("Error on send home details", err)
 	}
 	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
+
+	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	w.Header().Set("Access-Control-Allow-Headers", "Accept, Accept-Language, Content-Type, YourOwnHeader")
+	fmt.Println("header", w.Header())
 	w.Write(Senddata)
 
 }
