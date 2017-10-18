@@ -92,9 +92,10 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	if Data.Status == "Success" {
 
 		cookie := &http.Cookie{
-			Name:  "RentmaticsCookie",
-			Value: Data.Loginid,
-			Path:  "/",
+			Name:   "RentmaticsCookie",
+			Domain: "develop.Rentmatics.com",
+			Value:  Data.Loginid,
+			Path:   "/",
 		}
 		var senddata Model.StatusResponse
 
@@ -127,13 +128,15 @@ func RentLogin(w http.ResponseWriter, r *http.Request) {
 	if Data.Role != "Invalid" {
 
 		cookie := &http.Cookie{
-			Name:  "RentmaticsAdminCookie",
-			Value: Data.Username,
-			Path:  "/",
+			Name:   "RentmaticsAdminCookie",
+			Domain: "develop.Rentmatics.com",
+			Value:  Data.Username,
+			Path:   "/",
 		}
 		var senddata Model.StatusResponse
 
 		http.SetCookie(w, cookie)
+
 		senddata.Status = "Success"
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Access-Control-Allow-Orgin", "*")
