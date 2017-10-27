@@ -34,13 +34,18 @@
 }
 </style>
 <script>
+var ApiLogout="http://paymyhire.com:8083/Logout"
+var ApiNotifyme="http://paymyhire.com:8083/Notifyme"
+
+
+
 //Logout the User
 function logout() {
    
 
      $.ajax({
         type: "GET",
-        url: "http://176.111.105.86:8083/Logout",
+        url: ApiLogout,
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";
@@ -94,7 +99,7 @@ console.log(Availname)
     
 $.ajax({
       type: "POST",
-      url: "http://176.111.105.86:8083/Notifyme",
+      url: ApiNotifyme,
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(s),
 

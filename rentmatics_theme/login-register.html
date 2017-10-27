@@ -31,13 +31,19 @@
 }
 	</style>
 	<script>
+  var ApiLogout="http://paymyhire.com:8083/Logout"
+  var ApiLogin ="http://paymyhire.com:8083/Login"
+var ApiUser="http://paymyhire.com:8083/User"
+var ApiForgotpassword="http://paymyhire.com:8083/Forgotpassword"
+
+
 //Logout the User
 function logout() {
    
 
      $.ajax({
         type: "GET",
-        url: "http://176.111.105.86:8083/Logout",
+        url: ApiLogout,
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";
@@ -93,7 +99,7 @@ function Login() {
 
     $.ajax({
         type: "POST",
-        url: "http://176.111.105.86:8083/Login",
+        url: ApiLogin,
         crossDomain: true,
        
         contentType: "application/json; charset=utf-8",
@@ -138,8 +144,7 @@ function SignupRent() {
 
     $.ajax({
         type: "POST",
-        url: "http://176.111.105.86:8083/User",
-        crossDomain: true,
+        url: ApiUser,
         xhrFields: {
        withCredentials: true
     },
@@ -264,7 +269,7 @@ function onSignIn(googleUser) {
 
     $.ajax({
         type: "POST",
-        url: "http://176.111.105.86:8083/User",
+        url: ApiUser,
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Gmail),
 
@@ -354,7 +359,7 @@ function onSignIn(googleUser) {
     };
    $.ajax({
         type: "POST",
-        url: "http://176.111.105.86:8083/User",
+        url: ApiUser,
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Facebook),
 
@@ -388,7 +393,7 @@ function Forgot() {
         }
    $.ajax({
         type: "POST",
-        url: "http://176.111.105.86:8083/Forgotpassword",
+        url: ApiForgotpassword,
         contentType: "application/json; charset=utf-8",
         data: JSON.stringify(Forgotemail),
 

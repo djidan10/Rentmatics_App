@@ -16,13 +16,17 @@
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
 <script>
-//Logout the User
+var ApiLogout="http://paymyhire.com:8083/Logout"
+var ApiGetProfile="http://paymyhire.com:8083/GetProfile"
+var ApiMyprofile="http://paymyhire.com:8083/Myprofile"//Logout the User
+
+
 function logout() {
    
 
      $.ajax({
         type: "GET",
-        url: "http://176.111.105.86:8083/Logout",
+        url: ApiLogout,
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";
@@ -58,7 +62,7 @@ $(document).ready(function(){
    
     $.ajax({
       type: "POST",
-      url: "http://176.111.105.86:8083/GetProfile",
+      url: ApiGetProfile,
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(Getprofile),
 
@@ -109,7 +113,7 @@ function logout() {
     delete_cookie("RentmaticsCookie");
      $.ajax({
         type: "GET",
-        url: "http://176.111.105.86:8083/Logout",
+        url: ApiLogout,
 
 
         success: function(responsee) {
@@ -174,7 +178,7 @@ function myprofile(){
    
     $.ajax({
       type: "POST",
-      url: "http://176.111.105.86:8083/Myprofile",
+      url: ApiMyprofile,
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(Profile),
 

@@ -20,6 +20,8 @@
 //Logout the User
 
 var loginidd="";
+var ApiLogout="http://paymyhire.com:8083/Logout"
+
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
  if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
@@ -36,7 +38,7 @@ function logout() {
 
      $.ajax({
         type: "GET",
-        url: "http://176.111.105.86:8083/Logout",
+        url: ApiLogout,
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";

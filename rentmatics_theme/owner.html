@@ -36,6 +36,10 @@
 </style>
 <script>
 //Logout the User
+var ApiLogout="http://paymyhire.com:8083/Logout"
+var ApiOwnertoexecutive="http://paymyhire.com:8083/Ownertoexecutive"
+
+
 var loginidd="";
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
@@ -64,7 +68,7 @@ function logout() {
 
      $.ajax({
         type: "GET",
-        url: "http://176.111.105.86:8083/Logout",
+        url: ApiLogout,
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";
@@ -106,7 +110,7 @@ function Payalert(){
              
          $.ajax({
                type: "POST",
-               url: "http://176.111.105.86:8083/Ownertoexecutive",
+               url: ApiOwnertoexecutive,
                contentType:"application/json; charset=utf-8",
                data: JSON.stringify(Ownerhome),
          

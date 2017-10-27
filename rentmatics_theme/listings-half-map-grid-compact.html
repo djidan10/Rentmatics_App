@@ -23,13 +23,27 @@
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
 <script>
+var Apiprefixlogout="http://paymyhire.com:8083/Logout"
+var ApiGetAllhomedetails="http://paymyhire.com:8083/GetAllhomedetails"
+var Apiinsertwishlist="http://paymyhire.com:8083/Insertwishlist"
+var Apigetlisthome="http://paymyhire.com:8083/Gethomedetails"
+var Apideletewishlist="http://paymyhire.com:8083/Deletewishlist"
+var ApiGetFilter="http://paymyhire.com:8083/GetFilter"
+var ApiNotifyme="http://paymyhire.com:8083/Notifyme"
+
+
+
+GetFilter
+
+
+
 //Logout the User
 function logout() {
    
 
      $.ajax({
         type: "GET",
-        url: "http://176.111.105.86:8083/Logout",
+        url: Apiprefixlogout,
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";
@@ -76,7 +90,7 @@ var s={
 
  $.ajax({
          type: "POST",
-         url: "http://176.111.105.86:8083/GetAllhomedetails",
+         url: ApiGetAllhomedetails,
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
          
@@ -113,7 +127,7 @@ var sval = sval.replace("%20", " ");
 
    $.ajax({
          type: "POST",
-         url: "http://176.111.105.86:8083/Gethomedetails",
+         url: Apigetlisthome,
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
@@ -353,7 +367,7 @@ function Addfav(getid,getlogin,colorid){
 
    $.ajax({
          type: "POST",
-         url: "http://176.111.105.86:8083/Insertwishlist",
+         url: Apiinsertwishlist,
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
@@ -379,7 +393,7 @@ else{
 
    $.ajax({
          type: "POST",
-         url: "http://176.111.105.86:8083/Deletewishlist",
+         url: Apideletewishlist,
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
@@ -511,7 +525,7 @@ function GetFilterhome(){
     console.log(Filter)
     $.ajax({
       type: "POST",
-      url: "http://176.111.105.86:8083/GetFilter",
+      url: ApiGetFilter,
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(Filter),
 
@@ -549,7 +563,7 @@ function Notification(){
     
 $.ajax({
       type: "POST",
-      url: "http://176.111.105.86:8083/Notifyme",
+      url: ApiNotifyme,
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(s),
 
@@ -568,7 +582,7 @@ $.ajax({
             
           $.ajax({
            type: "GET",
-           url: "http://176.111.105.86:8083/Logout",
+           url: Apiprefixlogout,
          
          success: function(responsee){
 

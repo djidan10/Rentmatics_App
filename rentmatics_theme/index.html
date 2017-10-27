@@ -28,6 +28,8 @@
 
 //Foe Login
 var loginidd="";
+var Apiprefixlogout="http://paymyhire.com:8083/Logout"
+var ApiprefixAllhome="http://paymyhire.com:8083/GetAllhomedetails"
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
  if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
@@ -47,7 +49,7 @@ function logout() {
 
      $.ajax({
         type: "GET",
-        url: "http://176.111.105.86:8083/Logout",
+        url: Apiprefixlogout,
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";
@@ -79,7 +81,7 @@ window.onload = function () {
 
 	$.ajax({
          type: "POST",
-         url: "http://176.111.105.86:8083/GetAllhomedetails",
+         url: ApiprefixAllhome,
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
          

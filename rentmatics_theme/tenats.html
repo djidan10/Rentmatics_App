@@ -14,6 +14,7 @@
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
 <script>
+var ApiLogout="http://paymyhire.com:8083/Logout"
 
 var loginidd="";
 var cooki=$.cookie('RentmaticsCookie');
@@ -33,7 +34,7 @@ function logout() {
 
      $.ajax({
         type: "GET",
-        url: "http://176.111.105.86:8083/Logout",
+        url: ApiLogout,
 
         success: function(responsee) {
              document.getElementById("loginhiden").style.display = "inline";

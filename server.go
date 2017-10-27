@@ -157,7 +157,7 @@ func Serve() bool {
 
 	serverhttp := func() {
 		c := cors.New(cors.Options{
-			AllowedOrigins:   []string{"*", "http://develop.rentmatics.com"},
+			AllowedOrigins:   []string{"*", "http://develop.rentmatics.com", "http://paymyhire.com"},
 			AllowCredentials: true,
 		})
 		handler := c.Handler(router)
