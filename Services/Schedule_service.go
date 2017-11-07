@@ -4,8 +4,11 @@ import (
 	Db "Rentmatics_App/Common/DB/Mysql"
 	Model "Rentmatics_App/Model"
 	"encoding/json"
+	"fmt"
 	"net/http"
-	"net/smtp"
+
+	"github.com/sendgrid/sendgrid-go"
+	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
 func ScheduleVisit(w http.ResponseWriter, r *http.Request) {
@@ -17,19 +20,24 @@ func ScheduleVisit(w http.ResponseWriter, r *http.Request) {
 		log.Error("Error:Schedule Visit", err)
 	}
 	var Tostring = Schedule.Scheduleemail
-	auth := smtp.PlainAuth("", "Rentmatics@gmail.com", "RENTMATICS2017", "smtp.gmail.com")
-	var receiptent = "To:" + Tostring + "\r\n"
-	to := []string{Tostring}
-	msg := []byte(receiptent +
-		"Subject: RENTMATICS NOTIFICATION FOR YOUR APPOINTMENT!\r\n" +
-		"\r\n" +
-		"Your Appointment is Conformed,Our Executive will Contact you Soon!\r\n")
 
-	mailerr := smtp.SendMail("smtp.gmail.com:587", auth, "Rentmatics@gmail.com", to, msg)
-	if mailerr != nil {
-		log.Error("Error:Sending schedule Email", mailerr)
+	from := mail.NewEmail("Rentmatics User", "sandhiyabalakrishnan6@gmail.com")
+	subject := "RENTMATICS NOTIFICATION - CONFORM SCHEDULE VISIT!"
+	to := mail.NewEmail("Example User", Tostring)
+	plainTextContent := "Your Appointment is Conformed,Our Executive will Contact you Soon\nThank you For Contacting Rentmatics"
+	htmlContent := "<strong>Your Appointment is Conformed,Our Executive will Contact you Soon\nThank you For Contacting Rentmatics</strong><strong>Thank you for Contacting Rentmatics</strong>"
+	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+
+	client := sendgrid.NewSendClient("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")
+	response, err := client.Send(message)
+	if err != nil {
+		log.Error(err)
+	} else {
+		fmt.Println(response.StatusCode)
+		fmt.Println(response.Body)
+		fmt.Println(response.Headers)
+
 	}
-	log.Info("finished mailing")
 
 	Db.Scheduleinsert(Schedule)
 

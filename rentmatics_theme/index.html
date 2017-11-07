@@ -42,24 +42,20 @@ $(document).ready(function(){
                 localStorage.setItem("LoginID", cooki);
     }
 });
-
-//Logout the User
+function setCookie(cname, cvalue, exdays) {	
+	alert("inside cooki")
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
 function logout() {
-   
+	alert("inside")
+	
+         
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
 
-     $.ajax({
-        type: "GET",
-        url: Apiprefixlogout,
-
-        success: function(responsee) {
-             document.getElementById("loginhiden").style.display = "inline";
-                document.getElementById("account").style.display = "none";
-                location.reload(true);
-
-    
-        }
-
-    });
 
 }
 //Payment coming soon

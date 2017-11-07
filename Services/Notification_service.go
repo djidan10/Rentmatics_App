@@ -4,8 +4,11 @@ import (
 	Db "Rentmatics_App/Common/DB/Mysql"
 	Model "Rentmatics_App/Model"
 	"encoding/json"
+	"fmt"
 	"net/http"
-	"net/smtp"
+
+	"github.com/sendgrid/sendgrid-go"
+	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
 //Notify When Home Available
@@ -15,18 +18,24 @@ func Notification(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error("Notification Error", err)
 	}
-	var ToString = Notify.NotifyEmail
-	auth := smtp.PlainAuth("", "Rentmatics@gmail.com", "RENTMATICS2017", "smtp.gmail.com")
-	var receiptent = "To:" + ToString + "\r\n"
-	to := []string{ToString}
-	msg := []byte(receiptent +
-		"Subject: RENTMATICS NOTIFICATION!\r\n" +
-		"\r\n" +
-		"Currently We are working under this area,Rentmatics comre to you as soon!\r\n")
 
-	mailerr := smtp.SendMail("smtp.gmail.com:587", auth, "Rentmatics@gmail.com", to, msg)
-	if mailerr != nil {
-		log.Error("Mail Error - Notification", mailerr)
+	Tostring := Notify.NotifyEmail
+
+	from := mail.NewEmail("Rentmatics User", "sandhiyabalakrishnan6@gmail.com")
+	subject := "RENTMATICS NOTIFICATION!"
+	to := mail.NewEmail("Example User", Tostring)
+	plainTextContent := "We Have Succeesfully Recieved your home information,Our Executive will Contact you Soon \nThank you For Contacting Rentmatics"
+	htmlContent := "<strong>We Have Succeesfully Recieved your home information,Our Executive will Contact you Soon</strong><strong>Thank you For Contacting Rentmatics</strong>"
+	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+
+	client := sendgrid.NewSendClient("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")
+	response, err := client.Send(message)
+	if err != nil {
+		log.Error(err)
+	} else {
+		fmt.Println(response.StatusCode)
+		fmt.Println(response.Body)
+		fmt.Println(response.Headers)
 
 	}
 	log.Info("successfully send Email")

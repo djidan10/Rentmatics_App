@@ -20,24 +20,18 @@ var ApiLogout="http://paymyhire.com:8083/Logout"
 var ApiGetProfile="http://paymyhire.com:8083/GetProfile"
 var ApiMyprofile="http://paymyhire.com:8083/Myprofile"//Logout the User
 
-
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Logout the User
 function logout() {
-   
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
 
-     $.ajax({
-        type: "GET",
-        url: ApiLogout,
-
-        success: function(responsee) {
-             document.getElementById("loginhiden").style.display = "inline";
-                document.getElementById("account").style.display = "none";
-                location.reload(true);
-                document.location.href = "index.html";
-
-    
-        }
-
-    });
 
 }
 var loginidd="";

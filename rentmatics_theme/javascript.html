@@ -365,24 +365,18 @@ function SignupRent() {
     });
 }
 
-
-
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Logout the User
 function logout() {
-   
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
 
-     $.ajax({
-        type: "GET",
-        url: "http://localhost:8083/RentUserlogout",
-
-        success: function(responsee) {
-             document.getElementById("loginhiden").style.display = "inline";
-                document.getElementById("account").style.display = "none";
-                location.reload(true);
-
-    
-        }
-
-    });
 
 }
 
