@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"os"
 
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
@@ -20,15 +21,16 @@ func Notification(w http.ResponseWriter, r *http.Request) {
 	}
 
 	Tostring := Notify.NotifyEmail
+	sendkey := os.Getenv("SENDGRID_API_KEYGO")
 
-	from := mail.NewEmail("Rentmatics User", "sandhiyabalakrishnan6@gmail.com")
+	from := mail.NewEmail("Rentmatics User", "Rentmatics@gmail.com")
 	subject := "RENTMATICS NOTIFICATION!"
 	to := mail.NewEmail("Example User", Tostring)
 	plainTextContent := "We Have Succeesfully Recieved your home information,Our Executive will Contact you Soon \nThank you For Contacting Rentmatics"
 	htmlContent := "<strong>We Have Succeesfully Recieved your home information,Our Executive will Contact you Soon</strong><strong>Thank you For Contacting Rentmatics</strong>"
 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 
-	client := sendgrid.NewSendClient("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")
+	client := sendgrid.NewSendClient(sendkey)
 	response, err := client.Send(message)
 	if err != nil {
 		log.Error(err)
