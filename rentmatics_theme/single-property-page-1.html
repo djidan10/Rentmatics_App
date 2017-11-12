@@ -413,24 +413,7 @@ document.getElementById("imageslider").innerHTML=image;
               
                } });
             
-    //          $.ajax({
-    //            type: "GET",
-    //            url: sendotp,
-    //              crossDomain : true,
-    // xhrFields: {
-    //     withCredentials: true
-    // },
-
-              
-    //            success: function(responsee){
-    //            otp = JSON.parse(responsee);
-              
-    //            } });
-         
-                }
-                
-
-
+    
          function ScheduleVisit(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime){
          
             var schedule ={
@@ -500,23 +483,19 @@ document.getElementById("imageslider").innerHTML=image;
            var dynamicotp=parseInt(Math.random() * (2999 - 2000) + 2000);
              
          
-             var authkey ="150219AJLZP0ww58ff3960";
+        var authkey ="150219AJLZP0ww58ff3960";
          var resendotp =  "http://api.msg91.com/api/retryotp.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&retrytype=text";
+           var resendapi={
+            "OTp" : resendotp,
+           }
          $.ajax({
                type: "GET",
-               url: resendotp,
-                crossDomain : true,
-    xhrFields: {
-        withCredentials: true
-    },
-
-              
-         
-           success: function(responsee){
-            
-
-            
-              otp = JSON.parse(responsee);
+               url: "http://paymyhire.com:8083/Resend",
+               data: JSON.stringify(resendapi),
+                
+    
+               success: function(responsee){
+               console.log("successfully sended")
                
               
              }

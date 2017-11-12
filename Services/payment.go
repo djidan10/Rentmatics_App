@@ -82,9 +82,6 @@ func SendOTP(w http.ResponseWriter, r *http.Request) {
 		log.Error("Struct Mismatch on get profile", err)
 	}
 
-	//fmt.Println(Getsentotp.OTP, Getsentotp.Phonenumber, Authkey)
-	//	var sendotp = "http://api.msg91.com/api/sendotp.php?authkey=" + Authkey + "&mobile=91" + Getsentotp.Phonenumber + "&message=Your%20otp%20is%20" + string(Getsentotp.OTP) + "&sender=Rentmatics&otp=" + string(Getsentotp.OTP)
-	//	fmt.Println(sendotp)
 	resp, err := http.Get(Getsentotp.OTP)
 	if err != nil {
 		log.Error("Otp error", err)
@@ -118,21 +115,18 @@ func OTPAUTH1(w http.ResponseWriter, r *http.Request) {
 		io.Copy(w, resp.Body)
 	}
 
-	//	Senddata, err := json.Marshal(resp)
-	//	if err != nil {
-	//		log.Info("Cannot unmarshal the data from Favourites", err)
-	//	}
-	//	fmt.Println(Senddata)
-	//	w.WriteHeader(http.StatusOK)
-	//	w.Header().Set("Access-Control-Allow-Orgin", "*")
-	//	w.Write(Senddata)
+}
+func ResendOtp(w http.ResponseWriter, r *http.Request) {
+	var Getsentotp GetOtpAuth
+	err := json.NewDecoder(r.Body).Decode(&Getsentotp)
+	if err != nil {
+		log.Error("Struct Mismatch on get profile", err)
+	}
 
-	//	fmt.Println(Getsentotp.OTP, Getsentotp.Phonenumber, Authkey)
-	//	var sendotp = "http://api.msg91.com/api/sendotp.php?authkey=" + Authkey + "&mobile=91" + Getsentotp.Phonenumber + "&message=Your%20otp%20is%20" + Getsentotp.OTP + "&sender=Rentmatics&otp=" + Getsentotp.OTP
-	//	resp, err := http.Get(sendotp)
-	//	if err != nil {
-	//		log.Error("Otp error", resp)
-	//	}
-	//	OtpAuth = Getsentotp.OTP
+	resp, err := http.Get(Getsentotp.OTp)
+	if err != nil {
+		log.Error("Otp error", err)
+	}
+	log.Info(resp)
 
 }

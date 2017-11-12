@@ -108,6 +108,7 @@ func Serve() bool {
 
 	router.HandleFunc("/Sentotp", Service.SendOTP)
 	router.HandleFunc("/OTPAUTH", Service.OTPAUTH1)
+	router.HandleFunc("/Resend", Service.ResendOtp)
 
 	//Complaint
 	router.HandleFunc("/GetComplaint", Service.GetComplaint)
