@@ -147,6 +147,7 @@ func GetRentUSer(User1 Model.LoginUser) (Adminres Model.AdminLoginResponse) {
 		)
 
 	}
+	fmt.Println(Adminres)
 	if User1.Password == Adminres.Password {
 
 		return Adminres

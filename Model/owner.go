@@ -5,6 +5,7 @@ type Owner struct {
 	Homeid             int
 	First_Name         string
 	Last_Name          string
+	Rusername          string
 	Email_Id           string
 	Contact            string
 	Alernate_Contact   string
@@ -29,10 +30,7 @@ type Ownersend struct {
 type Ownercomplaints struct {
 	Ownercom_id   int
 	Ownerid       int
-	Executiveid   int
-	Tenantid      int
 	Homeid        int
-	Loginid       string
 	ComplaintDate string
 	Message       string
 	Status        string
@@ -51,4 +49,33 @@ type OwnertoExecutive struct {
 	Phone      string
 	Tenanttype string
 	Address    string
+}
+
+type OwnerRequest struct {
+	OwnerRequestid int
+	OwnerId        int
+	Ownername      string
+	Owneremail     string
+	Ownerhomeid    int
+	Description    string
+	Status         string
+	RequestDate    string
+	ApproveDate    string
+}
+
+type OwnerVisit struct {
+	Ownername   string
+	Owneremail  string
+	Ownerhomeid int
+	VisitDate   string
+	Description string
+	Status      string
+}
+type Ownermessage struct {
+	Fromemail   string
+	Toemail     string
+	Subject     string
+	Homeid      int
+	Towhom      string
+	Description string
 }

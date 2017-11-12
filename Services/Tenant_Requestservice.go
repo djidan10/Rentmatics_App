@@ -67,3 +67,14 @@ func InsertRequest(w http.ResponseWriter, r *http.Request) {
 	Db.InsertRequest_Db(InsRequest)
 
 }
+func Updaterequeststatus(w http.ResponseWriter, r *http.Request) {
+
+	var UpRequest Model.Requeststatus
+	err := json.NewDecoder(r.Body).Decode(&UpRequest)
+	if err != nil {
+		log.Error("Error: Tenant vacate ", err)
+	}
+	//Insert Vacate Details
+	Db.UpdateRequest_Db(UpRequest)
+
+}

@@ -4,6 +4,7 @@ import (
 	Db "Rentmatics_App/Common/DB/Mysql"
 	Model "Rentmatics_App/Model"
 	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -19,17 +20,9 @@ func Userdata(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error("Error - User Login", err)
 	}
-	cookie := &http.Cookie{
-		Name:  "RentmaticsCookie",
-		Value: Data.Loginid,
-		Path:  "/",
-	}
-	http.SetCookie(w, cookie)
 
 	w.WriteHeader(http.StatusOK)
-	w.Header().Set("Access-Control-Allow-Origin", "http://paymyhire.com")
-	w.Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
-	w.Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
 
 	w.Write(Senddata)
 
@@ -47,12 +40,6 @@ func RentUserdata(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Error("Error - User Login", err)
 	}
-	cookie := &http.Cookie{
-		Name:  "RentmaticsAdminCookie",
-		Value: Data.Username,
-		Path:  "/",
-	}
-	http.SetCookie(w, cookie)
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
@@ -88,57 +75,31 @@ func Login(w http.ResponseWriter, r *http.Request) {
 
 	Data := Db.GetUSer(User)
 	Senddata, err := json.Marshal(Data)
-	if err != nil {
-		log.Error("Error - User Login", err)
-	}
-	if Data.Status == "Success" {
 
-		cookie := &http.Cookie{
-			Name:   "RentmaticsCookie",
-			Domain: "develop.Rentmatics.com",
-			Value:  Data.Loginid,
-			Path:   "/",
-		}
-		var senddata Model.StatusResponse
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
 
-		http.SetCookie(w, cookie)
-		senddata.Status = "Success"
-		w.WriteHeader(http.StatusOK)
-		w.Header().Set("Access-Control-Allow-Orgin", "*")
+	w.Write(Senddata)
 
-		w.Write(Senddata)
-
-	} else {
-
-		w.Write(Senddata)
-
-	}
 }
 
 func RentLogin(w http.ResponseWriter, r *http.Request) {
+
 	var User Model.LoginUser
 	err := json.NewDecoder(r.Body).Decode(&User)
 	if err != nil {
 		log.Error("Error - User Login", err)
 	}
-
+	fmt.Println("rentlogin", User.Password, User.Username)
 	Data := Db.GetRentUSer(User)
+	fmt.Println(Data)
 	Senddata, err := json.Marshal(Data)
 	if err != nil {
 		log.Error("Error - User Login", err)
 	}
 	if Data.Role != "Invalid" {
 
-		cookie := &http.Cookie{
-			Name:   "RentmaticsAdminCookie",
-			Domain: "develop.Rentmatics.com",
-			Value:  Data.Username,
-			Path:   "/",
-		}
 		var senddata Model.StatusResponse
-
-		http.SetCookie(w, cookie)
-
 		senddata.Status = "Success"
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Access-Control-Allow-Orgin", "*")
@@ -167,6 +128,7 @@ func Changepassword(w http.ResponseWriter, r *http.Request) {
 
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Access-Control-Allow-Orgin", "*")
+
 	w.Write(Senddata)
 
 }

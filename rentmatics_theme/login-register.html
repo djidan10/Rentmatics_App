@@ -103,9 +103,7 @@ function Login() {
 
         success: function(responsee,stat,xhr) {
             var searchout = JSON.parse(responsee);
-            alert(searchout.Username)
-            alert(searchout.Loginid)
-            alert(searchout.Status)
+           
             if (searchout.Status == "Success") {
                 loginidd = searchout.Loginid;
                 setCookie("RentmaticsCookie",searchout.Loginid,365) 

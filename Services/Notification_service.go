@@ -26,7 +26,7 @@ func Notification(w http.ResponseWriter, r *http.Request) {
 	from := mail.NewEmail("Rentmatics User", "Rentmatics@gmail.com")
 	subject := "RENTMATICS NOTIFICATION!"
 	to := mail.NewEmail("Example User", Tostring)
-	plainTextContent := "We Have Succeesfully Recieved your home information,Our Executive will Contact you Soon \nThank you For Contacting Rentmatics"
+	plainTextContent := "We Have Succesfully Recieved your information,Rentmatics will Contact you Soon \nThank you For Contacting Rentmatics"
 	htmlContent := "<strong>We Have Succeesfully Recieved your home information,Our Executive will Contact you Soon</strong><strong>Thank you For Contacting Rentmatics</strong>"
 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 

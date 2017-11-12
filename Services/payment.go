@@ -22,6 +22,8 @@ var paylo = `{
   "send_sms": "false",
 	"redirect_url":"http://localhost:8083/rentmatics/"
   }`
+var Authkey = "150219AJLZP0ww58ff3960"
+var OtpAuth int
 
 func Payment(w http.ResponseWriter, r *http.Request) {
 	var payment Model.Payment
@@ -66,4 +68,71 @@ func PaymentResponse(w http.ResponseWriter, r *http.Request) {
 	fmt.Println(homeid)
 	fmt.Println(payment_id)
 	fmt.Println(payment_request_id)
+}
+
+type SentOtp struct {
+	OTP         string
+	Phonenumber string
+}
+
+func SendOTP(w http.ResponseWriter, r *http.Request) {
+	var Getsentotp SentOtp
+	err := json.NewDecoder(r.Body).Decode(&Getsentotp)
+	if err != nil {
+		log.Error("Struct Mismatch on get profile", err)
+	}
+
+	//fmt.Println(Getsentotp.OTP, Getsentotp.Phonenumber, Authkey)
+	//	var sendotp = "http://api.msg91.com/api/sendotp.php?authkey=" + Authkey + "&mobile=91" + Getsentotp.Phonenumber + "&message=Your%20otp%20is%20" + string(Getsentotp.OTP) + "&sender=Rentmatics&otp=" + string(Getsentotp.OTP)
+	//	fmt.Println(sendotp)
+	resp, err := http.Get(Getsentotp.OTP)
+	if err != nil {
+		log.Error("Otp error", err)
+	}
+	log.Info(resp)
+
+}
+
+type GetOtpAuth struct {
+	OTp string
+}
+
+func OTPAUTH1(w http.ResponseWriter, r *http.Request) {
+
+	var Getotp GetOtpAuth
+	err := json.NewDecoder(r.Body).Decode(&Getotp)
+	if err != nil {
+		log.Error("Struct Mismatch on get profile", err)
+	}
+	fmt.Println("insideauth", Getotp.OTp)
+	resp, err := http.Get(Getotp.OTp)
+	fmt.Println(resp)
+	fmt.Println("value", &resp)
+	fmt.Println("aaa", resp.Body)
+
+	if err != nil {
+		log.Error("Otp error", err)
+	}
+
+	if resp.Body != nil {
+		io.Copy(w, resp.Body)
+	}
+
+	//	Senddata, err := json.Marshal(resp)
+	//	if err != nil {
+	//		log.Info("Cannot unmarshal the data from Favourites", err)
+	//	}
+	//	fmt.Println(Senddata)
+	//	w.WriteHeader(http.StatusOK)
+	//	w.Header().Set("Access-Control-Allow-Orgin", "*")
+	//	w.Write(Senddata)
+
+	//	fmt.Println(Getsentotp.OTP, Getsentotp.Phonenumber, Authkey)
+	//	var sendotp = "http://api.msg91.com/api/sendotp.php?authkey=" + Authkey + "&mobile=91" + Getsentotp.Phonenumber + "&message=Your%20otp%20is%20" + Getsentotp.OTP + "&sender=Rentmatics&otp=" + Getsentotp.OTP
+	//	resp, err := http.Get(sendotp)
+	//	if err != nil {
+	//		log.Error("Otp error", resp)
+	//	}
+	//	OtpAuth = Getsentotp.OTP
+
 }

@@ -36,8 +36,8 @@
 </style>
 <script>
 //Logout the User
-var ApiLogout="http://paymyhire:8083/Logout"
-var ApiOwnertoexecutive="http://paymyhire:8083/Ownertoexecutive"
+var ApiLogout="http://paymyhire.com:8083/Logout"
+var ApiOwnertoexecutive="http://paymyhire.com:8083/Ownertoexecutive"
 
 
 var loginidd="";
@@ -444,7 +444,7 @@ autocomplete.addListener('place_changed', function () {
 var place = autocomplete.getPlace();
 
 var aaa = place["address_components"];
-console.log(aaa[0].long_name)
+
 
 // place variable will have all the information you are looking for.
 console.log(place.geometry['location'].lat());

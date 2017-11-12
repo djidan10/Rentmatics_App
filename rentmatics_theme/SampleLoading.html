@@ -13,7 +13,7 @@
                  }
                  console.log("query data=");
                  console.log(data);
-                 url1="http://localhost:8083/PaymentResponse/"+data["loginid"]+"/"+data["homeid"]+"/"+data["payment_id"]+"/"+data["payment_request_id"]+"/"
+                 url1="http://paymyhire.com:8083/PaymentResponse/"+data["loginid"]+"/"+data["homeid"]+"/"+data["payment_id"]+"/"+data["payment_request_id"]+"/"
 
                  console.log(url);
                   $.ajax({
@@ -23,7 +23,7 @@
                
          
            success: function(responsee){
-           document.location.href = "http://localhost:8083/rentmatics_theme/";
+           document.location.href = "http://paymyhire.com:8083/rentmatics_theme/";
          				
           
       }

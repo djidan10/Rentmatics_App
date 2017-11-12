@@ -4,6 +4,7 @@ import (
 	Db "Rentmatics_App/Common/DB/Mysql"
 	Model "Rentmatics_App/Model"
 	"encoding/json"
+
 	"net/http"
 )
 
@@ -53,5 +54,18 @@ func Insertownercomplaints(w http.ResponseWriter, r *http.Request) {
 		log.Error("Error - Owner single", err)
 	}
 	Db.Insertownercomplaints_Db(InsOwnercomp)
+
+}
+
+func Upadtecomplaintstatus(w http.ResponseWriter, r *http.Request) {
+
+	var UpdateComplaint Model.Complaintstatus
+	err := json.NewDecoder(r.Body).Decode(&UpdateComplaint)
+	if err != nil {
+		log.Error("Error: Tenant vacate ", err)
+	}
+
+	//Insert Vacate Details
+	Db.UpdateComplaints_Db(UpdateComplaint)
 
 }

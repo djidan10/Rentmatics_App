@@ -6,3 +6,8 @@ type InsertUser struct {
 	Password string
 	Role     string
 }
+
+type Admincomp_Req struct {
+	PendingComplaints []Complaints
+	PendingRequest    []Request
+}

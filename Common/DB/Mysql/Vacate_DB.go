@@ -26,6 +26,7 @@ func GetAllVacatedetails() (Temprentarray []Model.Vacate) {
 			&Data.Vacate_Date,
 			&Data.Vacate_reason,
 			&Data.Vacate_status,
+			&Data.ApproveDate,
 		)
 
 		Temprentarray = append(Temprentarray, Data)
@@ -52,6 +53,7 @@ func GetSinglevacate_Db(vacateid int) (Data Model.Vacate) {
 			&Data.Vacate_Date,
 			&Data.Vacate_reason,
 			&Data.Vacate_status,
+			&Data.ApproveDate,
 		)
 
 	}
@@ -59,7 +61,14 @@ func GetSinglevacate_Db(vacateid int) (Data Model.Vacate) {
 }
 
 func Insertvacate_Db(Vacatedata Model.Vacate) {
-	rows, err := OpenConnection["Rentmatics"].Exec("insert into vacate (homeid,tenantid,Vacate_predate,Vacate_Date,Vacate_reason,Vacate_status) values (?,?,?,?,?,?)", Vacatedata.Home_id, Vacatedata.Tenant_Id, Vacatedata.Vacate_priordate, Vacatedata.Vacate_Date, Vacatedata.Vacate_reason, Vacatedata.Vacate_status)
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into vacate (homeid,tenantid,Vacate_predate,Vacate_Date,Vacate_reason,Vacate_status,ApproveDate,) values (?,?,?,?,?,?,?)", Vacatedata.Home_id, Vacatedata.Tenant_Id, Vacatedata.Vacate_priordate, Vacatedata.Vacate_Date, Vacatedata.Vacate_reason, Vacatedata.Vacate_status, Vacatedata.ApproveDate)
 	log.Info("successfully inserted", rows, err)
 
+}
+
+func Updatevacate_Db(vacatedata Model.Vacatestatus) {
+	Queryupdate := "UPDATE vacate SET Vacate_status=' " + vacatedata.Status + " ' , Approvedate = '" + vacatedata.ApproveDate + "'  where id= '" + vacatedata.Vacateid + "'"
+
+	rows, err := OpenConnection["Rentmatics"].Exec(Queryupdate)
+	log.Info(rows, err)
 }

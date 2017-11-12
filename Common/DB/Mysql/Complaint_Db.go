@@ -3,6 +3,7 @@ package Mysql
 import (
 	Model "Rentmatics_App/Model"
 	_ "database/sql"
+	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 )
@@ -22,6 +23,7 @@ func GetAllComplaint() (Temprentarray []Model.Complaints) {
 			&Data.Home_id,
 			&Data.Tenant_Id,
 			&Data.Complaint_raisedDate,
+			&Data.Raisedby,
 			&Data.Complaint_Description,
 			&Data.Complaint_status,
 			&Data.Complaint_solvedDate,
@@ -49,6 +51,36 @@ func GetAllPendingComplaint() (Temprentarray []Model.Complaints) {
 			&Data.Home_id,
 			&Data.Tenant_Id,
 			&Data.Complaint_raisedDate,
+			&Data.Raisedby,
+			&Data.Complaint_Description,
+			&Data.Complaint_status,
+			&Data.Complaint_solvedDate,
+		)
+
+		Temprentarray = append(Temprentarray, Data)
+	}
+
+	return Temprentarray
+}
+
+//Get All pending Complaint
+func GetAllOwnerPendingComplaint(OTid int) (Temprentarray []Model.Complaints) {
+
+	var Data Model.Complaints
+
+	rows, err := OpenConnection["Rentmatics"].Query("Select * from complaint where complaint_status = 'pending' and Raisedby = 'Owner' and tenantid =?", OTid)
+	if err != nil {
+		log.Error("Error -Db:Tenant Pending Complaint", err)
+	}
+
+	for rows.Next() {
+
+		rows.Scan(
+			&Data.Complaint_id,
+			&Data.Home_id,
+			&Data.Tenant_Id,
+			&Data.Complaint_raisedDate,
+			&Data.Raisedby,
 			&Data.Complaint_Description,
 			&Data.Complaint_status,
 			&Data.Complaint_solvedDate,
@@ -75,6 +107,7 @@ func GetSingleComplaint_Db(Complaintid int) (Datasend Model.Complaintsend) {
 			&Data.Home_id,
 			&Data.Tenant_Id,
 			&Data.Complaint_raisedDate,
+			&Data.Raisedby,
 			&Data.Complaint_Description,
 			&Data.Complaint_status,
 			&Data.Complaint_solvedDate,
@@ -87,7 +120,15 @@ func GetSingleComplaint_Db(Complaintid int) (Datasend Model.Complaintsend) {
 }
 
 func InsertComplaints_Db(Complaintdata Model.Complaints) {
-	rows, err := OpenConnection["Rentmatics"].Exec("insert into complaint (homeid,tenantid,complained_raiseddate,complaint_description,complaint_status,complaint_solveddate) values (?,?,?,?,?,?)", Complaintdata.Home_id, Complaintdata.Tenant_Id, Complaintdata.Complaint_raisedDate, Complaintdata.Complaint_Description, Complaintdata.Complaint_status, Complaintdata.Complaint_solvedDate)
+	fmt.Println(Complaintdata.Raisedby, Complaintdata.Complaint_raisedDate, Complaintdata.Complaint_solvedDate, Complaintdata.Complaint_status)
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into complaint (homeid,tenantid,complained_raiseddate,Raisedby,complaint_description,complaint_status,complaint_solveddate) values (?,?,?,?,?,?,?)", Complaintdata.Home_id, Complaintdata.Tenant_Id, Complaintdata.Complaint_raisedDate, Complaintdata.Raisedby, Complaintdata.Complaint_Description, Complaintdata.Complaint_status, Complaintdata.Complaint_solvedDate)
 	log.Info("successfully inserted", rows, err)
 
+}
+
+func UpdateComplaints_Db(Owncompupdatedata Model.Complaintstatus) {
+	Queryupdate := "UPDATE complaint SET complaint_status=' " + Owncompupdatedata.Status + " ' , complaint_solveddate = '" + Owncompupdatedata.ApproveDate + "'  where id= '" + Owncompupdatedata.Complaintid + "'"
+
+	rows, err := OpenConnection["Rentmatics"].Exec(Queryupdate)
+	log.Info(rows, err)
 }

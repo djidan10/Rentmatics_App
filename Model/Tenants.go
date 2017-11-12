@@ -67,6 +67,7 @@ type Complaints struct {
 	Home_id               int
 	Tenant_Id             int
 	Complaint_raisedDate  string
+	Raisedby              string
 	Complaint_Description string
 	Complaint_status      string
 	Complaint_solvedDate  string
@@ -84,6 +85,7 @@ type Vacate struct {
 	Vacate_Date      string
 	Vacate_reason    string
 	Vacate_status    string
+	ApproveDate      string
 }
 
 type Activity struct {
@@ -95,6 +97,7 @@ type Activity struct {
 	Participation_count  int
 	Activity_Description string
 	Activity_Status      string
+	ApproveDate          string
 }
 
 type Request struct {
@@ -102,11 +105,9 @@ type Request struct {
 	Home_id             int
 	Tenant_Id           int
 	Resquestername      string
-	Total_Request       int
-	Pending_Request     int
-	Solved_Request      int
 	Request_Date        string
 	Request_description string
+	Raisedby            string
 	Approve_Date        string
 	Status              string
 }
@@ -114,4 +115,32 @@ type Request struct {
 type Requestsend struct {
 	Resquestdetails Request
 	Tenantdetails   Tenant
+}
+
+type Complaintstatus struct {
+	Complaintid string
+	Status      string
+	ApproveDate string
+}
+
+type Requeststatus struct {
+	Requestid   string
+	Status      string
+	ApproveDate string
+}
+type ActivityUpdatestatus struct {
+	Activityid  string
+	Status      string
+	ApproveDate string
+}
+type Vacatestatus struct {
+	Vacateid    string
+	Status      string
+	ApproveDate string
+}
+type ResponseMessage struct {
+	MessageId int
+	Subject   string
+	Homeid    int
+	Message   string
 }

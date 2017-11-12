@@ -106,7 +106,7 @@ margin-top:20px;
 var ApiLogout="http://paymyhire.com:8083/Logout"
 var ApiGetIndivual_home="http://paymyhire.com:8083/GetIndivual_home"
 var Apibooknow="http://paymyhire.com:8083/paytm"
-var ApiScheduleVisit="http://paymyhire.com:8083/ScheduleVisit"
+var ApiScheduleVisit="http://paymyhire.com.com/ScheduleVisit"
 var ApiInsertwishlist="http://paymyhire.com:8083/Insertwishlist"
 var ApiDeletewishlist="http://paymyhire.com:8083/Deletewishlist"
 
@@ -378,6 +378,7 @@ document.getElementById("imageslider").innerHTML=image;
          
          
          function Schedule1(){
+          
         
          $('#myModal').modal('show');
               Schedulename = document.getElementById('schname').value;
@@ -395,13 +396,36 @@ document.getElementById("imageslider").innerHTML=image;
              var authkey="150219AJLZP0ww58ff3960";
              var sendotp=  "http://api.msg91.com/api/sendotp.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&message=Your%20otp%20is%20"+dynamicotp+"&sender=Rentmatics&otp="+dynamicotp;
             
+             var sentop ={
+
+              "OTP" : sendotp,
+              "Phonenumber":Schedulephone,
+
+             }
              $.ajax({
-               type: "GET",
-               url: sendotp,
+               type: "POST",
+               url: "http://paymyhire.com:8083/Sentotp",
+               data: JSON.stringify(sentop),
+                
+    
                success: function(responsee){
-               otp = JSON.parse(responsee);
+               console.log("successfully sended")
               
                } });
+            
+    //          $.ajax({
+    //            type: "GET",
+    //            url: sendotp,
+    //              crossDomain : true,
+    // xhrFields: {
+    //     withCredentials: true
+    // },
+
+              
+    //            success: function(responsee){
+    //            otp = JSON.parse(responsee);
+              
+    //            } });
          
                 }
                 
@@ -436,17 +460,27 @@ document.getElementById("imageslider").innerHTML=image;
          
          
          function Otpauth(){
-
+       
            var authkey="150219AJLZP0ww58ff3960";
            var getotp = document.getElementById('verifyotp').value;
-           var verifyotp ="http://api.msg91.com/api/verifyRequestOTP.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&otp="+getotp;
+             var verifyotp ="http://api.msg91.com/api/verifyRequestOTP.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&otp="+getotp;
+
+           var verifyotp1={
+            "OTp" : verifyotp,
+           }
+          
            $.ajax({
-               type: "GET",
-               url: verifyotp,
+               type: "POST",
+               url: "http://paymyhire.com:8083/OTPAUTH",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(verifyotp1),
+              
+              
               
            success: function(responsee){
+          
              Scheuleresponse = JSON.parse(responsee);
-            
+                      
               if (Scheuleresponse.type == "success"){
                   $('#myModal').modal('hide');
                   ScheduleVisit(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime)
@@ -454,7 +488,9 @@ document.getElementById("imageslider").innerHTML=image;
               else{
                   $('#myModal').modal('show');
                  document.getElementById("invalidotp").style.visibility = "visible"; 
-                  } }
+                  } 
+                }
+            
          
          });
          }
@@ -462,13 +498,18 @@ document.getElementById("imageslider").innerHTML=image;
         function resend(){
      
            var dynamicotp=parseInt(Math.random() * (2999 - 2000) + 2000);
-             //Schedulephone="7418924864"
+             
          
              var authkey ="150219AJLZP0ww58ff3960";
          var resendotp =  "http://api.msg91.com/api/retryotp.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&retrytype=text";
          $.ajax({
                type: "GET",
                url: resendotp,
+                crossDomain : true,
+    xhrFields: {
+        withCredentials: true
+    },
+
               
          
            success: function(responsee){
@@ -1136,8 +1177,8 @@ return false;
       </div>
       <div class="modal-footer">
        
-    <a href="#" class="button btn btn-danger"  onclick="Otpauth()" style="margin-left:3%;">Submitotp</a>
-    <a href="#" class="button btn btn-danger" onclick="resend()" style="margin-left:8%;">Resendotp</a>
+    <a href="javascript:Otpauth()" class="button btn btn-danger"   style="margin-left:3%;">Submitotp</a>
+    <a href="javascript:resend()" class="button btn btn-danger"  style="margin-left:8%;">Resendotp</a>
       </div>
    
   </div>

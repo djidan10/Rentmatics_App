@@ -53,3 +53,15 @@ func InsertVacate(w http.ResponseWriter, r *http.Request) {
 	Db.Insertvacate_Db(Insvacate)
 
 }
+
+func UpdatetVacate(w http.ResponseWriter, r *http.Request) {
+
+	var Upvacate Model.Vacatestatus
+	err := json.NewDecoder(r.Body).Decode(&Upvacate)
+	if err != nil {
+		log.Error("Error: Tenant vacate ", err)
+	}
+	//Insert Vacate Details
+	Db.Updatevacate_Db(Upvacate)
+
+}

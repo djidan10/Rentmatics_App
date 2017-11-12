@@ -8,9 +8,8 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/rs/cors"
-
 	"github.com/gorilla/mux"
+	"github.com/rs/cors"
 )
 
 const (
@@ -57,20 +56,15 @@ func Serve() bool {
 	router.HandleFunc("/Gethomedetails", Service.Gethomedetails)
 	router.HandleFunc("/GetIndivual_home", Service.GetIndivual_home)
 	router.HandleFunc("/GetFilter", Service.GetFilter)
-
 	//Insert Home Details
 	router.HandleFunc("/GetImage", Service.InsertHomeDetails)
-
 	//User authentication
 	router.HandleFunc("/GetLogin", Service.Auth)
-
 	//Favourites
 	router.HandleFunc("/InsertFavourites", Service.InsertFavourite)
 	router.HandleFunc("/GetFavourites", Service.Getfavourites)
-
 	//Schedule Visit
 	//router.HandleFunc("/GetSchedule", Service.GetSchedule)
-
 	//Get Cities
 	router.HandleFunc("/GetCities", Service.GetCities)
 	//router.HandleFunc("/Scheduleotp", Service.Scheduleotp)
@@ -91,7 +85,7 @@ func Serve() bool {
 	router.HandleFunc("/Changepassword", Service.Changepassword)
 	router.HandleFunc("/Forgotpassword", Service.Forgot)
 
-	router.HandleFunc("/RentLogin", Service.Login)
+	router.HandleFunc("/RentLogin", Service.RentLogin)
 
 	//Notify
 	router.HandleFunc("/Notifyme", Service.Notification)
@@ -112,27 +106,35 @@ func Serve() bool {
 	router.HandleFunc("/GetTenant", Service.GetTenant)
 	router.HandleFunc("/GetIndiviualTenant", Service.GetSingleTenant)
 
+	router.HandleFunc("/Sentotp", Service.SendOTP)
+	router.HandleFunc("/OTPAUTH", Service.OTPAUTH1)
+
 	//Complaint
 	router.HandleFunc("/GetComplaint", Service.GetComplaint)
 	router.HandleFunc("/GetAllpendingComplaints", Service.Getpendingstatus)
 	router.HandleFunc("/GetSingleComplaint", Service.GetsingleComplaint)
 	router.HandleFunc("/InsertComplaint", Service.InsertComplaints)
+	router.HandleFunc("/UpdateComplaintstaus", Service.Upadtecomplaintstatus)
 
 	//Vacate
 	router.HandleFunc("/Getvacatedetails", Service.Getvacatedetails)
 	router.HandleFunc("/GetSinglevacate", Service.Getsinglevacate)
 	router.HandleFunc("/Insertvacate", Service.InsertVacate)
+	router.HandleFunc("/Updatevacate", Service.UpdatetVacate)
 
 	//Activites
 	router.HandleFunc("/GetActivitiesdetails", Service.GetActivity)
+	router.HandleFunc("/GetAllActivitiesPending", Service.GetActivityPending)
 	router.HandleFunc("/GetSingleActivity", Service.GetsingleActivity)
 	router.HandleFunc("/InsertAcivity", Service.InsertActivity)
+	router.HandleFunc("/UpdateActivity", Service.UpdateActivity)
 
 	//Tenant Request
 	router.HandleFunc("/GetRequestdetails", Service.GetRequest)
 	router.HandleFunc("/GetRequestPendingdetails", Service.GetPendingrequest)
 	router.HandleFunc("/GetSingleRequest", Service.GetsingleRequest)
 	router.HandleFunc("/InsertRequest", Service.InsertRequest)
+	router.HandleFunc("/Updaterequeststaus", Service.Updaterequeststatus)
 
 	//Owner Request
 	router.HandleFunc("/GetOwnerdetails", Service.GetOwners)
@@ -151,13 +153,35 @@ func Serve() bool {
 	router.HandleFunc("/Getsingleownercomplaint", Service.GetSingleOwnercomplaint)
 	router.HandleFunc("/Insertownercomplaints", Service.Insertownercomplaints)
 
+	//Ownerdashboard
+
+	router.HandleFunc("/Getownerhomedetils", Service.Getmyhomedetails)
+	router.HandleFunc("/GetOwnertenantdetails", Service.GetOwnerTenantDetails)
+	router.HandleFunc("/Insertownerrequest", Service.InsertOwnerRequestDetails)
+	router.HandleFunc("/InsertOwnervisit", Service.InsertOwnerVisitDetails)
+	router.HandleFunc("/OwnerMessage", Service.InsertOwnerMessage)
+
+	//GetOwnerid
+	router.HandleFunc("/GetOwnerId", Service.GetsingleId)
+	router.HandleFunc("/GetOwnercomplaintAll", Service.GetOwnercomplaintId)
+	router.HandleFunc("/GetOwnerRequestAll", Service.GetOwnerResquestId)
+	router.HandleFunc("/GetSingleOwnerResquest", Service.GetSingleOwnerResquest)
+
+	//GetComplaints and request Details
+	router.HandleFunc("/GetcomplaintsRequestData", Service.GetComplaintRequest)
+	router.HandleFunc("/GetOwnercomplaintsRequestData", Service.GetOwnerComplaintRequest)
+	router.HandleFunc("/GetOwnermessage", Service.GetOwnermessage)
+	router.HandleFunc("/GetOwnermessagedetail", Service.GetOwnermessagedetails)
+
+	//Tenant Api
+	router.HandleFunc("/GetTenantid", Service.GetAdminTenant)
 	//For HTTPS
 
 	// Default server - non-trusted for debugging
 
 	serverhttp := func() {
 		c := cors.New(cors.Options{
-			AllowedOrigins:   []string{"*", "http://develop.rentmatics.com", "http://paymyhire.com"},
+			AllowedOrigins:   []string{"*", "http://develop.rentmatics.com", "http://api.msg91.com"},
 			AllowCredentials: true,
 		})
 		handler := c.Handler(router)

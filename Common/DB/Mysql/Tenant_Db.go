@@ -178,3 +178,96 @@ func GetIndivualTenant_Db(Tenantid int) (Data Model.Tenant) {
 
 	return
 }
+
+//Get Home details based on Address
+func GetOwnerTenantdetails(Ownerid int) (Temprentarray []Model.Tenant) {
+
+	var Data Model.Tenant
+	rows, err := OpenConnection["Rentmatics"].Query("Select * from tenant where ownerid=?	", Ownerid)
+	if err != nil {
+		log.Error("Error -DB: Tenant", err)
+	}
+
+	for rows.Next() {
+
+		rows.Scan(
+			&Data.Tenant_id,
+			&Data.Homeid,
+			&Data.Executiveid,
+			&Data.Ownerid,
+			&Data.Loginid,
+			&Data.First_Name,
+			&Data.Last_Name,
+			&Data.Email_Id,
+			&Data.Contact,
+			&Data.Alernate_Contact,
+			&Data.DOB,
+			&Data.Tenant_Type,
+			&Data.Office_Address1,
+			&Data.Office_Address2,
+			&Data.Office_Area,
+			&Data.Office_City,
+			&Data.Office_Pin,
+			&Data.Office_Email,
+			&Data.Permanent_Address1,
+			&Data.Permanent_Address2,
+			&Data.Permanent_Area,
+			&Data.Permanent_City,
+			&Data.Permanent_Pin,
+			&Data.Tenant_img,
+			&Data.Pan_Card,
+			&Data.Aadhar_Card,
+			&Data.Voter_Card,
+			&Data.Aggrement,
+		)
+
+		Temprentarray = append(Temprentarray, Data)
+	}
+
+	return Temprentarray
+}
+
+func GetAdminTenant_Db(Tenantid string) (Data Model.Tenant) {
+
+	rows, err := OpenConnection["Rentmatics"].Query("Select * from tenant where loginid=?", Tenantid)
+	if err != nil {
+		log.Error("Error -DB: Tenant", err)
+	}
+
+	for rows.Next() {
+
+		rows.Scan(
+			&Data.Tenant_id,
+			&Data.Homeid,
+			&Data.Executiveid,
+			&Data.Ownerid,
+			&Data.Loginid,
+			&Data.First_Name,
+			&Data.Last_Name,
+			&Data.Email_Id,
+			&Data.Contact,
+			&Data.Alernate_Contact,
+			&Data.DOB,
+			&Data.Tenant_Type,
+			&Data.Office_Address1,
+			&Data.Office_Address2,
+			&Data.Office_Area,
+			&Data.Office_City,
+			&Data.Office_Pin,
+			&Data.Office_Email,
+			&Data.Permanent_Address1,
+			&Data.Permanent_Address2,
+			&Data.Permanent_Area,
+			&Data.Permanent_City,
+			&Data.Permanent_Pin,
+			&Data.Tenant_img,
+			&Data.Pan_Card,
+			&Data.Aadhar_Card,
+			&Data.Voter_Card,
+			&Data.Aggrement,
+		)
+
+	}
+
+	return
+}
