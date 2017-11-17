@@ -20,6 +20,7 @@
  <link href="css/bootstrap.min.css" rel="stylesheet">
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
 <style>
 	.jumbo-banner-section{
     background-image: url('images/banner1.jpg');
@@ -79,7 +80,8 @@ function Notification(){
     var Avaiphone =  document.getElementById('getphone1').value;
     var Availtenant =  document.getElementById('gettenant1').value;
     var Availiabity =  document.getElementById('availaibity1').value;
-    var Availcity =  document.getElementById('getcity1').value;
+    var Availcity =  document.getElementById('tags').value;
+    var partsOfStr = Availcity.split(',');
      
 
     var s ={
@@ -88,7 +90,7 @@ function Notification(){
       "Notifyphone":Avaiphone,
       "Notifytenenattype":Availtenant,
       "Notifyavailibity":Availiabity,
-      "NotifyCity":Availcity,
+      "NotifyCity":partsOfStr[0],
      };
     
 $.ajax({
@@ -284,22 +286,10 @@ $.ajax({
                   <span class="selChev"><i class="fa fa-chevron-down"></i></span>
                 </div>
               </div>
-              <div class="form-group">
-                <div class="flx selUni">
-                  <select class="rpfs" id="getcity1" required>
-                    <option >Select City</option>
-                    <option value="Sarjapur Road"></option>
-                    <option value="Whitefield">Whitefield</option>
-                    <option value="Bannerghatta Road">Bannerghatta Road</option>
-                    <option value="Electronic City">Electronic City</option>
-                    <option value="HSR Layout">HSR Layout</option>
-                    <option value="Jayanagar">Jayanagar</option>
-                    <option value="JP Nagar">JP Nagar</option>
-                    <option value="Hosur Road">Hosur Road</option>
-                  </select>
-                  <span class="selChev"><i class="fa fa-chevron-down"></i></span>
-                </div>
-              </div>
+               <div class="form-group">
+                                        <input type="text" placeholder="City" class="rpfi" id="tags" required>
+                                    </div>
+           
                <div>
           <button type="submit" class="btn btn-lg btn-block btn-notify" >Notify me when available</button>
         </div>
@@ -469,6 +459,30 @@ $.ajax({
 <script type="text/javascript" src="scripts/custom.js"></script>
 <script type="text/javascript" src="scripts/login.js"></script>
  <script src="scripts/bootstrap.min.js"></script>  
+
+<script>
+google.maps.event.addDomListener(window, 'load', initialize);
+function initialize() {
+var input = document.getElementById('tags');
+
+
+var autocomplete = new google.maps.places.Autocomplete(input);
+autocomplete.addListener('place_changed', function () {
+
+var place = autocomplete.getPlace();
+
+var aaa = place["address_components"];
+
+
+// place variable will have all the information you are looking for.
+console.log(place.geometry['location'].lat());
+console.log(place.geometry['location'].lng());
+});
+}
+</script>
+
+
+
 
 
 
