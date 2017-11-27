@@ -4,9 +4,12 @@ import (
 	Model "Rentmatics_App/Model"
 	_ "database/sql"
 	"fmt"
-	"net/smtp"
+	//"net/smtp"
+	"os"
 
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/sendgrid/sendgrid-go"
+	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
 func InserUser(Userdata Model.User) (Userinfo Model.UserResponse) {
@@ -217,20 +220,29 @@ func InsertForgotspassword(User1 string) string {
 			)
 
 		}
+		Tostring := "Username:" + Username + "<br>Password:" + Password
 
-		auth := smtp.PlainAuth("", "Rentmatics@gmail.com", "RENTMATICS2017", "smtp.gmail.com")
-		var receiptent = "To:" + User1 + "\r\n"
-		to := []string{User1}
-		msg := []byte(receiptent +
-			"Subject: RENTMATICS NOTIFICATION!\r\n" +
-			"\r\nUsername:" + Username + "\r\nPassword:" + Password +
-			"\r\n")
+		sendkey := os.Getenv("SENDGRID_API_KEYGO")
+		fmt.Println(sendkey)
 
-		mailerr := smtp.SendMail("smtp.gmail.com:587", auth, "Rentmatics@gmail.com", to, msg)
-		if mailerr != nil {
-			log.Error("Mail Error - Notification", mailerr)
+		from := mail.NewEmail("Rentmatics User", "sandhiyabalakrishnan6@gmail.com")
+		subject := "RENTMATICS NOTIFICATION - FORGOT PASSWORD!"
+		to := mail.NewEmail("Example User", User1)
+		plainTextContent := Tostring
+		htmlContent := "<strong>RENTMATICS NOTIFICATION - FORGOT PASSWORD <br> <br></strong><p>" + Tostring + "</p><br><b >Thank you for Contacting Rentmatics</b>"
+		message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
+		fmt.Println(User1)
+		client := sendgrid.NewSendClient(sendkey)
+		response, err := client.Send(message)
+		if err != nil {
+			log.Error(err)
+		} else {
+			fmt.Println(response.StatusCode)
+			fmt.Println(response.Body)
+			fmt.Println(response.Headers)
 
 		}
+
 		return "Success"
 	} else {
 		return "Failure"

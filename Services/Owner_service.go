@@ -66,7 +66,7 @@ func Ownertoexecutive(w http.ResponseWriter, r *http.Request) {
 	subject := "RENTMATICS NOTIFICATION!"
 	to := mail.NewEmail("Example User", Tostring)
 	plainTextContent := "We Have Succesfully Recieved your information,Our Rentmatics Executive will Contact you Soon \nThank you For Contacting Rentmatics"
-	htmlContent := "<strong>We Have Succeesfully Recieved your home information,Our Executive will Contact you Soon</strong><strong>Thank you For Contacting Rentmatics</strong>"
+	htmlContent := "<strong>RENTMATICS NOTIFICATION! </strong><br><br><p>We Have Succeesfully Recieved your home information,Our Executive will Contact you Soon</p><br><br><strong>Thank you For Contacting Rentmatics</strong>"
 	message := mail.NewSingleEmail(from, subject, to, plainTextContent, htmlContent)
 
 	client := sendgrid.NewSendClient(sendkey)
