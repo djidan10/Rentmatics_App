@@ -250,3 +250,41 @@ func InsertForgotspassword(User1 string) string {
 	}
 
 }
+func Insertfeedback(Insfeedback Model.Feedback) string {
+	row, err := OpenConnection["Rentmatics"].Exec("insert into feedback (name,Emailid,message) values (?,?,?)", Insfeedback.Name, Insfeedback.Emailid, Insfeedback.Message)
+	if err != nil {
+		log.Error("Error -DB: User", err, row)
+	}
+
+	return "success"
+}
+
+//Get Home details based on Address
+func Getfeedback_db() (Tempfeedarray []Model.Feedback) {
+
+	var Data Model.Feedback
+	rows, err := OpenConnection["Rentmatics"].Query("Select name,Emailid,message from  feedback")
+	if err != nil {
+		log.Error("Error -Db:Activity", err)
+	}
+	for rows.Next() {
+
+		rows.Scan(
+			&Data.Name,
+			&Data.Emailid,
+			&Data.Message,
+		)
+		Tempfeedarray = append(Tempfeedarray, Data)
+	}
+
+	return Tempfeedarray
+}
+
+func InsertReferandearn(InsRef Model.Referandearn) string {
+	row, err := OpenConnection["Rentmatics"].Exec("insert into referandearn (Referalname,Referalnumber,Referalmailid,ownername,ownerphone,ownermail,owneraddress) values (?,?,?,?,?,?,?)", InsRef.Refername, InsRef.Refernumber, InsRef.Refermail, InsRef.Ownername, InsRef.Ownerphone, InsRef.Owneremail, InsRef.Owneraddress)
+	if err != nil {
+		log.Error("Error -DB: User", err, row)
+	}
+
+	return "success"
+}

@@ -56,3 +56,18 @@ type Subscribeuser struct {
 	Sub_City  string
 	Sub_Email string
 }
+type Feedback struct {
+	Name    string
+	Emailid string
+	Message string
+}
+
+type Referandearn struct {
+	Refername    string
+	Refernumber  string
+	Refermail    string
+	Ownername    string
+	Ownerphone   string
+	Owneremail   string
+	Owneraddress string
+}

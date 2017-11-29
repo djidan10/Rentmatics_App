@@ -176,6 +176,9 @@ func Serve() bool {
 
 	//Tenant Api
 	router.HandleFunc("/GetTenantid", Service.GetAdminTenant)
+	router.HandleFunc("/Postfeedback", Service.Feedback)
+	router.HandleFunc("/Getfeedback", Service.GetFeedback)
+	router.HandleFunc("/Referandearn", Service.Referandearn)
 	//For HTTPS
 
 	// Default server - non-trusted for debugging

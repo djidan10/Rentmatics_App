@@ -156,3 +156,56 @@ func Forgot(w http.ResponseWriter, r *http.Request) {
 	w.Write(Senddata)
 
 }
+func Feedback(w http.ResponseWriter, r *http.Request) {
+
+	var Getfeedback Model.Feedback
+	err := json.NewDecoder(r.Body).Decode(&Getfeedback)
+	if err != nil {
+		log.Error("Error - Feedback", err)
+	}
+	Data := Db.Insertfeedback(Getfeedback)
+
+	Senddata, err := json.Marshal(Data)
+	if err != nil {
+		log.Error("Error - Change password", err)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+	w.Write(Senddata)
+
+}
+func GetFeedback(w http.ResponseWriter, r *http.Request) {
+
+	Data := Db.Getfeedback_db()
+
+	Senddata, err := json.Marshal(Data)
+	if err != nil {
+		log.Error("Error - Change password", err)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+	w.Write(Senddata)
+
+}
+
+func Referandearn(w http.ResponseWriter, r *http.Request) {
+
+	var GetRefer Model.Referandearn
+	err := json.NewDecoder(r.Body).Decode(&GetRefer)
+	if err != nil {
+		log.Error("Error - Feedback", err)
+	}
+	Data := Db.InsertReferandearn(GetRefer)
+
+	Senddata, err := json.Marshal(Data)
+	if err != nil {
+		log.Error("Error - Change password", err)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+	w.Write(Senddata)
+
+}
