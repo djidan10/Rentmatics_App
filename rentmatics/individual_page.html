@@ -1,581 +1,392 @@
-<!-- Rentmatics v1 (180417) -->
 <!DOCTYPE html>
-<html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
-      <meta name="author" content="">
-      <link rel="icon" href="img/favicon.ico">
-      <title>Rentmatics — Find Your Best Rentspace</title>
-      <!-- Google font Source Sans Pro -->
-      <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
-      <link href="css/font-awesome.min.css" rel="stylesheet">
-      <!-- Bootstrap -->
-      <link href="css/bootstrap.min.css" rel="stylesheet">
-      <link href="css/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
-      <link href="css/style.css" rel="stylesheet">
-       <script src="js/jquery.min.js"></script>
-      <script type="text/javascript" src="js/jquery.cookie.min.js" ></script>
+<head>
 
+<!-- Basic Page Needs
+================================================== -->
+<title>Rentmatics</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="scripts/lz.ui.css">
+<link rel="stylesheet" href="css1/style.css">
+
+<link rel="stylesheet" href="css1/style1.css"> 
+<link rel="stylesheet" href="css1/colors/main.css" id="colors">
+<link rel="stylesheet" href="css1/jquery.datetimepicker.css">
+<link href="css1/bootstrap.min.css" rel="stylesheet">
+<style type="text/css">
+
+  .logo-img path {
+  background-color: #000;
+}
+  #rcorners2 {
+   
+    border: 1px solid black;
+    padding: 20px; 
      
+}
+ 
 
-     <!--Function Started-->
- ]
+  h2 {
+  text-align: center;
+}
 
-         
-      <style>
-         label {
-         display: block;
-         }
-         /* start general carousel styles */
-         .carousel {
-         height: 392px;
-         margin: 20px;
+table caption {
+  padding: .5em 0;
+}
 
-         }
-         .carousel-inner {
-         overflow: visible;
+table, th, td {
+    border: 0.1px solid black;
+    padding:5px;
+    border-collapse: collapse;
+}
+@media screen and (max-width: 1007px) {
+  table {
+     border-bottom: 1px solid black;
+   
+  }
+}
 
-         background-color:red;
-          border-radius: 3px;
-         padding: 5px;
-          
-         }
-         .carousel ul {
-         -webkit-transform: translateY(20%);
-         -ms-transform: translateY(20%);
-         transform: translateY(20%);
-         }
-         .carousel li {
-         float: left;
-         font-size: 13px;
-         margin: 0 3%;
-         text-align: center;
-         width: 20%;
-         list-style-type: none;
-         margin-top: 20%;
+.p {
+  text-align: center;
+  padding-top: 140px;
+  font-size: 14px;
+}
 
-         }
-         .carousel li:first-child {
-         margin-left: 0.5%;
-         }
-         .carousel li:last-child {
-         margin-right: 1%;
-         }
-         .carousel li {
-         margin: 0 1.64%;
-         width: 30%;
-         }
-         .carousel img {
-         background-color: #fff;
-         border-radius: 3px;
-         padding: 5px;
-         width: 100%;
-         margin-bottom: -25%;
-         }
-         .carousel label {
-         padding: 0;
-         -webkit-transition: all .34s linear;
-         transition: all .34s linear;
-         }
-         .carousel input[type="radio"] {
-         display: none;
-         }
-         .carousel input[type="radio"]:checked + label {
-         border-color: transparent;
-         border-radius: 3px;
-         /*box-shadow: 0 0 20px 0 #7CFC00;*/
-         cursor: pointer;
-         padding: 0;
-         -ms-transform: scale(1.2);
-         -webkit-transform: scale(1.2);
-         transform: scale(1.2);
-         -webkit-transition-delay: 0;
-         transition-delay: 0;
-         -webkit-transition: all .34s linear;
-         transition: all .34s linear;
-         z-index: 2;
-         }
-         .carousel li:first-child input[type="radio"]:checked + label  {
-         position: relative;
-         -ms-transform: translateX(20%) scale(1.2);
-         -webkit-transform: translateX(20%) scale(1.2);
-         transform: translateX(20%) scale(1.2);
-         }
-         .carousel li:last-child input[type="radio"]:checked + label  {
-         position: relative;
-         -ms-transform: translateX(-20%) scale(1.2);
-         -webkit-transform: translateX(-20%) scale(1.2);
-         transform: translateX(-20%) scale(1.2);
-         }
+.rent_details_box{
+border:1px solid #ddd;
+margin-top:20px;
+}
+  .for_boys{
+  border-radius:20px;
+  }
+  .ownr_img{
+  max-width:80px; 
+  max-height:80px;
+  border-radius:100%;
+  }
 
-        
-      </style>
-      <script type="text/javascript">
-         var loginidd="";
-         var cooki=$.cookie('RentmaticsCookie');
-         $(document).ready(function(){
-          if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  li a.tab_btn1{
+  border-radius:0px;
+  border-top:1px solid #eee;
+  border-right:1px solid #eee;
+  }
+  li a.tab_btn2{
+  border-radius:0px;
+  border-top:1px solid #eee;
+  }
+  .nav-pills>li.active>a, .nav-pills>li.active>a:focus, .nav-pills>li.active>a:hover {
+    color: black;
+    background-color:#fbfbfb;
+}
+  .i_bed{
+  font-size:35px;
+  margin:8px;
+  color:#565a5c;
+  }
+  .rent_right_margin{
+  border-right:1px solid #eee;
+  }
+  .room_bed_margin{
+  margin-top:30px;
+  margin-bottom:30px;
+  }
+  #map-canvas {
+  min-width: 1070px;
+  width: 100%;
+  min-height: 400px;
+  height: 100%;
+}
+ul {
+  list-style-type: none;
+}
+</style>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script type="text/javascript" src="scripts/lz.js"></script>
+<script>
+var ApiLogout="http://localhost:8083/Logout"
+var ApiGetIndivual_home="http://localhost:8083/GetIndivual_home"
+var Apibooknow="http://localhost:8083/paytm"
+var ApiScheduleVisit="http://localhost:8083/ScheduleVisit"
+var ApiInsertwishlist="http://localhost:8083/Insertwishlist"
+var ApiDeletewishlist="http://localhost:8083/Deletewishlist"
+
+
+
+
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Logout the User
+function logout() {
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+
+
+}
+
+//Pay my rent
+function Payalert(){
+  window.open("http://paymyhire.com/");
+
+}
+
+//Onload Function Started
+var loginidd="";
+var bhk = 0;
+var bed1 = 0;
+var Availbed =0;
+var Availroom =0;
+var homeid=0;
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+  $("input").attr("required", "true");
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
             document.getElementById("Userdetails").style.visibility = "hidden"; 
             document.getElementById("loginhide").style.visibility = "visible"; 
-            document.getElementById("signuphide").style.visibility = "visible";
+           
             document.getElementById("Userdetails1").style.visibility = "hidden"; 
             document.getElementById("loginhide1").style.visibility = "visible"; 
-            document.getElementById("signuphide1").style.visibility = "visible"; 
+        
             }else{
               
-               document.getElementById("loginhide").style.display = "none"; 
-               document.getElementById("signuphide").style.display = "none"; 
-               $("#login").html(cooki);
+          document.getElementById("loginhide").style.display = "none"; 
+           $("#login").html(cooki);
+
+           
           document.getElementById("Userdetails").style.visibility = "visible"; 
           document.getElementById("wishlist").style.visibility = "visible"; 
           document.getElementById("logout").style.visibility = "visible";
-
-          document.getElementById("loginhide1").style.display = "none"; 
-               document.getElementById("signuphide1").style.display = "none"; 
-               $("#login1").html(cooki);
+           document.getElementById("loginhide1").style.display = "none"; 
+          // $("#login1").html(cooki);
           document.getElementById("Userdetails1").style.visibility = "visible"; 
           document.getElementById("wishlist1").style.visibility = "visible"; 
           document.getElementById("logout1").style.visibility = "visible";
-         
-         
-          $("#wish").html("Wishlist");
-         
-         
-             }
-         });
-         
-
-
-    function Login(){
-      var loginuser=document.getElementById('uname').value;
-    var loginpass=document.getElementById('upass').value;
-
-var Rentmatics ={
-            
-          "Username": loginuser,
-          "Password":loginpass,
-          
-              
-              };
-               
-         
-             $.ajax({
-               type: "POST",
-               url: "http://localhost:8083/Login",
-               contentType:"application/json; charset=utf-8",
-               data: JSON.stringify(Rentmatics),
-         
-           success: function(responsee){
-           var searchout = JSON.parse(responsee);
-           
-           console.log(searchout.Status);
-
-
-          if (searchout.Status == "Success"){
-
-      loginidd=searchout.Loginid;
-      alert("loogin id="+loginidd);
-         
-          
-           $("#login").html(loginidd);
-          document.getElementById("loginhide").style.display = "none"; 
-          document.getElementById("signuphide").style.display = "none"; 
-          document.getElementById("Userdetails").style.visibility = "visible"; 
+         $("#wish").html("Wishlist");
 
 
 
-          document.getElementById("loginhide1").style.display = "none"; 
-          document.getElementById("signuphide1").style.display = "none"; 
-          document.getElementById("Userdetails1").style.visibility = "visible"; 
-
-
-          }else{
-
-            alert("Incorect Username and Password")
-
-          }
-         
-
-
-}
-});
-}
-      
-         
-   function SignupRent(){
-  var signuser=document.getElementById('Susername').value;
-    var signpass=document.getElementById('cpassword').value;
-    var signemail=document.getElementById('Semail').value;
-    var Rentmatics ={
-          "Id ": "",      
-          "Username": signuser,
-          "Password":signpass,
-          "Loginid":  signemail, 
-          "Logintype": "Rentmatics"
-              
-              };
-               
-         
-             $.ajax({
-               type: "POST",
-               url: "http://localhost:8083/User",
-               contentType:"application/json; charset=utf-8",
-               data: JSON.stringify(Rentmatics),
-         
-            success: function(responsee){
-           var searchout = JSON.parse(responsee);
-           var uservalue=searchout.Username;
-           loginidd=searchout.Loginid;
-         
-          
-           $("#login").html(loginidd);
-           alert("loogin id="+loginidd);
-          document.getElementById("loginhide").style.display = "none"; 
-          document.getElementById("signuphide").style.display = "none"; 
-          document.getElementById("Userdetails").style.visibility = "visible"; 
-         
-
-
-           document.getElementById("loginhide1").style.display = "none"; 
-          document.getElementById("signuphide1").style.display = "none"; 
-          document.getElementById("Userdetails1").style.visibility = "visible"; 
-        }
-          });
-         }
-         
-           
-            function Getwish(){
-              alert("inside wish "+loginidd);
-            url = "wishlist.html";
-          document.location.href = url;
-                
-          }   
-         
-         
-              var auth2; // The Sign-In object.
-              var googleUser; // The current user.
-          var appStart = function() {
-                gapi.load('auth2', initSigninV2);
-              };
-              var initSigninV2 = function() {
-                auth2 = gapi.auth2.init({
-                    client_id: 'CLIENT_ID.apps.googleusercontent.com',
-                    scope: 'profile'
-                });
-         
-                
-                auth2.isSignedIn.listen(signinChanged);
-                auth2.currentUser.listen(userChanged);
-         
-                if (auth2.isSignedIn.get() == true) {
-                  auth2.signIn();
-                }
-            refreshValues();
-              };
-         
-              
-              var signinChanged = function (val) {
-                console.log('Signin state changed to ', val);
-                
-              };
-         
-              var userChanged = function (user) {
-                console.log('User now: ', user);
-                googleUser = user;
-                updateGoogleUser();
-               
-              };
-         
-              
-              var updateGoogleUser = function () {
-                if (googleUser) {
-                  console.log("got google user");
-                  console.log(googleUser)
-                  
-                } else {
-                  console.log("did nit get google user");
-                
-                }
-              };
-         
-              
-              var refreshValues = function() {
-                if (auth2){
-                  console.log('Refreshing values...');
-         
-                  googleUser = auth2.currentUser.get();
-                console.log(googleUser)
-                updateGoogleUser();
-                }
-              }
-
-               function GsignOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-      
-    });
-  }
-
-
-
-  var delete_cookie = function(name) {
-    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-};
-
-
-         function logout(){
-         
-         GsignOut();
-         
-         
-         // $.removeCookie('RentmaticsCookie');
-         delete_cookie("RentmaticsCookie");
-         
-         
-         
-          $.ajax({
-           type: "GET",
-           url: "http://localhost:8083/Logout",
-         
-         success: function(responsee){
-          document.getElementById("Userdetails").style.visibility = "hidden"; 
-         document.getElementById("wishlist").style.visibility = "hidden"; 
-         document.getElementById("logout").style.visibility = "hidden"; 
-         document.getElementById("loginhide").style.visibility = "visible";
-         document.getElementById("signuphide").style.visibility = "visible";  
-
-
-         document.getElementById("Userdetails1").style.visibility = "hidden"; 
-         document.getElementById("wishlist1").style.visibility = "hidden"; 
-         document.getElementById("logout1").style.visibility = "hidden"; 
-         document.getElementById("loginhide1").style.visibility = "visible";
-         document.getElementById("signuphide1").style.visibility = "visible";  
-         }
-         
-         });
-          
-         }
-
-
-              var email="";
-         function onSignIn(googleUser) {
-                  alert("inside google")
-                var profile = googleUser.getBasicProfile();
-                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail()); 
-         
-                // This is null if the 'email' scope is not present.
-              
-                  var Id = profile.getId(); // Do not send to your backend! Use an ID token instead.
-               var name = profile.getName();
-              // var iamprofile.getImageUrl());
-                 email = profile.getEmail();
-         
-         
-         
-         var Gmail ={
-          "Id ": Id,      
-          "Username": name,
-          "Password":  "",
-          "Loginid":  email, 
-          "Logintype": "Gmail"
-              
-              };
-               
-         
-             $.ajax({
-               type: "POST",
-               url: "http://localhost:8083/User",
-               contentType:"application/json; charset=utf-8",
-               data: JSON.stringify(Gmail),
-         
-            success: function(responsee){
-              var searchout = JSON.parse(responsee);
-         
-         
-         
-          console.log("response");
-          console.log(searchout)
-          var uservalue=searchout.Username;
-         
-          // $("#Userdetails").html(uservalue);
-         
-            $("#login").html(uservalue);
-         
-         
-         
-          document.getElementById("loginhide").style.display = "none"; 
-          document.getElementById("signuphide").style.display = "none"; 
-          document.getElementById("Userdetails").style.visibility = "visible"; 
-
-
-          document.getElementById("loginhide1").style.display = "none"; 
-          document.getElementById("signuphide1").style.display = "none"; 
-          document.getElementById("Userdetails1").style.visibility = "visible"; 
-         
-         
-         
-          }
-         
-         });
-              }
-         
-     function signOut() {
-             var auth2 = gapi.auth2.getAuthInstance();
-             auth2.signOut().then(function () {
-           console.log('User signed out.');
-                  });
-                }
-            
-           window.fbAsyncInit = function() {
-             FB.init({
-               appId      : '837076093106264',
-               xfbml      : true,
-               version    : 'v2.9'
-             });
-             FB.AppEvents.logPageView();
-           };
-         
-           (function(d, s, id){
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) {return;}
-              js = d.createElement(s); js.id = id;
-              //js.src = "//connect.facebook.net/en_US/sdk.js";
-              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1243386559017640";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-         
-          // This is called with the results from from FB.getLoginStatus().
-           function statusChangeCallback(response) {
-             console.log('statusChangeCallback');
-             console.log(response);
-            
-             if (response.status === 'connected') {
-               // Logged into your app and Facebook.
-               testAPI();
-             } else {
-             
-               
-             }
-           }
-         
-           function checkLoginState() {
-             FB.getLoginStatus(function(response) {
-               statusChangeCallback(response);
-             });
-           }
-         
-         
-           function testAPI() {
-             console.log('Welcome!  Fetching your information.... ');
-             FB.api('/me', function(response) {
-               console.log('Successful login for: ' + response.name);
-               console.log(response);
-               document.getElementById('status').innerHTML =
-                 'Thanks for logging in, ' + response.name + '!';
-             });
-           }
-      
-
-
-
-
-
-
-
-
-
-
-
-         
-         var homeid="";
+    }
+Loginid = localStorage.getItem("LoginID");
          var user_id="";
          var otp ="";
-         
-             window.onload = function () {
-                var url = document.location.href,
-                  params = url.split('?')[1].split('&'),
-                  data = {}, tmp;
-              for (var i = 0, l = params.length; i < l; i++) {
-                  tmp = params[i].split('=');
-                  data[tmp[0]] = tmp[1];
-                 }
-            var homeid = data
-            var login_id=data.loginid
-         
-            var Home={
-                   "Id" :data
+         var url = document.location.href,
+         url1 = decodeURIComponent(url)
+         var params = location.search.substr(location.search.indexOf("?")+1);
+         params = params.split("&");
+      for (var i=0; i<params.length; i++)
+       {
+
+         temp = params[i].split("=");
+         if ( [temp[0]] == "Id" ) { homeid = temp[1]; }
+       }  
+        loginid  = Loginid
+        var Home={
+                   "Id" :parseInt(homeid),
+                   "Loginid":cooki
          
                  };
+
          
             $.ajax({
                type: "POST",
-               url: "http://localhost:8083/GetIndivual_home",
+               url: ApiGetIndivual_home,
                contentType:"application/json; charset=utf-8",
                data: JSON.stringify(Home),
+               async: false,
          
            success: function(responsee){
             
-          var searchout = JSON.parse(responsee);
-         
-         var first =searchout.Home_images[0].Picture_url;
+         var searchout = JSON.parse(responsee);
          var Housename=searchout.Home_Data.Housename;
          var Address=searchout.Home_Data.Adress1;
          var Address1=searchout.Home_Data.Adress2;
          var Listing=searchout.Home_Data.Listing;
          var Amenities=searchout.Home_Data.Amenities;
          var Description=searchout.Home_Data.Description;
-         var City =searchout.Cityname;
+         var City =searchout.Home_Data.City;
          var Housetype =searchout.Home_Data.House_type;
-         var bhk =searchout.Home_Data.Bhk;
+         bhk =searchout.Home_Data.Bhk;
          var bhk1=bhk +" Bhk"
+         var bhk2=bhk +" Bhk"
          var tenannt =searchout.Home_Data.Tenant_type;
+         var tenant1 =searchout.Home_Data.Tenant_type;
          var mapview=searchout.Cityname;
-         
-         
-         var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
-         document.getElementById("map-canvas").setAttribute("src",src);
-         
-         
+         var Rent = "₹ "+searchout.Home_Data.Month_rent;
+         var bed = searchout.Home_Data.Bed;
+         bed1 = searchout.Home_Data.Bed;
+         var secutity_deposit = " ₹ "+searchout.Home_Data.Secutity_deposit;
+         Availbed = searchout.Home_Data.Avail_bed +"  Beds";
+         var City1 =searchout.Home_Data.City;
+         var District =searchout.Home_Data.District;
+         Availroom = searchout.Home_Data.Avail_room + "  Rooms";
+         var bedrent = " ₹ "+searchout.Home_Data.Bed_rent;
+         var bhkrent = " ₹ "+searchout.Home_Data.Bhk_rent;
+         var Squarefeet = searchout.Home_Data.Squarefeet;
+         var Totalfloors = searchout.Home_Data.Totalfloors;
+         var Facing =searchout.Home_Data.Facing;
+         var Parking =searchout.Home_Data.Parking;
+         var Liked =searchout.Liked;
+         if(Liked == true){
+           document.getElementById("addwish").style.color = "red";
+           document.getElementById("wishtext").style.color = "#fa5b0f";
+
+         }
+        
          var Amenties1 = Amenities.split(",");
          var list="";
          for(i=0;i<Amenties1.length;i++){
            
-           var list=list+"<li>"+Amenties1[i]+"</li>";
+          
+switch (Amenties1[i]) {
+    case "Sofa":
+       document.getElementById("sofa").style.textDecoration = "none";
+        break;
+    case "Wifi":
+        document.getElementById("wifi").style.textDecoration = "none";
+        break;
+    case "Television":
+       document.getElementById("tv").style.textDecoration = "none";
+        break;
+    case "Dish":
+       document.getElementById("dish").style.textDecoration = "none";
+        break;
+    case "Washing Machine":
+        document.getElementById("wm").style.textDecoration = "none";
+        break;
+    case "Western Toilet":
+        document.getElementById("wt").style.textDecoration = "none";
+        break;
+         case "Solar Heater":
+        document.getElementById("sh").style.textDecoration = "none";
+        break;
+    case "Geyser":
+        document.getElementById("geyser").style.textDecoration = "none";
+        break;
+
+
+
+    case "Fridge":
+        document.getElementById("fridge").style.textDecoration = "none";
+     case "LPG Gas Stove":
+       document.getElementById("gas").style.textDecoration = "none";
+
+
+     case "Crockery Set":
+        document.getElementById("spoon").style.textDecoration = "none";
+
+     case "Wardrobes":
+       document.getElementById("Wardrobes").style.textDecoration = "none";
+
+     case "Laptop Table":
+        document.getElementById("laptop").style.textDecoration = "none";
+
+     case "Side table":
+        document.getElementById("table").style.textDecoration = "none";
+
+
+
+    case "Lift":
+               document.getElementById("lift").style.textDecoration = "none";
+
+     case "Gym":
+                document.getElementById("gym").style.textDecoration = "none";
+
+
+     case "Swimming pool":
+                document.getElementById("pool").style.textDecoration = "none";
+
+
+   }
          
          }
-         
+
+
+
+
+
+
+
+
+         $("#Squarefeet").html(Squarefeet);
+         $("#Parking").html(Parking);
+         $("#Totalfloors").html(Totalfloors);
+         $("#Facing").html(Facing);
+         $("#Totalfloors").html(Totalfloors);
+         $("#bhk3").html(bhk1);
+         $("#tenant2").html(tenant1);
+         $("#District").html(District);
+         $("#city2").html(City1);
          $("#Housename").html(Housename);
+         $("#Housename1").html(Housename);
          $("#City").html(City);
          $("#Address").html(Address);
+         $("#Address3").html(Address);
          $("#Address1").html(Address1);
+         $("#Address2").html(Address1);
          $("#housetype").html(Housetype);
+         $("#housetype1").html(Housetype);
          $("#Listing").html(Listing);
          $("#Amenties").html(list);
          $("#Description").html(Description);
          $("#tenant").html(tenannt);
          $("#bhk").html(bhk1);
+         $("#bhk1").html(bhk1);
+         $("#rent").html(Rent);
+         $("#rent1").html(Rent);
+         $("#security").html(secutity_deposit);
+         $("#bed").html(bed);
+         $("#tablebhk").html(bhk);
+         $("#tablebed").html(bed);
+         $("#tableavailbed").html(Availbed);
+         $("#tableavailroom").html(Availroom);
+         $("#bed_rent").html(bedrent);
+         $("#bhk_rent").html(bhkrent);
          
+       
             
-         $("#First").attr("src",searchout.Home_images[0].Picture_url);
-         $("#Second").attr("src",searchout.Home_images[1].Picture_url);
-         $("#Third").attr("src",searchout.Home_images[2].Picture_url);
-         $("#Four").attr("src",searchout.Home_images[0].Picture_url);
-         $("#Five").attr("src",searchout.Home_images[1].Picture_url);
-         $("#Six").attr("src",searchout.Home_images[2].Picture_url);
-            
+var image =
+"<div class='row margin-bottom-50'>"+
+"<div class='col-md-12'>"+
+"<div class='property-slider default'>"+
+"<a href='"+searchout.Home_images[0].Picture_url+"' data-background-image='"+searchout.Home_images[0].Picture_url+"' class='item mfp-gallery'></a>"+
+"<a href='"+searchout.Home_images[1].Picture_url+"' data-background-image='"+searchout.Home_images[1].Picture_url+"' class='item mfp-gallery'></a>"+
+"<a href='"+searchout.Home_images[2].Picture_url+"' data-background-image='"+searchout.Home_images[2].Picture_url+"' class='item mfp-gallery'></a>"+
+"<a href='"+searchout.Home_images[3].Picture_url+"' data-background-image='"+searchout.Home_images[3].Picture_url+"' class='item mfp-gallery'></a>"+
+"<a href='"+searchout.Home_images[4].Picture_url+"' data-background-image='"+searchout.Home_images[4].Picture_url+"' class='item mfp-gallery'></a>"+
+"<a href='"+searchout.Home_images[5].Picture_url+"' data-background-image='"+searchout.Home_images[5].Picture_url+"' class='item mfp-gallery'></a>"+
+"</div>"+
+"<div class='property-slider-nav'>"+
+"<div class='item'><img src='"+searchout.Home_images[0].Picture_url+"' alt=''></div>"+
+"<div class='item'><img src='"+searchout.Home_images[1].Picture_url+"' alt=''></div>"+
+"<div class='item'><img src='"+searchout.Home_images[2].Picture_url+"' alt=''></div>"+
+"<div class='item'><img src='"+searchout.Home_images[3].Picture_url+"' alt=''></div>"+
+"<div class='item'><img src='"+searchout.Home_images[4].Picture_url+"' alt=''></div>"+
+"<div class='item'><img src='"+searchout.Home_images[5].Picture_url+"' alt=''></div>"+
+"</div>"+
+"</div"+
+"</div>";
+
+document.getElementById("imageslider").innerHTML=image;
+
+
+//document.getElementById("imageslider1").innerHTML=image1;
+// $("#imageslider").html(image)
+// $("#imageslider1").html(image1)
+
          }
          
          });
          
            
-         }
+         });
          
          
          
@@ -586,50 +397,57 @@ var Rentmatics ={
          var schedulemail ="";
          var Scheduledate = "";
          var Scheduletime ="";
+
+
+         
          
          function Schedule1(){
-           alert("inside schedule");
-           
-             Schedulename = document.getElementById('schname').value;
+          
+        
+         $('#myModal').modal('show');
+              Schedulename = document.getElementById('schname').value;
               schedulemail = document.getElementById('schemail').value;
               Schedulephone = document.getElementById('schphone').value;
-              Scheduledate = document.getElementById('schdate').value;
-              Scheduletime =document.getElementById('schtime').value;
-             console.log("scxdule date");
-             console.log(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime)
+              ScheduleDT = document.getElementById('schdate').value;
+              var split = ScheduleDT.substring(0,10)
+              var split1 = ScheduleDT.substring(11,16)
+              Scheduledate= split;
+              Scheduletime= split1;
+            console.log("scxdule date");
+            console.log(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime)
          
              var dynamicotp=parseInt(Math.random() * (2999 - 2000) + 2000);
-             //Schedulephone="7418924864"
-         
              var authkey="150219AJLZP0ww58ff3960";
-         var sendotp=  "http://api.msg91.com/api/sendotp.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&message=Your%20otp%20is%20"+dynamicotp+"&sender=Rentmatics&otp="+dynamicotp;
-         console.log(sendotp)
-         
-         
-         $.ajax({
-               type: "GET",
-               url: sendotp,
-              
-         
-           success: function(responsee){
+             var sendotp=  "http://api.msg91.com/api/sendotp.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&message=Your%20otp%20is%20"+dynamicotp+"&sender=Rentmatics&otp="+dynamicotp;
             
-              otp = JSON.parse(responsee);
-              console.log(otp)
-            //  
+             var sentop ={
+
+              "OTP" : sendotp,
+              "Phonenumber":Schedulephone,
+
+             }
+             $.ajax({
+               type: "POST",
+               url: "http://paymyhire.com:8083/Sentotp",
+               data: JSON.stringify(sentop),
+                
+    
+               success: function(responsee){
+               console.log("successfully sended")
+              
+               } });
+            
+   
          
-          
-             
-          }
-         
-         });
-         
-         }
-         
+                }
+                
+
+
          function ScheduleVisit(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime){
-           alert("inside schedule Visit");
+         
             var schedule ={
               
-               "Schedulehomeid":homeid,
+               "Schedulehomeid":parseInt(homeid),
                "ScheduleName":Schedulename,
                "Schedulephone":Schedulephone,
                "scheduleemail":schedulemail,
@@ -639,7 +457,7 @@ var Rentmatics ={
              
          $.ajax({
                type: "POST",
-               url: "http://localhost:8083/ScheduleVisit",
+               url: ApiScheduleVisit,
                contentType:"application/json; charset=utf-8",
                data: JSON.stringify(schedule),
          
@@ -654,60 +472,79 @@ var Rentmatics ={
          
          
          function Otpauth(){
+       
            var authkey="150219AJLZP0ww58ff3960";
            var getotp = document.getElementById('verifyotp').value;
-         console.log("************otp************");
-         console.log(getotp)
-         
-         
-         var verifyotp ="http://api.msg91.com/api/verifyRequestOTP.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&otp="+getotp;
-         console.log(verifyotp)
+             var verifyotp ="http://api.msg91.com/api/verifyRequestOTP.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&otp="+getotp;
+
+           var verifyotp1={
+            "OTp" : verifyotp,
+           }
+          
            $.ajax({
-               type: "GET",
-               url: verifyotp,
+               type: "POST",
+               url: "http://paymyhire.com:8083/OTPAUTH",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(verifyotp1),
+              
+              
               
            success: function(responsee){
-            
-              Scheuleresponse = JSON.parse(responsee);
-              alert("Succesfully updated")
-              console.log(Scheuleresponse)
+          
+             Scheuleresponse = JSON.parse(responsee);
+                      
               if (Scheuleresponse.type == "success"){
-         
-           ScheduleVisit(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime)
-         
-              }
+                  $('#myModal').modal('hide');
+                  ScheduleVisit(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime)
+               }
               else{
-               document.getElementById("invalidotp").style.visibility = "visible"; 
-         
-              }
-         
-          }
+                  $('#myModal').modal('show');
+                 document.getElementById("invalidotp").style.visibility = "visible"; 
+                  } 
+                }
+            
          
          });
          }
+
+        function resend(){
+     
+         var dynamicotp=parseInt(Math.random() * (2999 - 2000) + 2000);
+         var authkey ="150219AJLZP0ww58ff3960";
+         var resendotp =  "http://api.msg91.com/api/retryotp.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&retrytype=text";
+           var resendapi={
+            "OTp" : resendotp,
+           }
+         $.ajax({
+               type: "GET",
+               url: "http://paymyhire.com:8083/Resend",
+               
+           success: function(responsee){
+           otp = JSON.parse(responsee);
+            }
          
+         });
          
-         //var redirecturl="http://localhost:8083/rentmatics/?userid="+user_id;
+
+   
+         }
+
          
-         //Book The House
-         
-             function booknow(){
-         
-               var Bookname = document.getElementById('bookuser').value;
-               var Bookphone = document.getElementById('bookphone').value;
-               var Bookemail = document.getElementById('bookemail').value;
-         
-               var Advanceanmount="10";
-         
-               console.log("book dtat");
-               console.log(Bookname,Bookphone,Bookemail)
+function booknow(){
+
+
+             var Bookname = document.getElementById('bookuser').value;
+             var Bookphone = document.getElementById('bookphone').value;
+             var Bookemail = document.getElementById('bookemail').value;
+             var Advanceanmount="10";
+       
          
          
          var payment={
          
          
          
-         "Homeid":1,
+         "Homeid":parseInt(homeid),
          "Loginid":Bookemail,
            "Purpose": "purpose",
            "Amount": Advanceanmount,
@@ -724,7 +561,7 @@ var Rentmatics ={
          $.ajax({
               
                type: "POST",
-               url: "http://localhost:8083/paytm",
+               url: Apibooknow,
                contentType:"application/json; charset=utf-8",
                data: JSON.stringify(payment),
               
@@ -740,244 +577,314 @@ var Rentmatics ={
              
           },
           error :function(error){
-           alert("errrrrrrrrrrrrr");
-           console.log("errrrrrrrrrrrrrrrrrrr");
-           console.log(error)
+           
           }
          
          });
          
          }
-         
-        function logout(){
-       
-         
-          $.ajax({
-           type: "GET",
-           url: "http://localhost:8083/Logout",
-         
+
+
+     
+
+function Addfav(colorid){
+  
+      if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
+             var url2 = "login-register.html";
+              document.location.href = url2;
+               }
+      else{
+          if (colorid.style.color == "black" || colorid.style.color == undefined ){
+               colorid.style.color="red";  
+                      var s={
+                      "Id": null,
+                      "Homeid" :parseInt(homeid),
+                     "Loginid":cooki
+
+        };
+
+   $.ajax({
+         type: "POST",
+         url: ApiInsertwishlist,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
          success: function(responsee){
-          location.reload(true);
-          document.getElementById("Userdetails").style.visibility = "hidden"; 
-         document.getElementById("wishlist").style.visibility = "hidden"; 
-         document.getElementById("logout").style.visibility = "hidden"; 
-         document.getElementById("loginhide").style.visibility = "visible";
-         document.getElementById("signuphide").style.visibility = "visible";  
-         }
-         
-         });
+            
+           var searchout = JSON.parse(responsee);
           
-         }
+          
+           document.getElementById("addwish").style.color = "red";
+           document.getElementById("wishtext").style.color = "#fa5b0f";
+           
+}
+
+});
+}
+else{
+
+   var s={
+         
+          "Homeid" :parseInt(homeid),
+          "Loginid":cooki
+
+        };
+
+   $.ajax({
+         type: "POST",
+         url: ApiDeletewishlist,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+           success: function(responsee){
+           //colorid.style.color="black";  
+           document.getElementById("addwish").style.color = "black"; 
+           document.getElementById("wishtext").style.color = "black";
+          
+ 
+          
+}
+
+});
+
+
+
+}
+// 
+
+
+}
+return false;
+}
+
              
              
       </script>
-   </head>
-   <body data-spy="scroll" data-target=".nav-bar-sub" data-offset="50">
-      <div id="mySidenav" class="sidenav">
-         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
-            <svg class="close-icon" width="30" height="30" viewBox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-               <path d="M16.326 15l13.4-13.4c.366-.366.366-.96 0-1.325-.366-.367-.96-.367-1.326 0L15 13.675 1.6.275C1.235-.093.64-.093.275.275c-.367.365-.367.96 0 1.324l13.4 13.4-13.4 13.4c-.367.364-.367.96 0 1.323.182.184.422.275.662.275.24 0 .48-.09.663-.276l13.4-13.4 13.4 13.4c.183.184.423.275.663.275.24 0 .48-.09.662-.276.367-.365.367-.96 0-1.324L16.325 15z" fill-rule="evenodd"></path>
-            </svg>
-         </a>
-          <li id="signuphide1"><a data-toggle="modal" data-target="#signupModal" >Sign up</a></li>
-                     <li id="loginhide1"><a data-toggle="modal" data-target="#loginModal" >Login</a></li>
-                     <!-- <li class="active" id="Userdetails" style="display:none;"><a href="#" id="login" ></a></li> -->
-                     <li   id="Userdetails1" style="visibility:hidden">
-                        <a href="#"   role="button"  id="login1">Login</a></li>
-                         <li class="active"><a href="how_it_works.html">How It Works</a></li>
-                     <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
-                        
-                           <li class="active" id="wishlist1"><a href="javascript:Getwish()" >Wishlist</a></li>
-<!--                            <li><a href="#">Settings</a></li>
- -->                           <li id="logout1"><a href="javascript:logout()"  >Logout</a></li>
-                        
-      </div>
-      <!-- Navbar
-         =================================== -->
-      <nav class="navbar navbar-default rm-navbar rm-navbar-alt">
-         <div class="container-fluid">
-            <div class="navbar-header">
-               <button type="button" class="navbar-toggle rm-toggle" onclick="openNav()">
-                  <!-- -->
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-               </button>
-               <a class="navbar-brand" href="index.html"><img src="img/rm_logo.png" alt="Rentmatics"></a>
-            </div>
-            <div id="navbar" class="collapse navbar-collapse">
-                <ul class="nav navbar-nav navbar-right rm-nav">
-                    
+
+</script>
+
+</head>
+
+<body>
+  
+    <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+      <svg class="close-icon" width="30" height="30" viewBox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M16.326 15l13.4-13.4c.366-.366.366-.96 0-1.325-.366-.367-.96-.367-1.326 0L15 13.675 1.6.275C1.235-.093.64-.093.275.275c-.367.365-.367.96 0 1.324l13.4 13.4-13.4 13.4c-.367.364-.367.96 0 1.323.182.184.422.275.662.275.24 0 .48-.09.663-.276l13.4-13.4 13.4 13.4c.183.184.423.275.663.275.24 0 .48-.09.662-.276.367-.365.367-.96 0-1.324L16.325 15z" fill-rule="evenodd"></path>
+    </svg>
+    </a>
+  <ul>
+                     
+                     <li id="loginhide1"><a a href="login.html" >Login/Signup</a></li>
                      <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                     <li><a href="search_result.html">Find Room</a></li>
                      <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
-                     <li id="signuphide"><a data-toggle="modal" data-target="#signupModal" >Sign up</a></li>
-                     <li id="loginhide"><a data-toggle="modal" data-target="#loginModal" >Login</a></li>
+                     <li><a href="javascript:paymyrent()" >PayMyhire</a></li>
+                   
+                   <div id="Userdetails1" style="visibility:hidden">
+                     <li>
+                        <!-- login1
+                        <a href="#"   role="button"  id="login1">Login</a></li> -->
+                         <li class="active" id="wishlist1"><a href="javascript:Getwish()" >Wishlist</a></li>
+                          <li id="logout1"><a href="javascript:logout()"  >Logout</a></li>
+                        </div>
+                        </ul>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-inverse rm-navbar rm-navbar-alt" style="
+  background-color:transparent;border:none"> 
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle rm-toggle" onclick="openNav()">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html"><img src="img/rm_logo.png" alt="Rentmatics"></a>
+        </div>
+          <div id="navbar" class="collapse navbar-collapse">
+                  <ul class="nav navbar-nav navbar-right rm-nav">
+
+                     <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                     <li><a href="search_result.html">Find Room</a></li>
+                     <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
+                     <li ><a href="javascript:paymyrent()" >PayMyHire</a></li>
+                     <li id="loginhide"><a href="login.html" >Login/Signup</a></li>
                      <!-- <li class="active" id="Userdetails" style="display:none;"><a href="#" id="login" ></a></li> -->
+                     
                      <li class="dropdown"  id="Userdetails" style="visibility:hidden">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  id="login">Login</a>
+                        
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  id="login">Login
+                       </a> 
                         <ul class="dropdown-menu">
-                           <li class="active" id="wishlist"><a href="javascript:Getwish()" >Wishlist</a></li>
+                           <li  id="wishlist"><a href="wishlist.html" >Wishlist</a></li>
                            <!-- <li><a href="#">Settings</a></li> -->
                            <li id="logout"><a href="javascript:logout()"  >Logout</a></li>
                         </ul>
                      </li>
                   </ul>
-            </div>
-            <!--/.nav-collapse -->
-         </div>
-      </nav>
-      <!-- /Navbar -->
-      <!-- Jumbotron with gallery
-         =================================== -->
-      <div class="jumbo ip">
-         <div id="carousel-thingy" class="carousel slide" data-interval="false" >
-            <div class="carousel-inner" style="background-image:url(img/background3.jpg);height:100%;width:100%;background-repeat: no-repeat;background-size: cover;background-color:black;opacity:1.2;">
-               <div class="item">
-                  <ul class="reset clearfix">
-                     <li class="prod1">
-                        <input type="radio" name="product" id="product-1" value="a" >
-                        <label for="product-1">  
-                        <img id="First" alt="...">
-                        </label>
-                     </li>
-                     <li class="prod2">
-                        <input type="radio" name="product" id="product-2" value="b">
-                        <label for="product-2">  
-                        <img id="Second" alt="...">
-                        </label>
-                     </li>
-                     <li class="prod3">
-                        <input type="radio" name="product" id="product-3" value="c">
-                        <label for="product-3">  
-                        <img id="Third" alt="...">
-                        </label>
                      </li>
                   </ul>
                </div>
-               <div class="item">
-                  <ul class="reset clearfix">
-                     <li class="prod1">
-                        <input type="radio" name="product" id="product-4" value="d">
-                        <label for="product-4">  
-                        <img id="Four" alt="...">
-                        </label>
-                     </li>
-                     <li class="prod2">
-                        <input type="radio" name="product" id="product-5" value="e">
-                        <label for="product-5">  
-                        <img id="Five" alt="...">
-                        </label>
-                     </li>
-                     <li class="prod3">
-                        <input type="radio" name="product" id="product-6" value="f">
-                        <label for="product-6">  
-                        <img id="Six" alt="...">
-                        </label>
-                     </li>
-                  </ul>
-               </div>
-            </div>
-         </div>
       </div>
-      <!-- Body 
-         =====================================-->
-      <div class="page-body" style="margin-top:4%;">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-8">
-                  <!-- Floating nav bar -->
-                  <nav class="navbar nav-bar-sub">
-                     <div class="container">
-                        <ul class="nav navbar-nav sub-navbar">
-                           <li class="active"><a href="#overviewSection">Overview</a></li>
-                           <li><a href="#locationSection">Location</a></li>
-                        </ul>
-                     </div>
-                  </nav>
-                  <!-- /Floating nav bar -->  
-                  <!-- Overview Section
-                     ===========================================-->
-                  <!-- Overview Section
-                     ===========================================-->
-                  <div id="overviewSection" style="margin-bottom:0%">
-                     <div class="osTop">
-                        <h2 class="propTitle" id="Housename"></h2>
-                        <h4 id="Address"></h4>
-                        <h4 id="Address1"></h4>
-                        <h4 id="City"></h4>
-                        <h4>Banglore,karnataka</h4>
-                     </div>
-                     <!-- Facilities -->
-                     <div class="flx osAmn">
-                        <div class="flx1 amn">
-                           <span class="amnIco ico-type"></span>
-                           <label class="amnMicro" id="housetype"></label>
-                        </div>
-                        <div class="flx1 amn">
-                           <span class="amnIco ico-guest"></span>
-                           <label class="amnMicro" id="tenant"></label>
-                        </div>
-                        <div class="flx1 amn">
-                           <span class="amnIco ico-bedroom"></span>
-                           <label class="amnMicro" id="bhk"></label>
-                        </div>
-                        <div class="flx1 amn">
-                           <span class="amnIco ico-bed"></span>
-                           <label class="amnMicro">1 Bed</label>
-                        </div>
-                     </div>
-                     <!-- /Facilities -->
-                     <!-- About -->
-                     <div class="detSect">
-                        <h2 class="sectHeading">About this listing</h2>
-                        <p class="sectDesc" id="Listing"></p>
-                     </div>
-                     <!-- /About -->
-                     <hr class="hz-line">
-                     <!-- Complete facilities 
-                        ==================================-->
-                     <!-- facility -->
-                     <div class="fWrap">
-                        <div class="row">
-                           <div class="col-md-2"><span class="fTitle">Amenities</span></div>
-                           <div class="col-md-10">
-                              <div class="row">
-                                 <div class="col-md-6">
-                                    <ul class="fList-wrap amenities" id="Amenties">
-                                    </ul>
-                                 </div>
-                              </div>
-                              <hr class="hz-line">
-                           </div>
-                        </div>
-                     </div>
-                     <!-- /facility -->              
-                     <!-- facility -->
-                     <div class="fWrap">
-                        <div class="row">
-                           <div class="col-md-2"><span class="fTitle">Description</span></div>
-                           <div class="col-md-10">
-                              <div class="row">
-                                 <div class="col-md-12">
-                                    <div class="descWrap">
-                                       <h4 class="descTitle">The space</h4>
-                                       <p id="Description"></p>
-                                    </div>
-                                 </div>
-                              </div>
-                              <hr class="hz-line">
-                           </div>
-                        </div>
-                     </div>
-                     <!-- /facility -->
-                    
-                    
-                     <!-- /facility -->
-                     <!-- /Complete facilities -->
-                  </div>
-                  <!-- ========== /Overview Section ===========-->            
+    </nav>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+
+<!-- Titlebar
+================================================== -->
+
+<!-- Titlebar
+================================================== -->
+<div id="titlebar" class="property-titlebar margin-bottom-0">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        
+        <a href="istings-half-map-grid-compact.html" class="back-to-listings"></a>
+        <div class="property-title col-md-12">
+          <h4 id="Housename" style="margin-right:80%;font-size:20px;"><span class="property-badge"></span></h4>
+          <span>
+            <a href="#location" class="listing-address">
+              <i class="fa fa-map-marker">   <span style="margin-left:5px" id="Address"></span> <span id="Address1"></span></i>
+            
+            </a>
+          </span>
+        </div>
+
+        <div class="property-pricing">
+          <div id="rent"></div>
+          
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Content
+================================================== -->
+<div class="container" id="imageslider">
+  
+</div>
+
+
+
+<div class="container">
+  <div class="row">
+
+    <!-- Property Description -->
+    <div>
+
+
+<div class="col-md-8" >
+
+      <div class="property-description">
+        <h3 class="desc-headline">Description</h3>
+        <div class="show-more">
+          <p id="Description" style="font-family:Hanken;"></p>
+          <a href="#" class="show-more-button">Show More <i class="fa fa-angle-down"></i></a>
+        </div>
+        <h3 class="desc-headline">Amenties</h3>
+        <div class="col-md-4 checkboxes" >
+         <h4><b>Living Room</b></h4>
+        <div><i style="font-size: 2em;" class="im im-icon-Chair"></i><span style="margin-left:10px;text-decoration:line-through" id="sofa">Sofa</span></div>
+               <div> <i style="font-size: 2em" class="im im-icon-Wifi"></i><span style="margin-left:10px;text-decoration:line-through" id="wifi"> Wifi</span>
                </div>
+                <div><i style="font-size: 2em" class="fa fa-television"></i> <span style="margin-left:7px;text-decoration:line-through" id="tv">Television</span>
+                </div>
+                 <div> <img src="images/satellite-dish.svg" style="height:28px;margin-top:15px;" class="logo-img"><span style="margin-left:15px;text-decoration:line-through" id="dish">Dish</span> 
+                 </div>
+                <div> <img src="images/washing-machine.svg" style="height:28px; margin-top:15px;"><span style="margin-left:15px;text-decoration:line-through" id="wm">Washing Machine </span> 
+                </div>
+         <br>
+
+          <h4><b>Bathroom</b></h4>
+
+           <div> <img src="images/toilet.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="wt">Western Toilet </span> 
+           </div>
+           <div> <img src="images/water-heater.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="sh">Solar Heater</span> 
+           </div>
+          <div> <img src="images/water.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="geyser">Geyser</span> </div>
+          </div>
+         
+        <div class="col-md-4" >
+
+         <h4><b>Kitchen</b></h4>
+
+        <div> <img src="images/refrigerator.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="fridge">Fridge </span>
+         </div>
+
+         <div> <img src="images/stove.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="gas">LPG Gas Stove </span> </div>
+
+          <div> <img src="images/cutlery.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="spoon">Crockery Set </span> </div>
+          <br>
+
+            <h4><b>Bedroom</b></h4>
+
+
+
+           <div> <img src="images/wardrobe.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="Wardrobes">Wardrobes </span> </div>
+
+           <div> <img src="images/laptop.svg" style="height:28px;margin-top:10px;color:orange;"><span style="margin-left:15px;text-decoration:line-through" id="laptop">Laptop Table + Chair </span> </div>
+
+
+          <div> <img src="images/drawer.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="table">Side table</span>  </div>
+
+        </div>
+
+           <div class="col-md-4" >
+            <h4><b>Common</b></h4>
+
+
+
+        
+           <div> 
+           <img src="images/lift.svg" style="height:28px;margin-top:10px;">
+           <span style="margin-left:15px;text-decoration:line-through;" id="lift">Lift</span> 
+           </div>
+            <div> 
+            <img src="images/weightlifting.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through;" id="gym">Gym </span>
+             </div>
+             <div>
+              <img src="images/man-swimming.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through;" id="pool">Swimming pool </span> 
+              </div>
+
+         
+          </div>
+          
+        <!-- </ul> -->
+
+
+
+
+<br>
+
+<br>
+
+
+
+<br>
+<br>
+
+<div class="container" >
+  <div class="row">
+
+
+
+        <!-- Widget / End -->
 
 
 
@@ -985,490 +892,481 @@ var Rentmatics ={
 
 
 
-               <!--Schedule a Visit-->
-               <div class="col-md-4">
-                  <div class="rightPanel-wrapper">
-                     <div class="rp-form">
 
 
-                        <ul  class="nav navbar-nav sub-navbar">
-                           <li class="active">
-                              <a   data-target="#1a" data-toggle="tab" >Schedule Visit</a>
-                           </li>
-                           <li><a  data-target="#2a" data-toggle="tab" >Book Now</a>
-                           </li>
-                        </ul>
-                        <div class="tab-content clearfix">
-                           <div class=" tab-pane active" id="1a">
-                              <input type="text" placeholder="Name" class="rpfi" id="schname" ><br>
-                              <input type="email" placeholder="Email" class="rpfi" id="schemail">
-                              <br>
-                              <div class="flx" >
-                                 <div class="flx selUni mr15">
-                                    <select class="rpfs">
-                                       <option>+91</option>
-                                       <option>+92</option>
-                                       <option>+93</option>
-                                    </select>
-                                    <span class="selChev"><i class="fa fa-chevron-down"></i></span>
-                                 </div>
-                                 <div class="flx1">
-                                    <input type="text" placeholder="Phone" class="rpfi" id="schphone">  
-                                 </div>
-                              </div>
-                              <br>
-                              <div class="control-group">
-                                 <div class="controls input-append date form_date" data-date="" data-date-format="dd MM yyyy" data-link-field="dtp_input2" data-link-format="yyyy-mm-dd">
-                                    
-                                       <input type="text" placeholder="Pick a Day"  class="rpfi" style="margin-left:4%;" id="schdate">
-                                    
-                                    <span class="add-on"><i class="icon-remove"></i></span>
-                                    <span class="add-on"><i class="icon-th"></i></span>
-                                 </div>
-                                 <input type="hidden" id="dtp_input2" value="" /><br/>
-                              </div>
-                              <div class="control-group">
-                                 <div class="controls input-append date form_time" data-date="" data-date-format="hh:ii" data-link-field="dtp_input3" data-link-format="hh:ii">
-                                    <input type="text" placeholder="Pick a Time Slot"  class="rpfi" style="margin-left:4%;" id="schtime"  >
-                                    <span class="add-on"><i class="icon-remove"></i></span>
-                                    <span class="add-on"><i class="icon-th"></i></span>
-                                 </div>
-                                 <input type="hidden" id="dtp_input3" value="" /><br/>
-                              </div>
-                              <div>
-                                 <button class="btn btn-lg btn-block btn-notify" onclick="Schedule1()" data-toggle="modal"  data-target="#schedule" >Schedule a Visit</button>
-                              </div>
-                           </div>
+<div class="col-md-4" style="margin-left:535px;margin-top:-200px;width:365px;">
+        <div class="rp-wl">
+                  <div class="form-group">
+                     <button class="btn btn-default btn-lg btn-block btn-wishlist" onclick="return Addfav(this)" style="color:black"><i class="fa fa-heart mr5"   id="addwish"></i><b  id="wishtext" style="font-family:Hanken">Save to Wish List</b></button>
+                  </div>
+                  <p class="tc">Want to share this Rentspace</p>
+                  <div class="flx socials">
+ <!-- <div class="right-side"> -->
+        <ul class="social-icons" style="margin-top:-20px;margin-left:50px;">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
 
-                           
-                           <div class=" tab-pane" id="2a" >
-                              <input type="text" placeholder="Name" class="rpfi" id="bookuser"><br>
-                              <input type="email" placeholder="Email" class="rpfi" id="bookemail"><br>
-                              <div class="flx">
-                                 <div class="flx selUni mr15">
-                                    <select class="rpfs">
-                                       <option>+91</option>
-                                       <option>+92</option>
-                                       <option>+93</option>
-                                    </select>
-                                    <span class="selChev"><i class="fa fa-chevron-down"></i></span>
-                                 </div>
-                                 <div class="flx1">
-                                    <input type="text" placeholder="Phone" class="rpfi" id="bookphone"> 
-                                 </div>
-                              </div>
-                              <br>
-                              <div>
-                                 <button class="btn btn-lg btn-block btn-notify" onclick="booknow()">Book Now</button>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                 
-
-
-            <div class="rp-wl">
+                   
+                  </div>
+               </div>
+                <div class="rp-wl" style="visibility:hidden">
                   <div class="form-group">
                      <button class="btn btn-default btn-lg btn-block btn-wishlist"><i class="fa fa-heart-o mr5"></i>Save to Wish List</button>
                   </div>
-                  <p class="tc">908 travelers saved this place</p>
+                  <p class="tc">Want to share this Rentspace</p>
                   <div class="flx socials">
                      <div class="flx1">
                         <a class="socIco"><i class="fa fa-facebook"></i></a>
                      </div>
-                     <div class="flx1">
-                        <a class="socIco"><i class="fa fa-twitter"></i></a> 
-                     </div>
-                     <div class="flx1">
-                        <a class="socIco"><i class="fa fa-envelope"></i></a>  
-                     </div>
-                     <div class="flx1">
-                        <a class="socIco"><i class="fa fa-ellipsis-h"></i></a>  
-                     </div>
-                  </div>
-               </div>
-               <a class="report"><i class="fa fa-flag-o mr10"></i>Report this listing</a>
-            </div>
-         </div>
-      </div>
-
-
-
-
-
-
-
-
-
-
-               <!--Otp For Phone number-->
-               <div class="modal fade" id="schedule" role="dialog">
-                  <div class="modal-dialog">
-                     <!-- Modal content-->
-                     <div class="modal-content">
-                        <div class="modal-header">
-                           <button type="button" class="close" data-dismiss="modal">&times;</button>
-                           <h4 class="modal-title">Enter the OTP</h4>
-                        </div>
-                        <div class="modal-body">
-                           <input type="text" id="verifyotp">
-                        </div>
-                        <div id="invalidotp" style="visibility:hidden;">
-                           Invalid Otp         
-                        </div>
-                        <div class="modal-footer">
-                           <button type="button" class="btn btn-default" onclick="Otpauth()">Verify</button>
-                           <button type="button" class="btn btn-default">Resend</button>
-                        </div>
-                      </div>
+                   
+                    
                   </div>
                </div>
              
-      <!-- ./ -->
-      <!-- Location container 
-         ================================================-->
-      <div id="locationSection" class="pt60">
-         <h2 class="lsTitle">The neighborhood</h2>
-         <p class="lsMicro">Kunal’s home is located in Goa, India</p>
-         <!-- Map of the location -->
-         <div class="mapWrap">
-            <iframe id="map-canvas" width="100%" height="100%" frameborder="0" style="border:0"  src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&#10;&#9;&#9;&#9;    &amp;q=Goa, India" allowfullscreen="">
-            </iframe>
-         </div>
-         <!-- /Map of the location -->
-         <p class="lsMicro">Exact location information is provided after a booking is confirmed.</p>
-      </div>
-      <!-- ========== /Location container ===========-->
-      <!-- Similar listings 
-         ================================================-->
-      <hr>
-      <!-- ========== /Similar listings ===========-->
-      <!-- Explore other 
-         ================================================-->
-      <div class="explOth">
-         <h2 class="lslTitle mb30">Explore other options in and around Goa</h2>
-         <div class="mb15">
-            <span class="ivm">More places to stay in Goa:</span>
-            <ul class="list-inline list-expl-oth">
-               <li><a>Houses</a></li>
-               <li><a>Bed & Breakfasts</a></li>
-               <li><a>Lofts</a></li>
-               <li><a>Villas</a></li>
-               <li><a>Condominiums</a></li>
+
+</div>
+
+   <!-- Sidebar -->
+    <div class="col-lg-4 col-md-5">
+      <div class="sidebar sticky right">
+        <div class="style-2 " >
+          <!-- Tabs Navigation -->
+          <ul class="tabs-nav " style="border: 2px solid ash;color:white;">
+             <li class="active" style="color:white;background-color:#d71319;width:167.5px"><a href="#tab1" style="color:white"><i style="color:white" class="fa fa-bed i_bed"></i>Bed Details </a></li>
+
+            <li style="color:white;background-color:#d71319;width:164px"><a style="color:white;" href="#tab2"><i class="im im-icon-Warehouse"></i>Room Details</a></li>
             </ul>
+
+          <div class="tabs-container" style=" border: 2px solid white;width:335px">
+            <div class="tab-content" id="tab1">
+             <div >
+             <table >
+    <tr>
+          <th style="padding:15px;"> <b>Bed Available</b></th>
+          <th style="padding:12px;"><b >Bed Rent</b></th>
+    </tr>
+     <tr>
+          <td style="padding:15px"> <i style="font-size: 1em" class="fa fa-bed i_bed"></i><span  id="tableavailbed"></span></td>
+          <td style="padding:15px;width:110px;"><i style="font-size: 1.5em;" class="im im-icon-Money-2"></i><span  id="bed_rent"></span> </td>
+    </tr>
+     </table>                 
+     </div>
+     </div>
+     <div class="tab-content" id="tab2">
+<table >
+<tr>
+     <th style="padding:15px">  <b >Room Available</b></th>
+     <th style="padding:15px"> <b >Room Rent</b></th>
+     </tr>
+      <tr>
+      <td style="padding:15px"><i  class="im im-icon-Door"></i> <span id="tableavailroom"></span></td>
+       <td style="padding:15px;width:110px;"><i style="font-size: 1.3em;" class="im im-icon-Money-2"></i><span   id="bhk_rent"></span>
+       </td>
+        </tr>
+        </table>
+         </div>    
+        </div>
          </div>
-         <div>
-            <span class="micro3">Places nearby:</span>
-            <div class="row">
-               <div class="col-md-4">
-                  <ul class="list-nearby">
-                     <li><a>Fairhope Vacation Rentals</a></li>
-                     <li><a>Estepona</a></li>
-                     <li><a>Bangalore</a></li>
-                     <li><a>Kandy</a></li>
-                  </ul>
-               </div>
-               <div class="col-md-4">
-                  <ul class="list-nearby">
-                     <li><a>Bangkok</a></li>
-                     <li><a>Mueang Phuket</a></li>
-                     <li><a>Colombo</a></li>
-                     <li><a>Taranto</a></li>
-                  </ul>
-               </div>
-               <div class="col-md-4">
-                  <ul class="list-nearby">
-                     <li><a>Ypsilanti</a></li>
-                     <li><a>Mumbai</a></li>
-                     <li><a>Seevetal</a></li>
-                     <li><a>Iglesias</a></li>
-                  </ul>
-               </div>
-            </div>
+ </div>
+</div>
+
+
+   <!-- Sidebar -->
+    <div class="col-lg-4 col-md-5" >
+      <div class="sidebar sticky right" style="visibility:hidden">
+        <div class="style-2 " >
+        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   
+        </div>
          </div>
+ </div>
+</div>
+
+
+
+
+<div class="col-md-8">
+ <h4 class="headline margin-top-0 margin-bottom-20" style="font-family:hanken"><b >RENTMATICS HOME DETAILS</b></h4>
+        <!-- Blog Post -->
+        <div class="blog-post">
+          
+       
+          
+          <!-- Content -->
+          <div class="post-content">
+      
+      <div>
+      <details open>
+  <summary style="outline:none;"><b style="color:#d71319;font-size:20px;font-family:hanken" class="headline">House details</b></summary>
+ 
+          <div style="margin-top:20px;" >
+        
+          <table style="font-family:hanken">
+
+
+           <tr>
+
+      <th style="width:200px;">HouseName</th><th style="width:200px;text-align:center;" id="Housename1" ></th>
+      </tr>
+<tr>
+       <div> <th >BHK</th> <th style="text-align:center"  id="bhk1"></th></div>
+       </tr>
+        <tr> <th>Tenant Type</th><th style="text-align:center" id="tenant2"></th></tr>
+        <tr><th>House type</th><th style="text-align:center;" id="housetype1"></th></tr>
+        <tr><th>city</th><th style="text-align:center"  id="city2"></th></tr>
+       <tr><th>District</th><th style="text-align:center"  id="District"></th></tr>
+        <tr><th>Secutity Deposit</th><th style="text-align:center"   id="security"></th></tr>
+       <tr><th>squareFeet</th><th style="text-align:center"  id="Squarefeet"></th></tr>
+        <tr><th>Facing</th><th  style="text-align:center" id="Facing"></th></tr>
+        <tr><th>Parking</th><th style="text-align:center"  id="Parking"></th></tr>
+        <tr><th>Total Floor </th><th  style="text-align:center"  id="Totalfloors"></th></tr>
+        </table>
+        </div>
+        
+
+</details>
+<br><br>
+
+
+ <details >
+  <summary style="outline:none;"> <b style="color:#d71319;font-size:20px;font-family:hanken" class="headline">House Rules</b></summary>
+  <div style="margin-top:20px;font-family:hanken" >
+ <p>1. You shall take care of the home as your own<br>2. You shall look after you roommates like a family<br>3. You shall be good to neighbours & not wake them up midnight<br>4. You shall not host guests of opposite gender beyond 8 PM<br>5. You shall invite us on your birthday<br>6. You shall party hard but clean up afterwards<br>7. You shall introduce your roommates to The Big Bang Theor</</p>
+ </div>
+</details>
+<br><br>
+ <details>
+
+  <summary style="outline:none;"><b style="color:#d71319;font-size:20px;font-family:hanken" class="headline">Rent & Security Deposit - fine print</b></summary>
+  <div style="margin-top:20px;font-family:hanken" >
+   <li> Security Deposit is refundable, unless you have damaged something in the house.</li>
+<li>You need to pay the rent in advance. Before 3rd of every month.</li>
+<li>Short-term stays aren't allowed. You must stay for at least 6 months.</li>
+<li>You must provide at least 1 month notice before vacating the house.</li>
+<li>Maintenance charges of 5,000 when you vacate the house.</li></div>
+</details>
+          </div>
+
+        </div>
+        <!-- Blog Post / End -->
+
       </div>
+
+  
+
+
+  </div>
+</div>
+</p>
+</div>
+<!-- </section> -->
+
+
+
+
+
+    <br>
+       
+
+
+<div >
+<h4>The Neighborhood</h4>
+<br>
+
+<div id="map-container" style="height:500px;width:1100px">
+        <div id="map" data-map-zoom="4" data-map-scroll="true">
+            <!-- map goes here -->
+        </div>
+
+        <!-- Map Navigation -->
+      <a href="#" id="geoLocation" title="Your location"></a>
+      <ul id="mapnav-buttons" class="top">
+          <li><a href="#" id="prevpoint" title="Previous point on map">Prev</a></li>
+          <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
+      </ul>
+    </div>
+
+</div>
+       
+  </div>
+    </div>
+
+    <!--end of container>-->
+
+    
+
+    <!-- Sidebar -->
+    <div class="col-lg-4 col-md-5">
+      <div class="sidebar sticky right">
+        <div class="style-2">
+          <!-- Tabs Navigation -->
+          <ul class="tabs-nav tabs-container ">
+            <li class="active"><a href="#tab1a">Schedule Visit</a></li>
+            <li><a href="#tab2a" style="margin-left:4px">  Book Now</a></li>
+            
+          </ul>
+
+          <!-- Tabs Content -->
+          <div class="tabs-container">
+            <div class="tab-content" id="tab1a">
+            <form action="" method="post" onsubmit="Schedule1();return false;">
+       
+                 <input type="text" placeholder="Your name" id="schname" required>
+              <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="schemail" required>
+            <input type="text" placeholder="Your Phone" id="schphone" pattern="[0-9]{10}" required>
+
+            <input type="text" class="datetimepicker7" placeholder="Pick your Date" id="schdate" required/>
+
+            <button type="submit" class="button btn btn-danger"    data-backdrop="static" >Schedule Visit</button>
+            </form>
+
+          </div>
+
+
+            <div class="tab-content" id="tab2a">
+             <form action="" method="post" onsubmit="booknow();return false;">
+              <input type="text" placeholder="Your name" id="bookuser">
+              <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="bookemail" required>
+            <input type="text" placeholder="Your Phone" id="bookphone" pattern="[0-9]{10}" required>
+              
+            <button type="submit" class="button btn btn-danger">Book Now</button>
+              </form>
+
+            </div>    
+        </div>
+
+   
       </div>
+      <br>
+
+
+    </div>
+</div>
+        <!-- Widget / End -->
+
+</div>
+    </div>
+
+
+
+
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Rentmatics verification</h3>
+        <button type="button" class="close" aria-label="Close" data-dismiss="modal" style="margin-top:-30px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
       </div>
-      <!-- Footer
-         ====================================-->
-      <footer class="fat-footer">
-         <!-- Social links -->
-         <div class="social-footer">
-            <div class="container">
-               <ul class="list-inline socLinks">
-                  <li>
-                     <a class="fb" href="https://www.facebook.com/Rentmatics/" target="_blank">
-                     <i class="fa fa-facebook"></i>
-                     </a>
-                  </li>
-                  <li>
-                     <a class="twtr" href="https://twitter.com/rentmatics" target="_blank">
-                     <i class="fa fa-twitter"></i>
-                     </a>
-                  </li>
-                  <li>
-                     <a class="insta" href="https://www.instagram.com/rentmatics/" target="_blank">
-                     <i class="fa fa-instagram"></i> 
-                     </a>
-                  </li>
-               </ul>
-            </div>
-         </div>
-         <!-- /Social links -->
-         <!-- Footer text -->
-         <div class="footer-content">
-            <div class="container">
-               <div class="site-info">
-                  <ul class="list-inline footer-menu">
-                     <li>
-                        <a href="http://rentmatics.com/blog/">Blog</a>
-                     </li>
-                     <li>
-                        <a href="http://rentmatics.com/about/">About</a>
-                     </li>
-                     <li>
-                        <a href="http://rentmatics.com/help/">Help</a>
-                     </li>
-                     <li>
-                        <a href="http://rentmatics.com/careers/">Jobs</a>
-                     </li>
-                     <li>
-                        <a href="http://rentmatics.com/contact-us/">Contact Us</a>
-                     </li>
-                     <li>
-                        <a href="http://rentmatics.com/privacy/">Privacy</a>
-                     </li>
-                     <li>
-                        <a href="http://rentmatics.com/terms-conditions/">Terms &amp; Conditions</a>
-                     </li>
-                  </ul>
-               </div>
-               <div class="site-copyright-area">Copyright © 2016 Rentmatics.  •  <i class="fa fa-heart"></i> 
-                  •  Tel: +91-9884379333/9811448697         
-               </div>
-            </div>
-         </div>
-         <!-- Footer text -->
-      </footer>
-      <!-- Login / Signup modal -->
-       <div class="modal fade vert-centered" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-         <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-               <div class="modal-body">
-                  <form>
-                     <div class="rightPanel-wrapper">
-                        <a class="navbar-brand" href="#"><img src="img/rm_logo.png" alt="Rentmatics" style="margin-left:30%"></a>
-                        <div class="rp-form"> 
-                           <br>
-                           <br>
-                           <input type="name" placeholder="Username" class="rpfi" id="Susername" style="font:bold" required >
-                           <br>
-                           <br>
-                           <input type="password" placeholder="Password" class="rpfi" id="password" required>
-                           <br>
-                           <br>
-                           <input type="password" placeholder="Confirm Password" class="rpfi"  id="cpassword" required>
-                           <span id='message'></span>
-                           <br>
-                           <br>
-                           <input type="email" placeholder="Email" class="rpfi" id="Semail" required>
-                           <br>
-                           <button class="btn btn-lg btn-block btn-notify" onclick="SignupRent()">Signup</button>
+      <div class="modal-body">
+        <h4>Enter your Otp</h4>
+        <input type="text" id="verifyotp" >
+          <div id="invalidotp" style="visibility:hidden;color:red">
+                           Invalid Otp         
                         </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
       </div>
-      <!-- Modals
-         ===========================================-->
-      <!-- Login / Signup modal -->
-      <div class="modal fade vert-centered" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-         <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-               <div class="modal-body">
-                  <div  scope="public_profile,email" onlogin="checkLoginState();" class="fb-login-button" data-max-rows="1" data-size="large"  data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-                  <br><br>
-                  <div class="g-signin2" data-onsuccess="onSignIn" data-width="230" data-height="40" data-longtitle="true"></div>
-                  <br>
-                  <p style="margin-left:40%">OR</p>
-                  <div class="rightPanel-wrapper">
-                     <a class="navbar-brand" href="#"><img src="img/rm_logo.png" alt="Rentmatics" style="margin-left:30%"></a>
-                     <br>
-                     <br>
-                     <br>
-                     <div class="rp-form">
-                        <div class="form-group">
-                           <input type="name" placeholder="Username" class="rpfi" id="uname" required>
-                        </div>
-                        <div class="form-group">
-                           <input type="password" placeholder="Password" class="rpfi" id="upass" required>
-                        </div>
-                        <button class="btn btn-lg btn-block btn-notify" onclick="Login()">Login</button>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
+      <div class="modal-footer">
+       
+    <a href="javascript:Otpauth()" class="button btn btn-danger"   style="margin-left:3%;">Submitotp</a>
+    <a href="javascript:resend()" class="button btn btn-danger"  style="margin-left:8%;">Resendotp</a>
       </div>
-      <!-- Bootstrap core JavaScript
-         ================================================== -->
-      <!-- Placed at the end of the document so the pages load faster -->
+   
+  </div>
+</div>
+</div>
+
+
+<!-- Footer
+================================================== -->
+<div class="margin-top-55"></div>
+</div>
+
+
+<!-- Footer
+================================================== -->
+<div id="footer"  style="background-color:#484848;color:white" >
+  <!-- Main -->
+  <div class="container" >
+    <div class="row">
+      <div class="col-md-5 col-sm-6">
+       <h2  style="color:white;font-family:Hanken;font-size:35px;margin-top:-1px"><b style="text-shadow: 1px 1px 2px black, 0 0 25px grey, 0 0 5px grey;">Rentmatics</b></h2>
+        <!-- <img class="footer-logo" src="images/rm_logo.png"  alt=""> -->
+        <br><br>
+        <p style="font-family:Hanken;font-size:17px;margin-top:-35px">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 ">
+        <h4  style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Helpful Links</b></h4>
+        <ul class="footer-links">
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html"  style="color:white">Login/Signup</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="about.html"  style="color:white">About</a></li>
+         
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="myprivacy.html"  style="color:white">Privacy Policy</a></li>
+        </ul>
+
+        <ul class="footer-links">
+          <!-- <li><a href="#">FAQ</a></li> -->
+          <li  style="color:white;font-family:Hanken;font-size:17px"> <a href="blog.html"  style="color:white">Blog</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="howitwork.html"  style="color:white">How It Works</a></li>
+          <li  style="color:white;font-family:Hanken;font-size:17px"><a href="tandc.html"  style="color:white">Terms and condition</a></li>
+          
+        </ul>
+        <div class="clearfix"></div>
+      </div>    
+
+      <div class="col-md-3  col-sm-12">
+       <h4  style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Contact Us</b></h4>
+       
+        <div class="text-widget">
+          <span  style="color:white;font-family:Hanken;font-size:17px">12345 Little Lonsdale St, Melbourne</span> <br>
+          Phone: <span  style="color:white;font-family:Hanken;font-size:17px">Tel: +91-9884379333/9811448697 </span><br>
+          E-Mail:<span  style="color:white;font-family:Hanken;font-size:17px"> <a href="#" style="font-family:Hanken;font-size:17px;">info@rentmatics.com</a> </span><br>
+        </div>
+
+        <ul class="social-icons margin-top-20">
+          <li ><a class="facebook" href="https://www.facebook.com/Rentmatics/" ><i class="icon-facebook" ></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+        </ul>
+
+      </div>
+
+    </div>
+    
+    <!-- Copyright -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="copyrights" style="color:white;font-family:Hanken;font-size:20px">© 2016 Rentmatics. All Rights Reserved.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer / End -->
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+
+<script type="text/javascript" src="scripts/login.js"></script>
+<script type="text/javascript" src="css1/jquery.datetimepicker.full.js"></script>
+ <script src="scripts/bootstrap.min.js"></script>  
+
+ <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&sensor=false&amp;language=en"></script>
+<script type="text/javascript" src="scripts/infobox.min.js"></script>
+<script type="text/javascript" src="scripts/markerclusterer.js"></script>
+<script type="text/javascript" src="scripts/maps.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+  <script type="text/javascript">
+      /* For Sidebar Navigation in mobile resolution -->
+        /* Set the width of the side navigation to 250px */
+      function openNav() {
+          document.getElementById("mySidenav").style.width = "300px";
+      }
+
+      /* Set the width of the side navigation to 0 */
+      function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+      }
+
+    /* For filter display and hide */
+      function openOverlay() {
+          document.getElementById("myNav").style.display = "block";
+          document.getElementById("filterOpen").style.display = "none";
+          document.getElementById("filterClose").style.display = "block"
+      }
+
+      /* Close when someone clicks on the "x" symbol inside the overlay */
+      function closeOverlay() {
+          document.getElementById("myNav").style.display = "none";
+          document.getElementById("filterOpen").style.display = "block";
+          document.getElementById("filterClose").style.display = "none"
+
+      }
+
+      /* Switch to Map view during mobile resolution */
+      function switchToList() {
+          document.getElementById("switchList").style.display = "none";
+          document.getElementById("switchMap").style.display = "block";
+          document.getElementById("listContainer").style.display = "none";
+          document.getElementById("mapContainer").style.display = "block"
+      }
+
+      /* Switch to List view during mobile resolution  */
+      function switchToMap() {
+          document.getElementById("switchList").style.display = "block";
+          document.getElementById("switchMap").style.display = "none"
+          document.getElementById("listContainer").style.display = "block";
+          document.getElementById("mapContainer").style.display = "none"
+
+      }
+    </script> 
+<script src="scripts/login.js"></script>
+
+<!-- Style Switcher
+================================================== -->
+
+<!-- Style Switcher / End -->
+
+
+<!-- Wrapper / End -->
+<script>/*
+window.onerror = function(errorMsg) {
+  $('#console').html($('#console').html()+'<br>'+errorMsg)
+}*/
+
+
+var logic = function( currentDateTime ){
+  if (currentDateTime && currentDateTime.getDay() == 6){
+    this.setOptions({
+      minTime:'11:00'
+    });
+  }else
+    this.setOptions({
+      minTime:'8:00'
+    });
+};
+$('.datetimepicker7').datetimepicker({
+  onChangeDateTime:logic,
+  onShow:logic,
+  'format': 'd/m/Y H:i',
+    'minDate': -0,
+    'closeOnDateSelect' : true,
+    'validateOnBlur' : true,
+    'minDateTime': new Date()
+});
+
+
+
      
-      <!-- For photo gallery -->
-      <script src="js/jquery.tmpl.min.js"></script>
-      <script type="text/javascript" src="js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
-      <!-- Bootstrap JS -->
-      <script src="js/bootstrap.min.js"></script> 
-      <!-- For photo gallery -->  
-      <!-- <script src="js/gallery.js"></script> -->
-      <script src="js/jquery.easing.1.3.js"></script>
-      <script src="js/jquery.elastislide.js"></script>
-      <!-- Owl carousel -->
-    <!--  <script src="js/owl.carousel.min.js"></script>
-       <script type="text/javascript">
-         $(document).ready(function(){
-         $('.owl-carousel').owlCarousel({
-           loop:false,
-           margin:10,
-           nav:true,
-           navText : ["",""],
-           responsiveClass:true,
-           responsive:{
-               0:{
-                   items:1,
-                   nav:true
-               },
-               600:{
-                   items:2,
-                   nav:false
-               },
-               1000:{
-                   items:3,
-                   nav:true,
-                   loop:false
-               }
-           }
-         });
-         });
-      </script> -->
-      <!--  -->  
-      <script type="text/javascript">
-         /* Script for Sidebar navigation in mobile resolution */
-           /* Set the width of the side navigation to 250px */
-         function openNav() {
-             document.getElementById("mySidenav").style.width = "300px";
-         }
-         
-         /* Set the width of the side navigation to 0 */
-         function closeNav() {
-             document.getElementById("mySidenav").style.width = "0";
-         }   
-      </script> 
-      <!-- Anchors in page, make the page scroll smoothly to them  -->
-      <script type="text/javascript">
-         $( document ).ready(function() {    
-         
-         $(function() {
-         $('a[href*="#"]:not([href="#"])').click(function() {
-         if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-           var target = $(this.hash);
-           target = target.length ? target : $('[name=' + this.hash.slice(1) +']');
-           if (target.length) {
-           $('html, body').animate({
-             scrollTop: target.offset().top
-           }, 1000);
-           return false;
-           }
-         }
-         });
-         });
-         });
-      </script>
-      <!-- Overview and Location nav bar stick to top after scrolling banner area -->
-      <script>
-         var mainbottom, stop;
-         
-         
-         function addHeader() {
-           // we round here to reduce a little workload
-             stop = Math.round($(window).scrollTop());
-             if (stop > mainbottom) {
-                 $('.nav-bar-sub').addClass('navbar-fixed-top');
-             } else {
-                 $('.nav-bar-sub').removeClass('navbar-fixed-top');
-            }
-         }
-         
-      </script>
-      <!-- For Photo Gallery -->
-      <script id="img-wrapper-tmpl" type="text/x-jquery-tmpl">  
-         <div class="rg-image-wrapper">
-           {{if itemsCount > 1}}
-             <div class="rg-image-nav">
-               <a href="#" class="rg-image-nav-prev">Previous Image</a>
-               <a href="#" class="rg-image-nav-next">Next Image</a>
-             </div>
-           {{/if}}
-           <div class="rg-image"></div>
-           <div class="rg-loading"></div>
-           <div class="rg-caption-wrapper">
-             <div class="rg-caption" style="display:none;">
-               <p></p>
-             </div>
-           </div>
-         </div>
-      </script>
-      <script>
-         var $item = $('.carousel .item'); 
-         var $wHeight = $(window).height();
-         $item.eq(0).addClass('active');
-         $item.height(400); 
-         
-         
-         $(window).on('resize', function (){
-         $wHeight = $(window).height();
-         $item.height(400);
-         });
-         
-         $('.carousel').carousel({
-         interval: 6000,
-         pause: "false"
-         });
-      </script>
-      <script type="text/javascript">
-         $('.form_datetime').datetimepicker({
-             //language:  'fr',
-             weekStart: 1,
-             todayBtn:  1,
-         autoclose: 1,
-         todayHighlight: 1,
-         startView: 2,
-         forceParse: 0,
-             showMeridian: 1
-         });
-         $('.form_date').datetimepicker({
-             language:  'fr',
-             weekStart: 1,
-             todayBtn:  1,
-         autoclose: 1,
-         todayHighlight: 1,
-         startView: 2,
-         minView: 2,
-         forceParse: 0
-         });
-         $('.form_time').datetimepicker({
-             language:  'fr',
-             weekStart: 1,
-             todayBtn:  1,
-         autoclose: 1,
-         todayHighlight: 1,
-         startView: 1,
-         minView: 0,
-         maxView: 1,
-         forceParse: 0
-         });
-      </script>
-   </body>
+
+
+
+</script>
+
+</body>
 </html>

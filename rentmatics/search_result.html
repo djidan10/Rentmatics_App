@@ -24,430 +24,127 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/style.css" rel="stylesheet">
-    <script src="js/jquery.min.js"></script>
+     <link href="css/style2.css" rel="stylesheet">
+    <script src="scripts/jquery.min.js"></script>
 
-    <script type="text/javascript" src="js/jquery.cookie.min.js" ></script>
+    <script type="text/javascript" src="scripts/jquery.cookie.min.js" ></script>
 <style>
-.fontid{
-  font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-     font-size: 20px !important;
-    
-   margin-bottom: :-10px;
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-    font-weight: 600 !important;
-    color: #484848;
-    margin: 0;
-}
 
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
 .sliderbody{
-      font-weight: 200 !important;
-    color: #484848 !important;
-    font-family: Circular,-apple-system,BlinkMacSystemFont,Roboto,Helvetica Neue,sans-serif !important;
-    margin: 0px !important;
-    word-wrap: break-word !important;
-    font-size: 13px !important;
-    line-height: 18px !important;
-    letter-spacing: 0.2px !important;
+      
+   margin-left:6%;
+   font-size:10x;
+   font-family: Hanken;
+   color:#d71319
+   
+}
+ul {
+  list-style-type: none;
 }
 </style>
      
 
      <!--Function Started-->
  <script type="text/javascript">
-         var loginidd="";
-         var cooki=$.cookie('RentmaticsCookie');
-         $(document).ready(function(){
-          if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
-            document.getElementById("Userdetails").style.visibility = "hidden"; 
-            document.getElementById("loginhide").style.visibility = "visible"; 
-            document.getElementById("signuphide").style.visibility = "visible";
-            document.getElementById("Userdetails1").style.visibility = "hidden"; 
-            document.getElementById("loginhide1").style.visibility = "visible"; 
-            document.getElementById("signuphide1").style.visibility = "visible"; 
-            }else{
-              
-               document.getElementById("loginhide").style.display = "none"; 
-               document.getElementById("signuphide").style.display = "none"; 
-               $("#login").html(cooki);
-          document.getElementById("Userdetails").style.visibility = "visible"; 
-          document.getElementById("wishlist").style.visibility = "visible"; 
-          document.getElementById("logout").style.visibility = "visible";
-
-          document.getElementById("loginhide1").style.display = "none"; 
-               document.getElementById("signuphide1").style.display = "none"; 
-               $("#login1").html(cooki);
-          document.getElementById("Userdetails1").style.visibility = "visible"; 
-          document.getElementById("wishlist1").style.visibility = "visible"; 
-          document.getElementById("logout1").style.visibility = "visible";
-         
-         
-          $("#wish").html("Wishlist");
-         
-         
-             }
-         });
-         
+ var Apiprefixlogout="http://localhost:8083/Logout"
+var ApiGetAllhomedetails="http://localhost:8083/GetAllhomedetails"
+var Apiinsertwishlist="http://localhost:8083/Insertwishlist"
+var Apigetlisthome="http://localhost:8083/Gethomedetails"
+var Apideletewishlist="http://localhost:8083/Deletewishlist"
+var ApiGetFilter="http://localhost:8083/GetFilter"
+var ApiNotifyme="http://localhost:8083/Notifyme"
 
 
-    function Login(){
-      var loginuser=document.getElementById('uname').value;
-    var loginpass=document.getElementById('upass').value;
-
-var Rentmatics ={
-            
-          "Username": loginuser,
-          "Password":loginpass,
-          
-              
-              };
-               
-         
-             $.ajax({
-               type: "POST",
-               url: "http://localhost:8083/Login",
-               contentType:"application/json; charset=utf-8",
-               data: JSON.stringify(Rentmatics),
-         
-           success: function(responsee){
-           var searchout = JSON.parse(responsee);
-           console.log("^^^^^^^^^^^^^^^^^^6");
-           console.log(searchout.Status);
-
-
-          if (searchout.Status == "Success"){
-
-      loginidd=searchout.Loginid;
-      alert("loogin id="+loginidd);
-         
-          
-           $("#login").html(loginidd);
-          document.getElementById("loginhide").style.display = "none"; 
-          document.getElementById("signuphide").style.display = "none"; 
-          document.getElementById("Userdetails").style.visibility = "visible"; 
-
-
-
-          document.getElementById("loginhide1").style.display = "none"; 
-          document.getElementById("signuphide1").style.display = "none"; 
-          document.getElementById("Userdetails1").style.visibility = "visible"; 
-
-
-          }else{
-
-            alert("Incorect Username and Password")
-
-          }
-         
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Logout the User
+function logout() {
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
 
 
 }
+
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+
+
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+    }
 });
-}
-      
-         
-   function SignupRent(){
-  var signuser=document.getElementById('Susername').value;
-    var signpass=document.getElementById('cpassword').value;
-    var signemail=document.getElementById('Semail').value;
-    var Rentmatics ={
-          "Id ": "",      
-          "Username": signuser,
-          "Password":signpass,
-          "Loginid":  signemail, 
-          "Logintype": "Rentmatics"
-              
-              };
-               
-         
-             $.ajax({
-               type: "POST",
-               url: "http://localhost:8083/User",
-               contentType:"application/json; charset=utf-8",
-               data: JSON.stringify(Rentmatics),
-         
-            success: function(responsee){
-           var searchout = JSON.parse(responsee);
-           var uservalue=searchout.Username;
-           loginidd=searchout.Loginid;
-         
-          
-           $("#login").html(loginidd);
-           alert("loogin id="+loginidd);
-          document.getElementById("loginhide").style.display = "none"; 
-          document.getElementById("signuphide").style.display = "none"; 
-          document.getElementById("Userdetails").style.visibility = "visible"; 
-         
 
-
-           document.getElementById("loginhide1").style.display = "none"; 
-          document.getElementById("signuphide1").style.display = "none"; 
-          document.getElementById("Userdetails1").style.visibility = "visible"; 
-        }
-          });
-         }
-         
-           
-            function Getwish(){
-              alert("inside wish "+loginidd);
-            url = "wishlist.html";
-          document.location.href = url;
-                
-          }   
-         
-         
-              var auth2; // The Sign-In object.
-              var googleUser; // The current user.
-          var appStart = function() {
-                gapi.load('auth2', initSigninV2);
-              };
-              var initSigninV2 = function() {
-                auth2 = gapi.auth2.init({
-                    client_id: 'CLIENT_ID.apps.googleusercontent.com',
-                    scope: 'profile'
-                });
-         
-                
-                auth2.isSignedIn.listen(signinChanged);
-                auth2.currentUser.listen(userChanged);
-         
-                if (auth2.isSignedIn.get() == true) {
-                  auth2.signIn();
-                }
-            refreshValues();
-              };
-         
-              
-              var signinChanged = function (val) {
-                console.log('Signin state changed to ', val);
-                
-              };
-         
-              var userChanged = function (user) {
-                console.log('User now: ', user);
-                googleUser = user;
-                updateGoogleUser();
-               
-              };
-         
-              
-              var updateGoogleUser = function () {
-                if (googleUser) {
-                  console.log("got google user");
-                  console.log(googleUser)
-                  
-                } else {
-                  console.log("did nit get google user");
-                
-                }
-              };
-         
-              
-              var refreshValues = function() {
-                if (auth2){
-                  console.log('Refreshing values...');
-         
-                  googleUser = auth2.currentUser.get();
-                console.log(googleUser)
-                updateGoogleUser();
-                }
-              }
-
-               function GsignOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-      
-    });
-  }
-
-
-
-  var delete_cookie = function(name) {
-    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-};
-
-
-         function logout(){
-         
-         GsignOut();
-         
-         
-         // $.removeCookie('RentmaticsCookie');
-         delete_cookie("RentmaticsCookie");
-         
-         
-         
-          $.ajax({
-           type: "GET",
-           url: "http://localhost:8083/Logout",
-         
-         success: function(responsee){
-          document.getElementById("Userdetails").style.visibility = "hidden"; 
-         document.getElementById("wishlist").style.visibility = "hidden"; 
-         document.getElementById("logout").style.visibility = "hidden"; 
-         document.getElementById("loginhide").style.visibility = "visible";
-         document.getElementById("signuphide").style.visibility = "visible";  
-
-
-         document.getElementById("Userdetails1").style.visibility = "hidden"; 
-         document.getElementById("wishlist1").style.visibility = "hidden"; 
-         document.getElementById("logout1").style.visibility = "hidden"; 
-         document.getElementById("loginhide1").style.visibility = "visible";
-         document.getElementById("signuphide1").style.visibility = "visible";  
-         }
-         
-         });
-          
-         }
-
-
-              var email="";
-         function onSignIn(googleUser) {
-                  alert("inside google")
-                var profile = googleUser.getBasicProfile();
-                console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-                console.log('Name: ' + profile.getName());
-                console.log('Image URL: ' + profile.getImageUrl());
-                console.log('Email: ' + profile.getEmail()); 
-         
-                // This is null if the 'email' scope is not present.
-              
-                  var Id = profile.getId(); // Do not send to your backend! Use an ID token instead.
-               var name = profile.getName();
-              // var iamprofile.getImageUrl());
-                 email = profile.getEmail();
-         
-         
-         
-         var Gmail ={
-          "Id ": Id,      
-          "Username": name,
-          "Password":  "",
-          "Loginid":  email, 
-          "Logintype": "Gmail"
-              
-              };
-               
-         
-             $.ajax({
-               type: "POST",
-               url: "http://localhost:8083/User",
-               contentType:"application/json; charset=utf-8",
-               data: JSON.stringify(Gmail),
-         
-            success: function(responsee){
-              var searchout = JSON.parse(responsee);
-         
-         
-         
-          console.log("response");
-          console.log(searchout)
-          var uservalue=searchout.Username;
-         
-          // $("#Userdetails").html(uservalue);
-         
-            $("#login").html(uservalue);
-         
-         
-         
-          document.getElementById("loginhide").style.display = "none"; 
-          document.getElementById("signuphide").style.display = "none"; 
-          document.getElementById("Userdetails").style.visibility = "visible"; 
-
-
-          document.getElementById("loginhide1").style.display = "none"; 
-          document.getElementById("signuphide1").style.display = "none"; 
-          document.getElementById("Userdetails1").style.visibility = "visible"; 
-         
-         
-         
-          }
-         
-         });
-              }
-         
-     function signOut() {
-             var auth2 = gapi.auth2.getAuthInstance();
-             auth2.signOut().then(function () {
-           console.log('User signed out.');
-                  });
-                }
-            
-           window.fbAsyncInit = function() {
-             FB.init({
-               appId      : '837076093106264',
-               xfbml      : true,
-               version    : 'v2.9'
-             });
-             FB.AppEvents.logPageView();
-           };
-         
-           (function(d, s, id){
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) {return;}
-              js = d.createElement(s); js.id = id;
-              //js.src = "//connect.facebook.net/en_US/sdk.js";
-              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1243386559017640";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-         
-          // This is called with the results from from FB.getLoginStatus().
-           function statusChangeCallback(response) {
-             console.log('statusChangeCallback');
-             console.log(response);
-            
-             if (response.status === 'connected') {
-               // Logged into your app and Facebook.
-               testAPI();
-             } else {
-             
-               
-             }
-           }
-         
-           function checkLoginState() {
-             FB.getLoginStatus(function(response) {
-               statusChangeCallback(response);
-             });
-           }
-         
-         
-           function testAPI() {
-             console.log('Welcome!  Fetching your information.... ');
-             FB.api('/me', function(response) {
-               console.log('Successful login for: ' + response.name);
-               console.log(response);
-               document.getElementById('status').innerHTML =
-                 'Thanks for logging in, ' + response.name + '!';
-             });
-           }
-      
-      
-
-   //Get All home based on Areas
-   
+ //Get All home based on Areas
+ var Loginid = ""
+ var tmp = ""
+  
 
     window.onload = function () {
 
     var url = document.location.href,
     url1 = decodeURIComponent(url)
-        params = url1.split('?')[1].split('&'),
-        data = {}, tmp;
-        for (var i = 0, l = params.length; i < l; i++) {
-         tmp = params[i].split('=');
-         data[tmp[0]] = tmp[1];
-    }
-      loginid=data.loginid;
-      console.log(loginid)
 
-      var s={
-          "Id" :data.Id
+   
+  var params = location.search.substr(location.search.indexOf("?")+1);
+    if(params==""||params==null||params==undefined||params=="NODATA"){
+var s={
+      "Loginid":cooki
+       };
+
+ $.ajax({
+         type: "POST",
+         url: ApiGetAllhomedetails,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+         
+        
+
+         success: function(responsee){
+   
+            var searchout = JSON.parse(responsee);
+            var searchout = JSON.parse(responsee);
+            Getresponse(searchout)
+          }
+
+
+});
+      
+    }else{
+
+
+  var sval = "";
+  params = params.split("&");
+ for (var i=0; i<params.length; i++)
+       {
+
+         temp = params[i].split("=");
+         if ( [temp[0]] == "Id" ) { sval = temp[1]; }
+       }  
+
+
+var sval = sval.replace("%20", " ");
+     var s={
+          "Id" :sval,
+          "Loginid":cooki
         };
 
    $.ajax({
          type: "POST",
-         url: "http://localhost:8083/Gethomedetails",
+         url: Apigetlisthome,
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
@@ -456,24 +153,21 @@ var Rentmatics ={
             var searchout = JSON.parse(responsee);
             if (searchout == null){
 
-          url = 'working.html?loginid='+loginid;
-          console.log("*************wish url*******************")
-          console.log(url)
-           document.location.href = url;
+          url = 'working1.html';        
         
-
-
-
-            }
+           document.location.href = url;
+         }
             else{
 
+    
+      var searchout = JSON.parse(responsee);
             Getresponse(searchout)
           }
 }
 
 });
 }
-
+}
 //Get Mix and Max for Filter
 
 var ID;
@@ -540,10 +234,15 @@ for (var i = 0, l = elements.length; i < l; i++)
 
 //Common function for s=Displaying Response
 function Getresponse(searchout){
+  
   var cardstring ="";
-  var property =searchout.length +" ";
- for (k=0;k<searchout.length;k++){
-    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,loginid);
+  
+ console.log(searchout);
+  if( searchout != null  ){
+     var property =searchout.length +" Results Found ";
+    for (k=0;k<searchout.length;k++){
+    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,Loginid);
+
   }
 
   document.getElementById("listContainer").innerHTML=cardstring;
@@ -562,28 +261,28 @@ function Getresponse(searchout){
  for(j=0;j<searchout.length;j++){
  console.log(searchout[j].RentFullimages.length);
  var finalDiv="";
- var Singlesliderstart = "<div class='item'>"
- var Singlesliderstart1 = "<div class='item active'>"
+
  var Singlesliderstart2="<img src='";
- var Singlesliderend = "' alt='"+"'></div>";
+ var Singlesliderend = "' alt='"+"'>";
  var bhk1 =" Bhk"
+ var Rating ="";
  
- for (i=0;i<searchout[j].RentFullimages.length;i++){
-  if(i==0){
-    finalDiv=finalDiv+Singlesliderstart1+Singlesliderstart2+searchout[0].RentFullimages[i].Picture_url+Singlesliderend;
-  }else{
-  finalDiv=finalDiv+Singlesliderstart+Singlesliderstart2+searchout[0].RentFullimages[i].Picture_url+Singlesliderend;
-} }
+  for (i=0;i<searchout[j].RentFullimages.length;i++){
+    finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
+   }
+    
+  
 
  
   var ID = searchout[j].RentFullStruct.Id;
     var Liked = searchout[j].RentFullStruct.Liked;
-   GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
-   $("#sliderimg"+ID).html(finalDiv);
+  GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
+  
+  
  var mapview = searchout[j].Cityname;
- var City =searchout[j].Cityname
- var Rent = "$ "+searchout[j].RentFullStruct.Month_rent;
- var Housename = searchout[j].RentFullStruct.Housename;
+ var City =searchout[j].RentFullStruct.City
+ var Rent = "₹ "+searchout[j].RentFullStruct.Month_rent;
+ var Housename = " " + searchout[j].RentFullStruct.Housename;
  var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
  var Address1 = searchout[j].RentFullStruct.Adress1;
  var Address2 = searchout[j].RentFullStruct.Adress2;
@@ -593,71 +292,109 @@ function Getresponse(searchout){
  var housetype =searchout[j].RentFullStruct.House_type
  var tenantType =searchout[j].RentFullStruct.Tenant_type
  var furnishingType =searchout[j].RentFullStruct.Furnish_type
+ var bedType =searchout[j].RentFullStruct.Bed
+ var Availbed =searchout[j].RentFullStruct.Avail_bed
+  var bedrent =  "₹ "+ searchout[j].RentFullStruct.Bed_rent
+  var deposit =  "₹ "+ searchout[j].RentFullStruct.Secutity_deposit;
+  var Squarefeet =searchout[j].RentFullStruct.Squarefeet +"/sqft";
+  var Likecount =searchout[j].RentFullStruct.Likecount ;
+   Rating =searchout[j].RentFullStruct.Rating ;
+  var Totalfloors =searchout[j].RentFullStruct.Totalfloors ;
+  var Facing =searchout[j].RentFullStruct.Facing ;
 
- url = 'individual_page.html?Id=' + encodeURIComponent(ID)+'&loginid='+loginid;
 
 
+
+
+
+
+$("#Squarefeet"+ID).html(Squarefeet);
+$("#Likecount"+ID).html(Likecount);
+$("#Rating"+ID).html(Rating);
+$("#Totalfloors"+ID).html(Totalfloors);
+$("#Facing"+ID).html(Facing);
+$("#deposit"+ID).html(deposit);
 $("#property").html(property);
 $("#Rent"+ID).html(Rent);
 $("#Housename"+ID).html(Housename);
 $("#bhk"+ID).html(bhk);
+$("#bed"+ID).html(bedType);
 $("#Address1"+ID).html(Address1);
 $("#Address2"+ID).html(Address2);
 $("#pin"+ID).html(pin);
 $("#state"+ID).html(state);
 $("#country"+ID).html(country);
 $("#city"+ID).html(City);
+$("#city1"+ID).html(City);
 $("#houseType"+ID).html(housetype);
 $("#tenantType"+ID).html(tenantType);
 $("#furnishtype"+ID).html(furnishingType);
+$("#rentimage1"+ID).html(finalDiv);
+$("#availbed"+ID).html(Availbed);
+ $("#bedrent"+ID).html(bedrent)
 
+ url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
 document.getElementById("getUrl"+ ID).setAttribute("href",url);
-var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
-document.getElementById("maprightview").setAttribute("src",src);
-document.getElementById("mapscroll").setAttribute("src",src);
-document.getElementById("getUrl"+ ID).setAttribute("href",url);
+document.getElementById("getUrl1"+ ID).setAttribute("href",url);
+    var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
+      src=src.replace("&amp;","&")
+
+        // document.getElementById("map-canvas").setAttribute("src",src);
+//var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
+// document.getElementById("maprightview").setAttribute("src",src);
+// document.getElementById("mapscroll").setAttribute("src",src);
+// document.getElementById("getUrl"+ ID).setAttribute("href",url);
 
 
 }
+}
+else{
+ 
+   location.reload(true);
+ }
+
 }
 function Addfav(getid,getlogin,colorid){
+  
 
-   if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
-         $('#loginModal').modal('show');
-        cookievar = Cookies()
-          console.log(cookievar)
-          window.location.reload(true);
+   if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
+   
+    var url2 = "login-register.html";
+ 
+    document.location.href = url2;
 
-              }else{
-
-getlogin= cooki;
-
-if (colorid.style.color == "white"){
-
-  colorid.style.color="red";  
-
-
-      var s={
-          "Id":"",
-          "Homeid" :getid,
-          "Loginid":getlogin
+  
+        }
+      else{
+         
+               if (colorid.style.color == "white" || colorid.style.color == undefined ){
+               
+                    colorid.style.color="red";  
+                      var s={
+          "Id": null,
+          "Homeid" :parseInt(getid),
+          "Loginid":cooki
 
         };
 
    $.ajax({
          type: "POST",
-         url: "http://localhost:8083/Insertwishlist",
+         url: Apiinsertwishlist,
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
          success: function(responsee){
-   
+            
            // var searchout = JSON.parse(responsee);
-            //Getresponse(searchout)
+          
+          
+           //  Getresponse(searchout)
+           
 }
 
 });
-}else{
+}
+else{
 
    var s={
          
@@ -668,13 +405,15 @@ if (colorid.style.color == "white"){
 
    $.ajax({
          type: "POST",
-         url: "http://localhost:8083/Deletewishlist",
+         url: Apideletewishlist,
          contentType:"application/json; charset=utf-8",
          data: JSON.stringify(s),
 
-         success: function(responsee){
+           success: function(responsee){
            colorid.style.color="white";  
-   
+           document.getElementById(colorid).style.color = "red"; 
+          
+ 
           
 }
 
@@ -683,19 +422,22 @@ if (colorid.style.color == "white"){
 
 
 }
+// 
 
- // document.getElementById(colorid).style.color = "red"; 
- 
+
 }
+return false;
 }
 
+function Payalert(){
+ window.open("http://paymyhire.com/");
 
+}
 
 function GetLiked(likedid,liked){
 
-  if (liked == true){
-
- document.getElementById(likedid).style.color = "red";
+if (liked == true){
+   document.getElementById(likedid).style.color = "red";
 }else{
    document.getElementById(likedid).style.color = "white";
 }
@@ -703,94 +445,90 @@ function GetLiked(likedid,liked){
 
 
  //For Slider
- function Getjavascript(Dyid,loginid){
-  var str= 
-  
-"<div class='propCard '>"+                                                                                                                
-"<div class='prop-card-top col-md-12'>"+
-                                                                                                            
-"<div id='prop-card-carousel6"+Dyid+"' class='carousel propCarousel slide' data-ride='carousel' data-interval='false'>"+      
-" <div class='carousel-inner' role='listbox' id='sliderimg"+Dyid+"'>"+                                                                                                                                                  
-"</div> "+                                                                                                          
-" <a class='left carousel-control' data-target='#prop-card-carousel6"+Dyid+"' role='button' data-slide='prev'>"+           
-" <span class='fa fa-chevron-left chev-lt' aria-hidden='true'></span>"+                                            
-"</a>"+                                                                                                             
-"<a class='right carousel-control' data-target='#prop-card-carousel6"+Dyid+"' role='button' data-slide='next'>"+            
-"<span class='fa fa-chevron-right chev-rt' aria-hidden='true'></span>"+                                          
-"</a>"+                                                                                                             
-"</div>"+                                                                                                            
-"<span class='prop-mark-fav'><i class='fa fa-heart' id='colorid"+Dyid+"' onclick='Addfav("+Dyid+",loginid,this)' style='color:white' ></i></span>"+
-// "<span class='prop-mark-fav'><i class='fa fa-heart' style='color:red' ></i></span>"+                                                     
-
-"<span class='prop-price' id='Rent"+Dyid+"'><span class='ccy'>$</span></span>"+                                               
+ function Getjavascript(Dyid,Loginid){
+ 
+  var rentimage = 
+    
+"<div class='listings-container list-layout' style='margin-top:10px;'>"+
+"<div class='listing-item'>"+
+"<a class='listing-img-container' id='getUrl"+Dyid+"'>"+
+"<div style ='width=100%;height:100%;'id='rentimage1"+Dyid+"'"+
+"></div>"+
+"<div class='listing-badges'>"+
+"<span class='prop-mark-fav' ><i class='fa fa-heart' id='colorid"+Dyid+"' onclick='return  Addfav("+Dyid+",Loginid,this)' style='color:white;' ></i></span>"+
+"<span style='margin-right:70%' id='tenantType"+Dyid+"'></span>"+
 "</div>"+
+"<div class='listing-img-content'>"+
+"<span class='listing-price' id='Rent"+Dyid+"' style='font-size:20px;margin-left:-3%'></span>"+"<br>"+
+"<span class='listing-price' style='font-size:15px;margin-left:4%;font-family: Hanken;'> monthly</span>"+
 "</div>"+
-"<div class='prop-card-body col-md-6'>"+
-                                                                                         
-               
-"<a id='getUrl"+Dyid+"'>"+
-                                                                                         
-"<div class='fontid' id='Housename"+Dyid+"'></div>"+ 
-  
+"</a>"+
 
-"<div class='sliderbody'>Available For -<span id='houseType"+Dyid+"'></span></div>" +   
-"<div class='sliderbody' >Tenant Type- <span id='tenantType"+Dyid+"'></span></div>" +                                            
+"<div class='listing-content'>"+
+"<a  class='listing-content' id='getUrl1"+Dyid+"'>"+
+"<div style='margin-top:15px;'>"+
 
- "<span class='sliderbody'  id='bhk"+Dyid+"'></span>" + 
+"<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:20px;font-family:Hanken;color:black'></span>"+
 
-  "  | <span class='sliderbody'  id='furnishtype"+Dyid+"'></span>"+ 
+"<br>"+
+"<i class='fa fa-map-marker' style='margin-left:5.7%;color:#d71319'></i><span id='city1"+Dyid+"' style='margin-left:4px;font-family:Hanken;' font-size:11px;color:black'></span>"+ 
+"<br>"+
+"<span style='margin-left:6%;font-size:15px;font-family: Hanken;color:black'>Rent starts from</span>"+
+"<span style='margin-left:3%;font-size:15px;font-family:Hanken;color:black' id='bedrent"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
+"<br>"+
+"<span style='margin-left:6%;font-size:15px;font-family:Hanken;color:black'>Security Deposit</span>"+
+"<span style='margin-left:3%;font-size:15px;font-family:Hanken;color:black' id='deposit"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
+"<br>"+
+ "<b><span id='availbed"+Dyid+"' style='margin-left:6%;font-size:15px;'></span>"+
+"<span style='font-size:15px;font-family:Hanken'>  Bed Available</span></b>"+"<b id='Squarefeet"+Dyid+"' style='margin-left:10%;font-size:14px;font-family: Hanken'></b>"+
 
- "<div id='city"+Dyid+"' class='sliderbody'></div> "+    
-                                    
-// "<div class='locAdd propCardTitle' id='Address1"+Dyid+"'></div>"+                                                 
-// "<div class='locAdd propCardTitle' id='Address2"+Dyid+"'></div>"+                                                 
-// "<div class='locAdd propCardTitle' id='pin"+Dyid+"'></div>"+                                                      
- "<div class='sliderbody' id='state"+Dyid+"'></div>"+                                                    
-//  "<div class='locAdd propCardTitle' id='country"+Dyid+"'></div>"+  
-                                               
-"</a>"+  
-                                                                                                      
-                                                                                            
-                                                                                                             
-"</div>"   +
 
-"</div>"
+"</div>"+
+"<ul class='listing-details' >"+
+"<li ><b id='houseType"+Dyid+"' style='font-family:Hanken;margin-left:10px;'>"+"</b></li>"+
+"<li><b id='bhk"+Dyid+"'  style='font-family:Hanken;margin-left:5px;'>"+"</b></li>"+
+ "<li><b id='furnishtype"+Dyid+"' style='font-family:Hanken;margin-left:5px;'></b></li>"+
+"</ul>"+
+"</a>"+ 
+"</div>"+
 
-  return str; 
+"</div>";
+
+
+ return rentimage;
 
  }
  
  //For Filter Get REsponse
+//For Filter Get REsponse
 function GetFilterhome(){
-  console.log("**************Inside Filter")
   
 
 
     var minrent =  document.getElementById('getmin').value;
     var maxrent = document.getElementById('getmax').value;
-    var gettenanttype = document.getElementsByName('tenantType');
-    var getbookingtype =document.getElementsByName('bookingType');
-    var gethousetype =document.getElementsByName('houseType');
-    var getfurnishingType =document.getElementsByName('furnishingType');
+    var gettenanttype = document.getElementById('tenantType').value;
+    var getbookingtype =document.getElementById('bookingType').value;
+    var gethousetype =document.getElementById('houseType').value;
+    var getfurnishingType =document.getElementById('furnishingType').value;
     var getdistance =document.getElementById('distance').value;
     var getbhk =document.getElementById('getbhk').value;
      var getbed =document.getElementById('getbed').value;
-  
+     //Calling Radio button Function
+    // var tenantType=getRadiovalue(gettenanttype);
+    // var bookingtype=getRadiovalue(getbookingtype);
+    // var housetype=getRadiovalue(gethousetype);
+    // var furnishingType=getRadiovalue(getfurnishingType);
 
-    //Calling Radio button Function
-    var tenantType=getRadiovalue(gettenanttype);
-    var bookingtype=getRadiovalue(getbookingtype);
-    var housetype=getRadiovalue(gethousetype);
-    var furnishingType=getRadiovalue(getfurnishingType);
-    console.log(minrent,maxrent,bookingtype)
-  
+
   var Filter ={
+      "F_Loginid" : cooki,
       "F_Monthrent_Min": parseInt(minrent),
       "F_Monthrent_Max": parseInt(maxrent),
-      "F_Tenant_type":tenantType,
-      "F_Bookingtype":bookingtype,
-      "F_Housetype":housetype,
-      "F_Furnished_type":furnishingType,
+      "F_Tenant_type":gettenanttype,
+      "F_Bookingtype":getbookingtype,
+      "F_Housetype":gethousetype,
+      "F_Furnished_type":getfurnishingType,
       "F_Distance":getdistance,
       "F_Bhk":parseInt(getbhk),
       "F_Bed":parseInt(getbed)
@@ -799,17 +537,17 @@ function GetFilterhome(){
     console.log(Filter)
     $.ajax({
       type: "POST",
-      url: "http://localhost:8083/GetFilter",
+      url: ApiGetFilter,
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(Filter),
 
    success: function(responsee){
 
      var searchout = JSON.parse(responsee);
+     console.log(searchout)
          
             Getresponse(searchout);
-            closeOverlay();
-
+ 
  }
 
 });
@@ -817,7 +555,7 @@ function GetFilterhome(){
 
 
 function Notification(){
-  alert("inside notification")
+
     var Availname =  document.getElementById('getname1').value;
     var AvailEmail =  document.getElementById('getemail1').value
     var Avaiphone =  document.getElementById('getphone1').value;
@@ -825,8 +563,7 @@ function Notification(){
     var Availiabity =  document.getElementById('availaibity1').value;
     var Availcity =  document.getElementById('getcity1').value;
      
-console.log("Availabity");
-console.log(Availname)
+
     var s ={
       "Notifyname":Availname,
       "NotifyEmail":AvailEmail,
@@ -838,12 +575,12 @@ console.log(Availname)
     
 $.ajax({
       type: "POST",
-      url: "http://localhost:8083/Notifyme",
+      url: ApiNotifyme,
       contentType:"application/json; charset=utf-8",
       data: JSON.stringify(s),
 
   success: function(responsee){
-    alert("responsee"+responsee)
+    
     var aaa = JSON.parse(responsee)
    
  
@@ -857,7 +594,7 @@ $.ajax({
             
           $.ajax({
            type: "GET",
-           url: "http://localhost:8083/Logout",
+           url: Apiprefixlogout,
          
          success: function(responsee){
 
@@ -872,7 +609,6 @@ $.ajax({
          });
           
          }
- 
 
  </script>
   </head>
@@ -885,17 +621,22 @@ $.ajax({
                <path d="M16.326 15l13.4-13.4c.366-.366.366-.96 0-1.325-.366-.367-.96-.367-1.326 0L15 13.675 1.6.275C1.235-.093.64-.093.275.275c-.367.365-.367.96 0 1.324l13.4 13.4-13.4 13.4c-.367.364-.367.96 0 1.323.182.184.422.275.662.275.24 0 .48-.09.663-.276l13.4-13.4 13.4 13.4c.183.184.423.275.663.275.24 0 .48-.09.662-.276.367-.365.367-.96 0-1.324L16.325 15z" fill-rule="evenodd"></path>
             </svg>
          </a>
-         <li id="signuphide1"><a data-toggle="modal" data-target="#signupModal" >Sign up</a></li>
-                     <li id="loginhide1"><a data-toggle="modal" data-target="#loginModal" >Login</a></li>
-                     <!-- <li class="active" id="Userdetails" style="display:none;"><a href="#" id="login" ></a></li> -->
-                     <li   id="Userdetails1" style="visibility:hidden">
-                        <a href="#"   role="button"  id="login1">Login</a></li>
-                         <li class="active"><a href="how_it_works.html">How It Works</a></li>
+          <ul>
+                     
+                     <li id="loginhide1"><a a href="login.html" >Login/Signup</a></li>
+                     <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                     <li><a href="search_result.html">Find Room</a></li>
                      <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
-                        
-                           <li class="active" id="wishlist1"><a href="javascript:Getwish()" >Wishlist</a></li>
-<!--                            <li><a href="#">Settings</a></li>
- -->                           <li id="logout1"><a href="javascript:logout()"  >Logout</a></li>
+                     <li><a href="javascript:paymyrent()" >PayMyhire</a></li>
+                   
+                   <div id="Userdetails1" style="visibility:hidden">
+                     <li>
+                        <!-- login1
+                        <a href="#"   role="button"  id="login1">Login</a></li> -->
+                         <li class="active" id="wishlist1"><a href="javascript:Getwish()" >Wishlist</a></li>
+                          <li id="logout1"><a href="javascript:logout()"  >Logout</a></li>
+                        </div>
+                        </ul>
       </div>
       <!-- Navbar
          =================================== -->
@@ -913,16 +654,20 @@ $.ajax({
             </div>
             <div id="navbar" class="collapse navbar-collapse">
                 <ul class="nav navbar-nav navbar-right rm-nav">
-                    
+
                      <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                     <li><a href="search_result.html">Find Room</a></li>
                      <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
-                     <li id="signuphide"><a data-toggle="modal" data-target="#signupModal" >Sign up</a></li>
-                     <li id="loginhide"><a data-toggle="modal" data-target="#loginModal" >Login</a></li>
+                     <li ><a href="javascript:paymyrent()" >PayMyHire</a></li>
+                     <li id="loginhide"><a href="login.html" >Login/Signup</a></li>
                      <!-- <li class="active" id="Userdetails" style="display:none;"><a href="#" id="login" ></a></li> -->
+                     
                      <li class="dropdown"  id="Userdetails" style="visibility:hidden">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  id="login">Login</a>
+                        
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  id="login">Login
+                       </a> 
                         <ul class="dropdown-menu">
-                           <li class="active" id="wishlist"><a href="javascript:Getwish()" >Wishlist</a></li>
+                           <li  id="wishlist"><a href="wishlist.html" >Wishlist</a></li>
                            <!-- <li><a href="#">Settings</a></li> -->
                            <li id="logout"><a href="javascript:logout()"  >Logout</a></li>
                         </ul>
@@ -1209,11 +954,7 @@ $.ajax({
           </div>
 
         </div>
-        <!-- shown on smaller resolutions with help of switch-->
-        <div class="lt-map" id="mapContainer" >
-          <iframe id="mapscroll" width="100%" height="100%" frameborder="0" style="border:0"  allowfullscreen="">
-          </iframe>
-        </div>
+       
         <!-- /shown on smaller resolutions with help of switch -->
         </div>
         <!-- Send alerts bar -->
@@ -1230,13 +971,18 @@ $.ajax({
         </div>
         </div>
          <div class="sr-rt">
-        <iframe 
-        id="maprightview"
-        width="100%"
-        height="100%"
-        frameborder="0" style="border:0"
-         allowfullscreen>
-      </iframe>
+       <div id="map-container" style="height:600px">
+        <div id="map" data-map-zoom="4" data-map-scroll="true">
+            <!-- map goes here -->
+        </div>
+
+        <!-- Map Navigation -->
+      <a href="#" id="geoLocation" title="Your location"></a>
+      <ul id="mapnav-buttons" class="top">
+          <li><a href="#" id="prevpoint" title="Previous point on map">Prev</a></li>
+          <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
+      </ul>
+    </div>
       </div>
         </div>
 
@@ -1331,83 +1077,16 @@ $.ajax({
      
     </div>
 
-    <!-- Login / Signup modal -->
-    <div class="modal fade vert-centered" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-         <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-               <div class="modal-body">
-                  <form>
-                     <div class="rightPanel-wrapper">
-                        <a class="navbar-brand" href="#"><img src="img/rm_logo.png" alt="Rentmatics" style="margin-left:30%"></a>
-                        <div class="rp-form"> 
-                           <br>
-                           <br>
-                           <input type="name" placeholder="Username" class="rpfi" id="Susername" style="font:bold" required >
-                           <br>
-                           <br>
-                           <input type="password" placeholder="Password" class="rpfi" id="password" required>
-                           <br>
-                           <br>
-                           <input type="password" placeholder="Confirm Password" class="rpfi"  id="cpassword" required>
-                           <span id='message'></span>
-                           <br>
-                           <br>
-                           <input type="email" placeholder="Email" class="rpfi" id="Semail" required>
-                           <br>
-                           <button class="btn btn-lg btn-block btn-notify" onclick="SignupRent()">Signup</button>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- Modals
-         ===========================================-->
-      <!-- Login / Signup modal -->
-      <div class="modal fade vert-centered" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-         <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-               <div class="modal-body">
-                  <div  scope="public_profile,email" onlogin="checkLoginState();" class="fb-login-button" data-max-rows="1" data-size="large"  data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-                  <br><br>
-                  <div class="g-signin2" data-onsuccess="onSignIn" data-width="230" data-height="40" data-longtitle="true"></div>
-                  <br>
-                  <p style="margin-left:40%">OR</p>
-                  <div class="rightPanel-wrapper">
-                     <a class="navbar-brand" href="#"><img src="img/rm_logo.png" alt="Rentmatics" style="margin-left:30%"></a>
-                     <br>
-                     <br>
-                     <br>
-                     <div class="rp-form">
-                        <div class="form-group">
-                           <input type="name" placeholder="Username" class="rpfi" id="uname" required>
-                        </div>
-                        <div class="form-group">
-                           <input type="password" placeholder="Password" class="rpfi" id="upass" required>
-                        </div>
-                        <button class="btn btn-lg btn-block btn-notify" onclick="Login()">Login</button>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+   
+    
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
   
         <script src="js/api.js"></script>
      
-     <script src="js/jquery-1.12.4.js"></script>
-  <script src="js/jquery-ui.js"></script> 
-
-    <!-- Bootstrap JS -->
-    <script src="js/bootstrap.min.js"></script>  
-    <!-- Range slider -->
-    <script src="js/bootstrap-slider.min.js"></script>  
-
-
+  
+  <script src="js/jquery-ui.js"></script>
     <script type="text/javascript">
       /* For Sidebar Navigation in mobile resolution -->
         /* Set the width of the side navigation to 250px */
@@ -1452,5 +1131,19 @@ $.ajax({
 
       }
     </script> 
+
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>  
+    <!-- Range slider -->
+    <script src="js/bootstrap-slider.min.js"></script>  
+    <script src="scripts/login.js"></script>
+
+
+   
+    <!-- Maps -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&sensor=false&amp;language=en"></script>
+<script type="text/javascript" src="js/infobox.min.js"></script>
+<script type="text/javascript" src="js/markerclusterer.js"></script>
+<script type="text/javascript" src="js/maps.js"></script>
   </body>
 </html>

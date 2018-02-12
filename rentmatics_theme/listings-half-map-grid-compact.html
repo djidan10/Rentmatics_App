@@ -1,12 +1,10 @@
 <!DOCTYPE html>
 <head>
-
 <!-- Basic Page Needs
 ================================================== -->
 <title>Rentmatics</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
@@ -30,10 +28,6 @@ var Apigetlisthome="http://paymyhire.com:8083/Gethomedetails"
 var Apideletewishlist="http://paymyhire.com:8083/Deletewishlist"
 var ApiGetFilter="http://paymyhire.com:8083/GetFilter"
 var ApiNotifyme="http://paymyhire.com:8083/Notifyme"
-
-
-
-
 
 
 function setCookie(cname, cvalue, exdays) { 
@@ -222,8 +216,6 @@ function Getresponse(searchout){
 
   }
 
-  
-
   document.getElementById("listContainer").innerHTML=cardstring;
 
  for (l=0;l<searchout.length;l++){
@@ -335,9 +327,6 @@ else{
 }
 function Addfav(getid,getlogin,colorid){
   
-
-
-
 
    if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
    

@@ -1,0 +1,69 @@
+<html>
+<style type="text/css">
+	table, th, td {
+    border: 1px solid black;
+}
+</style>
+
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+
+<script>
+function Submitip(){
+	
+    var AvailIp =  document.getElementById('sendip').value;
+	alert(AvailIp)
+  
+    var sendip ={
+    	"Getipfromuser" : AvailIp
+    }
+    
+$.ajax({
+      type: "POST",
+      url: "http://localhost:8083/GetIP",
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(sendip),
+
+    
+
+  success: function(responsee){
+   	
+ alert("success")
+  var searchout = JSON.parse(responsee);
+
+  document.getElementById("visible").style.display = "inline";
+ $("#ip").html(searchout.ip_address);
+$("#country").html(searchout.country);
+$("#code").html(searchout.country_code);
+$("#continent").html(searchout.continent);
+}
+
+});
+
+}
+</script>
+<body>
+<div>
+<b>
+Find your IP Details Here
+</b>
+<br>
+
+<br>
+
+  
+<div style="display:none" id="visible">
+
+ <table style="font-family:hanken">
+
+<tr>
+       <div> <th >IP</th> <th style="text-align:center"  id="ip"></th></div>
+       </tr>
+        <tr> <th>Country</th><th style="text-align:center" id="country"></th></tr>
+        <tr><th>Country Code</th><th style="text-align:center;" id="code"></th></tr>
+        <tr><th>Continent</th><th style="text-align:center" id="continent"></th></tr>
+       
+        </table>
+		</div>
+</div>
+</body>
+</html>

@@ -109,10 +109,11 @@ func InserRentUser(Userdata Model.RentUser) (Status Model.AdminResponse) {
 
 func GetUSer(User1 Model.LoginUser) (Userinfo Model.UserResponse) {
 	var Getuser Model.Getlogin
-	rows, err := OpenConnection["Rentmatics"].Query("select username,loginid,password from userdata where username=?", User1.Username)
+	rows, err := OpenConnection["Rentmatics"].Query("select username,loginid,password from userdata where loginid=?", User1.Username)
 	if err != nil {
 		log.Error("Error -DB: Get User", err)
 	}
+
 	for rows.Next() {
 
 		rows.Scan(
@@ -122,6 +123,7 @@ func GetUSer(User1 Model.LoginUser) (Userinfo Model.UserResponse) {
 		)
 
 	}
+
 	if User1.Password == Getuser.Password {
 
 		Userinfo.Username = Getuser.Username

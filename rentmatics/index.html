@@ -10,31 +10,17 @@
       <meta name="author" content="">
       <meta name="google-signin-client_id" content="512343144553-4uoof7pml3lajhivpajgru0jo2u6mdnh.apps.googleusercontent.com">
       <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+
      <style>
-         .ui-autocomplete {
-         color: black;
-         font-family: font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-         line-height: 2.5;
-         font-size:14.9px;
-         border-radius: 0px;
-         border: 3px solid #454545;
-         }
-         .ui-state-active,
-         .ui-widget-content .ui-state-active,
-         .ui-widget-header .ui-state-active,
-         a.ui-button:active,
-         .ui-button:active,
-         .ui-button.ui-state-active:hover {
-         background-color:  #FF4D58;
-         border-color: #eceff1;
-         }
-         
-         ul.dropdown-menu>li>a:hover{
-         background: #FF4D58 !important;
-         }
+     ul {
+  list-style-type: none;
+}
+        
       </style>
       <script src="js/jquery.min.js"></script>
       <script type="text/javascript" src="js/jquery.cookie.min.js"></script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
       <script type="text/javascript">
          var loginidd="";
          var cooki=$.cookie('RentmaticsCookie');
@@ -42,385 +28,72 @@
           if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
             document.getElementById("Userdetails").style.visibility = "hidden"; 
             document.getElementById("loginhide").style.visibility = "visible"; 
-            document.getElementById("signuphide").style.visibility = "visible";
             document.getElementById("Userdetails1").style.visibility = "hidden"; 
             document.getElementById("loginhide1").style.visibility = "visible"; 
-            document.getElementById("signuphide1").style.visibility = "visible"; 
+        
             }else{
              	
-             	 document.getElementById("loginhide").style.display = "none"; 
-             	 document.getElementById("signuphide").style.display = "none"; 
-             	 $("#login").html(cooki);
+          document.getElementById("loginhide").style.display = "none"; 
+           $("#login").html(cooki);
+
+           
           document.getElementById("Userdetails").style.visibility = "visible"; 
           document.getElementById("wishlist").style.visibility = "visible"; 
           document.getElementById("logout").style.visibility = "visible";
-
-          document.getElementById("loginhide1").style.display = "none"; 
-               document.getElementById("signuphide1").style.display = "none"; 
-               $("#login1").html(cooki);
+           document.getElementById("loginhide1").style.display = "none"; 
+          // $("#login1").html(cooki);
           document.getElementById("Userdetails1").style.visibility = "visible"; 
           document.getElementById("wishlist1").style.visibility = "visible"; 
           document.getElementById("logout1").style.visibility = "visible";
-         
-         
-          $("#wish").html("Wishlist");
+         $("#wish").html("Wishlist");
          
          
              }
          });
-         
+
+   
 
 
-    function Login(){
-    	var loginuser=document.getElementById('uname').value;
-    var loginpass=document.getElementById('upass').value;
-
-var Rentmatics ={
-         	  
-         	"Username": loginuser,
-         	"Password":loginpass,
-         	
-              
-              };
-               
-         
-             $.ajax({
-               type: "POST",
-               url: "http://localhost:8083/Login",
-               contentType:"application/json; charset=utf-8",
-               data: JSON.stringify(Rentmatics),
-         
-           success: function(responsee){
-           var searchout = JSON.parse(responsee);
-           console.log("^^^^^^^^^^^^^^^^^^6");
-           console.log(searchout.Status);
-
-
-          if (searchout.Status == "Success"){
-
- 			loginidd=searchout.Loginid;
-      alert("loogin id="+loginidd);
-         
-          
-           $("#login").html(loginidd);
-          document.getElementById("loginhide").style.display = "none"; 
-          document.getElementById("signuphide").style.display = "none"; 
-          document.getElementById("Userdetails").style.visibility = "visible"; 
-
-
-
-          document.getElementById("loginhide1").style.display = "none"; 
-          document.getElementById("signuphide1").style.display = "none"; 
-          document.getElementById("Userdetails1").style.visibility = "visible"; 
-
-
-          }else{
-
-          	alert("Incorect Username and Password")
-
-          }
-         
-
-
+function paymyrent(){
+   window.open("http://paymyhire.com/");
 }
-});
+ function logout() {
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+    }
+         
+         
+         
+
+         //Post Data to Next page
+function Gethomes1() {
+    alert("inside")
+
+   // alert(loginidvalue);
+var url =""
+    var cities = document.getElementById('tags').value;
+  
+ 
+  var partsOfStr = cities.split(',');
+   
+   if (partsOfStr  == null || partsOfStr  == ""){
+     url = 'search_result.html' 
+   }else{
+       
+       
+
+      url = 'search_result.html?Id=' + partsOfStr[0];
+   localStorage.setItem("Getcity", partsOfStr[0]);
+
+   }
+  
+
+     document.location.href = url;
+   
 }
-      
-         
-   function SignupRent(){
- 	var signuser=document.getElementById('Susername').value;
-    var signpass=document.getElementById('cpassword').value;
-    var signemail=document.getElementById('Semail').value;
-    var Rentmatics ={
-         	"Id ": "",      
-         	"Username": signuser,
-         	"Password":signpass,
-         	"Loginid":  signemail, 
-         	"Logintype": "Rentmatics"
-              
-              };
-               
-         
-             $.ajax({
-               type: "POST",
-               url: "http://localhost:8083/User",
-               contentType:"application/json; charset=utf-8",
-               data: JSON.stringify(Rentmatics),
-         
-            success: function(responsee){
-           var searchout = JSON.parse(responsee);
-           var uservalue=searchout.Username;
-           loginidd=searchout.Loginid;
-         
-          
-           $("#login").html(loginidd);
-           alert("loogin id="+loginidd);
-          document.getElementById("loginhide").style.display = "none"; 
-          document.getElementById("signuphide").style.display = "none"; 
-          document.getElementById("Userdetails").style.visibility = "visible"; 
-         
 
-
-           document.getElementById("loginhide1").style.display = "none"; 
-          document.getElementById("signuphide1").style.display = "none"; 
-          document.getElementById("Userdetails1").style.visibility = "visible"; 
-        }
-          });
-         }
-         
-           
-            function Getwish(){
-              alert("inside wish "+loginidd);
-            url = "wishlist.html";
-         	document.location.href = url;
-         				
-          }   
-         
-         
-         			var auth2; // The Sign-In object.
-         			var googleUser; // The current user.
-					var appStart = function() {
-         			  gapi.load('auth2', initSigninV2);
-         			};
-         			var initSigninV2 = function() {
-         			  auth2 = gapi.auth2.init({
-         			      client_id: 'CLIENT_ID.apps.googleusercontent.com',
-         			      scope: 'profile'
-         			  });
-         
-         			  
-         			  auth2.isSignedIn.listen(signinChanged);
-        			  auth2.currentUser.listen(userChanged);
-         
-         			  if (auth2.isSignedIn.get() == true) {
-         			    auth2.signIn();
-         			  }
-					  refreshValues();
-         			};
-         
-         			
-         			var signinChanged = function (val) {
-         			  console.log('Signin state changed to ', val);
-         			  
-         			};
-         
-         			var userChanged = function (user) {
-         			  console.log('User now: ', user);
-         			  googleUser = user;
-         			  updateGoogleUser();
-         			 
-         			};
-         
-         			
-         			var updateGoogleUser = function () {
-         			  if (googleUser) {
-         			  	console.log("got google user");
-         			  	console.log(googleUser)
-         			    
-         			  } else {
-         			  	console.log("did nit get google user");
-         			  
-         			  }
-         			};
-         
-         			
-         			var refreshValues = function() {
-         			  if (auth2){
-         			    console.log('Refreshing values...');
-         
-         			    googleUser = auth2.currentUser.get();
-         				console.log(googleUser)
-         				updateGoogleUser();
-         			  }
-         			}
-
-               function GsignOut() {
-    var auth2 = gapi.auth2.getAuthInstance();
-    auth2.signOut().then(function () {
-      console.log('User signed out.');
-      
-    });
-  }
-
-
-
-  var delete_cookie = function(name) {
-    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-};
-
-
-         function logout(){
-         
-         GsignOut();
-         
-         
-         // $.removeCookie('RentmaticsCookie');
-         delete_cookie("RentmaticsCookie");
-         
-         
-         
-          $.ajax({
-           type: "GET",
-           url: "http://localhost:8083/Logout",
-         
-         success: function(responsee){
-          document.getElementById("Userdetails").style.visibility = "hidden"; 
-         document.getElementById("wishlist").style.visibility = "hidden"; 
-         document.getElementById("logout").style.visibility = "hidden"; 
-         document.getElementById("loginhide").style.visibility = "visible";
-         document.getElementById("signuphide").style.visibility = "visible";  
-
-
-         document.getElementById("Userdetails1").style.visibility = "hidden"; 
-         document.getElementById("wishlist1").style.visibility = "hidden"; 
-         document.getElementById("logout1").style.visibility = "hidden"; 
-         document.getElementById("loginhide1").style.visibility = "visible";
-         document.getElementById("signuphide1").style.visibility = "visible";  
-         }
-         
-         });
-          
-         }
-
-
-         			var email="";
-         function onSignIn(googleUser) {
-         					alert("inside google")
-         			  var profile = googleUser.getBasicProfile();
-         			  console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-         			  console.log('Name: ' + profile.getName());
-         			  console.log('Image URL: ' + profile.getImageUrl());
-         			  console.log('Email: ' + profile.getEmail()); 
-         
-         			  // This is null if the 'email' scope is not present.
-         			
-          				var Id = profile.getId(); // Do not send to your backend! Use an ID token instead.
-         			 var name = profile.getName();
-         			// var iamprofile.getImageUrl());
-         			   email = profile.getEmail();
-         
-         
-         
-         var Gmail ={
-         	"Id ": Id,      
-         	"Username": name,
-         	"Password":  "",
-         	"Loginid":  email, 
-         	"Logintype": "Gmail"
-              
-              };
-               
-         
-             $.ajax({
-               type: "POST",
-               url: "http://localhost:8083/User",
-               contentType:"application/json; charset=utf-8",
-               data: JSON.stringify(Gmail),
-         
-            success: function(responsee){
-            	var searchout = JSON.parse(responsee);
-         
-         
-         
-          console.log("response");
-          console.log(searchout)
-          var uservalue=searchout.Username;
-         
-          // $("#Userdetails").html(uservalue);
-         
-            $("#login").html(uservalue);
-         
-         
-         
-          document.getElementById("loginhide").style.display = "none"; 
-          document.getElementById("signuphide").style.display = "none"; 
-          document.getElementById("Userdetails").style.visibility = "visible"; 
-
-
-          document.getElementById("loginhide1").style.display = "none"; 
-          document.getElementById("signuphide1").style.display = "none"; 
-          document.getElementById("Userdetails1").style.visibility = "visible"; 
-         
-         
-         
-          }
-         
-         });
-         			}
-         
-     function signOut() {
-             var auth2 = gapi.auth2.getAuthInstance();
-             auth2.signOut().then(function () {
-         	 console.log('User signed out.');
-         			    });
-         			  }
-         		
-           window.fbAsyncInit = function() {
-             FB.init({
-               appId      : '837076093106264',
-               xfbml      : true,
-               version    : 'v2.9'
-             });
-             FB.AppEvents.logPageView();
-           };
-         
-           (function(d, s, id){
-              var js, fjs = d.getElementsByTagName(s)[0];
-              if (d.getElementById(id)) {return;}
-              js = d.createElement(s); js.id = id;
-              //js.src = "//connect.facebook.net/en_US/sdk.js";
-              js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.9&appId=1243386559017640";
-              fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));
-         
-          // This is called with the results from from FB.getLoginStatus().
-           function statusChangeCallback(response) {
-             console.log('statusChangeCallback');
-             console.log(response);
-            
-             if (response.status === 'connected') {
-               // Logged into your app and Facebook.
-               testAPI();
-             } else {
-             
-               
-             }
-           }
-         
-           function checkLoginState() {
-             FB.getLoginStatus(function(response) {
-               statusChangeCallback(response);
-             });
-           }
-         
-         
-           function testAPI() {
-             console.log('Welcome!  Fetching your information.... ');
-             FB.api('/me', function(response) {
-               console.log('Successful login for: ' + response.name);
-               console.log(response);
-               document.getElementById('status').innerHTML =
-                 'Thanks for logging in, ' + response.name + '!';
-             });
-           }
-         
-           //Post Data to Next page
-         function Gethomes(){
-            
-             var cities =  document.getElementById('tags').value;
-             
-             	for(i=0;i<Tags.length;i++){
-         				if(cities==Tags[i].City){
-                  "http://example.com/index.html?url=" + encodeURIComponent(  );
-         				
-         				  url = 'search_result.html?url=Id=' + encodeURIComponent(Tags[i].Id+'&loginid=sandy@gmail.com');
-                  //var safeUrlPart = encodeURIComponent(url.replace(/\./g, '&#46;'));
-
-            				 document.location.href = url;
-         				}
-         		 }
-             }   
-         
+ 
+    
           
       </script>
       <link rel="icon" href="img/favicon.ico">
@@ -441,31 +114,27 @@ var Rentmatics ={
                <path d="M16.326 15l13.4-13.4c.366-.366.366-.96 0-1.325-.366-.367-.96-.367-1.326 0L15 13.675 1.6.275C1.235-.093.64-.093.275.275c-.367.365-.367.96 0 1.324l13.4 13.4-13.4 13.4c-.367.364-.367.96 0 1.323.182.184.422.275.662.275.24 0 .48-.09.663-.276l13.4-13.4 13.4 13.4c.183.184.423.275.663.275.24 0 .48-.09.662-.276.367-.365.367-.96 0-1.324L16.325 15z" fill-rule="evenodd"></path>
             </svg>
          </a>
-                    
-                     <li id="signuphide1"><a data-toggle="modal" data-target="#signupModal" >Sign up</a></li>
-                     <li id="loginhide1"><a data-toggle="modal" data-target="#loginModal" >Login</a></li>
-                     <!-- <li class="active" id="Userdetails" style="display:none;"><a href="#" id="login" ></a></li> -->
-                     <li   id="Userdetails1" style="visibility:hidden">
-                        <a href="#"   role="button"  id="login1">Login</a></li>
-                         <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                    <ul>
+                     
+                     <li id="loginhide1"><a a href="login.html" >Login/Signup</a></li>
+                     <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                     <li><a href="search_result.html">Find Room</a></li>
                      <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
-                        
-                           <li class="active" id="wishlist1"><a href="javascript:Getwish()" >Wishlist</a></li>
-<!--                            <li><a href="#">Settings</a></li>
- -->                           <li id="logout1"><a href="javascript:logout()"  >Logout</a></li>
-                        
+                     <li><a href="javascript:paymyrent()" >PayMyhire</a></li>
+                   
+                   <div id="Userdetails1" style="visibility:hidden">
+                     <li>
+                        <!-- login1
+                        <a href="#"   role="button"  id="login1">Login</a></li> -->
+                         <li class="active" id="wishlist1"><a href="wishlist.html" >Wishlist</a></li>
+                          <li id="logout1"><a href="javascript:logout()"  >Logout</a></li>
+                        </div>
+                        </ul>
                    
                        
                     
       </div>
-      <script>
-           
-
-     
-         
-         
-         
-      </script>
+  
       <!-- jumbotran
          =================================== -->
       <div class="flxc jumbotran">
@@ -483,16 +152,21 @@ var Rentmatics ={
                </div>
                <div id="navbar" class="collapse navbar-collapse">
                   <ul class="nav navbar-nav navbar-right rm-nav">
+
                      <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                     <li><a href="search_result.html">Find Room</a></li>
                      <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
-                     <li id="signuphide"><a data-toggle="modal" data-target="#signupModal" >Sign up</a></li>
-                     <li id="loginhide"><a data-toggle="modal" data-target="#loginModal" >Login</a></li>
+                     <li ><a href="javascript:paymyrent()" >PayMyHire</a></li>
+                     <li id="loginhide"><a href="login.html" >Login/Signup</a></li>
                      <!-- <li class="active" id="Userdetails" style="display:none;"><a href="#" id="login" ></a></li> -->
+                     
                      <li class="dropdown"  id="Userdetails" style="visibility:hidden">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  id="login">Login</a>
+                        
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  id="login">Login
+                       </a> 
                         <ul class="dropdown-menu">
-                           <li  id="wishlist"><a href="javascript:Getwish()" >Wishlist</a></li>
-                           <li><a href="#">Settings</a></li>
+                           <li  id="wishlist"><a href="wishlist.html" >Wishlist</a></li>
+                           <!-- <li><a href="#">Settings</a></li> -->
                            <li id="logout"><a href="javascript:logout()"  >Logout</a></li>
                         </ul>
                      </li>
@@ -516,7 +190,7 @@ var Rentmatics ={
                         <option value="">Families (1)</option>
                      </select>
                   </div>
-                  <a class="search-submit-btn" href="javascript:Gethomes();">
+                  <a class="search-submit-btn" href="javascript:Gethomes1();">
                   <i class="fa fa-search"></i>
                   <span>Search</span>
                   </a>
@@ -917,75 +591,19 @@ var Rentmatics ={
          </div>
          <!-- Footer text -->
       </footer>
-      <div class="modal fade vert-centered" id="signupModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-         <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-               <div class="modal-body">
-                  <form>
-                     <div class="rightPanel-wrapper">
-                        <a class="navbar-brand" href="#"><img src="img/rm_logo.png" alt="Rentmatics" style="margin-left:30%"></a>
-                        <div class="rp-form"> 
-                           <br>
-                           <br>
-                           <input type="name" placeholder="Username" class="rpfi" id="Susername" style="font:bold" required >
-                           <br>
-                           <br>
-                           <input type="password" placeholder="Password" class="rpfi" id="password" required>
-                           <br>
-                           <br>
-                           <input type="password" placeholder="Confirm Password" class="rpfi"  id="cpassword" required>
-                           <span id='message'></span>
-                           <br>
-                           <br>
-                           <input type="email" placeholder="Email" class="rpfi" id="Semail" required>
-                           <br>
-                           <button class="btn btn-lg btn-block btn-notify" onclick="SignupRent()">Signup</button>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-      </div>
+    
       <!-- Modals
          ===========================================-->
-      <!-- Login / Signup modal -->
-      <div class="modal fade vert-centered" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-         <div class="modal-dialog modal-sm" role="document">
-            <div class="modal-content">
-               <div class="modal-body">
-                  <div  scope="public_profile,email" onlogin="checkLoginState();" class="fb-login-button" data-max-rows="1" data-size="large"  data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
-                  <br><br>
-                  <div class="g-signin2" data-onsuccess="onSignIn" data-width="230" data-height="40" data-longtitle="true"></div>
-                  <br>
-                  <p style="margin-left:40%">OR</p>
-                  <div class="rightPanel-wrapper">
-                     <a class="navbar-brand" href="#"><img src="img/rm_logo.png" alt="Rentmatics" style="margin-left:30%"></a>
-                     <br>
-                     <br>
-                     <br>
-                     <div class="rp-form">
-                        <div class="form-group">
-                           <input type="name" placeholder="Username" class="rpfi" id="uname" required>
-                        </div>
-                        <div class="form-group">
-                           <input type="password" placeholder="Password" class="rpfi" id="upass" required>
-                        </div>
-                        <button class="btn btn-lg btn-block btn-notify" onclick="Login()">Login</button>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
+     
       <!-- Bootstrap core JavaScript
          ================================================== -->
       <!-- Placed at the end of the document so the pages load faster -->
       <script src="js/jquery.min.js"></script>
-      <script src="js/jquery-1.12.4.js"></script>
+     
       <script src="js/jquery-ui.js"></script>
       <!-- Bootstrap JS -->
       <script src="js/bootstrap.min.js"></script>
+        <script src="scripts/login.js"></script>
       <!-- Script for Sidebar navigation in mobile resolution -->   
       <script type="text/javascript">
          /* Set the width of the side navigation to 250px */
@@ -999,38 +617,33 @@ var Rentmatics ={
          }
       </script> 
       <!-- Auto Complete Jquery -->
-      <script>
-         var Tagname = new Array();
-         var Tags = new Array();
-         
-         $(document).ready(function(){
-         $.ajax({
-          type: "GET",
-          url: "http://localhost:8083/GetCities",
-         	 contentType:"application/json; charset=utf-8",
-         
-         success: function(responsee){
-         
-         var availableTags = JSON.parse(responsee)
-         Tags = availableTags
-         for (i = 0; i < Tags.length; i++) { 
-           Tagname[i] = Tags[i].City
-         }
-         
-         
-         //Implement Action to Html page
-         $( "#tags" ).autocomplete({
-           source: Tagname
-            
-         
-          });
-         }
-         
-         });
-         });
-         
-         
+    
       </script>
-      <script type="text/javascript" src="js/jquery.cookie.min.js" ></script>	
+          <script>
+google.maps.event.addDomListener(window, 'load', initialize);
+function initialize() {
+  var options = {
+  types: ['(cities)'],
+  componentRestrictions: {country: "ind"}
+ };
+
+var input = document.getElementById('tags');
+
+
+var autocomplete = new google.maps.places.Autocomplete(input,options);
+autocomplete.addListener('place_changed', function () {
+
+var place = autocomplete.getPlace();
+
+var aaa = place["address_components"];
+console.log(aaa[0].long_name)
+
+// place variable will have all the information you are looking for.
+console.log(place.geometry['location'].lat());
+console.log(place.geometry['location'].lng());
+});
+}
+</script>
+ 
    </body>
 </html>

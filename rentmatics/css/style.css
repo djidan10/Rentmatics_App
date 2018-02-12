@@ -729,7 +729,7 @@ ul.card-links:before {
 	display: block;
 }
 .propCard{
-	max-width: 300px;
+	max-width: 200px;
     cursor: pointer;
 }
 .list-container{
