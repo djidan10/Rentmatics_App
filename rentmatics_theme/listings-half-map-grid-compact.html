@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <head>
+
 <!-- Basic Page Needs
 ================================================== -->
 <title>Rentmatics</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
@@ -30,18 +32,28 @@ var ApiGetFilter="http://paymyhire.com:8083/GetFilter"
 var ApiNotifyme="http://paymyhire.com:8083/Notifyme"
 
 
-function setCookie(cname, cvalue, exdays) { 
-  
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
+
+GetFilter
+
+
+
 //Logout the User
 function logout() {
-       setCookie("RentmaticsCookie", "NODATA",365) 
-        location.reload(true);
+   
 
+     $.ajax({
+        type: "GET",
+        url: Apiprefixlogout,
+
+        success: function(responsee) {
+             document.getElementById("loginhiden").style.display = "inline";
+                document.getElementById("account").style.display = "none";
+                location.reload(true);
+
+    
+        }
+
+    });
 
 }
 
@@ -124,7 +136,7 @@ var sval = sval.replace("%20", " ");
             var searchout = JSON.parse(responsee);
             if (searchout == null){
 
-          url = 'working1.html';        
+          url = 'working.html';        
         
            document.location.href = url;
          }
@@ -215,6 +227,8 @@ function Getresponse(searchout){
     cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,Loginid);
 
   }
+
+  
 
   document.getElementById("listContainer").innerHTML=cardstring;
 
@@ -328,6 +342,9 @@ else{
 function Addfav(getid,getlogin,colorid){
   
 
+
+
+
    if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
    
     var url2 = "login-register.html";
@@ -401,7 +418,7 @@ return false;
 }
 
 function Payalert(){
- window.open("http://paymyhire.com/");
+  alert("PayMyRent is coming Soon!Please wait")
 
 }
 
@@ -638,7 +655,7 @@ $.ajax({
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
-           <li><a href="javascript:Payalert()">PayMyHire</a></li>
+           <li><a href="javascript:Payalert()">Pay My Rent</a></li>
           </ul>
       </nav>
       <div class="clearfix"></div>

@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><!-- Basic Page Needs
+================================================== -->
+	<title>Rentmatics</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><!-- CSS
+================================================== -->
+	<link href="css/style.css" rel="stylesheet" />
+	<link href="css/colors/main.css" id="colors" rel="stylesheet" />
+	<link href="css/style1.css" rel="stylesheet" />
+	<link href="css/style2.css" rel="stylesheet" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
+
+<meta name="author" content=""><meta name="google-signin-client_id" content="22067969485-itbijda0dti859jimo6u5vl6ne2g7q4b.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script><!-- Google font Source Sans Pro --><!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet"> --><!-- Fontawesome Icons -->
+	<link href="css/font-awesome.min.css" rel="stylesheet" />
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
+<script type="text/javascript" src="scripts/jquery.min.js"></script><script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+	<style type="text/css">.jumbo-banner-section{
+    background-image: url('images/banner1.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 480px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: table;
+    width: 100%;
+}
+	</style>
+	<script>
+  var ApiLogout="http://paymyhire.com:8083/Logout"
+  var ApiLogin ="http://paymyhire.com:8083/Login"
+var ApiUser="http://paymyhire.com:8083/User"
+var ApiForgotpassword="http://paymyhire.com:8083/Forgotpassword"
+
+
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+
+
+//Logout the User
+function logout() {
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+
+
+}
+function Payalert(){  
+  window.open("http://paymyhire.com/");
+
+}
+var loginidd="";
+
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+    var owl = $('.owl-carousel');
+        owl.owlCarousel({
+            items: 3,
+            loop: true,
+            margin: 10,
+            autoplay: true,
+            autoplayTimeout: 1000,
+            autoplayHoverPause: true
+        });
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+    }
+});
+
+var loginidvalue =""
+  loginidvalue = localStorage.getItem("LoginID");
+
+//Login
+function Login() {
+    var loginuser = document.getElementById('uname').value;
+    var loginpass = document.getElementById('upass').value;
+    var Rentmatics = {
+        "Username": loginuser,
+        "Password": loginpass,
+
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiLogin,
+        crossDomain: true,
+       
+        contentType: "application/json; charset=utf-8",
+       
+        data: JSON.stringify(Rentmatics),
+
+        success: function(responsee,stat,xhr) {
+            var searchout = JSON.parse(responsee);
+           
+            if (searchout.Status == "Success") {
+                loginidd = searchout.Loginid;
+                setCookie("RentmaticsCookie",searchout.Loginid,365) 
+                $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.visibility = "visible";
+//alert(xhr.getResponseHeader('Set-Cookie'));
+              window.history.back();
+            } else {
+                alert("Incorect Username and Password")
+
+            } }
+    });
+
+}
+
+
+
+
+
+// Signup-Register the Rentmatics user
+function SignupRent() {
+    var signuser = document.getElementById('Susername').value;
+    var signpass = document.getElementById('cpassword').value;
+    var signemail = document.getElementById('Semail').value;
+    var Rentmatics = {
+        "Id ": "",
+        "Username": signuser,
+        "Password": signpass,
+        "Loginid": signemail,
+        "Logintype": "Rentmatics"
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiUser,
+        xhrFields: {
+       withCredentials: true
+    },
+
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Rentmatics),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+           window.history.back();
+        }
+    });
+}
+
+
+
+//For Google User-Signin
+var auth2; // The Sign-In object.
+var googleUser; // The current user.
+var appStart = function() {
+    gapi.load('auth2', initSigninV2);
+};
+var initSigninV2 = function() {
+    auth2 = gapi.auth2.init({
+        client_id: 'CLIENT_ID.apps.googleusercontent.com',
+        scope: 'profile'
+    });
+
+
+    auth2.isSignedIn.listen(signinChanged);
+    auth2.currentUser.listen(userChanged);
+
+    if (auth2.isSignedIn.get() == true) {
+        auth2.signIn();
+    }
+    refreshValues();
+};
+
+
+var signinChanged = function(val) {
+    console.log('Signin state changed to ', val);
+
+};
+
+var userChanged = function(user) {
+    console.log('User now: ', user);
+    googleUser = user;
+    updateGoogleUser();
+
+};
+
+
+var updateGoogleUser = function() {
+    if (googleUser) {
+        console.log("got google user");
+        console.log(googleUser)
+
+    } else {
+        console.log("did nit get google user");
+
+    }
+};
+
+
+var refreshValues = function() {
+    if (auth2) {
+        console.log('Refreshing values...');
+
+        googleUser = auth2.currentUser.get();
+        console.log(googleUser)
+        updateGoogleUser();
+    }
+}
+
+function GsignOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function() {
+        console.log('User signed out.');
+
+    });
+}
+
+
+
+var delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+var email = "";
+
+function onSignIn(googleUser) {
+    
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail());
+
+    // This is null if the 'email' scope is not present.
+
+    var Id = profile.getId(); // Do not send to your backend! Use an ID token instead.
+    var name = profile.getName();
+    // var iamprofile.getImageUrl());
+    email = profile.getEmail();
+
+
+
+    var Gmail = {
+        "Id ": Id,
+        "Username": name,
+        "Password": "",
+        "Loginid": email,
+        "Logintype": "Gmail"
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiUser,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Gmail),
+
+        success: function(responsee) {
+                   var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+          window.history.back();
+
+
+
+        }
+
+    });
+}
+
+
+  function signOut() {
+             var auth2 = gapi.auth2.getAuthInstance();
+             auth2.signOut().then(function () {
+           console.log('User signed out.');
+                  });
+                }
+
+
+
+
+            
+           window.fbAsyncInit = function() {
+             FB.init({
+               appId      : '151850542086031',
+               xfbml      : true,
+               version    : 'v2.9'
+             });
+             FB.AppEvents.logPageView();
+           };
+         
+           (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=151850542086031';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+         
+          // This is called with the results from from FB.getLoginStatus().
+           function statusChangeCallback(response) {
+             console.log('statusChangeCallback');
+             console.log(response);
+            
+             if (response.status === 'connected') {
+               // Logged into your app and Facebook.
+               testAPI();
+             } else {
+             
+               
+             }
+           }
+         
+           function checkLoginState() {
+             FB.getLoginStatus(function(response) {
+               statusChangeCallback(response);
+             });
+           }
+         
+         
+           function testAPI() {
+             console.log('Welcome!  Fetching your information.... ');
+             FB.api('/me', function(response) {
+               console.log('Successful login for: ' + response.name);
+               console.log(response);
+               // document.getElementById('status').innerHTML =
+               //   'Thanks for logging in, ' + response.name + '!';
+
+
+    var Facebook = {
+        "Id ": "",
+        "Username":response.name,
+        "Password": "",
+        "Loginid": response.name,
+        "Logintype": "Facebook"
+
+    };
+   $.ajax({
+        type: "POST",
+        url: ApiUser,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Facebook),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+            window.history.back();
+   }
+ });
+ });
+   }
+         
+
+//Redirect to wishlist page
+
+function Getwish() {
+    url = "wishlist.html";
+    document.location.href = url;
+
+}
+
+function Forgot() {
+  var forgotid = document.getElementById('forgotid').value;
+
+ var Forgotemail =  {
+          "Email" :forgotid
+        }
+   $.ajax({
+        type: "POST",
+        url: ApiForgotpassword,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Forgotemail),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+           if (searchout == "Success"){
+            alert("Successfully sent to Your Email ID")
+            $('#myModal').modal('hide');
+              }else{
+                alert("Invalid mail ID")
+              }
+           }
+ });
+   
+
+}
+
+
+
+
+
+
+
+</script>
+</head>
+<body><!-- Wrapper -->
+<div id="wrapper"><!-- Header Container
+================================================== --><!-- Header Container
+================================================== -->
+<header class="fullwidth" id="header-container"><!-- Topbar -->
+<div id="top-bar">
+<div class="container"><!-- Left Side Content -->
+<div class="left-side">
+<ul class="top-bar-menu">
+	<li>+91-9884379333/9811448697</li>
+	<li><a href="#" style="font-size:12px;">Info@rentmatics.com</a></li>
+</ul>
+</div>
+
+<div class="right-side">
+<ul class="social-icons">
+	<li></li>
+	<li></li>
+	<li></li>
+</ul>
+</div>
+</div>
+</div>
+
+<div class="clearfix"></div>
+
+<div id="header">
+<div class="container">
+<div class="left-side">
+<div id="logo"><a href="index.html"><img alt="" src="images/rm_logo.png" /></a></div>
+<!-- Mobile Navigation -->
+
+<div class="menu-responsive"></div>
+<!-- Main Navigation -->
+
+<nav class="style-1" id="navigation">
+<ul id="responsive">
+	<li><a href="index.html">Home</a></li>
+	<li><a href="howitwork.html" style="font-size:15px;">How It Works </a>
+	<ul>
+		<li><a href="owner.html" style="font-size:15px;">Owners</a></li>
+		<li><a href="tenats.html" style="font-size:15px;">Tenants</a></li>
+	</ul>
+	</li>
+	<li><a href="listings-half-map-grid-compact.html" style="font-size:15px;">Find Room</a></li>
+	<li><a href="javascript:Payalert()" style="font-size:15px;">PayMyHire</a></li>
+</ul>
+</nav>
+
+<div class="clearfix"></div>
+</div>
+
+<div class="right-side">
+<nav class="style-1" id="navigation">
+<ul id="responsive">
+	<li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
+	<li id="loginhiden"><a class="sign-in" href="login-register.html" style="font-size:15px;">Log In / Register</a></li>
+	<li id="account" style="display:none"><a href="#">My Account</a>
+	<ul>
+		<li><a href="my-profile.html">My Profile</a></li>
+		<li><a href="my-bookmarks.html">My Wish List</a></li>
+		<li><a href="javascript:logout()">Logout</a></li>
+	</ul>
+	</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+</header>
+
+<div class="clearfix"></div>
+<!-- Header Container / End --><!-- Titlebar
+
+<!-- main -->
+
+<div class="jumbo-banner-section">
+<div class="main agileits-w3layouts" style="margin-top:-80px">
+<div class="main-agileinfo" style="margin-top:70px;">
+<div class="agileui-forms">
+<div class="container-form" style="height:500px;">
+<div class="form-item log-in"><!-- login form-->
+<div class="w3table agileinfo">
+<div class="w3table-cell register">
+<div class="w3table-tophead">
+<h2>Sign in</h2>
+</div>
+
+<form action="" method="post" onsubmit="Login();return false;">
+<div class="fields-grid">
+<div class="styled-input agile-styled-input-top"><input id="uname" name="Username" required="" type="text" /> <label>Username</label></div>
+
+<div class="styled-input"><input id="upass" name="Password" required="" type="Password" /> <label>Password</label></div>
+<a data-target="#myModal" data-toggle="modal" href="#" style="font-family:Hanken">forgot password?</a> <input type="submit" value="Sign in" /></div>
+
+<div class="social-grids">
+<div class="social-text">
+<p style="margin-top:-30px;font-family:Hanken;">Or Login with</p>
+</div>
+
+<div class="social-icons"><!-- <form method="post" class="login"> -->
+<div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-width="230" data-height="40" style="width:45%;margin-top:20px;margin-left:25px;"></div>
+&nbsp;
+<br>
+<div class="g-signin2 button-social-login button-social-login-google" data-height="40" data-longtitle="true" data-onsuccess="onSignIn" data-width="230" style="margin-left:25px;margin-top:10%"></div>
+</div>
+
+<div class="clear"></div>
+</div>
+</form>
+</div>
+</div>
+</div>
+
+<div class="form-item sign-up"><!-- sign-up form-->
+<div class="w3table w3-agileits">
+<div class="w3table-cell register">
+<h3>Sign up</h3>
+
+<form action="" method="post" onsubmit="SignupRent();return false;">
+<div class="fields-grid">
+<div class="styled-input agile-styled-input-top"><input id="Susername" name="First name" required="" type="text" /> <label>User name</label></div>
+
+<div class="styled-input"><input id="Semail" name="Email" required="" type="email" /> <label>Email</label></div>
+
+<div class="styled-input"><input autofocus="" id="cpassword" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" required="" title="Must contain 1 Uppercase and  1 letter with more that 6 character" type="password" /> <label>Password</label></div>
+</div>
+<input type="submit" value="Sign up" /></form>
+</div>
+</div>
+</div>
+</div>
+
+<div class="container-info">
+<div class="info-w3lsitem">
+<div class="w3table">
+<div class="w3table-cell">
+<p>Have an account?</p>
+
+<div class="btn">Sign in</div>
+</div>
+</div>
+</div>
+
+<div class="info-w3lsitem">
+<div class="w3table">
+<div class="w3table-cell">
+<p>Dont have an account?</p>
+
+<div class="btn">Sign up</div>
+</div>
+</div>
+</div>
+
+<div class="clear"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+<div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" id="myModal" role="dialog">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h3 class="modal-title" id="exampleModalLabel">Rentmatics</h3>
+<button aria-label="Close" class="close" data-dismiss="modal" style="margin-top:-30px;" type="button"><span aria-hidden="true">&times;</span></button></div>
+
+<div class="modal-body">
+<h4 style="font-family:Hanken">Enter your Rentmatics Email ID</h4>
+<input id="forgotid" type="text" /></div>
+
+<div class="modal-footer"><a class="button btn btn-danger" href="#" onclick="Forgot()" style="margin-left:3%;">Submit</a></div>
+</div>
+</div>
+</div>
+<!-- Footer
+================================================== -->
+
+<div class="margin-top-55"></div>
+<!-- Footer
+================================================== -->
+   <footer class="fat-footer">
+         <!-- Social links -->
+         <div class="social-footer">
+            <div class="container">
+               <ul class="list-inline socLinks">
+                  <li>
+                     <a class="fb" href="https://www.facebook.com/Rentmatics/" target="_blank">
+                     <i class="fa fa-facebook"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="twtr" href="https://twitter.com/rentmatics" target="_blank">
+                     <i class="fa fa-twitter"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="insta" href="https://www.instagram.com/rentmatics/" target="_blank">
+                     <i class="fa fa-instagram"></i>  
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <!-- /Social links -->
+         <!-- Footer text -->
+         <div class="footer-content">
+            <div class="container">
+               <div class="site-info">
+                  <ul class="list-inline footer-menu">
+                     <!-- <li>
+                        <a href="http://rentmatics.com/blog/">Blog</a>
+                     </li> -->
+                     <li>
+                        <a href="about.html">About</a>
+                     </li>
+                     <li>
+                        <a href="blog.html">Blog</a>
+                     </li>
+                     
+                     <li>
+                        <a href="contact.html">Contact Us</a>
+                     </li>
+                     <li>
+                        <a href="myprivacy.html">Privacy</a>
+                     </li>
+                     <li>
+                        <a href="tandc.html">Terms &amp; Conditions</a>
+                     </li>
+                  </ul>
+               </div>
+               <div class="site-copyright-area">Copyright © 2016 Rentmatics.  •  <i class="fa fa-heart"></i> d
+                  •  Tel: +91-9884379333/9811448697         
+               </div>
+            </div>
+         </div>
+         <!-- Footer text -->
+      </footer>
+<!-- Footer / End --><!-- Back To Top Button -->
+
+<div id="backtotop"></div>
+<!-- Scripts
+================================================== --><script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script><script type="text/javascript" src="scripts/chosen.min.js"></script><script type="text/javascript" src="scripts/magnific-popup.min.js"></script><script type="text/javascript" src="scripts/owl.carousel.min.js"></script><script type="text/javascript" src="scripts/rangeSlider.js"></script><script type="text/javascript" src="scripts/sticky-kit.min.js"></script><script type="text/javascript" src="scripts/slick.min.js"></script><script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script><script type="text/javascript" src="scripts/tooltips.min.js"></script><script type="text/javascript" src="scripts/masonry.min.js"></script><script type="text/javascript" src="scripts/custom.js"></script><script src="scripts/bootstrap.min.js"></script><script>
+
+    $(".info-w3lsitem .btn").click(function() {
+        $(".main-agileinfo").toggleClass("log-in");
+      });
+      $(".container-form .btn").click(function() {
+        $(".main-agileinfo").addClass("active");
+    });
+  </script><!-- //js --><!-- Wrapper / End --></body>
+</html>

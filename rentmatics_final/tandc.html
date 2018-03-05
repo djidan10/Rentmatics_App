@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Rentmatics</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+<link rel="stylesheet" href="css/jquery-ui.css">
+<link rel="stylesheet" href="css/style1.css">
+
+        
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script>
+//Logout the User
+
+var loginidd="";
+var ApiLogout="http://paymyhire.com:8083/Logout"
+
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  cardstring="No wish list found"
+  document.getElementById("hidenid").style.display = "none";
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+    }
+});
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Logout the User
+function logout() {
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+
+
+}
+
+
+
+function Payalert(){
+	window.open("http://paymyhire.com/");
+
+}
+
+
+</script>
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth">
+
+  <!-- Topbar -->
+  <div id="top-bar">
+    <div class="container">
+      <!-- Left Side Content -->
+      <div class="left-side">
+        <ul class="top-bar-menu">
+            <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+          <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
+        </ul>
+      </div>
+      <div class="right-side">
+        <ul class="social-icons">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="header">
+    <div class="container">
+      <div class="left-side">
+         <div id="logo">
+          <a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+         </div>
+         <!-- Mobile Navigation -->
+        <div class="menu-responsive">
+          <i class="fa fa-reorder menu-trigger"></i>
+        </div>
+         <!-- Main Navigation -->
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="howitwork.html">How It Works </a>
+              <ul>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+             </ul>
+            </li>
+           <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+           <li><a href="javascript:Payalert()">PayMyHire</a></li>
+          </ul>
+      </nav>
+      <div class="clearfix"></div>
+      </div>
+      <div class="right-side">
+
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+          <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
+           <li id="loginhiden">
+          <a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
+          </li>
+           <li style="display:none" id="account"><a href="#">My Account</a>
+            <ul>
+                    <li><a href="my-profile.html">My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                   <li><a href="javascript:logout()">Logout</a></li>
+                   
+                  </ul> 
+                </li> 
+          </ul>
+       </nav>
+    </div>
+  </div>
+</div>
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Banner
+================================================== -->
+<div class="parallax" data-background="images/tc.jpg" data-color="#36383e" data-color-opacity="0.5" data-img-width="2500" data-img-height="1600">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				
+				<div class="search-container" style="margin-left:13%">
+
+					<!-- Form -->
+					<h2 style="margin-left:9%;font-family:Hanken;font-weight: 400;font-size: 84px;">Terms  & Condition</h2>
+
+					
+					<!-- Row With Forms / End -->
+
+					
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+
+		
+<!-- Content
+================================================== -->
+<!-- Fullwidth Section -->
+<section>
+
+	<!-- Content -->
+	<div class="container" style="background-color:white">
+<div  style="font-size:17px;margin-left:15%; font-family:Source Sans Pro;text-align:justify;box-sizing: border-box;word-break:break-word;color:#484848;line-height: 1.6;width:700px;">
+
+		<br>
+		<br>
+LAST REVISION: 01-May-2016
+<br>
+<br>
+
+PLEASE READ THIS TERMS OF SERVICE AGREEMENT CAREFULLY. BY USING THIS WEBSITE OR ORDERING PRODUCTS FROM THIS WEBSITE YOU AGREE TO BE BOUND BY ALL OF THE TERMS AND CONDITIONS OF THIS AGREEMENT.
+<br><br>
+This Terms of Service Agreement (the “Agreement”) governs your use of this website, Rentmatics.in (the “Website”), Rentmatics (“Business Name”) offer of products for purchase on this Website, or your purchase of products available on this Website. This Agreement includes, and incorporates by this reference, the policies and guidelines referenced below. Rentmatics reserves the right to change or revise the terms and conditions of this Agreement at any time by posting any changes or a revised Agreement on this Website. Rentmatics will alert you that changes or revisions have been made by indicating on the top of this Agreement the date it was last revised. The changed or revised Agreement will be effective immediately after it is posted on this Website. Your use of the Website following the posting any such changes or of a revised Agreement will constitute your acceptance of any such changes or revisions. Rentmatics encourages you to review this Agreement whenever you visit the Website to make sure that you understand the terms and conditions governing use of the Website. This Agreement does not alter in any way the terms or conditions of any other written agreement you may have with Rentmatics for other products or services. If you do not agree to this Agreement (including any referenced policies or guidelines), please immediately terminate your use of the Website. If you would like to print this Agreement, please click the print button on your browser toolbar.
+
+<br><br><b>1. PRODUCTS<br></b>
+Terms of Offer. This Website offers for sale certain products (the “Products”). By placing an order for Products through this Website, you agree to the terms set forth in this Agreement.
+
+<br><br><b>Customer Solicitation:<br></b> Unless you notify our third party call center reps or direct Rentmatics sales reps, while they are calling you, of your desire to opt out from further direct company communications and solicitations, you are agreeing to continue to receive further emails and call solicitations Rentmatics and its designated in house or third party call team(s).
+
+<br><br><b>Opt Out Procedure: <br></b>We provide 3 easy ways to opt out of from future solicitations. 1. You may use the opt out link found in any email solicitation that you may receive. 2. You may also choose to opt out, via sending your email address to: [opt-out email].
+<br>
+3. You may send a written remove request to [Company Address].
+Proprietary Rights. Rentmatics has proprietary rights and trade secrets in the Products. You may not copy, reproduce, resell or redistribute any Product manufactured and/or distributed by Rentmatics. Rentmatics also has rights to all trademarks and trade dress and specific layouts of this webpage, including calls to action, text placement, images and other information.
+Sales Tax. If you purchase any Products, you will be responsible for paying any applicable sales tax.
+
+<br><br><b>1. WEBSITE<br></b>
+
+Content; Intellectual Property; Third Party Links. In addition to making Products available, this Website also offers information and marketing materials. This Website also offers information, both directly and through indirect links to third-party websites, about nutritional and dietary supplements. Rentmatics does not always create the information offered on this Website; instead the information is often gathered from other sources. To the extent that Rentmatics does create the content on this Website, such content is protected by intellectual property laws of the India, foreign nations, and international bodies. Unauthorized use of the material may violate copyright, trademark, and/or other laws. You acknowledge that your use of the content on this Website is for personal, noncommercial use. Any links to third-party websites are provided solely as a convenience to you. Rentmatics does not endorse the contents on any such third-party websites. Rentmatics is not responsible for the content of or any damage that may result from your access to or reliance on these third-party websites. If you link to third-party websites, you do so at your own risk.
+<br>
+<br>
+Use of Website; Rentmatics is not responsible for any damages resulting from use of this website by anyone. You will not use the Website for illegal purposes. You will (1) abide by all applicable local, state, national, and international laws and regulations in your use of the Website (including laws regarding intellectual property), (2) not interfere with or disrupt the use and enjoyment of the Website by other users, (3) not resell material on the Website, (4) not engage, directly or indirectly, in transmission of “spam”, chain letters, junk mail or any other type of unsolicited communication, and (5) not defame, harass, abuse, or disrupt other users of the Website
+<br>
+<br>
+License. By using this Website, you are granted a limited, non-exclusive, non-transferable right to use the content and materials on the Website in connection with your normal, noncommercial, use of the Website. You may not copy, reproduce, transmit, distribute, or create derivative works of such content or information without express written authorization from Rentmatics or the applicable third party (if third party content is at issue).
+<br>
+<br>
+Posting. By posting, storing, or transmitting any content on the Website, you hereby grant Rentmatics a perpetual, worldwide, non-exclusive, royalty-free, assignable, right and license to use, copy, display, perform, create derivative works from, distribute, have distributed, transmit and assign such content in any form, in all media now known or hereinafter created, anywhere in the world. Rentmatics does not have the ability to control the nature of the user-generated content offered through the Website. You are solely responsible for your interactions with other users of the Website and any content you post. Rentmatics is not liable for any damage or harm resulting from any posts by or interactions between users. Rentmatics reserves the right, but has no obligation, to monitor interactions between and among users of the Website and to remove any content Rentmatics deems objectionable, in Muscle UP Nutrition’s sole discretion.
+
+<br><b>III. DISCLAIMER OF WARRANTIES<br></b>
+YOUR USE OF THIS WEBSITE AND/OR PRODUCTS ARE AT YOUR SOLE RISK. THE WEBSITE AND PRODUCTS ARE OFFERED ON AN “AS IS” AND “AS AVAILABLE” BASIS. Rentmatics EXPRESSLY DISCLAIMS ALL WARRANTIES OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT WITH RESPECT TO THE PRODUCTS OR WEBSITE CONTENT, OR ANY RELIANCE UPON OR USE OF THE WEBSITE CONTENT OR PRODUCTS. (“PRODUCTS” INCLUDE TRIAL PRODUCTS.)
+<br>
+WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, Rentmatics MAKES NO WARRANTY:
+<br>
+THAT THE INFORMATION PROVIDED ON THIS WEBSITE IS ACCURATE, RELIABLE, COMPLETE, OR TIMELY.
+<br>
+THAT THE LINKS TO THIRD-PARTY WEBSITES ARE TO INFORMATION THAT IS ACCURATE, RELIABLE, COMPLETE, OR TIMELY.
+<br>
+NO ADVICE OR INFORMATION, WHETHER ORAL OR WRITTEN, OBTAINED BY YOU FROM THIS WEBSITE WILL CREATE ANY WARRANTY NOT EXPRESSLY STATED HEREIN.
+<br>
+AS TO THE RESULTS THAT MAY BE OBTAINED FROM THE USE OF THE PRODUCTS OR THAT DEFECTS IN PRODUCTS WILL BE CORRECTED.
+REGARDING ANY PRODUCTS PURCHASED OR OBTAINED THROUGH THE WEBSITE.
+<br>
+SOME JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF CERTAIN WARRANTIES, SO SOME OF THE ABOVE EXCLUSIONS MAY NOT APPLY TO YOU.
+
+<br><b>1. LIMITATION OF LIABILITY<br></b>
+Rentmatics ENTIRE LIABILITY, AND YOUR EXCLUSIVE REMEDY, IN LAW, IN EQUITY, OR OTHWERWISE, WITH RESPECT TO THE WEBSITE CONTENT AND PRODUCTS AND/OR FOR ANY BREACH OF THIS AGREEMENT IS SOLELY LIMITED TO THE AMOUNT YOU PAID, LESS SHIPPING AND HANDLING, FOR PRODUCTS PURCHASED VIA THE WEBSITE.
+<br>
+Rentmatics WILL NOT BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL OR CONSEQUENTIAL DAMAGES IN CONNECTION WITH THIS AGREEMENT OR THE PRODUCTS IN ANY MANNER, INCLUDING LIABILITIES RESULTING FROM (1) THE USE OR THE INABILITY TO USE THE WEBSITE CONTENT OR PRODUCTS; (2) THE COST OF PROCURING SUBSTITUTE PRODUCTS OR CONTENT; (3) ANY PRODUCTS PURCHASED OR OBTAINED OR TRANSACTIONS ENTERED INTO THROUGH THE WEBSITE; OR (4) ANY LOST PROFITS YOU ALLEGE.
+<br>
+SOME JURISDICTIONS DO NOT ALLOW THE LIMITATION OR EXCLUSION OF LIABILITY FOR INCIDENTAL OR CONSEQUENTIAL DAMAGES SO SOME OF THE ABOVE LIMITATIONS MAY NOT APPLY TO YOU.
+
+<br><b>1. INDEMNIFICATION<br></b>
+
+You will release, indemnify, defend and hold harmless Rentmatics, and any of its contractors, agents, employees, officers, directors, shareholders, affiliates and assigns from all liabilities, claims, damages, costs and expenses, including reasonable attorneys’ fees and expenses, of third parties relating to or arising out of (1) this Agreement or the breach of your warranties, representations and obligations under this Agreement; (2) the Website content or your use of the Website content; (3) the Products or your use of the Products (including Trial Products); (4) any intellectual property or other proprietary right of any person or entity; (5) your violation of any provision of this Agreement; or (6) any information or data you supplied to Rentmatics. When Rentmatics is threatened with suit or sued by a third party, Rentmatics may seek written assurances from you concerning your promise to indemnify Rentmatics; your failure to provide such assurances may be considered by Rentmatics to be a material breach of this Agreement. Rentmatics will have the right to participate in any defense by you of a third-party claim related to your use of any of the Website content or Products, with counsel of Rentmatics choice at its expense. Rentmatics will reasonably cooperate in any defense by you of a third-party claim at your request and expense. You will have sole responsibility to defend Rentmatics against any claim, but you must receive Rentmatics prior written consent regarding any related settlement. The terms of this provision will survive any termination or cancellation of this Agreement or your use of the Website or Products.
+
+<br><b>1. PRIVACY<br></b>
+
+Rentmatics believes strongly in protecting user privacy and providing you with notice of Muscle UP Nutrition’s use of data. Please refer to Rentmatics privacy policy, incorporated by reference here in, that is posted on the Website.
+
+<br><b>1. AGREEMENT TO BE BOUND<br></b>
+By using this Website or ordering Products, you acknowledge that you have read and agree to be bound by this Agreement and all terms and conditions on this Website.
+
+<br><b>VIII. GENERAL<br></b>
+
+Force Majeure. Rentmatics will not be deemed in default hereunder or held responsible for any cessation, interruption or delay in the performance of its obligations hereunder due to earthquake, flood, fire, storm, natural disaster, act of God, war, terrorism, armed conflict, labor strike, lockout, or boycott.
+<br>
+Cessation of Operation. Rentmatics may at any time, in its sole discretion and without advance notice to you, cease operation of the Website and distribution of the Products.
+<br>
+Entire Agreement. This Agreement comprises the entire agreement between you and Rentmatics and supersedes any prior agreements pertaining to the subject matter contained herein.
+<br>
+Effect of Waiver. The failure of Rentmatics to exercise or enforce any right or provision of this Agreement will not constitute a waiver of such right or provision. If any provision of this Agreement is found by a court of competent jurisdiction to be invalid, the parties nevertheless agree that the court should endeavor to give effect to the parties’ intentions as reflected in the provision, and the other provisions of this Agreement remain in full force and effect.
+<br>
+Governing Law; Jurisdiction. This Website originates from the [City, State]. This Agreement will be governed by the laws of the State of [Law State Name] without regard to its conflict of law principles to the contrary. Neither you nor Rentmatics will commence or prosecute any suit, proceeding or claim to enforce the provisions of this Agreement, to recover damages for breach of or default of this Agreement, or otherwise arising under or by reason of this Agreement, other than in courts located in State of [State Name]. By using this Website or ordering Products, you consent to the jurisdiction and venue of such courts in connection with any action, suit, proceeding or claim arising under or by reason of this Agreement. You hereby waive any right to trial by jury arising out of this Agreement and any related documents.
+<br>
+Statute of Limitation. You agree that regardless of any statute or law to the contrary, any claim or cause of action arising out of or related to use of the Website or Products or this Agreement must be filed within one (1) year after such claim or cause of action arose or be forever barred.
+<br>
+Waiver of Class Action Rights. BY ENTERING INTO THIS AGREEMENT, YOU HEREBY IRREVOCABLY WAIVE ANY RIGHT YOU MAY HAVE TO JOIN CLAIMS WITH THOSE OF OTHER IN THE FORM OF A CLASS ACTION OR SIMILAR PROCEDURAL DEVICE. ANY CLAIMS ARISING OUT OF, RELATING TO, OR CONNECTION WITH THIS AGREEMENT MUST BE ASSERTED INDIVIDUALLY.
+<br>
+Termination. Rentmatics reserves the right to terminate your access to the Website if it reasonably believes, in its sole discretion, that you have breached any of the terms and conditions of this Agreement. Following termination, you will not be permitted to use the Website and Rentmatics may, in its sole discretion and without advance notice to you, cancel any outstanding orders for Products. If your access to the Website is terminated, Rentmatics reserves the right to exercise whatever means it deems necessary to prevent unauthorized access of the Website. This Agreement will survive indefinitely unless and until Rentmatics chooses, in its sole discretion and without advance to you, to terminate it.
+<br>
+Domestic Use. Rentmatics makes no representation that the Website or Products are appropriate or available for use in locations outside India. Users who access the Website from outside India do so at their own risk and initiative and must bear all responsibility for compliance with any applicable local laws.
+<br>
+Assignment. You may not assign your rights and obligations under this Agreement to anyone. Rentmatics may assign its rights and obligations under this Agreement in its sole discretion and without advance notice to you.
+
+<br>
+BY USING THIS WEBSITE OR ORDERING PRODUCTS FROM THIS WEBSITE YOU AGREE
+TO BE BOUND BY ALL OF THE TERMS AND CONDITIONS OF THIS AGREEMENT.
+
+		</div>
+	</div>
+	<br>
+	<br>
+
+</section>
+<!-- Fullwidth Section / End -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Footer
+================================================== -->
+<div class="margin-top-55"></div>
+
+
+ <footer class="fat-footer">
+         <!-- Social links -->
+         <div class="social-footer">
+            <div class="container">
+               <ul class="list-inline socLinks">
+                  <li>
+                     <a class="fb" href="https://www.facebook.com/Rentmatics/" target="_blank">
+                     <i class="fa fa-facebook"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="twtr" href="https://twitter.com/rentmatics" target="_blank">
+                     <i class="fa fa-twitter"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="insta" href="https://www.instagram.com/rentmatics/" target="_blank">
+                     <i class="fa fa-instagram"></i>  
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <!-- /Social links -->
+         <!-- Footer text -->
+         <div class="footer-content">
+            <div class="container">
+               <div class="site-info">
+                  <ul class="list-inline footer-menu">
+                     <!-- <li>
+                        <a href="http://rentmatics.com/blog/">Blog</a>
+                     </li> -->
+                     <li>
+                        <a href="about.html">About</a>
+                     </li>
+                     <li>
+                        <a href="blog.html">Blog</a>
+                     </li>
+                     
+                     <li>
+                        <a href="contact.html">Contact Us</a>
+                     </li>
+                     <li>
+                        <a href="myprivacy.html">Privacy</a>
+                     </li>
+                     <li>
+                        <a href="tandc.html">Terms &amp; Conditions</a>
+                     </li>
+                  </ul>
+               </div>
+               <div class="site-copyright-area">Copyright © 2016 Rentmatics.  •  <i class="fa fa-heart"></i> d
+                  •  Tel: +91-9884379333/9811448697         
+               </div>
+            </div>
+         </div>
+         <!-- Footer text -->
+      </footer>
+
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+<!-- Scripts
+================================================== -->
+<!-- <script type="text/javascript"  src="scripts/jquery-min.js"></script> -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript"  src="scripts/jquery-1.12.4.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+
+
+<!-- Style Switcher
+================================================== -->
+<script src="scripts/switcher.js"></script>
+
+
+
+</div>
+<!-- Wrapper / End -->
+
+</body>
+</html>

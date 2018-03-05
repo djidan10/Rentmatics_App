@@ -2341,7 +2341,7 @@ button.fs-map-btn.button {
 }
 
 .listing-img-container:before {
-    /*opacity: 0.9;*/
+    opacity: 0.9;
     background: linear-gradient(to bottom, transparent 65%, #2f2f2f);
     transition: opacity .3s;
 }
@@ -2573,7 +2573,7 @@ ul.listing-details li {
 
 .list-layout .listing-img-container {
     height: 0;
-    min-height: 400px;
+    min-height: 200px;
     flex: 2;
     overflow: hidden;
     border-radius: 3px 0 0 3px;

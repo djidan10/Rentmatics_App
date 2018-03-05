@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Rentmatics</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style1.css">
+
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script>
+var ApiLogout="http://paymyhire.com:8083/Logout"
+
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  cardstring="No wish list found"
+  document.getElementById("hidenid").style.display = "none";
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+    }
+});
+//Logout the User
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Logout the User
+function logout() {
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+
+
+}
+
+function Payalert(){
+	window.open("http://paymyhire.com/");
+
+}
+
+
+</script>
+
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+<!-- Header Container
+
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth">
+
+  <!-- Topbar -->
+  <div id="top-bar">
+    <div class="container">
+      <!-- Left Side Content -->
+      <div class="left-side">
+        <ul class="top-bar-menu">
+            <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+          <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
+        </ul>
+      </div>
+      <div class="right-side">
+        <ul class="social-icons">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="header">
+    <div class="container">
+      <div class="left-side">
+         <div id="logo">
+          <a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+         </div>
+         <!-- Mobile Navigation -->
+        <div class="menu-responsive">
+          <i class="fa fa-reorder menu-trigger"></i>
+        </div>
+         <!-- Main Navigation -->
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="howitwork.html">How It Works </a>
+              <ul>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+             </ul>
+            </li>
+           <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+           <li><a href="javascript:Payalert()">PayMyHire</a></li>
+          </ul>
+      </nav>
+      <div class="clearfix"></div>
+      </div>
+      <div class="right-side">
+
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+          <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
+           <li id="loginhiden">
+          <a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
+          </li>
+           <li style="display:none" id="account"><a href="#">My Account</a>
+            <ul>
+                    <li><a href="my-profile.html">My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                   <li><a href="javascript:logout()">Logout</a></li>
+                   
+                  </ul> 
+                </li> 
+          </ul>
+       </nav>
+    </div>
+  </div>
+</div>
+</header>
+
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Titlebar
+================================================== -->
+
+<div class="parallax titlebar"
+	data-background="images/jumbo-banner.jpg"
+	data-color="#333333"
+	data-color-opacity="0.7"
+	data-img-width="800"
+	data-img-height="505">
+
+	<div id="titlebar">
+		<div class="container">
+			<div class="row">
+				<br>
+				<div class="col-md-12">
+				
+			
+					<h2 style="color:white;font-size: 46px;font-family: inherit;font-weight: 500;line-height: 1.1;text-align:center">Tenants</h2>
+					<br>
+					<h5 style="color:white;font-size: 20px;font-family: inherit;font-weight: 500;line-height: 1.1;text-align:center;">Discover how rentmatics can you help you find everything you want</h5>
+					
+						<!-- Status -->
+					
+					
+					<!-- Row / End -->
+
+				</div>
+		
+
+		</div>	
+
+					
+					
+					<!-- Breadcrumbs -->
+					
+				</div>
+			</div>
+		</div>
+
+
+
+
+<!-- Content
+================================================== -->
+
+			
+<!-- Content
+================================================== -->
+<!-- Fullwidth Section -->
+<section class="fullwidth" data-background-color="#f7f7f7" style="margin-top:-100px">
+
+	<!-- Content -->
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-4">
+			<div class="testimonial-box">
+					<div class="testimonial">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					<div >
+					<img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/phone.png">
+					</div>
+
+					<h3>Book and Confirm</h3>
+					<p>TSearch and filter hundreds of listings, read reviews, explore photos and find the perfect spot.</p>
+				</div>
+			</div>
+			</div>
+			</div>
+
+			<div class="col-md-4">
+			<div class="testimonial-box">
+					<div class="testimonial">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					<div >
+						<img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/find.png">
+					</div>
+
+					<h3>Check In and Work</h3>
+					<p>Go and have a good time or even make a booking directly from the listing page. All of those, thanks to Listable!</p>
+				</div>
+				</div>
+				</div>
+			</div>
+
+			<div class="col-md-4">
+			<div class="testimonial-box">
+					<div class="testimonial">
+				<!-- Icon Box -->
+				<div class="icon-box-1 alternative">
+
+					<div>
+						<img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/save.png">
+					</div>
+
+					<h3>Find a Space</h3>
+					<p>Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a mall to do some shopping?</p>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	</div>
+	</div>
+
+</section>
+<!-- Fullwidth Section / End -->
+			
+<!-- Content
+================================================== -->
+<!-- Fullwidth Section -->
+<section class="fullwidth" data-background-color="#70c39e" style="margin-top:-100px">
+
+	<!-- Content -->
+	<div class="container">
+		<div class="row">
+		<h2 style="font-family:inherit; font-weight: 500;line-height: 1.1;color:white;">Why singles love Rentmatics homes</h2>
+		<br>
+		<div style="color:white;line-height: 2.1">
+		<li>Feel like a Home</li>
+		<li>Verified Houses</li>
+		<li>Hassle-free living</li>
+		<li>Easy move in/move out policies</li>
+		<li>Choose your roommate</li>
+		<li>And More events, activities</li>
+<br>
+		<a href="listings-half-map-grid-compact.html" class="button border">Explore Houses</a>
+
+		</div>
+
+			
+		</div>
+	</div>
+	
+
+</section>
+
+
+<!-- Footer
+================================================== -->
+ <footer class="fat-footer">
+         <!-- Social links -->
+         <div class="social-footer">
+            <div class="container">
+               <ul class="list-inline socLinks">
+                  <li>
+                     <a class="fb" href="https://www.facebook.com/Rentmatics/" target="_blank">
+                     <i class="fa fa-facebook"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="twtr" href="https://twitter.com/rentmatics" target="_blank">
+                     <i class="fa fa-twitter"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="insta" href="https://www.instagram.com/rentmatics/" target="_blank">
+                     <i class="fa fa-instagram"></i>  
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <!-- /Social links -->
+         <!-- Footer text -->
+         <div class="footer-content">
+            <div class="container">
+               <div class="site-info">
+                  <ul class="list-inline footer-menu">
+                     <!-- <li>
+                        <a href="http://rentmatics.com/blog/">Blog</a>
+                     </li> -->
+                     <li>
+                        <a href="about.html">About</a>
+                     </li>
+                     <li>
+                        <a href="blog.html">Blog</a>
+                     </li>
+                     
+                     <li>
+                        <a href="contact.html">Contact Us</a>
+                     </li>
+                     <li>
+                        <a href="myprivacy.html">Privacy</a>
+                     </li>
+                     <li>
+                        <a href="tandc.html">Terms &amp; Conditions</a>
+                     </li>
+                  </ul>
+               </div>
+               <div class="site-copyright-area">Copyright © 2016 Rentmatics.  •  <i class="fa fa-heart"></i> d
+                  •  Tel: +91-9884379333/9811448697         
+               </div>
+            </div>
+         </div>
+         <!-- Footer text -->
+      </footer>
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+
+
+<!-- Style Switcher
+================================================== -->
+<script src="scripts/switcher.js"></script>
+
+<!-- Style Switcher / End -->
+
+
+</div>
+<!-- Wrapper / End -->
+
+
+</body>
+</html>

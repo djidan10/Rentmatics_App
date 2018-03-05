@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Rentmatics</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style1.css"> 
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+
+    
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script>
+var ApiLogout="http://paymyhire.com:8083/Logout"
+var ApiGetProfile="http://paymyhire.com:8083/GetProfile"
+var ApiMyprofile="http://paymyhire.com:8083/Myprofile"//Logout the User
+
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Logout the User
+function logout() {
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+
+
+}
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+                 Loginid = cooki
+               
+
+    var Getprofile ={
+      
+      "Loginid":cooki
+     
+
+
+     };
+   
+    $.ajax({
+      type: "POST",
+      url: ApiGetProfile,
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(Getprofile),
+
+   success: function(responsee){
+
+
+     var searchout = JSON.parse(responsee);
+     console.log(searchout);
+     if (searchout == ""){
+
+     }else{
+     
+     var responsename =searchout.Name
+     var responsetittle =searchout.Tittle
+     var responsephone =searchout.Phone
+     var responsemail =searchout.Email
+     var responseabout =searchout.About
+     var responsetwitter =searchout.Twiter
+     var responsefacebook =searchout.Facebook
+     var responsegoogle =searchout.Google
+
+    $("#Pname").val(responsename);
+    $("#Ptittle").val(responsetittle);
+    $("#Pphone").val(responsephone);
+    $("#Pemail").val(responsemail);
+    $("#Pabout").val(responseabout);
+    $("#Ptwitter").val(responsetwitter);
+    $("#Pfacebook").val(responsefacebook);
+    $("#Pgoogle").val(responsegoogle);
+         
+       }
+
+ }
+
+});
+
+     
+    }
+});
+
+
+//Logout the User
+function logout() {
+	
+
+
+   // $.removeCookie('RentmaticsCookie');
+    delete_cookie("RentmaticsCookie");
+     $.ajax({
+        type: "GET",
+        url: ApiLogout,
+
+
+        success: function(responsee) {
+        	localStorage.removeItem("LoginID");
+           document.getElementById("loginhiden").style.display = "inline";
+            document.getElementById("account").style.visibility = "hidden";
+
+    
+        }
+
+    });
+
+}
+function Payalert(){
+	window.open("http://paymyhire.com/");
+
+}
+
+function myprofile(){
+
+
+
+
+   if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+
+
+    alert("Please Signin to create profile");
+    document.location.href = "login-register.html";
+  
+   }else{
+   
+
+
+    
+
+    var getname =  document.getElementById('Pname').value;
+    var gettittle = document.getElementById('Ptittle').value;
+    var getphone = document.getElementById('Pphone').value;
+    var getemail =document.getElementById('Pemail').value;
+    var getabout =document.getElementById('Pabout').value;
+    var gettwiter =document.getElementById('Ptwitter').value;
+    var getfacebook =document.getElementById('Pfacebook').value;
+    var getgoogle =document.getElementById('Pgoogle').value;
+
+    console.log(getname,gettittle,getphone,getemail,getabout,gettwiter);
+
+
+      var Profile ={
+      "Id": null,
+      "Loginid":cooki,
+      "Name":getname,
+      "Tittle":gettittle,
+      "Phone":getphone,
+      "Email":getemail,
+      "About":getabout,
+      "Twiter":gettwiter,
+      "Facebook":getfacebook,
+      "Google":getgoogle
+
+
+     };
+   
+    $.ajax({
+      type: "POST",
+      url: ApiMyprofile,
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(Profile),
+
+   success: function(responsee){
+
+     var searchout = JSON.parse(responsee);
+     var responsename =searchout.Name
+     var responsetittle =searchout.Tittle
+     var responsephone =searchout.Phone
+     var responsemail =searchout.Email
+     var responseabout =searchout.About
+     var responsetwitter =searchout.Twiter
+     var responsefacebook =searchout.Facebook
+     var responsegoogle =searchout.Google
+
+
+    $("#Pname").html(responsename);
+    $("#Ptittle").html(responsetittle);
+    $("#Pphone").html(responsephone);
+    $("#Pemail").html(responsemail);
+    $("#Pabout").html(responseabout);
+    $("#Ptwitter").html(responsetwitter);
+    $("#Pfacebook").html(responsefacebook);
+    $("#Pgoogle").html(responsegoogle);
+         
+       
+
+ }
+
+});
+}
+
+
+}
+
+
+</script>
+
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth">
+
+  <!-- Topbar -->
+  <div id="top-bar">
+    <div class="container">
+      <!-- Left Side Content -->
+      <div class="left-side">
+        <ul class="top-bar-menu">
+            <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+          <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
+        </ul>
+      </div>
+      <div class="right-side">
+        <ul class="social-icons">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="header">
+    <div class="container">
+      <div class="left-side">
+         <div id="logo">
+          <a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+         </div>
+         <!-- Mobile Navigation -->
+        <div class="menu-responsive">
+          <i class="fa fa-reorder menu-trigger"></i>
+        </div>
+         <!-- Main Navigation -->
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="howitwork.html">How It Works </a>
+              <ul>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+             </ul>
+            </li>
+           <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+           <li><a href="javascript:Payalert()">PayMyHire</a></li>
+          </ul>
+      </nav>
+      <div class="clearfix"></div>
+      </div>
+      <div class="right-side">
+
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+          <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
+           <li id="loginhiden">
+          <a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
+          </li>
+           <li style="display:none" id="account"><a href="#">My Account</a>
+            <ul>
+                    <li><a href="my-profile.html">My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                   <li><a href="javascript:logout()">Logout</a></li>
+                   
+                  </ul> 
+                </li> 
+          </ul>
+       </nav>
+    </div>
+  </div>
+</div>
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+
+<br>
+<br>
+
+<!-- Content
+================================================== -->
+<div class="container">
+	<div class="row">
+
+
+		<!-- Widget -->
+		<div class="col-md-4">
+			<div class="sidebar left">
+
+				<div class="my-account-nav-container">
+					
+					<ul class="my-account-nav">
+						<li class="sub-nav-title">Manage Account</li>
+						<li><a href="my-profile.html" class="current"><i class="sl sl-icon-user"></i> My Profile</a></li>
+						<li><a href="my-bookmarks.html"><i class="sl sl-icon-star"></i> Bookmarked Listings</a></li>
+					</ul>
+					
+					<!-- <ul class="my-account-nav">
+						<li class="sub-nav-title">Manage Listings</li>
+						<li><a href="my-properties.html"><i class="sl sl-icon-docs"></i> My Properties</a></li>
+						<li><a href="submit-property.html"><i class="sl sl-icon-action-redo"></i> Submit New Property</a></li>
+					</ul>
+ -->
+					<ul class="my-account-nav">
+						<li><a href="change-password.html"><i class="sl sl-icon-lock"></i> Change Password</a></li>
+						<li><a href="javascript:logout()"><i class="sl sl-icon-power"></i> Log Out</a></li>
+					</ul>
+
+				</div>
+
+			</div>
+		</div>
+
+		<div class="col-md-8">
+			<div class="row">
+
+
+				<div class="col-md-8 my-profile">
+					<h4 class="margin-top-0 margin-bottom-30">My Account</h4>
+
+					<label>Your Name</label>
+					<input  type="text" id="Pname">
+
+					<label>Your Title</label>
+					<input  type="text" id="Ptittle">
+
+					<label>Phone</label>
+					<input  type="text" id="Pphone">
+
+					<label>Email</label>
+					<input  type="text" id="Pemail">
+
+
+					<h4 class="margin-top-50 margin-bottom-25">About Me</h4>
+					<textarea name="about"  cols="30" rows="10" id="Pabout">Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper</textarea>
+				
+
+					<h4 class="margin-top-50 margin-bottom-0">Social</h4>
+
+					<label><i class="fa fa-twitter"></i> Twitter</label>
+					<input  type="text" id="Ptwitter">
+
+					<label><i class="fa fa-facebook-square"></i> Facebook</label>
+					<input  type="text" id="Pfacebook">
+
+					<label><i class="fa fa-google-plus"></i> Google+</label>
+					<input  type="text" id="Pgoogle">
+
+
+					<button class="button margin-top-20 margin-bottom-20" onclick="myprofile()">Save Changes</button>
+				</div>
+<!-- 
+				<div class="col-md-4">
+					
+					<div class="edit-profile-photo">
+						<img src="images/agent-02.jpg" alt="">
+						<div class="change-photo-btn">
+							<div class="photoUpload">
+							    <span><i class="fa fa-upload"></i> Upload Photo</span>
+							    <input type="file" class="upload" />
+							</div>
+						</div>
+					</div>
+
+				</div> -->
+
+
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+<!-- Footer
+================================================== -->
+<div class="margin-top-55"></div>
+
+   <footer class="fat-footer">
+         <!-- Social links -->
+         <div class="social-footer">
+            <div class="container">
+               <ul class="list-inline socLinks">
+                  <li>
+                     <a class="fb" href="https://www.facebook.com/Rentmatics/" target="_blank">
+                     <i class="fa fa-facebook"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="twtr" href="https://twitter.com/rentmatics" target="_blank">
+                     <i class="fa fa-twitter"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="insta" href="https://www.instagram.com/rentmatics/" target="_blank">
+                     <i class="fa fa-instagram"></i>  
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <!-- /Social links -->
+         <!-- Footer text -->
+         <div class="footer-content">
+            <div class="container">
+               <div class="site-info">
+                  <ul class="list-inline footer-menu">
+                     <!-- <li>
+                        <a href="http://rentmatics.com/blog/">Blog</a>
+                     </li> -->
+                     <li>
+                        <a href="about.html">About</a>
+                     </li>
+                     <li>
+                        <a href="blog.html">Blog</a>
+                     </li>
+                     
+                     <li>
+                        <a href="contact.html">Contact Us</a>
+                     </li>
+                     <li>
+                        <a href="myprivacy.html">Privacy</a>
+                     </li>
+                     <li>
+                        <a href="tandc.html">Terms &amp; Conditions</a>
+                     </li>
+                  </ul>
+               </div>
+               <div class="site-copyright-area">Copyright © 2016 Rentmatics.  •  <i class="fa fa-heart"></i> d
+                  •  Tel: +91-9884379333/9811448697         
+               </div>
+            </div>
+         </div>
+         <!-- Footer text -->
+      </footer>
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+
+
+
+
+
+</div>
+
+
+</body>
+</html>

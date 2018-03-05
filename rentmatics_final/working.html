@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Findeo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style1.css">
+
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+
+    <style>
+#map-canvas {
+  min-width: 600px;
+  width: 100%;
+  min-height: 800px;
+  height: 100%;
+}
+</style>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script>
+var ApiLogout="http://paymyhire.com:8083/Logout"
+var ApiPostsubscriber="http://paymyhire.com:8083/Postsubscriber"
+
+//Logout the User
+function logout() {
+   
+
+     $.ajax({
+        type: "GET",
+        url: ApiLogout,
+
+        success: function(responsee) {
+             document.getElementById("loginhiden").style.display = "inline";
+                document.getElementById("account").style.display = "none";
+                location.reload(true);
+
+    
+        }
+
+    });
+
+}
+
+
+function Payalert(){
+  window.open("http://paymyhire.com/");
+
+}
+
+
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+
+
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+    }
+});
+
+
+  
+      function Postsubscriber(){
+    
+         Subscriberemail = document.getElementById('subemail').value;
+         
+          City = localStorage.getItem("Getcity");
+          var Subscriber={
+         "Sub_City" : City,
+          "Sub_Email" :Subscriberemail
+
+ };
+
+   $.ajax({
+      type: "POST",
+      url: ApiPostsubscriber,
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(Subscriber),
+
+  success: function(responsee){
+   
+alert("succesfully updated will come to you soon!")
+document.location.href = "index.html";
+      }
+    });
+    }
+
+ </script>
+
+
+
+
+</head>
+
+<body >
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth">
+
+  <!-- Topbar -->
+  <div id="top-bar">
+    <div class="container">
+      <!-- Left Side Content -->
+      <div class="left-side">
+        <ul class="top-bar-menu">
+            <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+          <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
+        </ul>
+      </div>
+      <div class="right-side">
+        <ul class="social-icons">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="header">
+    <div class="container">
+      <div class="left-side">
+         <div id="logo">
+          <a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+         </div>
+         <!-- Mobile Navigation -->
+        <div class="menu-responsive">
+          <i class="fa fa-reorder menu-trigger"></i>
+        </div>
+         <!-- Main Navigation -->
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="howitwork.html">How It Works </a>
+              <ul>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+             </ul>
+            </li>
+           <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+           <li><a href="javascript:Payalert()">PayMyHire</a></li>
+          </ul>
+      </nav>
+      <div class="clearfix"></div>
+      </div>
+      <div class="right-side">
+
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+          <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
+           <li id="loginhiden">
+          <a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
+          </li>
+           <li style="display:none" id="account"><a href="#">My Account</a>
+            <ul>
+                    <li><a href="my-profile.html">My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                   <li><a href="javascript:logout()">Logout</a></li>
+                   
+                  </ul> 
+                </li> 
+          </ul>
+       </nav>
+    </div>
+  </div>
+</div>
+</header>
+
+
+
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Content
+================================================== -->
+
+<div class="parallax titlebar"
+  data-background="images/jumbo-banner.jpg"
+  data-color="#333333"
+  data-color-opacity="0.7"
+  data-img-width="800"
+  data-img-height="505">
+
+  <div id="titlebar">
+    <div class="container">
+      <div class="row">
+        <br>
+        <div class="col-md-12">
+        
+      
+         
+          <h5 style="color:white;font-size: 20px;font-family: Hanken;text-align:center;">We’re growing quickly but we haven’t started our services yet!
+Once we started we will get back to you,</h5> <p style="color:white;font-size: 20px;font-family: Hanken;margin-left:120px;">please enter your email ID</p>
+
+
+<input type="text" placeholder="enter your Email" id="subemail" style="width:600px;margin-left:102px;"/>
+ <a href="javascript:Postsubscriber()" class="button btn btn-danger"  style="margin-left:100px;">Subscribe</a>
+          
+            <!-- Status -->
+          
+          
+          <!-- Row / End -->
+
+        </div>
+    
+
+    </div>  
+
+          
+          
+          <!-- Breadcrumbs -->
+          
+        </div>
+      </div>
+    </div>
+
+
+ <footer class="fat-footer">
+         <!-- Social links -->
+         <div class="social-footer">
+            <div class="container">
+               <ul class="list-inline socLinks">
+                  <li>
+                     <a class="fb" href="https://www.facebook.com/Rentmatics/" target="_blank">
+                     <i class="fa fa-facebook"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="twtr" href="https://twitter.com/rentmatics" target="_blank">
+                     <i class="fa fa-twitter"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="insta" href="https://www.instagram.com/rentmatics/" target="_blank">
+                     <i class="fa fa-instagram"></i>  
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <!-- /Social links -->
+         <!-- Footer text -->
+         <div class="footer-content">
+            <div class="container">
+               <div class="site-info">
+                  <ul class="list-inline footer-menu">
+                     <!-- <li>
+                        <a href="http://rentmatics.com/blog/">Blog</a>
+                     </li> -->
+                     <li>
+                        <a href="about.html">About</a>
+                     </li>
+                     <li>
+                        <a href="blog.html">Blog</a>
+                     </li>
+                     
+                     <li>
+                        <a href="contact.html">Contact Us</a>
+                     </li>
+                     <li>
+                        <a href="myprivacy.html">Privacy</a>
+                     </li>
+                     <li>
+                        <a href="tandc.html">Terms &amp; Conditions</a>
+                     </li>
+                  </ul>
+               </div>
+               <div class="site-copyright-area">Copyright © 2016 Rentmatics.  •  <i class="fa fa-heart"></i> d
+                  •  Tel: +91-9884379333/9811448697         
+               </div>
+            </div>
+         </div>
+         <!-- Footer text -->
+      </footer>
+
+
+
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+ <!-- <script src="http://vast-eng.github.io/jquery-popup-overlay/jquery.popupoverlay.js"></script> -->
+
+
+<!-- Maps -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&sensor=false&amp;language=en"></script>
+<script type="text/javascript" src="scripts/infobox.min.js"></script>
+<script type="text/javascript" src="scripts/markerclusterer.js"></script>
+<script type="text/javascript" src="scripts/maps.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+ 
+
+</div>
+<!-- Wrapper / End -->
+
+</body>
+</html>

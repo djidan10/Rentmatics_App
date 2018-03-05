@@ -1,0 +1,1149 @@
+<!-- Rentmatics v1 (140417) -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
+    <meta name="author" content="">
+    <link rel="icon" href="img/favicon.ico">
+
+    <title>Rentmatics — Find Your Best Rentspace</title>
+
+    <meta name="google-signin-client_id" content="512343144553-4uoof7pml3lajhivpajgru0jo2u6mdnh.apps.googleusercontent.com">
+      <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- Google font Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet">
+    <!-- Fontawesome Icons -->
+    <link href="css/font-awesome.min.css" rel="stylesheet">
+    <!-- For range slider -->
+    <link href="css/bootstrap-slider.min.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="css/style.css" rel="stylesheet">
+     <link href="css/style2.css" rel="stylesheet">
+    <script src="scripts/jquery.min.js"></script>
+
+    <script type="text/javascript" src="scripts/jquery.cookie.min.js" ></script>
+<style>
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}
+.sliderbody{
+      
+   margin-left:6%;
+   font-size:10x;
+   font-family: Hanken;
+   color:#d71319
+   
+}
+ul {
+  list-style-type: none;
+}
+</style>
+     
+
+     <!--Function Started-->
+ <script type="text/javascript">
+ var Apiprefixlogout="http://localhost:8083/Logout"
+var ApiGetAllhomedetails="http://localhost:8083/GetAllhomedetails"
+var Apiinsertwishlist="http://localhost:8083/Insertwishlist"
+var Apigetlisthome="http://localhost:8083/Gethomedetails"
+var Apideletewishlist="http://localhost:8083/Deletewishlist"
+var ApiGetFilter="http://localhost:8083/GetFilter"
+var ApiNotifyme="http://localhost:8083/Notifyme"
+
+
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Logout the User
+function logout() {
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+
+
+}
+
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+
+
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+    }
+});
+
+ //Get All home based on Areas
+ var Loginid = ""
+ var tmp = ""
+  
+
+    window.onload = function () {
+
+    var url = document.location.href,
+    url1 = decodeURIComponent(url)
+
+   
+  var params = location.search.substr(location.search.indexOf("?")+1);
+    if(params==""||params==null||params==undefined||params=="NODATA"){
+var s={
+      "Loginid":cooki
+       };
+
+ $.ajax({
+         type: "POST",
+         url: ApiGetAllhomedetails,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+         
+        
+
+         success: function(responsee){
+   
+            var searchout = JSON.parse(responsee);
+            var searchout = JSON.parse(responsee);
+            Getresponse(searchout)
+          }
+
+
+});
+      
+    }else{
+
+
+  var sval = "";
+  params = params.split("&");
+ for (var i=0; i<params.length; i++)
+       {
+
+         temp = params[i].split("=");
+         if ( [temp[0]] == "Id" ) { sval = temp[1]; }
+       }  
+
+
+var sval = sval.replace("%20", " ");
+     var s={
+          "Id" :sval,
+          "Loginid":cooki
+        };
+
+   $.ajax({
+         type: "POST",
+         url: Apigetlisthome,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+         success: function(responsee){
+   
+            var searchout = JSON.parse(responsee);
+            if (searchout == null){
+
+          url = 'working1.html';        
+        
+           document.location.href = url;
+         }
+            else{
+
+    
+      var searchout = JSON.parse(responsee);
+            Getresponse(searchout)
+          }
+}
+
+});
+}
+}
+//Get Mix and Max for Filter
+
+var ID;
+var bhkarray = new Array();
+bhkarray = ["1","2","3"];
+var bhkarraycount=0;
+$("#getbhk").html(bhkarray[bhkarraycount]);
+
+//Get minus for number of Bhk
+function getminus(){
+if (bhkarraycount>0){
+   $("#getbhk").val(bhkarray[--bhkarraycount]);
+    }}
+
+//Get plus count for number of Bhk
+function getplus(){
+if (bhkarraycount<=2){
+   $("#getbhk").val(bhkarray[++bhkarraycount]);
+   }}
+
+
+//Get Counting for Number of Beds
+
+ var  bhkarray1=new Array();
+ var bhkarraycount1=0;
+    
+ bhkarray1 = ["1","2","3","4","5","6"];
+$("#getbed").html(bhkarray1[bhkarraycount1]);
+
+function getminus1(){
+if (bhkarraycount1>0){
+  $("#getbed").val(bhkarray1[--bhkarraycount1]);
+
+}}
+function getplus1(){
+if (bhkarraycount1<=6){
+  
+   $("#getbed").val(bhkarray1[++bhkarraycount1]);
+}}
+
+     
+
+function GetRent(min,max){
+    
+$("#getmin").val(min);
+$("#getmax").val(max);
+  
+}
+
+//Get Radio button values
+function getRadiovalue(elements){
+
+for (var i = 0, l = elements.length; i < l; i++)
+    {
+        if (elements[i].checked)
+        {
+            return elements[i].value;
+        }
+    }
+}
+
+
+
+
+//Common function for s=Displaying Response
+function Getresponse(searchout){
+  
+  var cardstring ="";
+  
+ console.log(searchout);
+  if( searchout != null  ){
+     var property =searchout.length +" Results Found ";
+    for (k=0;k<searchout.length;k++){
+    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,Loginid);
+
+  }
+
+  document.getElementById("listContainer").innerHTML=cardstring;
+
+ for (l=0;l<searchout.length;l++){
+    GetLiked("colorid"+searchout[l].RentFullStruct.Id);
+  }
+
+
+
+
+
+
+
+
+ for(j=0;j<searchout.length;j++){
+ console.log(searchout[j].RentFullimages.length);
+ var finalDiv="";
+
+ var Singlesliderstart2="<img src='";
+ var Singlesliderend = "' alt='"+"'>";
+ var bhk1 =" Bhk"
+ var Rating ="";
+ 
+  for (i=0;i<searchout[j].RentFullimages.length;i++){
+    finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
+   }
+    
+  
+
+ 
+  var ID = searchout[j].RentFullStruct.Id;
+    var Liked = searchout[j].RentFullStruct.Liked;
+  GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
+  
+  
+ var mapview = searchout[j].Cityname;
+ var City =searchout[j].RentFullStruct.City
+ var Rent = "₹ "+searchout[j].RentFullStruct.Month_rent;
+ var Housename = " " + searchout[j].RentFullStruct.Housename;
+ var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
+ var Address1 = searchout[j].RentFullStruct.Adress1;
+ var Address2 = searchout[j].RentFullStruct.Adress2;
+ var pin = searchout[j].RentFullStruct.Pin;
+ var state = searchout[j].RentFullStruct.State;
+ var country = searchout[j].RentFullStruct.Country;
+ var housetype =searchout[j].RentFullStruct.House_type
+ var tenantType =searchout[j].RentFullStruct.Tenant_type
+ var furnishingType =searchout[j].RentFullStruct.Furnish_type
+ var bedType =searchout[j].RentFullStruct.Bed
+ var Availbed =searchout[j].RentFullStruct.Avail_bed
+  var bedrent =  "₹ "+ searchout[j].RentFullStruct.Bed_rent
+  var deposit =  "₹ "+ searchout[j].RentFullStruct.Secutity_deposit;
+  var Squarefeet =searchout[j].RentFullStruct.Squarefeet +"/sqft";
+  var Likecount =searchout[j].RentFullStruct.Likecount ;
+   Rating =searchout[j].RentFullStruct.Rating ;
+  var Totalfloors =searchout[j].RentFullStruct.Totalfloors ;
+  var Facing =searchout[j].RentFullStruct.Facing ;
+
+
+
+
+
+
+
+$("#Squarefeet"+ID).html(Squarefeet);
+$("#Likecount"+ID).html(Likecount);
+$("#Rating"+ID).html(Rating);
+$("#Totalfloors"+ID).html(Totalfloors);
+$("#Facing"+ID).html(Facing);
+$("#deposit"+ID).html(deposit);
+$("#property").html(property);
+$("#Rent"+ID).html(Rent);
+$("#Housename"+ID).html(Housename);
+$("#bhk"+ID).html(bhk);
+$("#bed"+ID).html(bedType);
+$("#Address1"+ID).html(Address1);
+$("#Address2"+ID).html(Address2);
+$("#pin"+ID).html(pin);
+$("#state"+ID).html(state);
+$("#country"+ID).html(country);
+$("#city"+ID).html(City);
+$("#city1"+ID).html(City);
+$("#houseType"+ID).html(housetype);
+$("#tenantType"+ID).html(tenantType);
+$("#furnishtype"+ID).html(furnishingType);
+$("#rentimage1"+ID).html(finalDiv);
+$("#availbed"+ID).html(Availbed);
+ $("#bedrent"+ID).html(bedrent)
+
+ url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
+document.getElementById("getUrl"+ ID).setAttribute("href",url);
+document.getElementById("getUrl1"+ ID).setAttribute("href",url);
+    var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
+      src=src.replace("&amp;","&")
+
+        // document.getElementById("map-canvas").setAttribute("src",src);
+//var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
+// document.getElementById("maprightview").setAttribute("src",src);
+// document.getElementById("mapscroll").setAttribute("src",src);
+// document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+
+}
+}
+else{
+ 
+   location.reload(true);
+ }
+
+}
+function Addfav(getid,getlogin,colorid){
+  
+
+   if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
+   
+    var url2 = "login-register.html";
+ 
+    document.location.href = url2;
+
+  
+        }
+      else{
+         
+               if (colorid.style.color == "white" || colorid.style.color == undefined ){
+               
+                    colorid.style.color="red";  
+                      var s={
+          "Id": null,
+          "Homeid" :parseInt(getid),
+          "Loginid":cooki
+
+        };
+
+   $.ajax({
+         type: "POST",
+         url: Apiinsertwishlist,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+         success: function(responsee){
+            
+           // var searchout = JSON.parse(responsee);
+          
+          
+           //  Getresponse(searchout)
+           
+}
+
+});
+}
+else{
+
+   var s={
+         
+          "Homeid" :getid,
+          "Loginid":getlogin
+
+        };
+
+   $.ajax({
+         type: "POST",
+         url: Apideletewishlist,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+           success: function(responsee){
+           colorid.style.color="white";  
+           document.getElementById(colorid).style.color = "red"; 
+          
+ 
+          
+}
+
+});
+
+
+
+}
+// 
+
+
+}
+return false;
+}
+
+function Payalert(){
+ window.open("http://paymyhire.com/");
+
+}
+
+function GetLiked(likedid,liked){
+
+if (liked == true){
+   document.getElementById(likedid).style.color = "red";
+}else{
+   document.getElementById(likedid).style.color = "white";
+}
+}
+
+
+ //For Slider
+ function Getjavascript(Dyid,Loginid){
+ 
+  var rentimage = 
+    
+"<div class='listings-container list-layout' style='margin-top:10px;'>"+
+"<div class='listing-item'>"+
+"<a class='listing-img-container' id='getUrl"+Dyid+"'>"+
+"<div style ='width=100%;height:100%;'id='rentimage1"+Dyid+"'"+
+"></div>"+
+"<div class='listing-badges'>"+
+"<span class='prop-mark-fav' ><i class='fa fa-heart' id='colorid"+Dyid+"' onclick='return  Addfav("+Dyid+",Loginid,this)' style='color:white;' ></i></span>"+
+"<span style='margin-right:70%' id='tenantType"+Dyid+"'></span>"+
+"</div>"+
+"<div class='listing-img-content'>"+
+"<span class='listing-price' id='Rent"+Dyid+"' style='font-size:20px;margin-left:-3%'></span>"+"<br>"+
+"<span class='listing-price' style='font-size:15px;margin-left:4%;font-family: Hanken;'> monthly</span>"+
+"</div>"+
+"</a>"+
+
+"<div class='listing-content'>"+
+"<a  class='listing-content' id='getUrl1"+Dyid+"'>"+
+"<div style='margin-top:15px;'>"+
+
+"<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:20px;font-family:Hanken;color:black'></span>"+
+
+"<br>"+
+"<i class='fa fa-map-marker' style='margin-left:5.7%;color:#d71319'></i><span id='city1"+Dyid+"' style='margin-left:4px;font-family:Hanken;' font-size:11px;color:black'></span>"+ 
+"<br>"+
+"<span style='margin-left:6%;font-size:15px;font-family: Hanken;color:black'>Rent starts from</span>"+
+"<span style='margin-left:3%;font-size:15px;font-family:Hanken;color:black' id='bedrent"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
+"<br>"+
+"<span style='margin-left:6%;font-size:15px;font-family:Hanken;color:black'>Security Deposit</span>"+
+"<span style='margin-left:3%;font-size:15px;font-family:Hanken;color:black' id='deposit"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
+"<br>"+
+ "<b><span id='availbed"+Dyid+"' style='margin-left:6%;font-size:15px;'></span>"+
+"<span style='font-size:15px;font-family:Hanken'>  Bed Available</span></b>"+"<b id='Squarefeet"+Dyid+"' style='margin-left:10%;font-size:14px;font-family: Hanken'></b>"+
+
+
+"</div>"+
+"<ul class='listing-details' >"+
+"<li ><b id='houseType"+Dyid+"' style='font-family:Hanken;margin-left:10px;'>"+"</b></li>"+
+"<li><b id='bhk"+Dyid+"'  style='font-family:Hanken;margin-left:5px;'>"+"</b></li>"+
+ "<li><b id='furnishtype"+Dyid+"' style='font-family:Hanken;margin-left:5px;'></b></li>"+
+"</ul>"+
+"</a>"+ 
+"</div>"+
+
+"</div>";
+
+
+ return rentimage;
+
+ }
+ 
+ //For Filter Get REsponse
+//For Filter Get REsponse
+function GetFilterhome(){
+  
+
+
+    var minrent =  document.getElementById('getmin').value;
+    var maxrent = document.getElementById('getmax').value;
+    var gettenanttype = document.getElementById('tenantType').value;
+    var getbookingtype =document.getElementById('bookingType').value;
+    var gethousetype =document.getElementById('houseType').value;
+    var getfurnishingType =document.getElementById('furnishingType').value;
+    var getdistance =document.getElementById('distance').value;
+    var getbhk =document.getElementById('getbhk').value;
+     var getbed =document.getElementById('getbed').value;
+     //Calling Radio button Function
+    // var tenantType=getRadiovalue(gettenanttype);
+    // var bookingtype=getRadiovalue(getbookingtype);
+    // var housetype=getRadiovalue(gethousetype);
+    // var furnishingType=getRadiovalue(getfurnishingType);
+
+
+  var Filter ={
+      "F_Loginid" : cooki,
+      "F_Monthrent_Min": parseInt(minrent),
+      "F_Monthrent_Max": parseInt(maxrent),
+      "F_Tenant_type":gettenanttype,
+      "F_Bookingtype":getbookingtype,
+      "F_Housetype":gethousetype,
+      "F_Furnished_type":getfurnishingType,
+      "F_Distance":getdistance,
+      "F_Bhk":parseInt(getbhk),
+      "F_Bed":parseInt(getbed)
+
+     };
+    console.log(Filter)
+    $.ajax({
+      type: "POST",
+      url: ApiGetFilter,
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(Filter),
+
+   success: function(responsee){
+
+     var searchout = JSON.parse(responsee);
+     console.log(searchout)
+         
+            Getresponse(searchout);
+ 
+ }
+
+});
+}
+
+
+function Notification(){
+
+    var Availname =  document.getElementById('getname1').value;
+    var AvailEmail =  document.getElementById('getemail1').value
+    var Avaiphone =  document.getElementById('getphone1').value;
+    var Availtenant =  document.getElementById('gettenant1').value;
+    var Availiabity =  document.getElementById('availaibity1').value;
+    var Availcity =  document.getElementById('getcity1').value;
+     
+
+    var s ={
+      "Notifyname":Availname,
+      "NotifyEmail":AvailEmail,
+      "Notifyphone":Avaiphone,
+      "Notifytenenattype":Availtenant,
+      "Notifyavailibity":Availiabity,
+      "NotifyCity":Availcity,
+     };
+    
+$.ajax({
+      type: "POST",
+      url: ApiNotifyme,
+      contentType:"application/json; charset=utf-8",
+      data: JSON.stringify(s),
+
+  success: function(responsee){
+    
+    var aaa = JSON.parse(responsee)
+   
+ 
+ }
+
+});
+
+}
+
+   function logout(){
+            
+          $.ajax({
+           type: "GET",
+           url: Apiprefixlogout,
+         
+         success: function(responsee){
+
+          window.location.reload(true);
+          document.getElementById("Userdetails").style.visibility = "hidden"; 
+         document.getElementById("wishlist").style.visibility = "hidden"; 
+         document.getElementById("logout").style.visibility = "hidden"; 
+         document.getElementById("loginhide").style.visibility = "visible";
+         document.getElementById("signuphide").style.visibility = "visible";  
+         }
+         
+         });
+          
+         }
+
+ </script>
+  </head>
+
+  <body>
+    
+   <div id="mySidenav" class="sidenav">
+         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+            <svg class="close-icon" width="30" height="30" viewBox="0 0 30 30" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+               <path d="M16.326 15l13.4-13.4c.366-.366.366-.96 0-1.325-.366-.367-.96-.367-1.326 0L15 13.675 1.6.275C1.235-.093.64-.093.275.275c-.367.365-.367.96 0 1.324l13.4 13.4-13.4 13.4c-.367.364-.367.96 0 1.323.182.184.422.275.662.275.24 0 .48-.09.663-.276l13.4-13.4 13.4 13.4c.183.184.423.275.663.275.24 0 .48-.09.662-.276.367-.365.367-.96 0-1.324L16.325 15z" fill-rule="evenodd"></path>
+            </svg>
+         </a>
+          <ul>
+                     
+                     <li id="loginhide1"><a a href="login.html" >Login/Signup</a></li>
+                     <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                     <li><a href="search_result.html">Find Room</a></li>
+                     <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
+                     <li><a href="javascript:paymyrent()" >PayMyhire</a></li>
+                   
+                   <div id="Userdetails1" style="visibility:hidden">
+                     <li>
+                        <!-- login1
+                        <a href="#"   role="button"  id="login1">Login</a></li> -->
+                         <li class="active" id="wishlist1"><a href="javascript:Getwish()" >Wishlist</a></li>
+                          <li id="logout1"><a href="javascript:logout()"  >Logout</a></li>
+                        </div>
+                        </ul>
+      </div>
+      <!-- Navbar
+         =================================== -->
+      <nav class="navbar navbar-default rm-navbar rm-navbar-alt">
+         <div class="container-fluid">
+            <div class="navbar-header">
+               <button type="button" class="navbar-toggle rm-toggle" onclick="openNav()">
+                  <!-- -->
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+               </button>
+               <a class="navbar-brand" href="index.html"><img src="img/rm_logo.png" alt="Rentmatics"></a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right rm-nav">
+
+                     <li class="active"><a href="how_it_works.html">How It Works</a></li>
+                     <li><a href="search_result.html">Find Room</a></li>
+                     <li><a data-toggle="modal" data-target="#" >Refer and Earn</a></li>
+                     <li ><a href="javascript:paymyrent()" >PayMyHire</a></li>
+                     <li id="loginhide"><a href="login.html" >Login/Signup</a></li>
+                     <!-- <li class="active" id="Userdetails" style="display:none;"><a href="#" id="login" ></a></li> -->
+                     
+                     <li class="dropdown"  id="Userdetails" style="visibility:hidden">
+                        
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"  id="login">Login
+                       </a> 
+                        <ul class="dropdown-menu">
+                           <li  id="wishlist"><a href="wishlist.html" >Wishlist</a></li>
+                           <!-- <li><a href="#">Settings</a></li> -->
+                           <li id="logout"><a href="javascript:logout()"  >Logout</a></li>
+                        </ul>
+                     </li>
+                  </ul>
+            </div>
+            <!--/.nav-collapse -->
+         </div>
+      </nav>
+
+
+
+
+
+
+    
+    
+    <!-- Body
+    =================================== -->
+
+    <div class="sr_body">
+      <div class="sr-lt">
+        <!-- List result header -->
+        <div class="srlt-header">
+          <!-- Search bar with filter -->
+          <div class="flx srlt-searchbar">
+            <div class="srlts-searching">
+              <i class="fa fa-search"></i>
+              <span>Searching</span>
+            </div>
+            <div class="flx1 srlts-input">
+              <input type="text" placeholder="Enter the location" id="tags">
+            </div>
+            <div class="srlts-action">
+              <span class="filter-open" id="filterOpen" onclick="openOverlay()">Filters</span>
+              <span class="filter-close" id="filterClose" onclick="closeOverlay()">Cancel</span>
+            </div>
+          </div>
+          <!-- The overlay -->
+        <div id="myNav" class="overlay">
+            <div class="overlay-body">              
+              <!-- Filter parameters -->
+              <div class="param-wrap">
+                <!-- Monthly Rent -->
+                <div class="param-row">
+                  <div class="fp-name">Monthly Rent</div>
+                  <div class="btn-group-card">
+                    <div class="row mt15 mb20">
+                      <div class="flx aC col-md-6 col-sm-6 col-xs-6">
+                        <span class="mrLabel mr5"><i class="fa fa-inr mr5"></i>MIN</span>
+                        <div class="flx1">
+                          <input type="text" class="mrInp" id="getmin" >
+                        </div>
+                      </div>
+                      <div class="flx aC col-md-6 col-sm-6 col-xs-6">
+                        <span class="mrLabel mr5"><i class="fa fa-inr mr5"></i>MAX</span>
+                        <div class="flx1">
+                          <input type="text" class="mrInp" id="getmax" >
+                        </div>
+                      </div>
+                    </div>
+                    <div class="btn-group filter-param flx mrBtns" data-toggle="buttons">
+                    <label class="flx1 btn btn-default btn-lg" onclick="GetRent(5000,7500)">
+                      <input type="radio" name="monthlyRent" autocomplete="off" value="5000,7500" > 5K - 7.5K
+                    </label>
+                    <label class="flx1 btn btn-default btn-lg" onclick="GetRent(7500,10000)">
+                      <input type="radio" name="monthlyRent" autocomplete="off" value="7500,10000"> 7.5K - 10K
+                    </label>
+                    <label class="flx1 btn btn-default btn-lg" onclick="GetRent(10000,12500)">
+                      <input type="radio" name="monthlyRent" autocomplete="off" value="10000,12500"> 10K - 12.5K
+                    </label>
+                    <label class="flx1 btn btn-default btn-lg" onclick="GetRent(12500,15000)">
+                      <input type="radio" name="monthlyRent" autocomplete="off" value="12500,15000"> 12.5K - 15K
+                    </label>
+                  </div>
+                  <div class="btn-group filter-param flx mrBtns" data-toggle="buttons">
+                    <label class="flx1 btn btn-default btn-lg" onclick="GetRent(15000,20000)">
+                      <input type="radio" name="monthlyRent" autocomplete="off" value="15000,20000"> 15K - 20K
+                    </label> 
+                    <label class="flx1 btn btn-default btn-lg" onclick="GetRent(20000,25000)">
+                      <input type="radio" name="monthlyRent" autocomplete="off" value="20000,25000"> 20K - 25K
+                    </label>
+                    <label class="flx1 btn btn-default btn-lg" onclick="GetRent(25000,30000)">
+                      <input type="radio" name="monthlyRent" autocomplete="off" value="25000,30000"> 25K - 30K
+                    </label>
+                    <label class="flx1 btn btn-default btn-lg" onclick="GetRent(30000,50000)">
+                      <input type="radio" name="monthlyRent" autocomplete="off" value="30000,50000"> 30K+
+                    </label>
+                  </div>
+                  </div>
+                </div>  
+                <!-- -->
+                <!-- Tenant Type -->
+                <div class="param-row">
+                  <div class="fp-name">Tenant Type</div>
+                  <div class="btn-group-card">
+                    <div class="btn-group filter-param tglBtns" data-toggle="buttons">
+                    <label class="btn btn-default btn-lg">
+                      <input type="radio" name="tenantType" autocomplete="off" value="Girls"> 
+                      <span class="tentTypeIco icoGirl"></span>
+                      <span>Girls</span>
+                    </label>
+                    <label class="btn btn-default btn-lg">
+                      <input type="radio" name="tenantType" autocomplete="off" value="Boys">
+                      <span class="tentTypeIco icoBoy"></span>
+                      <span>Boys</span>
+                    </label>
+                    <label class="btn btn-default btn-lg">
+                      <input type="radio" name="tenantType" autocomplete="off" value="Family">
+                      <span class="tentTypeIco icoFamily"></span>
+                      <span>Family</span>
+                    </label>
+                  </div>
+                  </div>
+                </div>  
+                <!-- -->
+                <!-- Booking Type -->
+                <div class="param-row">
+                  <div class="fp-name">Booking Type</div>
+                  <div class="btn-group-card">
+                    <div class="btn-group filter-param tglBtns" data-toggle="buttons">
+                    <label class="btn btn-default btn-lg">
+                      <input type="checkbox" name="bookingType" autocomplete="off" value="Shared Room"> 
+                      <span class="tentTypeIco icoSharedRoom"></span>
+                      <span>Shared Room</span>
+                    </label>
+                    <label class="btn btn-default btn-lg">
+                      <input type="checkbox" name="bookingType" autocomplete="off" value="Private Room">
+                      <span class="tentTypeIco icoPrivateRoom"></span>
+                      <span>Private Room</span>
+                    </label>
+                    <label class="btn btn-default btn-lg">
+                      <input type="checkbox" name="bookingType" autocomplete="off" value="Entire House">
+                      <span class="tentTypeIco icoHouse"></span>
+                      <span>Entire House</span>
+                    </label>
+                  </div>
+                  </div>
+                </div>  
+                <!-- -->  
+                <!-- Booking Type -->
+                <div class="param-row">
+                  <div class="fp-name">House Type</div>
+                  <div class="btn-group-card">
+                    <div class="btn-group filter-param tglBtns" data-toggle="buttons">
+                    <label class="btn btn-default btn-lg">
+                      <input type="checkbox" name="houseType" autocomplete="off" value="Apartment"> 
+                      <span class="tentTypeIco icoApartment"></span>
+                      <span>Apartment</span>
+                    </label>
+                    <label class="btn btn-default btn-lg">
+                      <input type="checkbox" name="houseType" autocomplete="off" value="Independent">
+                      <span class="tentTypeIco icoIndependent"></span>
+                      <span>Independent</span>
+                    </label>
+                    <label class="btn btn-default btn-lg">
+                      <input type="checkbox" name="houseType" autocomplete="off" value="Villa">
+                      <span class="tentTypeIco icoVilla"></span>
+                      <span>Villa</span>
+                    </label>
+                  </div>
+                  </div>
+                </div>  
+                <!-- -->
+                <!-- Furnishing Type -->
+                <div class="param-row">
+                  <div class="fp-name">Furnishing Type</div>
+                  <div class="btn-group-card">
+                    <div class="btn-group filter-param tglBtns" data-toggle="buttons">
+                    <label class="btn btn-default btn-lg">
+                      <input type="checkbox" name="furnishingType" autocomplete="off" value="Fully Furnished"> 
+                      <span class="tentTypeIco icoFurnished"></span>
+                      <span>Fully Furnished</span>
+                    </label>
+                    <label class="btn btn-default btn-lg">
+                      <input type="checkbox" name="furnishingType" autocomplete="off" value="Semi Furnished">
+                      <span class="tentTypeIco icoSemiFurnished"></span>
+                      <span>Semi Furnished</span>
+                    </label>
+                    <label class="btn btn-default btn-lg">
+                      <input type="checkbox" name="furnishingType" autocomplete="off" value="Unfurnished">
+                      <span class="tentTypeIco icoUnfurnished"></span>
+                      <span>Unfurnished</span>
+                    </label>
+                  </div>
+                  </div>
+                </div>  
+                <!-- -->
+
+                <!-- Furnishing Type -->
+                <div class="param-row">
+                  <div class="fp-name">Distance from selected location</div>
+                  <div class="btn-group-card">
+                    <p class="txtl">Search within <span class="distUnit">2.5</span> KM</p>
+                    <div class="sliderWrap">
+                      <input
+                      type="text"
+                      id="distance"
+                      name="somename"
+                      data-provide="slider"
+                      data-slider-min="0" 
+                      data-slider-max="3" 
+                      data-slider-step="2">
+                    </div>  
+                  </div>
+                </div>  
+                <!-- -->  
+
+                <!-- No. of bedroom -->
+                <div class="param-row">
+                  <div class="fp-name">Number of bedrooms</div>
+                  <div class="btn-group-card">
+                    <div class="flx aC">
+                      <button class="card-btn" onclick="getminus()"><i class="fa fa-minus"></i></button>
+                      <span class="flx1 cardValue" ><input type="text" id="getbhk" class="getbhkfilter" style="text-align:center;"></span>
+                      <button class="card-btn" onclick="getplus()"><i class="fa fa-plus"></i></button>
+                    </div>    
+                  </div>
+                </div>  
+                  <div class="param-row">
+                  <div class="fp-name">Number of beds</div>
+                  <div class="btn-group-card">
+                    <div class="flx aC">
+                      <button class="card-btn" onclick="getminus1()"><i class="fa fa-minus"></i></button>
+                      <span class="flx1 cardValue" ><input type="text" id="getbed" class="getbedfilter" style="text-align:center;"/></span>
+                      <button class="card-btn" onclick="getplus1()"><i class="fa fa-plus"></i></button>
+                    </div>    
+                  </div>
+                </div>  
+                <!-- -->
+
+             
+            </div>
+              <!-- /Filter parameters -->
+            </div>
+            <!-- overlay footer -->
+            <div class="overlayFooter">
+              <button class="btn btn-default btn-clear" onclick="closeOverlay()">Clear all</button>
+              <button class="btn btn-warning btn-find" onclick="GetFilterhome()">Find these properties!</button>
+            </div>
+            <!-- /overlay footer -->
+        </div>
+        <!-- The overlay -->
+          
+          <!-- /Filter overlay -->
+          <!-- includes search result, sort and view switch -->
+          <div class="flx srlt-topbar">
+            <!-- Swith view between map and list -->
+            <div class="flx1 view-switch">
+              <span class="switch map-icon" id="switchList" onclick="switchToList()"><i class="fa fa-map-marker switchIcons"></i>Map View</span>
+              <span class="switch list-icon" id="switchMap" onclick="switchToMap()"><i class="fa fa-list switchIcons"></i>List View</span>
+            </div>
+            <!-- /Swith view between map and list -->
+            <!-- Search result (will be hidden in smaller resolutions -->
+            <div class="flx1 srtl-search-res">
+              <!-- Result failed -->
+              <span  id="property"></span><label>    Properties found</label><!-- Result failed -->
+              <!-- Result success -->
+              <span class="res-success" style="display: none;">1 Apartments for rent in Texas</span><!-- Result success -->
+            </div>
+            <!-- /Search result -->
+
+            <!-- Sort -->
+            <div class="dropdown">
+            <button class="dropdown-toggle sort-btn" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+              Closest to Search
+              <span class="fa fa-chevron-up chev"></span>
+            </button>
+            <ul class="dropdown-menu pull-right srtDrp" aria-labelledby="dropdownMenu1">
+              <li><a><i class="fa fa-heart sort-icon"></i>Properties I Like</a></li>
+              <li class="active"><a><i class="fa fa-map-marker sort-icon"></i>Closest to Search</a></li>
+              <li><a><i class="fa fa-clock-o sort-icon"></i>Newest</a></li>
+              <li><a><i class="fa fa-usd sort-icon"></i>Least Expensive</a></li>
+              <li><a><i class="fa fa-star sort-icon"></i>Most Popular</a></li>
+            </ul>
+          </div>
+            <!-- /Sort -->
+          </div>
+        </div>
+        <!-- /List result header -->
+        <!-- List result body -->
+        <div class="srlt-body">
+          <div class="list-container" id="listContainer" >
+          </div>
+
+        </div>
+       
+        <!-- /shown on smaller resolutions with help of switch -->
+        </div>
+        <!-- Send alerts bar -->
+        <div class="flx sendAlerts" style="height:5%">
+          <div class="flx1">
+            <label class="toggle-switch">
+            <input type="checkbox" data-toggle="modal" data-target="#formModal">
+            <div class="swtich-slider round"></div>
+          </label>
+          <span class="micro">Send me alerts bases on these filters</span>
+        </div>
+        <div>
+          <span class="hide-btn">Hide</span>
+        </div>
+        </div>
+         <div class="sr-rt">
+       <div id="map-container" style="height:600px">
+        <div id="map" data-map-zoom="4" data-map-scroll="true">
+            <!-- map goes here -->
+        </div>
+
+        <!-- Map Navigation -->
+      <a href="#" id="geoLocation" title="Your location"></a>
+      <ul id="mapnav-buttons" class="top">
+          <li><a href="#" id="prevpoint" title="Previous point on map">Prev</a></li>
+          <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
+      </ul>
+    </div>
+      </div>
+        </div>
+
+ <!-- Notify me form -->
+ <div class="modal fade fullscreen form-modal" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="myModalLabel">Notify</h4>
+        </div>
+        <div class="modal-body">
+          <div class="rp-form">
+        <div class="form-group">
+          <input type="text" placeholder="Name" class="rpfi" id="getname1">
+        </div>
+        <div class="form-group">
+          <input type="email" placeholder="Email" class="rpfi" id="getemail1">
+        </div>
+        <div class="flx form-group">
+          <div class="flx selUni mr15">
+            <select class="rpfs">
+              <option>+91</option>
+              <option>+92</option>
+              <option>+93</option>
+            </select>
+            <span class="selChev"><i class="fa fa-chevron-down"></i></span>
+          </div>
+          <div class="flx1">
+            <input type="text" placeholder="Phone" class="rpfi" id="getphone1">  
+          </div>
+        </div>
+       <div class="form-group">
+                <div class="flx selUni">
+                  <select class="rpfs" id="gettenant1">
+                    <option checked>Need For</option>
+                    <option value="Singles">Singles</option>
+                    <option value="bachelors">Group of Singles</option>
+                    <option value="Family">Family</option>
+                  </select>
+                  <span class="selChev"><i class="fa fa-chevron-down"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="flx selUni">
+                  <select class="rpfs" id="availaibity1">
+                    <option checked value="Need Immediately">Need Immediately</option>
+                    <option value="Next Week">Next Week</option>
+                    <option value="15th of this month">15th of this month</option>
+                    <option value="1st of next month">1st of next month</option>
+                    <option value="15th of next month">15th of next month</option>
+                    <option value="Within a month">Within a month</option>
+                    <option value="In 2 months">In 2 months</option>
+                    <option value="No time in mind">No time in mind</option>
+                  </select>
+                  <span class="selChev"><i class="fa fa-chevron-down"></i></span>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="flx selUni">
+                  <select class="rpfs" id="getcity1">
+                    <option  checked>Select City</option>
+                    <option value="Sarjapur Road"></option>
+                    <option value="Whitefield">Whitefield</option>
+                    <option value="Bannerghatta Road">Bannerghatta Road</option>
+                    <option value="Electronic City">Electronic City</option>
+                    <option value="HSR Layout">HSR Layout</option>
+                    <option value="Jayanagar">Jayanagar</option>
+                    <option value="JP Nagar">JP Nagar</option>
+                    <option value="Hosur Road">Hosur Road</option>
+                  </select>
+                  <span class="selChev"><i class="fa fa-chevron-down"></i></span>
+                </div>
+              </div>
+       
+        <div>
+          <button class="btn btn-lg btn-block btn-notify" onclick="Notification()">Notify me when available</button>
+        </div>
+      </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+        <!-- /List result body -->
+      </div>
+     
+    </div>
+
+   
+    
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+  
+        <script src="js/api.js"></script>
+     
+  
+  <script src="js/jquery-ui.js"></script>
+    <script type="text/javascript">
+      /* For Sidebar Navigation in mobile resolution -->
+        /* Set the width of the side navigation to 250px */
+      function openNav() {
+          document.getElementById("mySidenav").style.width = "300px";
+      }
+
+      /* Set the width of the side navigation to 0 */
+      function closeNav() {
+          document.getElementById("mySidenav").style.width = "0";
+      }
+
+    /* For filter display and hide */
+      function openOverlay() {
+          document.getElementById("myNav").style.display = "block";
+          document.getElementById("filterOpen").style.display = "none";
+          document.getElementById("filterClose").style.display = "block"
+      }
+
+      /* Close when someone clicks on the "x" symbol inside the overlay */
+      function closeOverlay() {
+          document.getElementById("myNav").style.display = "none";
+          document.getElementById("filterOpen").style.display = "block";
+          document.getElementById("filterClose").style.display = "none"
+
+      }
+
+      /* Switch to Map view during mobile resolution */
+      function switchToList() {
+          document.getElementById("switchList").style.display = "none";
+          document.getElementById("switchMap").style.display = "block";
+          document.getElementById("listContainer").style.display = "none";
+          document.getElementById("mapContainer").style.display = "block"
+      }
+
+      /* Switch to List view during mobile resolution  */
+      function switchToMap() {
+          document.getElementById("switchList").style.display = "block";
+          document.getElementById("switchMap").style.display = "none"
+          document.getElementById("listContainer").style.display = "block";
+          document.getElementById("mapContainer").style.display = "none"
+
+      }
+    </script> 
+
+    <!-- Bootstrap JS -->
+    <script src="js/bootstrap.min.js"></script>  
+    <!-- Range slider -->
+    <script src="js/bootstrap-slider.min.js"></script>  
+    <script src="scripts/login.js"></script>
+
+
+   
+    <!-- Maps -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&sensor=false&amp;language=en"></script>
+<script type="text/javascript" src="js/infobox.min.js"></script>
+<script type="text/javascript" src="js/markerclusterer.js"></script>
+<script type="text/javascript" src="js/maps.js"></script>
+  </body>
+</html>

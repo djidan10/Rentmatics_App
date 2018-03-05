@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Rentmatics</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style1.css"> 
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+
+    
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script>
+var ApiLogout="http://paymyhire.com:8083/Logout"
+var ApiWishlist="http://paymyhire.com:8083/Wishlist"
+var ApiDeletewishlist="http://paymyhire.com:8083/Deletewishlist"
+
+
+
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  cardstring="No wish list found"
+ 	document.getElementById("hidenid").style.display = "none";
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+    }
+});
+
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Logout the User
+function logout() {
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+
+
+}
+function Payalert(){
+	window.open("http://paymyhire.com/");
+
+}
+window.onload = function () {
+
+  
+    
+
+      var s={
+          "Loginid" :cooki
+        };
+
+   $.ajax({
+         type: "POST",
+      
+          url: ApiWishlist,
+          contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+         success: function(responsee){
+   
+            var searchout = JSON.parse(responsee);
+            if (searchout == null ){
+
+              alert("No wishlist Found");
+              document.getElementById("emptywish").style.display = "inline"; 
+          //url = 'working.html?loginid='+loginid;
+      
+            }
+            else{
+
+            Getresponse(searchout)
+          }
+}
+
+});
+}
+
+
+
+
+
+//Common function for s=Displaying Response
+function Getresponse(searchout){
+	
+  var cardstring ="";
+  var property =searchout.length +" Results Found ";
+ for (k=0;k<searchout.length;k++){
+    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,cooki);
+    console.log(cardstring)
+  }
+
+  document.getElementById("listContainer1").innerHTML=cardstring
+
+
+
+ for(j=0;j<searchout.length;j++){
+
+ if (searchout == ""){
+ 	document.getElementById("emptywish").style.display = "inline";
+
+ }
+ var finalDiv="";
+
+
+ var bhk1 =" Bhk"
+ 
+ 
+  for (i=0;i<searchout[j].RentFullimages.length;i++){
+  	finalDiv= searchout[j].RentFullimages[0].Picture_url;
+   }
+    
+  
+
+ 
+  var ID = searchout[j].RentFullStruct.Id;
+    var Liked = searchout[j].RentFullStruct.Liked;
+  //GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
+  
+ var mapview = searchout[j].Cityname;
+ var City =searchout[j].Cityname
+ var Rent = "$ "+searchout[j].RentFullStruct.Month_rent;
+ var Housename = searchout[j].RentFullStruct.Housename;
+ var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
+ var Address1 = searchout[j].RentFullStruct.Adress1;
+ var Address2 = searchout[j].RentFullStruct.Adress2;
+ var pin = searchout[j].RentFullStruct.Pin;
+ var state = searchout[j].RentFullStruct.State;
+ var country = searchout[j].RentFullStruct.Country;
+ var housetype =searchout[j].RentFullStruct.House_type
+ var tenantType =searchout[j].RentFullStruct.Tenant_type
+ var furnishingType =searchout[j].RentFullStruct.Furnish_type
+ var bedType =searchout[j].RentFullStruct.Bed
+
+
+
+
+
+
+$("#property").html(property);
+$("#Rent"+ID).html(Rent);
+$("#Housename"+ID).html(Housename);
+$("#bhk"+ID).html(bhk);
+$("#bed"+ID).html(bedType);
+$("#Address1"+ID).html(Address1);
+$("#Address2"+ID).html(Address2);
+$("#pin"+ID).html(pin);
+$("#state"+ID).html(state);
+$("#country"+ID).html(country);
+$("#city"+ID).html(City);
+$("#houseType"+ID).html(housetype);
+$("#tenantType"+ID).html(tenantType);
+$("#furnishtype"+ID).html(furnishingType);
+//$("#rentimage1"+ID).html(finalDiv);
+document.getElementById("rentimage1"+ ID).setAttribute("src",finalDiv);
+
+ url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
+
+//document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+    var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
+      src=src.replace("&amp;","&")
+      console.log(src)
+        // document.getElementById("map-canvas").setAttribute("src",src);
+//var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
+// document.getElementById("maprightview").setAttribute("src",src);
+// document.getElementById("mapscroll").setAttribute("src",src);
+document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+
+}
+}
+
+function Deletefav(homeid){
+  
+var s={
+         
+          "Homeid" :homeid,
+          "Loginid":cooki
+
+        };
+
+   $.ajax({
+         type: "POST",
+         url: ApiDeletewishlist,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+           success: function(responsee){
+              location.reload(true);
+          
+          
+ 
+          
+}
+
+});
+
+
+
+}
+// 
+
+
+
+
+
+ //For Slider
+ function Getjavascript(Dyid,loginid){
+  var str= 
+  
+"<tr>"+
+"<td class='title-container'>"+
+
+
+"<div style='margin-left:80% ' class='notification closeable'>"+
+"<a class='close' href='javascript:Deletefav("+Dyid+")'></a>"+
+"</div>"+
+"<a id='getUrl"+Dyid+"' style=''>"+
+"<img  style='height:30%;width:30%;margin-top:-10%'  id='rentimage1"+Dyid+"'"+
+">"+
+
+
+"<div class='title' style='margin-left:250px;margin-top:-120px'>"+
+
+
+
+
+"<h4 id='Housename"+Dyid+"' style='font-family:Hanken;margin-top:-50px;' >"+
+"</h4>"+
+
+"<span id='Address1"+Dyid+"' style='font-family:Hanken'></span>"+
+"<span id='Address2"+Dyid+"' style='font-family:Hanken'></span>"+
+"<span class='table-property-price' id='Rent"+Dyid+"'></span>"+
+
+"</div>"+
+
+"</td>"+
+"</tr>";
+
+  return str;
+
+ }
+
+</script>
+
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<header id="header-container" class="fullwidth">
+
+  <!-- Topbar -->
+  <div id="top-bar">
+    <div class="container">
+      <!-- Left Side Content -->
+      <div class="left-side">
+        <ul class="top-bar-menu">
+            <li><i class="fa fa-phone"></i> +91-9884379333/9811448697</li>
+          <li><i class="fa fa-envelope"></i> <a href="#">Info@rentmatics.com</a></li>
+        </ul>
+      </div>
+      <div class="right-side">
+        <ul class="social-icons">
+          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          </ul>
+      </div>
+    </div>
+  </div>
+  <div class="clearfix"></div>
+  <div id="header">
+    <div class="container">
+      <div class="left-side">
+         <div id="logo">
+          <a href="index.html"><img src="images/rm_logo.png" alt=""></a>
+         </div>
+         <!-- Mobile Navigation -->
+        <div class="menu-responsive">
+          <i class="fa fa-reorder menu-trigger"></i>
+        </div>
+         <!-- Main Navigation -->
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+            <li><a  href="index.html">Home</a></li>
+            <li><a href="howitwork.html">How It Works </a>
+              <ul>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+             </ul>
+            </li>
+           <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+           <li><a href="javascript:Payalert()">PayMyHire</a></li>
+          </ul>
+      </nav>
+      <div class="clearfix"></div>
+      </div>
+      <div class="right-side">
+
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+          <li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
+           <li id="loginhiden">
+          <a href="login-register.html" class="sign-in"><i class="fa fa-user"></i> Log In / Register</a>
+          </li>
+           <li style="display:none" id="account"><a href="#">My Account</a>
+            <ul>
+                    <li><a href="my-profile.html">My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                   <li><a href="javascript:logout()">Logout</a></li>
+                   
+                  </ul> 
+                </li> 
+          </ul>
+       </nav>
+    </div>
+  </div>
+</div>
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<br>
+<br>
+
+
+<!-- Content
+================================================== -->
+<div class="container">
+	<div class="row">
+
+
+		<!-- Widget -->
+		<div class="col-md-4">
+			<div class="sidebar left">
+
+				<div class="my-account-nav-container">
+					
+					<ul class="my-account-nav">
+						<li class="sub-nav-title">Manage Account</li>
+						<li><a href="my-profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
+						<li><a href="my-bookmarks.html" class="current"><i class="sl sl-icon-star"></i> Bookmarked Listings</a></li>
+					</ul>
+					
+					
+
+					<ul class="my-account-nav">
+						<li><a href="change-password.html"><i class="sl sl-icon-lock"></i> Change Password</a></li>
+						<li><a href="javascript:logout()"><i class="sl sl-icon-power"></i> Log Out</a></li>
+					</ul>
+
+				</div>
+
+			</div>
+		</div>
+
+
+		<div class="col-md-8">
+			<table class="manage-table bookmarks-table responsive-table">
+
+
+				<tr id="hidenid">
+					<th ><i class="fa fa-file-text" ></i> My Wishlist</th>
+          <br>
+
+					</tr>
+          <br>
+           
+       <td style="background-color:white;color:black;font-family:Hanken;display:none;font-size:17px;margin-left:240px;" id="emptywish" >No Wishlist found</td>
+
+
+				<tr  id="listContainer1"></tr>
+
+
+
+			</table>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- The Modal -->
+<div id="myModal1" class="modal">
+
+  <!-- Modal content -->
+  <div class="modal-content" style="width:40%;">
+    <span class="close">&times;</span>
+
+   <span style="color:black">Pay My rent is Comming soon!...</span>
+  
+
+</div>
+</div>
+
+<!-- Footer
+================================================== -->
+   <footer class="fat-footer">
+         <!-- Social links -->
+         <div class="social-footer">
+            <div class="container">
+               <ul class="list-inline socLinks">
+                  <li>
+                     <a class="fb" href="https://www.facebook.com/Rentmatics/" target="_blank">
+                     <i class="fa fa-facebook"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="twtr" href="https://twitter.com/rentmatics" target="_blank">
+                     <i class="fa fa-twitter"></i>
+                     </a>
+                  </li>
+                  <li>
+                     <a class="insta" href="https://www.instagram.com/rentmatics/" target="_blank">
+                     <i class="fa fa-instagram"></i>  
+                     </a>
+                  </li>
+               </ul>
+            </div>
+         </div>
+         <!-- /Social links -->
+         <!-- Footer text -->
+         <div class="footer-content">
+            <div class="container">
+               <div class="site-info">
+                  <ul class="list-inline footer-menu">
+                     <!-- <li>
+                        <a href="http://rentmatics.com/blog/">Blog</a>
+                     </li> -->
+                     <li>
+                        <a href="about.html">About</a>
+                     </li>
+                     <li>
+                        <a href="blog.html">Blog</a>
+                     </li>
+                     
+                     <li>
+                        <a href="contact.html">Contact Us</a>
+                     </li>
+                     <li>
+                        <a href="myprivacy.html">Privacy</a>
+                     </li>
+                     <li>
+                        <a href="tandc.html">Terms &amp; Conditions</a>
+                     </li>
+                  </ul>
+               </div>
+               <div class="site-copyright-area">Copyright © 2016 Rentmatics.  •  <i class="fa fa-heart"></i> d
+                  •  Tel: +91-9884379333/9811448697         
+               </div>
+            </div>
+         </div>
+         <!-- Footer text -->
+      </footer>
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/owl.carousel.min.js"></script>
+<script type="text/javascript" src="scripts/rangeSlider.js"></script>
+<script type="text/javascript" src="scripts/sticky-kit.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/masonry.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+<script type="text/javascript" src="scripts/login.js"></script>
+
+
+
+
+
+</div>
+
+
+</body>
+</html>

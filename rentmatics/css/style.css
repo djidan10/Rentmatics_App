@@ -19,11 +19,11 @@ ul.dropdown-menu>li>a:hover{
 }
 @font-face {
     font-family: 'Hanken';
-    src: url('../fonts/Hanken-Light.ttf');
+    /*src: url('../fonts/Hanken-Light.ttf');*/
   	font-weight: 400; 
 }
 body {
-  font-family: 'Hanken', Helvetica,Arial,sans-serif;
+  /*font-family: 'Hanken', Helvetica,Arial,sans-serif;*/
   padding: 0;
 }
 .rm-navbar{
@@ -269,47 +269,7 @@ select, input, button, a{
 .address-postcode, .address-country, .address-city {
     display: none;
 }
-.icon{
-	color: #FF4D5A;
-    width: 22px;
-    margin: 7px;
-    height: 22px;
-}
-.card-tags > li {
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 10px;
-}
-.classImg{
-	display: inline-block;
-    margin: 0 auto;
-	margin-bottom: 15px;
-	max-width: 100%;
-}
-.card2{
-	font-size: 16px;
-	font-weight: 300;
-	padding:16px 32px;
-	color: #ababab;
-	background: white;
-	text-align: center;
-	border-radius: 8px;
-	overflow: hidden;
-	border:1px solid #ececec;
-	min-height: 355px;
-}
-.cardTitle{
-	font-size: 24px;
-	color: #484848;
-	margin-bottom: 5px;
-}
-.cardText {
-    margin: 0;
-    font-size: 16px;
-    line-height: 24px;
-    font-family: 'Source Sans Pro', sans-serif;
-    font-weight: 300;
-}
+
 .link1{
 	color: #484848;
 	text-decoration: none !important;
@@ -370,7 +330,7 @@ ul.card-links:before {
 	color: #919191 !important;
 	text-decoration: none !important;
 	font-size: 14px;
-	font-family: 'Source Sans Pro', sans-serif;
+	/*font-family: 'Source Sans Pro', sans-serif;*/
 	padding-right: 30px;
 	line-height: 21px;
 	position: relative;
@@ -402,7 +362,7 @@ ul.card-links:before {
 }
 .testm-txt{
 	font-size: 18px;
-	font-family: 'Source Sans Pro', sans-serif;
+	/*font-family: 'Source Sans Pro', sans-serif;*/
 	color: #ababab;
 	line-height: 32.4px;
 	margin-bottom: 15px;

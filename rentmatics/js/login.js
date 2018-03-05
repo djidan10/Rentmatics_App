@@ -102,6 +102,29 @@ function Getwish() {
 
 
 
+//Post Data to Next page
+function Gethomes() {
+
+   // alert(loginidvalue);
+var url =""
+    var cities = document.getElementById('tags').value;
+  
+ 
+  var partsOfStr = cities.split(',');
+   
+   if (partsOfStr  == null || partsOfStr  == ""){
+     url = 'listings-half-map-grid-compact.html' 
+   }else{
+    
+      url = 'listings-half-map-grid-compact.html?Id=' + partsOfStr[0];
+   localStorage.setItem("Getcity", partsOfStr[0]);
+
+   }
+  
+
+     document.location.href = url;
+   
+}
 
 function Payalert(){
     alert("Pay Myrent Comminng Soon!...please wait")
