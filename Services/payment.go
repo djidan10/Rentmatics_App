@@ -1,6 +1,7 @@
 package Services
 
 import (
+	Db "Rentmatics_App/Common/DB/Mysql"
 	Model "Rentmatics_App/Model"
 	"bytes"
 	"encoding/json"
@@ -94,6 +95,23 @@ type GetOtpAuth struct {
 	OTp string
 }
 
+func Booknow(w http.ResponseWriter, r *http.Request) {
+	var payment Model.Booknow
+
+	err := json.NewDecoder(r.Body).Decode(&payment)
+	if err != nil {
+		log.Error("Error on Getting Payment value", err)
+	}
+	Data := Db.InsertBookings(payment)
+	Senddata, err := json.Marshal(Data)
+	if err != nil {
+		log.Error("Cannot unmarshal the Activity data from database", err)
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+	w.Write(Senddata)
+
+}
 func OTPAUTH1(w http.ResponseWriter, r *http.Request) {
 
 	var Getotp GetOtpAuth

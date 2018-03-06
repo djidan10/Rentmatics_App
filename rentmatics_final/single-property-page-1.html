@@ -5,7 +5,13 @@
 ================================================== -->
 <title>Rentmatics</title>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:url"           content="https://develop.rentmatics.com/test/index.html" />
+  <meta property="og:type"          content="develop.rentmatics.com" />
+  <meta property="og:title"         content="Your Website Title" />
+  <meta property="og:description"   content="Your description" />
+  <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
 
 <!-- CSS
 ================================================== -->
@@ -15,6 +21,7 @@
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
 <link rel="stylesheet" href="css/jquery.datetimepicker.css">
 <link href="css/bootstrap.min.css" rel="stylesheet">
+ <link rel="canonical" href="http://develop.rentmatics.com" />
 <style type="text/css">
 
   .logo-img path {
@@ -102,6 +109,7 @@ margin-top:20px;
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
 <script type="text/javascript" src="scripts/lz.js"></script>
+
 <script>
 var ApiLogout="http://paymyhire.com:8083/Logout"
 var ApiGetIndivual_home="http://paymyhire.com:8083/GetIndivual_home"
@@ -142,6 +150,8 @@ var Availbed =0;
 var Availroom =0;
 var homeid=0;
 var cooki=$.cookie('RentmaticsCookie');
+
+
 $(document).ready(function(){
   $("input").attr("required", "true");
     if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
@@ -506,59 +516,60 @@ document.getElementById("imageslider").innerHTML=image;
          }
 
          
-function booknow(){
+// function booknow(){
 
 
-             var Bookname = document.getElementById('bookuser').value;
-             var Bookphone = document.getElementById('bookphone').value;
-             var Bookemail = document.getElementById('bookemail').value;
-             var Advanceanmount="10";
+//              var Bookname = document.getElementById('bookuser').value;
+//              var Bookphone = document.getElementById('bookphone').value;
+//              var Bookemail = document.getElementById('bookemail').value;
+//              alert(Bookname)
+         //     var Advanceanmount="10";
        
          
          
-         var payment={
+         // var payment={
          
          
          
-         "Homeid":parseInt(homeid),
-         "Loginid":Bookemail,
-           "Purpose": "purpose",
-           "Amount": Advanceanmount,
-           "Buyer_name":Bookname,
-           "Email": Bookemail,
-           "Phone": Bookphone,
-           "Send_email": false,
-           "Send_sms": false
+         // "Homeid":parseInt(homeid),
+         // "Loginid":Bookemail,
+         //   "Purpose": "purpose",
+         //   "Amount": Advanceanmount,
+         //   "Buyer_name":Bookname,
+         //   "Email": Bookemail,
+         //   "Phone": Bookphone,
+         //   "Send_email": false,
+         //   "Send_sms": false
          
-         }
+         // }
          
      
          
-         $.ajax({
+         // $.ajax({
               
-               type: "POST",
-               url: Apibooknow,
-               contentType:"application/json; charset=utf-8",
-               data: JSON.stringify(payment),
+         //       type: "POST",
+         //       url: Apibooknow,
+         //       contentType:"application/json; charset=utf-8",
+         //       data: JSON.stringify(payment),
               
           
          
-           success: function(responsee){
+         //   success: function(responsee){
             
-              otp = JSON.parse(responsee);
+         //      otp = JSON.parse(responsee);
          
-           console.log(otp)
-            window.location=otp.payment_request.longurl;
+         //   console.log(otp)
+         //    window.location=otp.payment_request.longurl;
          
              
-          },
-          error :function(error){
+         //  },
+         //  error :function(error){
            
-          }
+         //  }
          
-         });
+         // });
          
-         }
+         // }
 
 
      
@@ -888,9 +899,31 @@ return false;
                   <div class="flx socials">
  <!-- <div class="right-side"> -->
         <ul class="social-icons" style="margin-top:-20px;margin-left:50px;">
-          <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
-          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
-          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+
+
+
+          <li><div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=151850542086031&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+ <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+</li>
+          <li> <g:plus action="share"></g:plus>
+
+    <script>
+      window.___gcfg = {
+        lang: 'en-US',
+        parsetags: 'onload'
+      };
+    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script></li>
           </ul>
 
                    
@@ -1110,12 +1143,12 @@ return false;
 
 
             <div class="tab-content" id="tab2a">
-             <form action="" method="post" onsubmit="booknow();return false;">
+             <form >
               <input type="text" placeholder="Your name" id="bookuser">
               <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="bookemail" required>
             <input type="text" placeholder="Your Phone" id="bookphone" pattern="[0-9]{10}" required>
               
-            <button type="submit" class="button btn btn-danger">Book Now</button>
+            <button type="submit" class="button btn btn-danger" id="rzp-button1">Book Now</button>
               </form>
 
             </div>    
@@ -1168,6 +1201,7 @@ return false;
 ================================================== -->
 <div class="margin-top-55"></div>
 </div>
+
 
 
     <footer class="fat-footer">
@@ -1302,6 +1336,95 @@ $('.datetimepicker7').datetimepicker({
 
 
 </script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+
+var options = {
+    "key": "rzp_test_raeiwtOUjRtYDL",
+    "amount": "100", // 2000 paise = INR 20
+    "name": "Sandhiya",
+    "description": "Booking Home",
+    "image": "img/rm_logo.png",
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        Sendbookingdata(response.razorpay_payment_id)
+
+         console.log(response)
+    },
+  
+    "theme": {
+        "color": "#F37254"
+    }
+};
+var rzp1 = new Razorpay(options);
+
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
+
+
+
+
+function Sendbookingdata(paymentid ){
+
+
+
+
+      var homeid= 0
+      var url = document.location.href,
+      url1 = decodeURIComponent(url)
+      var params = location.search.substr(location.search.indexOf("?")+1);
+      params = params.split("&");
+      for (var i=0; i<params.length; i++)
+       {
+
+         temp = params[i].split("=");
+         if ( [temp[0]] == "Id" ) { homeid = temp[1]; }
+       }  
+        alert(homeid)
+
+         var Bookname = document.getElementById('bookuser').value;
+             var Bookphone = document.getElementById('bookphone').value;
+             var Bookemail = document.getElementById('bookemail').value;
+             alert(Bookname)
+  
+
+         var payment={
+         
+         "Homeid":parseInt(homeid),
+         "Loginid":Bookemail,
+         "Amount": "500",
+         "Buyer_name":Bookname,
+         "Email": Bookemail,
+         "Phone": Bookphone,
+         "Paymentid":paymentid,
+         "Description" : "House Prebooking"
+          
+         }
+        $.ajax({
+              
+               type: "POST",
+               url: "http://localhost:8083/Booknow",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(payment),
+       success: function(responsee){
+           suc = JSON.parse(responsee);
+           if(suc == "success"){
+            alert("Succesfully Booked")
+           }
+          
+          },
+            });
+}
+
+</script>
+<script>
+
+
+</script>
+
+
 
 </body>
 </html>

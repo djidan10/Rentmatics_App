@@ -102,11 +102,16 @@ type RentSendFav struct {
 type RentSendall struct {
 	Allhomes []RentSend
 }
+type Amenties struct {
+	Amenties string
+	Url      string
+}
 
 type Home_single struct {
 	Cityname     string
 	Home_Data    Home
 	Home_images  []Home_images
+	Amenties     []Amenties
 	Liked        bool
 	Ownerdetails Owner
 }

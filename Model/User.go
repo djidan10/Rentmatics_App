@@ -59,15 +59,17 @@ type Subscribeuser struct {
 type Feedback struct {
 	Name    string
 	Emailid string
-	Message string
+	Rating  int
 }
 
 type Referandearn struct {
 	Refername    string
 	Refernumber  string
-	Refermail    string
 	Ownername    string
 	Ownerphone   string
-	Owneremail   string
 	Owneraddress string
+}
+
+type Refer struct {
+	Loginid string
 }

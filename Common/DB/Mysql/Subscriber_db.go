@@ -15,3 +15,14 @@ func Insertsubscribtion(Subuser Model.Subscribeuser) {
 
 	}
 }
+
+func InsertBookings(book Model.Booknow) string {
+
+	row, err := OpenConnection["Rentmatics"].Exec("insert into  Rentbookings (Homeid,Loginid,Amount,Buyer_name,Email,Phone,Paymentid,Refercode,Description) values (?,?,?,?,?,?,?,?,?)", book.Homeid, book.Loginid, book.Amount, book.Buyer_name, book.Email, book.Phone, book.Paymentid, book.Referalcode, book.Description)
+	if err != nil {
+		log.Error("Error -DB: All Home", err, row)
+
+	}
+
+	return "success"
+}

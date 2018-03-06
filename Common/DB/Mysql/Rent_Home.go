@@ -166,6 +166,7 @@ func GetHomeDetils_DB(City string) (Temprentarray []Model.RentSend) {
 //Get single home based on id
 func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 	var Data Model.Home
+	var Amen []Model.Amenties
 
 	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from home where id=?", homeid)
@@ -211,8 +212,7 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 			&Data.Facing,
 			&Data.Parking,
 		)
-		//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", Data.Cityid)
-		//		row.Scan(&Data1.Cityname)
+
 		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
 		fmt.Println("err", err)
 		var Rentimgarray []Model.Home_images
@@ -229,8 +229,30 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 			Rentimgarray = append(Rentimgarray, Rentimage)
 		}
 
+		var Amenid int
+		row1, err := OpenConnection["Rentmatics"].Query("select Amentiesid from HomeAmenties where Homeid=?", Data.Id)
+		for row1.Next() {
+			row1.Scan(
+				&Amenid)
+
+			row2, err := OpenConnection["Rentmatics"].Query("select Name,url  from Amenties where id=?", Amenid)
+			fmt.Println("err", err)
+
+			for row2.Next() {
+				var Amentemp Model.Amenties
+
+				row2.Scan(
+
+					&Amentemp.Amenties,
+					&Amentemp.Url)
+
+				Amen = append(Amen, Amentemp)
+			}
+		}
+
 		Data1.Home_Data = Data
 		Data1.Home_images = Rentimgarray
+		Data1.Amenties = Amen
 		Data1.Ownerdetails = GetSingleOwner_Db(Data.Ownerid)
 		fmt.Println("end of Data", Data1)
 

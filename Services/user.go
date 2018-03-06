@@ -9,6 +9,7 @@ import (
 )
 
 func Userdata(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("insert user")
 	var User1 Model.User
 	err := json.NewDecoder(r.Body).Decode(&User1)
 	if err != nil {
@@ -198,6 +199,26 @@ func Referandearn(w http.ResponseWriter, r *http.Request) {
 		log.Error("Error - Feedback", err)
 	}
 	Data := Db.InsertReferandearn(GetRefer)
+
+	Senddata, err := json.Marshal(Data)
+	if err != nil {
+		log.Error("Error - Change password", err)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+	w.Write(Senddata)
+
+}
+
+func GetRefercode(w http.ResponseWriter, r *http.Request) {
+
+	var GetRefer Model.Refer
+	err := json.NewDecoder(r.Body).Decode(&GetRefer)
+	if err != nil {
+		log.Error("Error - Feedback", err)
+	}
+	Data := Db.Getcode_DB(GetRefer.Loginid)
 
 	Senddata, err := json.Marshal(Data)
 	if err != nil {

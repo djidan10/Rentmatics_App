@@ -5,14 +5,22 @@ import (
 	_ "database/sql"
 	"fmt"
 	//"net/smtp"
+	"math/rand"
 	"os"
+	"strconv"
+	"time"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/sendgrid/sendgrid-go"
 	"github.com/sendgrid/sendgrid-go/helpers/mail"
 )
 
+func randomInt(min, max int) int {
+	return min + rand.Intn(max-min)
+}
 func InserUser(Userdata Model.User) (Userinfo Model.UserResponse) {
+	fmt.Println("inside rent insert")
+
 	var Count int
 
 	query := "SELECT COUNT(*) FROM userdata WHERE userdata.loginid ='" + Userdata.Loginid + "'"
@@ -22,7 +30,12 @@ func InserUser(Userdata Model.User) (Userinfo Model.UserResponse) {
 	)
 	if Count == 0 {
 
-		row, err := OpenConnection["Rentmatics"].Exec("insert into userdata (username,password,loginid,login_type) values (?,?,?,?)", Userdata.Username, Userdata.Password, Userdata.Loginid, Userdata.Logintype)
+		rand.Seed(time.Now().UnixNano())
+		randomno := randomInt(1234567, 7654321)
+		referid := "RENT_" + strconv.Itoa(randomno)
+		fmt.Println("rent id", referid)
+
+		row, err := OpenConnection["Rentmatics"].Exec("insert into userdata (username,password,loginid,login_type,	Referid) values (?,?,?,?,?)", Userdata.Username, Userdata.Password, Userdata.Loginid, Userdata.Logintype, referid)
 		if err != nil {
 			log.Error("Error -DB: User", err, row)
 		}
@@ -253,7 +266,7 @@ func InsertForgotspassword(User1 string) string {
 
 }
 func Insertfeedback(Insfeedback Model.Feedback) string {
-	row, err := OpenConnection["Rentmatics"].Exec("insert into feedback (name,Emailid,message) values (?,?,?)", Insfeedback.Name, Insfeedback.Emailid, Insfeedback.Message)
+	row, err := OpenConnection["Rentmatics"].Exec("insert into feedback (name,Emailid,rating) values (?,?,?)", Insfeedback.Name, Insfeedback.Emailid, Insfeedback.Rating)
 	if err != nil {
 		log.Error("Error -DB: User", err, row)
 	}
@@ -265,7 +278,7 @@ func Insertfeedback(Insfeedback Model.Feedback) string {
 func Getfeedback_db() (Tempfeedarray []Model.Feedback) {
 
 	var Data Model.Feedback
-	rows, err := OpenConnection["Rentmatics"].Query("Select name,Emailid,message from  feedback")
+	rows, err := OpenConnection["Rentmatics"].Query("Select name,Emailid,rating from  feedback")
 	if err != nil {
 		log.Error("Error -Db:Activity", err)
 	}
@@ -274,7 +287,7 @@ func Getfeedback_db() (Tempfeedarray []Model.Feedback) {
 		rows.Scan(
 			&Data.Name,
 			&Data.Emailid,
-			&Data.Message,
+			&Data.Rating,
 		)
 		Tempfeedarray = append(Tempfeedarray, Data)
 	}
@@ -283,10 +296,27 @@ func Getfeedback_db() (Tempfeedarray []Model.Feedback) {
 }
 
 func InsertReferandearn(InsRef Model.Referandearn) string {
-	row, err := OpenConnection["Rentmatics"].Exec("insert into referandearn (Referalname,Referalnumber,Referalmailid,ownername,ownerphone,ownermail,owneraddress) values (?,?,?,?,?,?,?)", InsRef.Refername, InsRef.Refernumber, InsRef.Refermail, InsRef.Ownername, InsRef.Ownerphone, InsRef.Owneremail, InsRef.Owneraddress)
+	row, err := OpenConnection["Rentmatics"].Exec("insert into referandearn (Referalname,Referalnumber,ownername,ownerphone,owneraddress) values (?,?,?,?,?)", InsRef.Refername, InsRef.Refernumber, InsRef.Ownername, InsRef.Ownerphone, InsRef.Owneraddress)
 	if err != nil {
 		log.Error("Error -DB: User", err, row)
 	}
 
 	return "success"
+}
+
+func Getcode_DB(InsRef string) string {
+	var refercode string
+	rows, err := OpenConnection["Rentmatics"].Query("select Referid from userdata where loginid=?", InsRef)
+	if err != nil {
+		log.Error("Error -DB: User", err, rows)
+	}
+
+	for rows.Next() {
+
+		rows.Scan(
+			&refercode,
+		)
+
+	}
+	return refercode
 }

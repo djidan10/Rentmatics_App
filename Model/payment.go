@@ -23,3 +23,15 @@ type Paymentinsto struct {
 	Send_sms     bool   `json:"send_sms"`
 	Redirect_url string `json:"redirect_url"`
 }
+
+type Booknow struct {
+	Homeid      int
+	Loginid     string
+	Amount      string
+	Buyer_name  string
+	Email       string
+	Phone       string
+	Paymentid   string
+	Referalcode string
+	Description string
+}

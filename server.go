@@ -98,6 +98,9 @@ func Serve() bool {
 	router.HandleFunc("/paytm", Service.Payment)
 	router.HandleFunc("/PaymentResponse/{loginid}/{homeid}/{payment_id}/{payment_request_id}/", Service.PaymentResponse)
 
+	//Booking
+	router.HandleFunc("/Booknow", Service.Booknow)
+
 	//Subscriber
 	router.HandleFunc("/Postsubscriber", Service.Postsubscriber)
 
@@ -181,7 +184,11 @@ func Serve() bool {
 	router.HandleFunc("/GetTenantid", Service.GetAdminTenant)
 	router.HandleFunc("/Postfeedback", Service.Feedback)
 	router.HandleFunc("/Getfeedback", Service.GetFeedback)
-	router.HandleFunc("/Referandearn", Service.Referandearn)
+	router.HandleFunc("/OwnerReferandearn", Service.Referandearn)
+
+	//Refer and earn
+	router.HandleFunc("/Getrefercode", Service.GetRefercode)
+
 	//For HTTPS
 
 	// Default server - non-trusted for debugging
