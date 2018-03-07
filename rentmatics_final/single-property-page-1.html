@@ -33,6 +33,33 @@
     padding: 20px; 
      
 }
+section {
+  width: 40%;
+  padding:1px;
+  text-align: center;
+  float: left;
+}
+
+.one {
+text-align:left;
+ display: block;
+}
+
+.two {
+text-align:right;
+}
+
+.first {
+text-align:left;
+font-size:12px;
+}
+
+.second {
+
+
+font-size:12px;
+
+}
  
 
   h2 {
@@ -112,6 +139,8 @@ margin-top:20px;
 
 <script>
 var ApiLogout="http://paymyhire.com:8083/Logout"
+var ApiGetAllhomedetails="http://paymyhire.com:8083/GetAllhomedetails"
+
 var ApiGetIndivual_home="http://paymyhire.com:8083/GetIndivual_home"
 var Apibooknow="http://paymyhire.com:8083/paytm"
 var ApiScheduleVisit="http://paymyhire.com:8083/ScheduleVisit"
@@ -153,6 +182,31 @@ var cooki=$.cookie('RentmaticsCookie');
 
 
 $(document).ready(function(){
+
+
+  var s={
+      "Loginid":cooki
+       };
+
+ $.ajax({
+         type: "POST",
+         url: ApiGetAllhomedetails,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+          async: false,
+         
+        
+
+         success: function(responsee){
+   
+            var searchout = JSON.parse(responsee);
+            var searchout = JSON.parse(responsee);
+            Getresponse(searchout)
+          }
+
+
+});
+
   $("input").attr("required", "true");
     if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
        }else{
@@ -191,7 +245,18 @@ Loginid = localStorage.getItem("LoginID");
            success: function(responsee){
             
          var searchout = JSON.parse(responsee);
-         var Housename=searchout.Home_Data.Housename;
+
+        var sendament =""
+        var NewAment = searchout.Amenties
+        for(i =0;i<NewAment.length;i++){
+         var  localamen = NewAment[i].Amenties;
+        var  localurl = NewAment[i].Url;
+          sendstring = "<li><img src='"+localurl+  "' style='height:20px;width:30px'>"+localamen+"</li><br>"
+        sendament = sendament.concat(sendstring);
+
+        }
+      document.getElementById("Amens").innerHTML=sendament;
+        var Housename=searchout.Home_Data.Housename;
          var Address=searchout.Home_Data.Adress1;
          var Address1=searchout.Home_Data.Adress2;
          var Listing=searchout.Home_Data.Listing;
@@ -226,79 +291,7 @@ Loginid = localStorage.getItem("LoginID");
 
          }
         
-         var Amenties1 = Amenities.split(",");
-         var list="";
-         for(i=0;i<Amenties1.length;i++){
-           
-          
-switch (Amenties1[i]) {
-    case "Sofa":
-       document.getElementById("sofa").style.textDecoration = "none";
-        break;
-    case "Wifi":
-        document.getElementById("wifi").style.textDecoration = "none";
-        break;
-    case "Television":
-       document.getElementById("tv").style.textDecoration = "none";
-        break;
-    case "Dish":
-       document.getElementById("dish").style.textDecoration = "none";
-        break;
-    case "Washing Machine":
-        document.getElementById("wm").style.textDecoration = "none";
-        break;
-    case "Western Toilet":
-        document.getElementById("wt").style.textDecoration = "none";
-        break;
-         case "Solar Heater":
-        document.getElementById("sh").style.textDecoration = "none";
-        break;
-    case "Geyser":
-        document.getElementById("geyser").style.textDecoration = "none";
-        break;
-
-
-
-    case "Fridge":
-        document.getElementById("fridge").style.textDecoration = "none";
-     case "LPG Gas Stove":
-       document.getElementById("gas").style.textDecoration = "none";
-
-
-     case "Crockery Set":
-        document.getElementById("spoon").style.textDecoration = "none";
-
-     case "Wardrobes":
-       document.getElementById("Wardrobes").style.textDecoration = "none";
-
-     case "Laptop Table":
-        document.getElementById("laptop").style.textDecoration = "none";
-
-     case "Side table":
-        document.getElementById("table").style.textDecoration = "none";
-
-
-
-    case "Lift":
-               document.getElementById("lift").style.textDecoration = "none";
-
-     case "Gym":
-                document.getElementById("gym").style.textDecoration = "none";
-
-
-     case "Swimming pool":
-                document.getElementById("pool").style.textDecoration = "none";
-
-
-   }
-         
-         }
-
-
-
-
-
-
+       
 
 
          $("#Squarefeet").html(Squarefeet);
@@ -320,7 +313,6 @@ switch (Amenties1[i]) {
          $("#housetype").html(Housetype);
          $("#housetype1").html(Housetype);
          $("#Listing").html(Listing);
-         $("#Amenties").html(list);
          $("#Description").html(Description);
          $("#tenant").html(tenannt);
          $("#bhk").html(bhk1);
@@ -363,9 +355,7 @@ var image =
 document.getElementById("imageslider").innerHTML=image;
 
 
-//document.getElementById("imageslider1").innerHTML=image1;
-// $("#imageslider").html(image)
-// $("#imageslider1").html(image1)
+
 
          }
          
@@ -455,6 +445,142 @@ document.getElementById("imageslider").innerHTML=image;
          });
          
          }
+//For Slider
+ function Getjavascript(Dyid){
+ 
+  var rentimage = 
+"<div class='carousel-item'>"+
+"<div class='listing-item compact'>"+
+"<a  id='getUrl"+Dyid+"' class='listing-img-container'>"+
+"<div class='listing-badges'>"+
+"<span class='featured' id='Housename"+Dyid+"' >Featured</span>"+
+"</div>"+
+"<div class='listing-img-content'>"+
+"<span class='listing-compact-title' >Eagle Apartments <i>$275,000</i></span>"+
+"<ul class='listing-hidden-content'>"+
+"<li >Rent  <span id='bedrent"+Dyid+"'>530 sq ft</span></li>"+
+"<li>Deposit <span id='deposit"+Dyid+"'>3</span></li>"+
+"<li>Beds <span id='availbed"+Dyid+"'>1</span></li>"+
+"<li>Sqft <span id='Squarefeet"+Dyid+"'>1</span></li>"+
+"</ul>"+
+"</div>"+
+"<div style ='width=100%;height:100%;' id='rentimage1"+Dyid+"'"+
+"></div>"+
+"</a>"+
+"</div>"+
+" </div>";
+
+
+ return rentimage;
+
+ }
+ 
+
+         function Getresponse(searchout){
+
+  
+  var cardstring ="";
+  
+ console.log(searchout);
+  if( searchout != null  ){
+     var property =searchout.length +" Results Found ";
+    for (k=0;k<searchout.length;k++){
+    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id);
+
+  }
+
+  document.getElementById("listContainer").innerHTML=cardstring;
+
+ // for (l=0;l<searchout.length;l++){
+ //    GetLiked("colorid"+searchout[l].RentFullStruct.Id);
+ //  }
+
+ for(j=0;j<searchout.length;j++){
+ console.log(searchout[j].RentFullimages.length);
+ var finalDiv="";
+
+ var Singlesliderstart2="<img src='";
+ var Singlesliderend = "' alt='"+"'>";
+ var bhk1 =" Bhk"
+ var Rating ="";
+ 
+  for (i=0;i<searchout[j].RentFullimages.length;i++){
+    finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
+   }
+    
+  
+
+ 
+  var ID = searchout[j].RentFullStruct.Id;
+    var Liked = searchout[j].RentFullStruct.Liked;
+ 
+  
+  
+ var mapview = searchout[j].Cityname;
+ var City =searchout[j].RentFullStruct.City
+ var Rent = "₹ "+searchout[j].RentFullStruct.Month_rent;
+ var Housename = " " + searchout[j].RentFullStruct.Housename;
+ var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
+ var Address1 = searchout[j].RentFullStruct.Adress1;
+ var Address2 = searchout[j].RentFullStruct.Adress2;
+ var pin = searchout[j].RentFullStruct.Pin;
+ var state = searchout[j].RentFullStruct.State;
+ var country = searchout[j].RentFullStruct.Country;
+ var housetype =searchout[j].RentFullStruct.House_type
+ var tenantType =searchout[j].RentFullStruct.Tenant_type
+ var furnishingType =searchout[j].RentFullStruct.Furnish_type
+ var bedType =searchout[j].RentFullStruct.Bed
+ var Availbed =searchout[j].RentFullStruct.Avail_bed
+  var bedrent =  "₹ "+ searchout[j].RentFullStruct.Bed_rent
+  var deposit =  "₹ "+ searchout[j].RentFullStruct.Secutity_deposit;
+  var Squarefeet =searchout[j].RentFullStruct.Squarefeet +"/sqft";
+  var Likecount =searchout[j].RentFullStruct.Likecount ;
+   Rating =searchout[j].RentFullStruct.Rating ;
+  var Totalfloors =searchout[j].RentFullStruct.Totalfloors ;
+  var Facing =searchout[j].RentFullStruct.Facing ;
+
+
+
+$("#Squarefeet"+ID).html(Squarefeet);
+$("#Likecount"+ID).html(Likecount);
+$("#Rating"+ID).html(Rating);
+$("#Totalfloors"+ID).html(Totalfloors);
+$("#Facing"+ID).html(Facing);
+$("#deposit"+ID).html(deposit);
+$("#property").html(property);
+$("#Rent"+ID).html(Rent);
+$("#Housename"+ID).html(Housename);
+$("#bhk"+ID).html(bhk);
+$("#bed"+ID).html(bedType);
+$("#Address1"+ID).html(Address1);
+$("#Address2"+ID).html(Address2);
+$("#pin"+ID).html(pin);
+$("#state"+ID).html(state);
+$("#country"+ID).html(country);
+$("#city"+ID).html(City);
+$("#city1"+ID).html(City);
+$("#houseType"+ID).html(housetype);
+$("#tenantType"+ID).html(tenantType);
+$("#furnishtype"+ID).html(furnishingType);
+$("#rentimage1"+ID).html(finalDiv);
+$("#availbed"+ID).html(Availbed);
+ $("#bedrent"+ID).html(bedrent)
+
+ url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
+document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+   
+
+
+
+}
+}
+else{
+ 
+   location.reload(true);
+ }
+
+}
          
          
          function Otpauth(){
@@ -515,61 +641,6 @@ document.getElementById("imageslider").innerHTML=image;
    
          }
 
-         
-// function booknow(){
-
-
-//              var Bookname = document.getElementById('bookuser').value;
-//              var Bookphone = document.getElementById('bookphone').value;
-//              var Bookemail = document.getElementById('bookemail').value;
-//              alert(Bookname)
-         //     var Advanceanmount="10";
-       
-         
-         
-         // var payment={
-         
-         
-         
-         // "Homeid":parseInt(homeid),
-         // "Loginid":Bookemail,
-         //   "Purpose": "purpose",
-         //   "Amount": Advanceanmount,
-         //   "Buyer_name":Bookname,
-         //   "Email": Bookemail,
-         //   "Phone": Bookphone,
-         //   "Send_email": false,
-         //   "Send_sms": false
-         
-         // }
-         
-     
-         
-         // $.ajax({
-              
-         //       type: "POST",
-         //       url: Apibooknow,
-         //       contentType:"application/json; charset=utf-8",
-         //       data: JSON.stringify(payment),
-              
-          
-         
-         //   success: function(responsee){
-            
-         //      otp = JSON.parse(responsee);
-         
-         //   console.log(otp)
-         //    window.location=otp.payment_request.longurl;
-         
-             
-         //  },
-         //  error :function(error){
-           
-         //  }
-         
-         // });
-         
-         // }
 
 
      
@@ -695,7 +766,7 @@ return false;
          <!-- Main Navigation -->
         <nav id="navigation" class="style-1">
           <ul id="responsive">
-            <li><a  href="index.html">Home</a></li>
+            <li><a  href="index.html" >Home</a></li>
             <li><a href="howitwork.html">How It Works </a>
               <ul>
                 <li><a href="owner.html">Owners</a> </li>
@@ -703,7 +774,7 @@ return false;
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
-           <li><a href="javascript:Payalert()">Pay My Rent</a></li>
+           <li><a href="http://paymyhire.com/" target="_blank">PayMyHire</a></li>
           </ul>
       </nav>
       <div class="clearfix"></div>
@@ -793,104 +864,179 @@ return false;
           <p id="Description" style="font-family:Hanken;"></p>
           <a href="#" class="show-more-button">Show More <i class="fa fa-angle-down"></i></a>
         </div>
-        <h3 class="desc-headline">Amenties</h3>
-        <div class="col-md-4 checkboxes" >
-         <h4><b>Living Room</b></h4>
-        <div><i style="font-size: 2em;" class="im im-icon-Chair"></i><span style="margin-left:10px;text-decoration:line-through" id="sofa">Sofa</span></div>
-               <div> <i style="font-size: 2em" class="im im-icon-Wifi"></i><span style="margin-left:10px;text-decoration:line-through" id="wifi"> Wifi</span>
-               </div>
-                <div><i style="font-size: 2em" class="fa fa-television"></i> <span style="margin-left:7px;text-decoration:line-through" id="tv">Television</span>
-                </div>
-                 <div> <img src="images/satellite-dish.svg" style="height:28px;margin-top:15px;" class="logo-img"><span style="margin-left:15px;text-decoration:line-through" id="dish">Dish</span> 
-                 </div>
-                <div> <img src="images/washing-machine.svg" style="height:28px; margin-top:15px;"><span style="margin-left:15px;text-decoration:line-through" id="wm">Washing Machine </span> 
-                </div>
-         <br>
-
-          <h4><b>Bathroom</b></h4>
-
-           <div> <img src="images/toilet.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="wt">Western Toilet </span> 
-           </div>
-           <div> <img src="images/water-heater.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="sh">Solar Heater</span> 
-           </div>
-          <div> <img src="images/water.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="geyser">Geyser</span> </div>
-          </div>
-         
-        <div class="col-md-4" >
-
-         <h4><b>Kitchen</b></h4>
-
-        <div> <img src="images/refrigerator.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="fridge">Fridge </span>
-         </div>
-
-         <div> <img src="images/stove.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="gas">LPG Gas Stove </span> </div>
-
-          <div> <img src="images/cutlery.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="spoon">Crockery Set </span> </div>
-          <br>
-
-            <h4><b>Bedroom</b></h4>
-
-
-
-           <div> <img src="images/wardrobe.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="Wardrobes">Wardrobes </span> </div>
-
-           <div> <img src="images/laptop.svg" style="height:28px;margin-top:10px;color:orange;"><span style="margin-left:15px;text-decoration:line-through" id="laptop">Laptop Table + Chair </span> </div>
-
-
-          <div> <img src="images/drawer.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through" id="table">Side table</span>  </div>
-
+        </div>
         </div>
 
-           <div class="col-md-4" >
-            <h4><b>Common</b></h4>
+            <div class="col-lg-4 col-md-5" >
+      <div class="sidebar sticky right">
+        <div class="style-2 " >
+          <!-- Tabs Navigation -->
+          <ul class="tabs-nav " style="border: 2px solid ash;color:white;">
+             <li class="active" style="color:white;background-color   : #7D1935;width:167.5px"><a href="#tab1" style="color:white"><i style="color:white" class="fa fa-bed i_bed"></i>Bed Details </a></li>
 
+            <li style="color:white;background-color: #7D1935;width:164px"><a style="color:white;" href="#tab2"><i class="im im-icon-Warehouse"></i>Room Details</a></li>
+            </ul>
 
-
-        
-           <div> 
-           <img src="images/lift.svg" style="height:28px;margin-top:10px;">
-           <span style="margin-left:15px;text-decoration:line-through;" id="lift">Lift</span> 
-           </div>
-            <div> 
-            <img src="images/weightlifting.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through;" id="gym">Gym </span>
-             </div>
-             <div>
-              <img src="images/man-swimming.svg" style="height:28px;margin-top:10px;"><span style="margin-left:15px;text-decoration:line-through;" id="pool">Swimming pool </span> 
-              </div>
-
-         
-          </div>
-          
-        <!-- </ul> -->
-
-
+          <div class="tabs-container" style=" border: 2px solid white;width:335px">
+            <div class="tab-content" id="tab1">
+             <div >
+             <table >
+    <tr>
+          <th style="padding:15px;"> <b>Bed Available</b></th>
+          <th style="padding:12px;"><b >Bed Rent</b></th>
+    </tr>
+     <tr>
+          <td style="padding:15px"> <i style="font-size: 1em" class="fa fa-bed i_bed"></i><span  id="tableavailbed"></span></td>
+          <td style="padding:15px;width:110px;"><i style="font-size: 1.5em;" class="im im-icon-Money-2"></i><span  id="bed_rent"></span> </td>
+    </tr>
+     </table>                 
+     </div>
+     </div>
+     <div class="tab-content" id="tab2">
+<table >
+<tr>
+     <th style="padding:15px">  <b >Room Available</b></th>
+     <th style="padding:15px"> <b >Room Rent</b></th>
+     </tr>
+      <tr>
+      <td style="padding:15px"><i  class="im im-icon-Door"></i> <span id="tableavailroom"></span></td>
+       <td style="padding:15px;width:110px;"><i style="font-size: 1.3em;" class="im im-icon-Money-2"></i><span   id="bhk_rent"></span>
+       </td>
+        </tr>
+        </table>
+         </div>    
+        </div>
+         </div>
+ </div>
+</div>
 
 
 <br>
-
-<br>
-
-
-
-<br>
-<br>
-
-<div class="container" >
   <div class="row">
+         <div class="card" style="height:70px">
+            <div class="card-block">
+               <div class="clearfix">
+                  <section class="one">
+                     <h3 class="desc-headline">Amenties</h3>
+                         <div id ="Amens">
+                          </div>
+                  </section>
+                  <section class="two">
+                   <div style="margin-left:330px;width:75%" >
+      <div class="sidebar sticky right">
+        <div class="style-2">
+          <!-- Tabs Navigation -->
+          <ul class="tabs-nav tabs-container ">
+            <li class="active"><a href="#tab1a">Schedule Visit</a></li>
+            <li><a href="#tab2a" style="margin-left:4px">  Book Now</a></li>
+            
+          </ul>
+
+          <!-- Tabs Content -->
+          <div class="tabs-container">
+            <div class="tab-content" id="tab1a">
+            <form action="" method="post" onsubmit="Schedule1();return false;">
+       
+                 <input type="text" placeholder="Your name" id="schname" required>
+              <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="schemail" required>
+            <input type="text" placeholder="Your Phone" id="schphone" pattern="[0-9]{10}" required>
+
+            <input type="text" class="datetimepicker7" placeholder="Pick your Date" id="schdate" required/>
+
+            <button type="submit" class="button btn btn-danger"    data-backdrop="static" >Schedule Visit</button>
+            </form>
+
+          </div>
+
+
+            <div class="tab-content" id="tab2a">
+             <form >
+              <input type="text" placeholder="Your name" id="bookuser">
+              <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="bookemail" required>
+            <input type="text" placeholder="Your Phone" id="bookphone" pattern="[0-9]{10}" required>
+              
+            <button type="submit" class="button btn btn-danger" id="rzp-button1">Book Now</button>
+              </form>
+
+            </div>    
+        </div>
+
+   
+      </div>
+      <br>
+
+
+    </div>
+</div>
+
+                  
+                  
+                  </section>
+               </div>
+            </div>
+         </div>
+      </div>
 
 
 
-        <!-- Widget / End -->
 
+  <div class="row">
+         <div class="card" style="height:70px">
+            <div class="card-block">
+               <div class="clearfix">
+                  <section class="one">
+                     
+<div>
+ <h4 class="headline margin-top-0 margin-bottom-20" style="font-family:hanken;color: #7D1935;"><b >RENTMATICS HOME DETAILS</b></h4>
+    <div class="blog-post">
+      <div class="post-content">
+      <details open>
+       <summary style="outline:none;"><b style="color: #7D1935;font-size:20px;font-family:hanken" class="headline">House details</b></summary>
+       <div style="margin-top:20px;" >
+          <table style="font-family:hanken">
+          <tr>
+           <th style="width:200px;">HouseName</th><th style="width:200px;text-align:center;" id="Housename1" ></th>
+           </tr>
+         <tr>
+       <div> <th >BHK</th> <th style="text-align:center"  id="bhk1"></th></div>
+       </tr>
+        <tr> <th>Tenant Type</th><th style="text-align:center" id="tenant2"></th></tr>
+        <tr><th>House type</th><th style="text-align:center;" id="housetype1"></th></tr>
+        <tr><th>city</th><th style="text-align:center"  id="city2"></th></tr>
+       <tr><th>District</th><th style="text-align:center"  id="District"></th></tr>
+        <tr><th>Secutity Deposit</th><th style="text-align:center"   id="security"></th></tr>
+       <tr><th>squareFeet</th><th style="text-align:center"  id="Squarefeet"></th></tr>
+        <tr><th>Facing</th><th  style="text-align:center" id="Facing"></th></tr>
+        <tr><th>Parking</th><th style="text-align:center"  id="Parking"></th></tr>
+        <tr><th>Total Floor </th><th  style="text-align:center"  id="Totalfloors"></th></tr>
+        </table>
+        </div>
+        </details>
+<br><br>
+<details >
+  <summary style="outline:none;"> <b style="color: #7D1935;font-size:20px;font-family:hanken" class="headline">House Rules</b></summary>
+  <div style="margin-top:20px;font-family:hanken" >
+ <p>1. You shall take care of the home as your own<br>2. You shall look after you roommates like a family<br>3. You shall be good to neighbours & not wake them up midnight<br>4. You shall not host guests of opposite gender beyond 8 PM<br>5. You shall invite us on your birthday<br>6. You shall party hard but clean up afterwards<br>7. You shall introduce your roommates to The Big Bang Theor</</p>
+ </div>
+</details>
+<br><br>
+ <details>
+<summary style="outline:none;"><b style="color: #7D1935;font-size:20px;font-family:hanken" class="headline">Rent & Security Deposit - fine print</b></summary>
+  <div style="margin-top:20px;font-family:hanken" >
+   <li> Security Deposit is refundable, unless you have damaged something in the house.</li>
+<li>You need to pay the rent in advance. Before 3rd of every month.</li>
+<li>Short-term stays aren't allowed. You must stay for at least 6 months.</li>
+<li>You must provide at least 1 month notice before vacating the house.</li>
+<li>Maintenance charges of 5,000 when you vacate the house.</li></div>
+</details>
+  </div>
 
-
-
-
-
-
-
-
-<div class="col-md-4" style="margin-left:535px;margin-top:-200px;width:365px;">
+  </div>
+</div>
+                  </section>
+                  <section class="two">
+                     
+<div class="col-md-8" style="margin-left:330px;width:75%"">
         <div class="rp-wl">
                   <div class="form-group">
                      <button class="btn btn-default btn-lg btn-block btn-wishlist" onclick="return Addfav(this)" style="color:black"><i class="fa fa-heart mr5"   id="addwish"></i><b  id="wishtext" style="font-family:Hanken">Save to Wish List</b></button>
@@ -946,146 +1092,16 @@ return false;
 
 </div>
 
-   <!-- Sidebar -->
-    <div class="col-lg-4 col-md-5">
-      <div class="sidebar sticky right">
-        <div class="style-2 " >
-          <!-- Tabs Navigation -->
-          <ul class="tabs-nav " style="border: 2px solid ash;color:white;">
-             <li class="active" style="color:white;background-color:#d71319;width:167.5px"><a href="#tab1" style="color:white"><i style="color:white" class="fa fa-bed i_bed"></i>Bed Details </a></li>
-
-            <li style="color:white;background-color:#d71319;width:164px"><a style="color:white;" href="#tab2"><i class="im im-icon-Warehouse"></i>Room Details</a></li>
-            </ul>
-
-          <div class="tabs-container" style=" border: 2px solid white;width:335px">
-            <div class="tab-content" id="tab1">
-             <div >
-             <table >
-    <tr>
-          <th style="padding:15px;"> <b>Bed Available</b></th>
-          <th style="padding:12px;"><b >Bed Rent</b></th>
-    </tr>
-     <tr>
-          <td style="padding:15px"> <i style="font-size: 1em" class="fa fa-bed i_bed"></i><span  id="tableavailbed"></span></td>
-          <td style="padding:15px;width:110px;"><i style="font-size: 1.5em;" class="im im-icon-Money-2"></i><span  id="bed_rent"></span> </td>
-    </tr>
-     </table>                 
-     </div>
-     </div>
-     <div class="tab-content" id="tab2">
-<table >
-<tr>
-     <th style="padding:15px">  <b >Room Available</b></th>
-     <th style="padding:15px"> <b >Room Rent</b></th>
-     </tr>
-      <tr>
-      <td style="padding:15px"><i  class="im im-icon-Door"></i> <span id="tableavailroom"></span></td>
-       <td style="padding:15px;width:110px;"><i style="font-size: 1.3em;" class="im im-icon-Money-2"></i><span   id="bhk_rent"></span>
-       </td>
-        </tr>
-        </table>
-         </div>    
-        </div>
+                  </section>
+               </div>
+            </div>
          </div>
- </div>
-</div>
-
-
-   <!-- Sidebar -->
-    <div class="col-lg-4 col-md-5" >
-      <div class="sidebar sticky right" style="visibility:hidden">
-        <div class="style-2 " >
-        aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa   
-        </div>
-         </div>
- </div>
-</div>
-
-
-
-
-<div class="col-md-8">
- <h4 class="headline margin-top-0 margin-bottom-20" style="font-family:hanken"><b >RENTMATICS HOME DETAILS</b></h4>
-        <!-- Blog Post -->
-        <div class="blog-post">
-          
-       
-          
-          <!-- Content -->
-          <div class="post-content">
-      
-      <div>
-      <details open>
-  <summary style="outline:none;"><b style="color:#d71319;font-size:20px;font-family:hanken" class="headline">House details</b></summary>
- 
-          <div style="margin-top:20px;" >
-        
-          <table style="font-family:hanken">
-
-
-           <tr>
-
-      <th style="width:200px;">HouseName</th><th style="width:200px;text-align:center;" id="Housename1" ></th>
-      </tr>
-<tr>
-       <div> <th >BHK</th> <th style="text-align:center"  id="bhk1"></th></div>
-       </tr>
-        <tr> <th>Tenant Type</th><th style="text-align:center" id="tenant2"></th></tr>
-        <tr><th>House type</th><th style="text-align:center;" id="housetype1"></th></tr>
-        <tr><th>city</th><th style="text-align:center"  id="city2"></th></tr>
-       <tr><th>District</th><th style="text-align:center"  id="District"></th></tr>
-        <tr><th>Secutity Deposit</th><th style="text-align:center"   id="security"></th></tr>
-       <tr><th>squareFeet</th><th style="text-align:center"  id="Squarefeet"></th></tr>
-        <tr><th>Facing</th><th  style="text-align:center" id="Facing"></th></tr>
-        <tr><th>Parking</th><th style="text-align:center"  id="Parking"></th></tr>
-        <tr><th>Total Floor </th><th  style="text-align:center"  id="Totalfloors"></th></tr>
-        </table>
-        </div>
-        
-
-</details>
-<br><br>
-
-
- <details >
-  <summary style="outline:none;"> <b style="color:#d71319;font-size:20px;font-family:hanken" class="headline">House Rules</b></summary>
-  <div style="margin-top:20px;font-family:hanken" >
- <p>1. You shall take care of the home as your own<br>2. You shall look after you roommates like a family<br>3. You shall be good to neighbours & not wake them up midnight<br>4. You shall not host guests of opposite gender beyond 8 PM<br>5. You shall invite us on your birthday<br>6. You shall party hard but clean up afterwards<br>7. You shall introduce your roommates to The Big Bang Theor</</p>
- </div>
-</details>
-<br><br>
- <details>
-
-  <summary style="outline:none;"><b style="color:#d71319;font-size:20px;font-family:hanken" class="headline">Rent & Security Deposit - fine print</b></summary>
-  <div style="margin-top:20px;font-family:hanken" >
-   <li> Security Deposit is refundable, unless you have damaged something in the house.</li>
-<li>You need to pay the rent in advance. Before 3rd of every month.</li>
-<li>Short-term stays aren't allowed. You must stay for at least 6 months.</li>
-<li>You must provide at least 1 month notice before vacating the house.</li>
-<li>Maintenance charges of 5,000 when you vacate the house.</li></div>
-</details>
-          </div>
-
-        </div>
-        <!-- Blog Post / End -->
-
       </div>
 
-  
-
-
-  </div>
-</div>
-</p>
-</div>
-<!-- </section> -->
 
 
 
 
-
-    <br>
-       
 
 
 <div >
@@ -1115,52 +1131,7 @@ return false;
     
 
     <!-- Sidebar -->
-    <div class="col-lg-4 col-md-5">
-      <div class="sidebar sticky right">
-        <div class="style-2">
-          <!-- Tabs Navigation -->
-          <ul class="tabs-nav tabs-container ">
-            <li class="active"><a href="#tab1a">Schedule Visit</a></li>
-            <li><a href="#tab2a" style="margin-left:4px">  Book Now</a></li>
-            
-          </ul>
-
-          <!-- Tabs Content -->
-          <div class="tabs-container">
-            <div class="tab-content" id="tab1a">
-            <form action="" method="post" onsubmit="Schedule1();return false;">
-       
-                 <input type="text" placeholder="Your name" id="schname" required>
-              <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="schemail" required>
-            <input type="text" placeholder="Your Phone" id="schphone" pattern="[0-9]{10}" required>
-
-            <input type="text" class="datetimepicker7" placeholder="Pick your Date" id="schdate" required/>
-
-            <button type="submit" class="button btn btn-danger"  	 data-backdrop="static" >Schedule Visit</button>
-            </form>
-
-          </div>
-
-
-            <div class="tab-content" id="tab2a">
-             <form >
-              <input type="text" placeholder="Your name" id="bookuser">
-              <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="bookemail" required>
-            <input type="text" placeholder="Your Phone" id="bookphone" pattern="[0-9]{10}" required>
-              
-            <button type="submit" class="button btn btn-danger" id="rzp-button1">Book Now</button>
-              </form>
-
-            </div>    
-        </div>
-
    
-      </div>
-      <br>
-
-
-    </div>
-</div>
         <!-- Widget / End -->
 
 </div>
@@ -1195,6 +1166,32 @@ return false;
   </div>
 </div>
 </div>
+
+<div class="container">
+  <div class="row">
+  
+    <div class="col-md-12">
+      <h3 class="headline margin-bottom-25 margin-top-65">Similar Properties</h3>
+    </div>
+    
+    <!-- Carousel -->
+    <div class="col-md-12" id="listContainer">
+      <div class="carousel" >
+        
+        <!-- Listing Item -->
+     <!--    <div >
+        </div> -->
+        <!-- Listing Item / End -->
+
+       
+
+      </div>
+    </div>
+    <!-- Carousel / End -->
+
+  </div>
+</div>
+<!-- Featured / End -->
 
 
 <!-- Footer
@@ -1419,10 +1416,7 @@ function Sendbookingdata(paymentid ){
 }
 
 </script>
-<script>
 
-
-</script>
 
 
 

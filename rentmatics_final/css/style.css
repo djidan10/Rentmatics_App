@@ -144,25 +144,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* Common Styles */
 #top-bar {
 	background-color: #66676b;
@@ -893,7 +874,7 @@ button.widget-button {
 #navigation.style-1 .current {
 	background-color: transparent;
 	border: 1px solid #66676b;
-	color: #66676b;
+	color: white;
 	padding: 5px 15px;
 	border-radius: 3px;
 }
@@ -907,15 +888,19 @@ button.widget-button {
 
 #navigation.style-1 ul li:hover {
 	background-color: #66676b;
-	color: #fff;
+	color: white;
 }
 
-#navigation.style-1 ul li:hover a { color: #fff; }
+#navigation.style-1 ul li:hover a { color: white; }
+
+
+
 
 #navigation.style-1 ul a {
 	font-size: 15px;
 	line-height: 32px;
 	padding: 6px 16px;
+	color:white;
 }
 
 #navigation.style-1 ul li { margin: 0 5px; }

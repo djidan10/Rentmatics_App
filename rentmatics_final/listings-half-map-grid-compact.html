@@ -19,12 +19,13 @@
   min-height: 800px;
   height: 100%;
 }
-a:hover, a:visited, a:link, a:active
+a:hover
 {
-   color:#d71319;
+ 
     text-decoration: none;
 
 }
+
 .switch {
   position: relative;
   display: inline-block;
@@ -475,10 +476,6 @@ else{
 return false;
 }
 
-function Payalert(){
- window.open("http://paymyhire.com/");
-
-}
 
 function GetLiked(likedid,liked){
 
@@ -517,7 +514,7 @@ if (liked == true){
 "<span id='Housename"+Dyid+"' style='margin-left:6%;font-size:20px;font-family:Hanken;color:black'></span>"+
 
 "<br>"+
-"<i class='fa fa-map-marker' style='margin-left:5.7%;color:#d71319'></i><span id='city1"+Dyid+"' style='margin-left:4px;font-family:Hanken;' font-size:11px;color:#d71319'></span>"+ 
+"<i class='fa fa-map-marker' style='margin-left:5.7%;color:#7D1935'></i><span id='city1"+Dyid+"' style='margin-left:4px;font-family:Hanken;font-size:14px;color:#7D1935'></span>"+ 
 "<br>"+
 "<span style='margin-left:6%;font-size:15px;font-family: Hanken;color:black'>Rent starts from</span>"+
 "<span style='margin-left:3%;font-size:15px;font-family:Hanken;color:black' id='bedrent"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
@@ -525,8 +522,8 @@ if (liked == true){
 "<span style='margin-left:6%;font-size:15px;font-family:Hanken;color:black'>Security Deposit</span>"+
 "<span style='margin-left:3%;font-size:15px;font-family:Hanken;color:black' id='deposit"+Dyid+"'></span>"+"<span style='color:black'>/bed</span>"+
 "<br>"+
- "<b><span id='availbed"+Dyid+"' style='margin-left:6%;font-size:15px;'></span>"+
-"<span style='font-size:15px;font-family:Hanken'>  Bed Available</span></b>"+"<b id='Squarefeet"+Dyid+"' style='margin-left:10%;font-size:14px;font-family: Hanken'></b>"+
+ "<b><span id='availbed"+Dyid+"' style='margin-left:6%;font-size:15px;color:#7D1935'></span>"+
+"<span style='font-size:15px;font-family:Hanken;color: #7D1935'>  Bed Available</span></b>"+"<b id='Squarefeet"+Dyid+"' style='margin-left:10%;font-size:14px;font-family: Hanken;color: #7D1935'></b>"+
 
 
 "</div>"+
@@ -556,28 +553,29 @@ function GetFilterhome(){
 
     var minrent =  document.getElementById('getmin').value;
     var maxrent = document.getElementById('getmax').value;
-    var gettenanttype = document.getElementById('tenantType').value;
-    var getbookingtype =document.getElementById('bookingType').value;
-    var gethousetype =document.getElementById('houseType').value;
-    var getfurnishingType =document.getElementById('furnishingType').value;
+    var gettenanttype = document.getElementsByName('tenantType');
+    var getbookingtype =document.getElementsByName('bookingType');
+    var gethousetype =document.getElementsByName('houseType');
+    var getfurnishingType =document.getElementsByName('furnishingType');
     var getdistance =document.getElementById('distance').value;
     var getbhk =document.getElementById('getbhk').value;
      var getbed =document.getElementById('getbed').value;
-     //Calling Radio button Function
-    // var tenantType=getRadiovalue(gettenanttype);
-    // var bookingtype=getRadiovalue(getbookingtype);
-    // var housetype=getRadiovalue(gethousetype);
-    // var furnishingType=getRadiovalue(getfurnishingType);
+  
 
+    //Calling Radio button Function
+    var tenantType=getRadiovalue(gettenanttype);
+    var bookingtype=getRadiovalue(getbookingtype);
+    var housetype=getRadiovalue(gethousetype);
+    var furnishingType=getRadiovalue(getfurnishingType);
 
   var Filter ={
       "F_Loginid" : cooki,
       "F_Monthrent_Min": parseInt(minrent),
       "F_Monthrent_Max": parseInt(maxrent),
-      "F_Tenant_type":gettenanttype,
-      "F_Bookingtype":getbookingtype,
-      "F_Housetype":gethousetype,
-      "F_Furnished_type":getfurnishingType,
+      "F_Tenant_type":tenantType,
+      "F_Bookingtype":bookingtype,
+      "F_Housetype":housetype,
+      "F_Furnished_type":furnishingType,
       "F_Distance":getdistance,
       "F_Bhk":parseInt(getbhk),
       "F_Bed":parseInt(getbed)
@@ -593,10 +591,13 @@ function GetFilterhome(){
    success: function(responsee){
 
      var searchout = JSON.parse(responsee);
-     console.log(searchout)
-         
-            Getresponse(searchout);
- 
+     if(searchout != null){
+       Getresponse(searchout);
+
+     }else{
+       document.getElementById("listContainer").innerHTML="No Result Found!!!";
+       document.getElementById("property").style.display = "None";
+          }
  }
 
 });
@@ -708,7 +709,7 @@ $.ajax({
          <!-- Main Navigation -->
         <nav id="navigation" class="style-1">
           <ul id="responsive">
-            <li><a  href="index.html">Home</a></li>
+            <li><a  href="index.html" >Home</a></li>
             <li><a href="howitwork.html">How It Works </a>
               <ul>
                 <li><a href="owner.html">Owners</a> </li>
@@ -716,7 +717,7 @@ $.ajax({
              </ul>
             </li>
            <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
-           <li><a href="javascript:Payalert()">PayMyHire</a></li>
+           <li><a href="http://paymyhire.com/" target="_blank">PayMyHire</a></li>
           </ul>
       </nav>
       <div class="clearfix"></div>
@@ -778,7 +779,7 @@ $.ajax({
     <div class="fs-content">
 
       <!-- Search -->
-      <section  style="background-color:#d71319">
+      <section  style="background-color: #7D1935">
 
         <div class="row">
           <div class="col-md-12">
@@ -807,7 +808,7 @@ $.ajax({
      
       <!-- Search / End -->
       <div class="col-md-12">
-          <b class="showing-results" id="property" style="color:#d71319;font-family:Hanken;font-size:20px;"></b>
+          <b class="showing-results" id="property" style="color: #7D1935;font-family:Hanken;font-size:20px;"></b>
         </div>
 
 
