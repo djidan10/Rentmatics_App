@@ -159,7 +159,7 @@ func GetHomeDetils_DB(City string, filter string) (Temprentarray []Model.RentSen
 
 	} else {
 
-		rows, err := OpenConnection["Rentmatics"].Query("Select * from home where city IN(?) OR tenant_type = (?);", City)
+		rows, err := OpenConnection["Rentmatics"].Query("Select * from home where city IN(?) OR tenant_type = (?);", City, filter)
 		fmt.Println(err)
 		for rows.Next() {
 
