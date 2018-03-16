@@ -10,6 +10,7 @@ import (
 
 type Cityy struct {
 	Id      string
+	Filter  string
 	Loginid string
 }
 
@@ -59,7 +60,7 @@ func Gethomedetails(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if Cityid.Loginid == "" {
-		Data = Db.GetHomeDetils_DB(Cityid.Id)
+		Data = Db.GetHomeDetils_DB(Cityid.Id, Cityid.Filter)
 
 	} else {
 		Data = Db.GetHomeDetilswithFav(Cityid.Id, Cityid.Loginid)
