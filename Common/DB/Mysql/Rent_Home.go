@@ -89,7 +89,7 @@ func GetHomeDetils_DB(City string, filter string) (Temprentarray []Model.RentSen
 	var Data Model.Home
 	var TempRentStruct Model.RentSend
 	if filter == "All" {
-		rows, err := OpenConnection["Rentmatics"].Query("Select * from home where city =?)", City)
+		rows, err := OpenConnection["Rentmatics"].Query("Select * from home where city =?", City)
 		fmt.Println(err)
 		for rows.Next() {
 
@@ -158,7 +158,6 @@ func GetHomeDetils_DB(City string, filter string) (Temprentarray []Model.RentSen
 		}
 
 	} else {
-
 		rows, err := OpenConnection["Rentmatics"].Query("Select * from home where city IN(?) OR tenant_type = (?);", City, filter)
 		fmt.Println(err)
 		for rows.Next() {
