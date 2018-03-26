@@ -105,7 +105,6 @@ function Getwish() {
 //Post Data to Next page
 function Gethomes() {
 
-   // alert(loginidvalue);
 var url =""
     var cities = document.getElementById('tags').value;
   

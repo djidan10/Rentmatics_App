@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<head>
+   <!-- Basic Page Needs
+      ================================================== -->
+   <title>Listeo</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+   <!-- CSS
+      ================================================== -->
+   <link rel="stylesheet" href="css/style.css">
+   <link rel="stylesheet" href="css/colors/main.css" id="colors">
+   <script type="text/javascript" src="scripts/jquery.min.js"></script>
+   <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+   <script>
+      var Apiprefixlogout="http://paymyhire.com:8083/Logout"
+      var ApiGetAllhomedetails="http://paymyhire.com:8083/GetAllhomedetails"
+      var Apiinsertwishlist="http://paymyhire.com:8083/Insertwishlist"
+      var Apigetlisthome="http://paymyhire.com:8083/Gethomedetails"
+      var Apideletewishlist="http://paymyhire.com:8083/Deletewishlist"
+      var ApiGetFilter="http://paymyhire.com:8083/GetFilter"
+      var ApiNotifyme="http://paymyhire.com:8083/Notifyme"
+      
+      //Logout the User
+      function logout() {
+         
+      
+           $.ajax({
+              type: "GET",
+              url: Apiprefixlogout,
+      
+              success: function(responsee) {
+                   document.getElementById("loginhiden").style.display = "inline";
+                      document.getElementById("account").style.display = "none";
+                      location.reload(true);
+      
+          
+              }
+      
+          });
+      
+      }
+      
+      var loginidd="";
+      var cooki=$.cookie('RentmaticsCookie');
+      
+      
+      $(document).ready(function(){
+       if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+        
+         }else{
+             $("#login").html("MyAccount");
+                      document.getElementById("loginhiden").style.display = "none";
+                      document.getElementById("account").style.display = "inline";
+          }
+      });
+      
+       //Get All home based on Areas
+       var Loginid = ""
+       var tmp = ""
+        
+      
+          window.onload = function () {
+      
+          var url = document.location.href,
+          url1 = decodeURIComponent(url)
+          var params = location.search.substr(location.search.indexOf("?")+1);
+          if(params==""||params==null||params==undefined||params=="NODATA"){
+          var s={
+            "Loginid":cooki
+             };
+      
+       $.ajax({
+               type: "POST",
+               url: ApiGetAllhomedetails,
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(s),
+               
+              
+      
+               success: function(responsee){
+         
+                  var searchout = JSON.parse(responsee);
+                  var searchout = JSON.parse(responsee);
+                  Getresponse(searchout)
+                }
+      
+      
+      });
+            
+          }else{
+      
+      
+        var sval = "";
+        var filter ="";
+        params = params.split("&");
+       for (var i=0; i<params.length; i++)
+             {
+      
+               temp = params[i].split("=");
+
+               if ( [temp[0]] == "Id" ) {  sval = temp[1];   }
+               if ( [temp[0]] == "Filter" ) {  filter = temp[1];   }
+             }  
+      
+      var sval = sval.replace("%20", " ");
+           var s={
+                "Id" :sval,
+                "Filter":filter,
+                "Loginid":cooki
+              };
+      
+         $.ajax({
+               type: "POST",
+               url: Apigetlisthome,
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(s),
+      
+               success: function(responsee){
+         
+                  var searchout = JSON.parse(responsee);
+                  if (searchout == null){
+      
+                url = 'working.html';        
+              
+                 document.location.href = url;
+               }
+                  else{
+      
+          
+            var searchout = JSON.parse(responsee);
+                  Getresponse(searchout)
+                }
+      }
+      
+      });
+      }
+      }
+      //Get Mix and Max for Filter
+      
+      var ID;
+      var bhkarray = new Array();
+      bhkarray = ["1","2","3"];
+      var bhkarraycount=0;
+      $("#getbhk").html(bhkarray[bhkarraycount]);
+      
+      //Get minus for number of Bhk
+      function getminus(){
+      if (bhkarraycount>0){
+         $("#getbhk").val(bhkarray[--bhkarraycount]);
+          }}
+      
+      //Get plus count for number of Bhk
+      function getplus(){
+      if (bhkarraycount<=2){
+         $("#getbhk").val(bhkarray[++bhkarraycount]);
+         }}
+      
+      
+      //Get Counting for Number of Beds
+      
+       var  bhkarray1=new Array();
+       var bhkarraycount1=0;
+          
+       bhkarray1 = ["1","2","3","4","5","6"];
+      $("#getbed").html(bhkarray1[bhkarraycount1]);
+      
+      function getminus1(){
+      if (bhkarraycount1>0){
+        $("#getbed").val(bhkarray1[--bhkarraycount1]);
+      
+      }}
+      function getplus1(){
+      if (bhkarraycount1<=6){
+        
+         $("#getbed").val(bhkarray1[++bhkarraycount1]);
+      }}
+      
+           
+      
+      function GetRent(min,max){
+          
+      $("#getmin").val(min);
+      $("#getmax").val(max);
+        
+      }
+      
+      //Get Radio button values
+      function getRadiovalue(elements){
+      
+      for (var i = 0, l = elements.length; i < l; i++)
+          {
+              if (elements[i].checked)
+              {
+                  return elements[i].value;
+              }
+          }
+      }
+      
+      
+      
+      
+      //Common function for s=Displaying Response
+      function Getresponse(searchout){
+        
+        var cardstring ="";
+        
+       console.log(searchout);
+        if( searchout != null  ){
+           var property =searchout.length +" Rentspace Found ";
+          for (k=0;k<searchout.length;k++){
+          cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,Loginid);
+      
+        }
+      
+        
+      
+        document.getElementById("listContainer").innerHTML=cardstring;
+      
+       for (l=0;l<searchout.length;l++){
+          GetLiked("colorid"+searchout[l].RentFullStruct.Id);
+        }
+       for(j=0;j<searchout.length;j++){
+       console.log(searchout[j].RentFullimages.length);
+       var finalDiv="";
+      
+       var Singlesliderstart2="<img src='";
+       var Singlesliderend = "' alt='"+"'>";
+       var bhk1 =" Bhk"
+       var Rating ="";
+       for (i=0;i<searchout[j].RentFullimages.length;i++){
+          finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
+         }
+        var ID = searchout[j].RentFullStruct.Id;
+        var Liked = searchout[j].RentFullStruct.Liked;
+        GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
+        
+        
+       var mapview = searchout[j].Cityname;
+       var City =searchout[j].RentFullStruct.City
+       var Rent = "₹ "+searchout[j].RentFullStruct.Month_rent;
+       var Housename = " " + searchout[j].RentFullStruct.Housename;
+       var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
+       var Address1 = searchout[j].RentFullStruct.Adress1;
+       var Address2 = searchout[j].RentFullStruct.Adress2;
+       var pin = searchout[j].RentFullStruct.Pin;
+       var state = searchout[j].RentFullStruct.State;
+       var country = searchout[j].RentFullStruct.Country;
+       var housetype =searchout[j].RentFullStruct.House_type
+       var tenantType =searchout[j].RentFullStruct.Tenant_type
+       var furnishingType =searchout[j].RentFullStruct.Furnish_type
+       var bedType =searchout[j].RentFullStruct.Bed
+       var Availbed =searchout[j].RentFullStruct.Avail_bed
+        var bedrent =  "₹ "+ searchout[j].RentFullStruct.Bed_rent
+        var deposit =  "₹ "+ searchout[j].RentFullStruct.Secutity_deposit;
+        var Squarefeet =searchout[j].RentFullStruct.Squarefeet +"/sqft";
+        var Likecount =searchout[j].RentFullStruct.Likecount ;
+         Rating =searchout[j].RentFullStruct.Rating ;
+        var Totalfloors =searchout[j].RentFullStruct.Totalfloors ;
+        var Facing =searchout[j].RentFullStruct.Facing ;
+      
+      
+      
+      
+      
+      
+      $("#Squarefeet"+ID).html(Squarefeet);
+      $("#Likecount"+ID).html(Likecount);
+      $("#Rating"+ID).html(Rating);
+      $("#Totalfloors"+ID).html(Totalfloors);
+      $("#Facing"+ID).html(Facing);
+      $("#deposit"+ID).html(deposit);
+      $("#property").html(property);
+      $("#homeRent"+ID).html(Rent);
+      $("#Housename"+ID).html(Housename);
+      $("#bhk"+ID).html(bhk);
+      $("#bed"+ID).html(bedType);
+      $("#Address1"+ID).html(Address1);
+      $("#Address2"+ID).html(Address2);
+      $("#pin"+ID).html(pin);
+      $("#state"+ID).html(state);
+      $("#country"+ID).html(country);
+      $("#city"+ID).html(City);
+      $("#city1"+ID).html(City);
+      $("#houseType"+ID).html(housetype);
+      $("#tenant"+ID).html(tenantType);
+      $("#furnishtype"+ID).html(furnishingType);
+      $("#rentimage1"+ID).html(finalDiv);
+      $("#availbed"+ID).html(Availbed);
+      $("#bedrent"+ID).html(bedrent)
+       url = 'listings-single-page.html?Id=' + encodeURIComponent(ID);
+      document.getElementById("getUrl"+ ID).setAttribute("href",url);
+   
+      
+      
+      }
+      }
+      else{
+       
+         location.reload(true);
+       }
+      
+      }
+      function Addfav(getid,getlogin,colorid){
+        
+      
+      
+      
+      
+         if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
+         
+          var url2 = "login-register.html";
+       
+          document.location.href = url2;
+      
+        
+              }
+            else{
+               
+                     if (colorid.style.color == "white" || colorid.style.color == undefined ){
+                     
+                          colorid.style.color="red";  
+                            var s={
+                "Id": null,
+                "Homeid" :parseInt(getid),
+                "Loginid":cooki
+      
+              };
+      
+         $.ajax({
+               type: "POST",
+               url: Apiinsertwishlist,
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(s),
+      
+               success: function(responsee){
+                  
+                 // var searchout = JSON.parse(responsee);
+                
+                
+                 //  Getresponse(searchout)
+                 
+      }
+      
+      });
+      }
+      else{
+      
+         var s={
+               
+                "Homeid" :getid,
+                "Loginid":getlogin
+      
+              };
+      
+         $.ajax({
+               type: "POST",
+               url: Apideletewishlist,
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(s),
+      
+                 success: function(responsee){
+                 colorid.style.color="white";  
+                 document.getElementById(colorid).style.color = "red"; 
+                
+       
+                
+      }
+      
+      });
+      
+      
+      
+      }
+      // 
+      
+      
+      }
+      return false;
+      }
+      
+      function Payalert(){
+        alert("PayMyRent is coming Soon!Please wait")
+      
+      }
+      
+      function GetLiked(likedid,liked){
+      
+      if (liked == true){
+         document.getElementById(likedid).style.color = "red";
+      }else{
+         document.getElementById(likedid).style.color = "white";
+      }
+      }
+      
+      
+       //For Slider
+       function Getjavascript(Dyid,Loginid){
+       
+        var rentimage = 
+      "<div class='col-lg-12 col-md-12'>"+
+      "<div class='listing-item-container list-layout' data-marker-id='1'>"+
+      "<a id='getUrl"+Dyid+"' class='listing-item'>"+
+      "<div class='listing-item-image' id='rentimage1"+Dyid+"'>"+
+      "</div>"+
+      "<span id='bhk"+Dyid+"' class='tag'>Eat & Drink</span>"+
+      "<div class='listing-item-content'>"+
+      "<div class='listing-item-inner'>"+
+      "<h3 id='Housename"+Dyid+"'>Tom's Restaurant <i class='verified-icon'></i></h3>"+
+      "<i class='fa fa-map-marker' style='color:#f91942'></i><span style='margin-left:4px;color:#f91942' id='city1"+Dyid+"'></span>"+
+      "<div>Rent starts from<span style='margin-left:7px;color:#f91942'  id='homeRent"+Dyid+"'></span></div>"+
+      
+      "<div>Tenant Type <span style='margin-left:7px;color:#f91942' id='tenant"+Dyid+"' ></span></div>"+
+      "<div>Building Type <span style='margin-left:7px;color:#f91942' id='houseType"+Dyid+"' ></span></div>"+
+      
+      "</div>"+
+      "<span class='like-icon' id='colorid"+Dyid+"' onclick='return  Addfav("+Dyid+",Loginid,this)'></span>"+
+      "</div>"+
+      "</a>"+
+      "</div>"+
+      "</div>";
+      
+       return rentimage;
+      
+       }
+       
+       //For Filter Get REsponse
+      //For Filter Get REsponse
+      function GetFilterhome(){
+        
+      
+      
+          var minrent =  document.getElementById('getmin').value;
+          var maxrent = document.getElementById('getmax').value;
+          var gettenanttype = document.getElementById('tenantType').value;
+          var getbookingtype =document.getElementById('bookingType').value;
+          var gethousetype =document.getElementById('houseType').value;
+          var getfurnishingType =document.getElementById('furnishingType').value;
+          var getdistance =document.getElementById('distance').value;
+          var getbhk =document.getElementById('getbhk').value;
+           var getbed =document.getElementById('getbed').value;
+           //Calling Radio button Function
+          // var tenantType=getRadiovalue(gettenanttype);
+          // var bookingtype=getRadiovalue(getbookingtype);
+          // var housetype=getRadiovalue(gethousetype);
+          // var furnishingType=getRadiovalue(getfurnishingType);
+      
+      
+        var Filter ={
+            "F_Loginid" : cooki,
+            "F_Monthrent_Min": parseInt(minrent),
+            "F_Monthrent_Max": parseInt(maxrent),
+            "F_Tenant_type":gettenanttype,
+            "F_Bookingtype":getbookingtype,
+            "F_Housetype":gethousetype,
+            "F_Furnished_type":getfurnishingType,
+            "F_Distance":getdistance,
+            "F_Bhk":parseInt(getbhk),
+            "F_Bed":parseInt(getbed)
+      
+           };
+          console.log(Filter)
+          $.ajax({
+            type: "POST",
+            url: ApiGetFilter,
+            contentType:"application/json; charset=utf-8",
+            data: JSON.stringify(Filter),
+      
+         success: function(responsee){
+      
+           var searchout = JSON.parse(responsee);
+           console.log(searchout)
+               
+                  Getresponse(searchout);
+       
+       }
+      
+      });
+      }
+
+
+
+      
+      
+      function Notification(){
+      
+          var Availname =  document.getElementById('getname1').value;
+          var AvailEmail =  document.getElementById('getemail1').value
+          var Avaiphone =  document.getElementById('getphone1').value;
+          var Availtenant =  document.getElementById('gettenant1').value;
+          var Availiabity =  document.getElementById('availaibity1').value;
+          var Availcity =  document.getElementById('getcity1').value;
+           
+      
+          var s ={
+            "Notifyname":Availname,
+            "NotifyEmail":AvailEmail,
+            "Notifyphone":Avaiphone,
+            "Notifytenenattype":Availtenant,
+            "Notifyavailibity":Availiabity,
+            "NotifyCity":Availcity,
+           };
+          
+      $.ajax({
+            type: "POST",
+            url: ApiNotifyme,
+            contentType:"application/json; charset=utf-8",
+            data: JSON.stringify(s),
+      
+        success: function(responsee){
+          
+          var aaa = JSON.parse(responsee)
+         
+       
+       }
+      
+      });
+      
+      }
+      
+         function logout(){
+                  
+                $.ajax({
+                 type: "GET",
+                 url: Apiprefixlogout,
+               
+               success: function(responsee){
+      
+                window.location.reload(true);
+                document.getElementById("Userdetails").style.visibility = "hidden"; 
+               document.getElementById("wishlist").style.visibility = "hidden"; 
+               document.getElementById("logout").style.visibility = "hidden"; 
+               document.getElementById("loginhide").style.visibility = "visible";
+               document.getElementById("signuphide").style.visibility = "visible";  
+               }
+               
+               });
+                
+               }
+       
+      
+       
+   </script>
+</head>
+<body>
+   <!-- Wrapper -->
+   <div id="wrapper">
+      <!-- Header Container
+         ================================================== -->
+      <header id="header-container" class="fixed fullwidth">
+         <!-- Header -->
+         <div id="header" class="not-sticky">
+            <div class="container">
+               <!-- Left Side Content -->
+               <div class="left-side">
+                  <!-- Logo -->
+                  <div id="logo">
+                     <a href="index.html"><img src="images/logo.png" alt=""></a>
+                  </div>
+                  <!-- Mobile Navigation -->
+                  <div class="mmenu-trigger">
+                     <button class="hamburger hamburger--collapse" type="button">
+                     <span class="hamburger-box">
+                     <span class="hamburger-inner"></span>
+                     </span>
+                     </button>
+                  </div>
+                  <!-- Main Navigation -->
+                  <nav id="navigation" class="style-1">
+                     <ul id="responsive">
+                        <li><a class="current" href="index.html">Home</a></li>
+                        <li>
+                           <a href="howitwork.html">How It Works </a>
+                           <ul>
+                              <li><a href="owner.html">Owners</a>	</li>
+                              <li><a href="tenats.html">Tenants</a></li>
+                           </ul>
+                        </li>
+                        <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+                        <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
+                       
+                        <li style="display:none" id="account">
+                           <a href="#">My Account</a>
+                           <ul>
+                              <li><a href="my-profile.html" >My Profile</a></li>
+                              <li><a href="my-bookmarks.html">My Wish List</a></li>
+                              <li><a href="javascript:logout()" ">Logout</a></li>
+                           </ul>
+                        </li>
+                        <a href="#sign-in-dialog" class=" button border sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login" style="margin-left:12px"></i> Sign In/Log In</a>
+                       <!--  <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a> -->		
+                     </ul>
+                  </nav>
+                  <div class="clearfix"></div>
+                  <!-- Main Navigation / End -->
+               </div>
+               <!-- Left Side Content / End -->
+               <!-- Right Side Content / End -->
+               <!-- Sign In Popup -->
+               <div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+                  <div class="small-dialog-header">
+                     <h3>Sign In</h3>
+                  </div>
+                  <!--Tabs -->
+                  <div class="sign-in-form style-1">
+                     <ul class="tabs-nav">
+                        <li class=""><a href="#tab1">Log In</a></li>
+                        <li><a href="#tab2">Register</a></li>
+                     </ul>
+                     <div class="tabs-container alt">
+                        <!-- Login -->
+                        <div class="tab-content" id="tab1" style="display: none;">
+                           <form method="post" class="login">
+                              <p class="form-row form-row-wide">
+                                 <label for="username">Username:
+                                 <i class="im im-icon-Male"></i>
+                                 <input type="text" class="input-text" name="username" id="username" value="" />
+                                 </label>
+                              </p>
+                              <p class="form-row form-row-wide">
+                                 <label for="password">Password:
+                                 <i class="im im-icon-Lock-2"></i>
+                                 <input class="input-text" type="password" name="password" id="password"/>
+                                 </label>
+                                 <span class="lost_password">
+                                 <a href="#" >Lost Your Password?</a>
+                                 </span>
+                              </p>
+                              <div class="form-row">
+                                 <input type="submit" class="button border margin-top-5" name="login" value="Login" />
+                                 <div class="checkboxes margin-top-10">
+                                    <input id="remember-me" type="checkbox" name="check">
+                                    <label for="remember-me">Remember Me</label>
+                                 </div>
+                              </div>
+                           </form>
+                        </div>
+                        <!-- Register -->
+                        <div class="tab-content" id="tab2" style="display: none;">
+                           <form method="post" class="register">
+                              <p class="form-row form-row-wide">
+                                 <label for="username2">Username:
+                                 <i class="im im-icon-Male"></i>
+                                 <input type="text" class="input-text" name="username" id="username2" value="" />
+                                 </label>
+                              </p>
+                              <p class="form-row form-row-wide">
+                                 <label for="email2">Email Address:
+                                 <i class="im im-icon-Mail"></i>
+                                 <input type="text" class="input-text" name="email" id="email2" value="" />
+                                 </label>
+                              </p>
+                              <p class="form-row form-row-wide">
+                                 <label for="password1">Password:
+                                 <i class="im im-icon-Lock-2"></i>
+                                 <input class="input-text" type="password" name="password1" id="password1"/>
+                                 </label>
+                              </p>
+                              <p class="form-row form-row-wide">
+                                 <label for="password2">Repeat Password:
+                                 <i class="im im-icon-Lock-2"></i>
+                                 <input class="input-text" type="password" name="password2" id="password2"/>
+                                 </label>
+                              </p>
+                              <input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
+                           </form>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+               <!-- Sign In Popup / End -->
+            </div>
+         </div>
+         <!-- Header / End -->
+      </header>
+      <div class="clearfix"></div>
+      <!-- Header Container / End -->
+      <!-- Content
+         ================================================== -->
+      <div class="fs-container">
+         <div class="fs-inner-container content">
+            <div class="fs-content">
+               <!-- Search -->
+               <section class="search">
+                  <div class="row">
+                     <div class="col-md-12">
+                        <!-- Row With Forms -->
+                        <div class="row with-forms">
+                           <!-- Main Search Input -->
+                           <div class="col-fs-2">
+                              <div class="input-with-icon">
+                                 <i class="sl sl-icon-magnifier"></i>
+                                 <input type="text" placeholder="Where are you looking for?" value=""/>
+                              </div>
+                           </div>
+                           <!-- Main Search Input -->
+                           <div class="col-fs-4">
+                              <div class="input-with-icon location">
+                               <a href="dashboard-add-listing.html" class="button border" style="width:150px;text-align:center">search</a>
+                                 <!--  <button class="button" onclick="window.location.href='listings-half-screen-map-list.html'">Search</button> -->
+                              </div>
+                                	
+                           </div>
+                          
+                         
+                           <!-- Filters -->
+                           <div class="col-fs-12">
+                              <!-- Panel Dropdown / End -->
+                              <div class="panel-dropdown">
+                                 <a href="#">Categories</a>
+                                 <div class="panel-dropdown-content checkboxes categories">
+                                    <div class="row">
+                                       <div class="col-fs-6">
+                                          <select data-placeholder="Tenant Type" class="panel-dropdown" id="tenantType">
+                                             <option value="">Tenant Type </option>
+                                             <option value="Girls">Girls</option>
+                                             <option value="Boys">Boys</option>
+                                             <option value="Family">Family</option>
+                                          </select>
+                                       </div>
+                                       <div class="col-fs-6" >
+                                          <select data-placeholder="House Type" class="panel-dropdown" id="houseType">
+                                             <option value="">House Type </option>
+                                             <option value="Apartment">Apartment</option>
+                                             <option value="Independent">Independent House</option>
+                                             <option value="Villa">Villa</option>
+                                          </select>
+                                       </div>
+                                    </div>
+                                    <div class="row">
+                                       <div class="col-fs-6" >
+                                          <select data-placeholder="Min Rent" class="panel-dropdown" id="getmin">
+                                             <option value="5000">Minimum Rent </option>
+                                             <option value="5000">5000</option>
+                                             <option value="7500">7500</option>
+                                             <option value="10000">10000</option>
+                                             <option value="12500">12500</option>
+                                             <option value="15000">15000</option>
+                                             <option value="20000">20000</option>
+                                             <option value="25000">25000</option>
+                                             <option value="30000">30000+</option>
+                                          </select>
+                                       </div>
+                                       <div class="col-fs-6" >
+                                          <select data-placeholder="Min Rent" class="panel-dropdown" id="getmax">
+                                             <option value="">Maximum Rent </option>
+                                             <option value="7500">7500</option>
+                                             <option value="10000">10000</option>
+                                             <option value="12500">12500</option>
+                                             <option value="15000">15000</option>
+                                             <option value="20000">20000</option>
+                                             <option value="25000">25000</option>
+                                             <option value="30000">30000+</option>
+                                          </select>
+                                          </div>
+                                          </div>
+                                       <div class="row">
+                                          <div class="col-fs-6" >
+                                             <select data-placeholder="Min Rent" class="panel-dropdown" id="getbhk">
+                                                <option >Bhk </option>
+                                                <option value="1">1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                             </select>
+                                          </div>
+                                          <div class="col-fs-6" >
+                                             <select data-placeholder="Min Rent" class="panel-dropdown" id="getbed">
+                                                <option >Beds </option>
+                                                <option value="1" >1</option>
+                                                <option value="2">2</option>
+                                                <option value="3">3</option>
+                                                <option value="4">4</option>
+                                                <option value="5">5</option>
+                                             </select>
+                                          </div>
+                                       </div>
+                                         <div class="row">
+                                          <div class="col-fs-6" >
+                                             <select data-placeholder="Min Rent" class="panel-dropdown"  id="bookingType">
+                                             
+                                                <option value="">Booking Type </option>  
+                                                <option value="Shared Room">Shared Room</option>
+                                                 <option value="Private Room">Private Room</option>
+                                                 <option value="Entire House">Entire House</option>
+                                             </select>
+                                          </div>
+                                          <div class="col-fs-6" >
+                                            <select data-placeholder="Min Rent" class="panel-dropdown" id="furnishingType">
+                                                 <option value="">Furnished Type</option>  
+                                                 <option value="Furnished">Fully Furnished</option>
+                                                  <option value="Semi Furnished">Semi Furnished</option>
+                                                <option value="Unfurnished">UnFurnished</option>
+                                             </select>
+                                          </div>
+                                       </div>
+                                       <div class="panel-buttons">
+                                          <button class="panel-cancel">Cancel</button>
+                                          <button class="panel-apply" onclick="GetFilterhome()">Apply</button>
+                                       </div>
+                                    </div>
+                                 </div>
+                               
+                                
+                                     
+                           
+                              <!-- Panel Dropdown -->
+                              <div class="panel-dropdown wide">
+                                 <a href="#">More Filters</a>
+                                 <div class="panel-dropdown-content checkboxes">
+                                    <!-- Checkboxes -->
+
+                                    <div class="row">
+                                       <div class="col-md-6">
+                                           <input id="check-2" type="checkbox" name="check">
+                                           <label for="check-2">Air Conditioning</label>
+                                           <input id="check-3" type="checkbox" name="check">
+                                           <label for="check-3">Swimming Pool</label>
+                                           <input id="check-4" type="checkbox" name="check" >
+                                           <label for="check-4">Central Heating</label>
+                                          <input id="check-5" type="checkbox" name="check">
+                                             <label for="check-5">Laundry Room</label> 
+                                        </div>
+                                        <div class="col-md-6">
+                                          <input id="check-6" type="checkbox" name="check">
+                                           <label for="check-6">Gym</label>
+
+                                             <input id="check-7" type="checkbox" name="check">
+                                             <label for="check-7">Alarm</label>
+
+                                              <input id="check-8" type="checkbox" name="check">
+                                               <label for="check-8">Window Covering</label>
+                                       </div>
+                                    </div>
+                                    <!-- Buttons -->
+                                    <div class="panel-buttons">
+                                       <button class="panel-cancel">Cancel</button>
+                                       <button class="panel-apply" onclick="GetFilterhome()">Apply</button>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- Panel Dropdown / End -->
+                              <!-- Panel Dropdown -->
+                              <div class="panel-dropdown">
+                                 <a href="#">Distance Radius</a>
+                                 <div class="panel-dropdown-content">
+                                    <input class="distance-radius" type="range" min="1" max="100" step="1" value="50" data-title="Radius around selected destination" id="distance">
+                                    <div class="panel-buttons">
+                                       <button class="panel-cancel">Disable</button>
+                                       <button class="panel-apply" onclick="GetFilterhome()">Apply</button>
+                                    </div>
+                                 </div>
+                              </div>
+                              <!-- Panel Dropdown / End -->
+                           </div>
+                           <!-- Filters / End -->
+                        </div>
+                        <!-- Row With Forms / End -->
+                     </div>
+                  </div>
+               </section>
+               <!-- Search / End -->
+               <section class="listings-container margin-top-30">
+                  <!-- Sorting / Layout Switcher -->
+                  <div class="row fs-switcher">
+                     <div class="col-md-6">
+                        <!-- Showing Results -->
+                        <p class="showing-results" id="property" style='color:#f91942'></p>
+                     </div>
+                  </div>
+                  <!-- Listings -->
+                  <div class="row fs-listings" id="listContainer" >
+                  </div>
+                  <!-- Listings Container / End -->
+                  <!-- Pagination Container -->
+                  <!-- Pagination Container / End -->
+               </section>
+            </div>
+         </div>
+         <div class="fs-inner-container map-fixed">
+            <!-- Map -->
+            <!-- 	<div id="map-container">
+               <div id="map" data-map-zoom="9" data-map-scroll="true">
+                 
+               </div>
+               </div> -->
+            <div id="map-container">
+               <div id="map" data-map-zoom="9" data-map-scroll="true">
+                  <!-- map goes here -->
+               </div>
+               <!-- Map Navigation -->
+               <a href="#" id="geoLocation" title="Your location"></a>
+               <ul id="mapnav-buttons" class="top">
+                  <li><a href="#" id="prevpoint" title="Previous point on map">Prev</a></li>
+                  <li><a href="#" id="nextpoint" title="Next point on mp">Next</a></li>
+               </ul>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- Wrapper / End -->
+   <!-- Scripts
+      ================================================== -->
+   <script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+   <script type="text/javascript" src="scripts/mmenu.min.js"></script>
+   <script type="text/javascript" src="scripts/chosen.min.js"></script>
+   <script type="text/javascript" src="scripts/slick.min.js"></script>
+   <script type="text/javascript" src="scripts/rangeslider.min.js"></script>
+   <script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+   <script type="text/javascript" src="scripts/waypoints.min.js"></script>
+   <script type="text/javascript" src="scripts/counterup.min.js"></script>
+   <script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+   <script type="text/javascript" src="scripts/tooltips.min.js"></script>
+   <script type="text/javascript" src="scripts/custom.js"></script>
+   <!-- Maps -->
+   <script type="text/javascript" src="http://maps.google.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&sensor=false&amp;language=en"></script><script type="text/javascript" src="scripts/infobox.min.js"></script>
+   <script type="text/javascript" src="scripts/markerclusterer.js"></script>
+   <script type="text/javascript" src="scripts/maps.js"></script>
+</body>
+</html>

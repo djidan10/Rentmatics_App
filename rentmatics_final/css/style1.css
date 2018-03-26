@@ -1650,10 +1650,10 @@ input:checked + .swtich-slider:before {
     display: block;
     vertical-align: middle;
     /*background: #261E1E;*/
-    background-image: url('../img/house7.jpeg');
+   /* background-image: url('../img/house7.jpeg');
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: cover;*/
     padding: 50px;
     color: #FFF;
     /*max-width: 430px;*/

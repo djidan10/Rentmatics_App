@@ -51,6 +51,10 @@ func Serve() bool {
 	//http.Handle("/", fs)
 	router.PathPrefix("/rentmatics_final/").Handler(http.StripPrefix("/rentmatics_final/", fs4))
 
+	fs5 := http.FileServer(http.Dir("./Rent/"))
+
+	router.PathPrefix("/Rent/").Handler(http.StripPrefix("/Rent/", fs5))
+
 	//Handlers
 
 	//Rent Homes

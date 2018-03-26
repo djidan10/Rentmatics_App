@@ -971,6 +971,7 @@ button.widget-button {
 		-ms-transition: all 0.2s ease-in-out;
 		transition: all 0.2s ease-in-out;
 		border-radius: 4px;
+		font-style: "Helvetica Neue";
 	}
 
 	#main-header {
@@ -999,7 +1000,7 @@ button.widget-button {
 		top: -1px;
 		position: relative;
 		left: 10px;
-		font-family: "Varela Round";
+		font-family: "Helvetica Neue";
 	}
 
 	

@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Listeo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
+<meta name="author" content=""><meta name="google-signin-client_id" content="22067969485-itbijda0dti859jimo6u5vl6ne2g7q4b.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<script type="text/javascript" src="scripts/jquery.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
+<script>
+
+//Foe Login
+var loginidd="";
+var Apiprefixlogout="http://paymyhire.com:8083/Logout"
+var ApiprefixAllhome="http://paymyhire.com:8083/GetAllhomedetails"
+var ApiLogout="http://paymyhire.com:8083/Logout"
+  var ApiLogin ="http://paymyhire.com:8083/Login"
+var ApiUser="http://paymyhire.com:8083/User"
+var ApiForgotpassword="http://paymyhire.com:8083/Forgotpassword"
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+                
+                localStorage.setItem("LoginID", cooki);
+    }
+});
+function setCookie(cname, cvalue, exdays) {	
+	
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function logout() {
+	
+	
+         
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+
+
+}
+//Payment coming soon
+function Payalert(){
+	window.open("http://paymyhire.com/");
+
+}
+
+//Geting all home data
+window.onload = function () {
+
+	 var s={
+          
+          "Loginid":cooki
+
+        };
+
+
+
+	$.ajax({
+         type: "POST",
+         url: ApiprefixAllhome,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+            async: false,
+         
+         
+      	success: function(responsee){
+ 			var searchout = JSON.parse(responsee);
+            Getresponse(searchout)
+          }});
+}
+
+
+
+//Common function for=Displaying Response
+function Getresponse(searchout){
+	
+  var cardstring ="";
+  var property =searchout.length +" Results Found ";
+ for (k=0;k<searchout.length;k++){
+    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,cooki);
+   }
+
+  document.getElementById("listContainer").innerHTML=cardstring;
+	for(j=0;j<searchout.length;j++){
+
+ var Singlesliderstart2="<img src='";
+ var Singlesliderend = "' alt='"+"'>";
+
+
+ var bhk1 =" Bhk"
+  var finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
+   
+ var ID = searchout[j].RentFullStruct.Id;
+ var Liked = searchout[j].RentFullStruct.Liked;
+ var mapview = searchout[j].Cityname;
+ var City =searchout[j].RentFullStruct.City
+ var Rent = "₹ "+searchout[j].RentFullStruct.Month_rent;
+ var Housename = searchout[j].RentFullStruct.Housename;
+ var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
+ var Address1 = searchout[j].RentFullStruct.Adress1;
+ var Address2 = searchout[j].RentFullStruct.Adress2;
+ var pin = searchout[j].RentFullStruct.Pin;
+ var state = searchout[j].RentFullStruct.State;
+ var country = searchout[j].RentFullStruct.Country;
+ var housetype =searchout[j].RentFullStruct.House_type
+ var tenantType =searchout[j].RentFullStruct.Tenant_type
+ var furnishingType =searchout[j].RentFullStruct.Furnish_type
+ var bedType =searchout[j].RentFullStruct.Bed
+$("#property").html(property);
+$("#Rent"+ID).html(Rent);
+$("#Housename"+ID).html(Housename);
+$("#bhk"+ID).html(bhk);
+$("#bed"+ID).html(bedType);
+$("#Address1"+ID).html(Address1);
+$("#Address2"+ID).html(Address2);
+$("#pin"+ID).html(pin);
+$("#state"+ID).html(state);
+$("#country"+ID).html(country);
+$("#city"+ID).html(City);
+$("#houseType"+ID).html(housetype);
+$("#tenantType"+ID).html(tenantType);
+$("#furnishtype"+ID).html(furnishingType);
+$("#rentimage1"+ID).html(finalDiv);
+
+ url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
+
+document.getElementById("getUrl1"+ ID).setAttribute("href",url);
+
+    var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
+      src=src.replace("&amp;","&")
+      console.log(src)
+      
+
+}}		
+
+
+
+// image  card all home
+ function Getjavascript(Dyid,loginid){
+ 
+  var rentimage = 
+"<div class='carousel-item'>"+
+"<a  id='getUrl1"+Dyid+"' class='listing-item-container'>"+
+"<div class='listing-item' >"+
+"<div id='rentimage1"+Dyid+"'></div>"+
+"<div class='listing-badge now-open'  id='tenantType"+Dyid+"'>open</div>"+
+"<div class='listing-item-content'>"+
+"<span class='tag'  id='Rent"+Dyid+"' >Eat & Drink</span>"+
+"<h3 id='city"+Dyid+"' >Tom's Restaurant <i class='verified-icon'></i></h3>"+
+"<span id='houseType"+Dyid+"'>964 School Street, New York</span>"+
+"</div>"+
+"</div>"+
+"</div>"+
+
+"</a>"+
+"</div>";
+
+ return rentimage;
+
+ }
+
+
+
+
+function Gethomes() {
+
+var url =""
+ var cities = document.getElementById('tags').value;
+  var search = document.getElementById('searchtype').value;
+  alert(search);
+ 
+  var partsOfStr = cities.split(',');
+  if (partsOfStr  == null || partsOfStr  == ""){
+     url = 'listings-half-screen-map-list.html' 
+   }else{
+    
+      url = 'listings-half-screen-map-list.html?Id=' + partsOfStr[0] + "&Filter="+ search;
+   localStorage.setItem("Getcity", partsOfStr[0]);
+
+   }
+  
+
+     document.location.href = url;
+   
+}
+
+function Payalert(){
+    alert("Pay Myrent Comminng Soon!...please wait")
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+var loginidvalue =""
+ loginidvalue = localStorage.getItem("LoginID");
+
+//Login
+function Login() {
+    var loginuser = document.getElementById('uname').value;
+    var loginpass = document.getElementById('upass').value;
+    var Rentmatics = {
+        "Username": loginuser,
+        "Password": loginpass,
+
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiLogin,
+        crossDomain: true,
+       
+        contentType: "application/json; charset=utf-8",
+       
+        data: JSON.stringify(Rentmatics),
+
+        success: function(responsee,stat,xhr) {
+            var searchout = JSON.parse(responsee);
+           
+            if (searchout.Status == "Success") {
+                loginidd = searchout.Loginid;
+                setCookie("RentmaticsCookie",searchout.Loginid,365) 
+                $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.visibility = "visible";
+//alert(xhr.getResponseHeader('Set-Cookie'));
+              window.history.back();
+            } else {
+                alert("Incorect Username and Password")
+
+            } }
+    });
+
+}
+
+
+
+
+
+// Signup-Register the Rentmatics user
+function SignupRent() {
+    var signuser = document.getElementById('Susername').value;
+    var signpass = document.getElementById('cpassword').value;
+    var signemail = document.getElementById('Semail').value;
+    var Rentmatics = {
+        "Id ": "",
+        "Username": signuser,
+        "Password": signpass,
+        "Loginid": signemail,
+        "Logintype": "Rentmatics"
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiUser,
+        xhrFields: {
+       withCredentials: true
+    },
+
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Rentmatics),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+           window.history.back();
+        }
+    });
+}
+
+
+
+//For Google User-Signin
+var auth2; // The Sign-In object.
+var googleUser; // The current user.
+var appStart = function() {
+    gapi.load('auth2', initSigninV2);
+};
+var initSigninV2 = function() {
+    auth2 = gapi.auth2.init({
+        client_id: 'CLIENT_ID.apps.googleusercontent.com',
+        scope: 'profile'
+    });
+
+
+    auth2.isSignedIn.listen(signinChanged);
+    auth2.currentUser.listen(userChanged);
+
+    if (auth2.isSignedIn.get() == true) {
+        auth2.signIn();
+    }
+    refreshValues();
+};
+
+
+var signinChanged = function(val) {
+    console.log('Signin state changed to ', val);
+
+};
+
+var userChanged = function(user) {
+    console.log('User now: ', user);
+    googleUser = user;
+    updateGoogleUser();
+
+};
+
+
+var updateGoogleUser = function() {
+    if (googleUser) {
+        console.log("got google user");
+        console.log(googleUser)
+
+    } else {
+        console.log("did nit get google user");
+
+    }
+};
+
+
+var refreshValues = function() {
+    if (auth2) {
+        console.log('Refreshing values...');
+
+        googleUser = auth2.currentUser.get();
+        console.log(googleUser)
+        updateGoogleUser();
+    }
+}
+
+function GsignOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function() {
+        console.log('User signed out.');
+
+    });
+}
+
+
+
+var delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+var email = "";
+
+function onSignIn(googleUser) {
+    
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail());
+
+    // This is null if the 'email' scope is not present.
+
+    var Id = profile.getId(); // Do not send to your backend! Use an ID token instead.
+    var name = profile.getName();
+    // var iamprofile.getImageUrl());
+    email = profile.getEmail();
+
+
+
+    var Gmail = {
+        "Id ": Id,
+        "Username": name,
+        "Password": "",
+        "Loginid": email,
+        "Logintype": "Gmail"
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiUser,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Gmail),
+
+        success: function(responsee) {
+                   var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+          window.history.back();
+
+
+
+        }
+
+    });
+}
+
+
+  function signOut() {
+             var auth2 = gapi.auth2.getAuthInstance();
+             auth2.signOut().then(function () {
+           console.log('User signed out.');
+                  });
+                }
+
+
+
+
+            
+           window.fbAsyncInit = function() {
+             FB.init({
+               appId      : '151850542086031',
+               xfbml      : true,
+               version    : 'v2.9'
+             });
+             FB.AppEvents.logPageView();
+           };
+         
+           (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=151850542086031';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+         
+          // This is called with the results from from FB.getLoginStatus().
+           function statusChangeCallback(response) {
+             console.log('statusChangeCallback');
+             console.log(response);
+            
+             if (response.status === 'connected') {
+               // Logged into your app and Facebook.
+               testAPI();
+             } else {
+             
+               
+             }
+           }
+         
+           function checkLoginState() {
+             FB.getLoginStatus(function(response) {
+               statusChangeCallback(response);
+             });
+           }
+         
+         
+           function testAPI() {
+             console.log('Welcome!  Fetching your information.... ');
+             FB.api('/me', function(response) {
+               console.log('Successful login for: ' + response.name);
+               console.log(response);
+               // document.getElementById('status').innerHTML =
+               //   'Thanks for logging in, ' + response.name + '!';
+
+
+    var Facebook = {
+        "Id ": "",
+        "Username":response.name,
+        "Password": "",
+        "Loginid": response.name,
+        "Logintype": "Facebook"
+
+    };
+   $.ajax({
+        type: "POST",
+        url: ApiUser,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Facebook),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+            window.history.back();
+   }
+ });
+ });
+   }
+         
+
+//Redirect to wishlist page
+
+function Getwish() {
+    url = "wishlist.html";
+    document.location.href = url;
+
+}
+
+function Forgot() {
+  var forgotid = document.getElementById('forgotid').value;
+
+ var Forgotemail =  {
+          "Email" :forgotid
+        }
+   $.ajax({
+        type: "POST",
+        url: ApiForgotpassword,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Forgotemail),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+           if (searchout == "Success"){
+            alert("Successfully sent to Your Email ID")
+            $('#myModal').modal('hide');
+              }else{
+                alert("Invalid mail ID")
+              }
+           }
+ });
+   
+
+}
+
+
+
+
+
+
+
+</script>
+
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<header id="header-container">
+
+	<!-- Header -->
+	<div id="header">
+		<div class="container">
+			
+			<!-- Left Side Content -->
+			<div class="left-side">
+				
+				<!-- Logo -->
+				<div id="logo">
+					<a href="index.html"><img src="images/logo.png" alt=""></a>
+				</div>
+
+				<!-- Mobile Navigation -->
+				<div class="mmenu-trigger">
+					<button class="hamburger hamburger--collapse" type="button">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</div>
+
+
+				<!-- Main Navigation -->
+				<nav id="navigation" class="style-1">
+					<ul id="responsive">
+
+						<li><a class="current" href="index.html">Home</a></li>
+                        <li><a href="howitwork.html">How It Works </a>
+							<ul>
+								<li><a href="owner.html">Owners</a>	</li>
+								<li><a href="tenats.html">Tenants</a></li>
+								
+				    		</ul>
+						</li>
+                        <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+                        <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
+                          <li><a href="http://paymyhire.com/" target="_blank" style="visibility:hidden" >PayMy</a></li>
+
+                         <li style="display:none" id="account"><a href="#">My Account</a>
+									<ul>
+										<li><a href="my-profile.html" >My Profile</a></li>
+										<li><a href="my-bookmarks.html">My Wish List</a></li>
+										<li><a href="javascript:logout()" ">Logout</a></li>
+									
+									</ul>	
+						</li>
+
+						
+
+							<li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i> Sign In</a></li>
+					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>		
+					</ul>
+					 
+				</nav>
+				<div class="clearfix"></div>
+				<!-- Main Navigation / End -->
+				
+			</div>
+			<!-- Left Side Content / End -->
+
+
+
+			<!-- Sign In Popup -->
+			<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+
+				<div class="small-dialog-header">
+					<h3>Sign In</h3>
+				</div>
+
+				<!--Tabs -->
+				<div class="sign-in-form style-1">
+
+					<ul class="tabs-nav">
+						<li class=""><a href="#tab1">Log In</a></li>
+						<li><a href="#tab2">Register</a></li>
+					</ul>
+
+					<div class="tabs-container alt">
+
+						<!-- Login -->
+						<div class="tab-content" id="tab1" style="display: none;">
+							<form action="" method="post" onsubmit="Login();return false;" class="login">
+
+								<p class="form-row form-row-wide">
+									<label for="username">Username:
+										<i class="im im-icon-Male"></i>
+										<input type="text" class="input-text" name="username" id="uname" value="" />
+									</label>
+								</p>
+
+								<p class="form-row form-row-wide">
+									<label for="password">Password:
+										<i class="im im-icon-Lock-2"></i>
+										<input class="input-text" type="password" name="password" id="upass"/>
+									</label>
+									<span class="lost_password">
+										<a href="#" >Lost Your Password?</a>
+									</span>
+								</p>
+
+								<div class="form-row">
+									<input type="submit" class="button border margin-top-5" name="login" value="Login" />
+								
+									<div>
+                          <p style="color:black;margin-top:5%">----------------------------OR----------------------------</p>
+                              
+									
+								</div>
+								</div>
+								<!-- <form method="post" class="login"> -->
+
+							
+								<div>
+                                 <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-width="50" data-height="40" style="margin-top:4%;margin-left:25%"></div>
+&nbsp;                              
+
+                                  <div class="g-signin2 button-social-login button-social-login-google" data-size="medium"  data-height="30" data-longtitle="true" data-onsuccess="onSignIn" data-width="200" style="margin-top:4%;margin-left:25%"></div>
+                                   </div>
+								
+							</form>
+
+
+
+						</div>
+
+						<!-- Register -->
+						<div class="tab-content" id="tab2" style="display: none;">
+
+							<form method="post" class="register">
+								
+							<p class="form-row form-row-wide">
+								<label for="username2">Username:
+									<i class="im im-icon-Male"></i>
+									<input type="text" class="input-text" name="username" id="username2" value="" />
+								</label>
+							</p>
+								
+							<p class="form-row form-row-wide">
+								<label for="email2">Email Address:
+									<i class="im im-icon-Mail"></i>
+									<input type="text" class="input-text" name="email" id="email2" value="" />
+								</label>
+							</p>
+
+							<p class="form-row form-row-wide">
+								<label for="password1">Password:
+									<i class="im im-icon-Lock-2"></i>
+									<input class="input-text" type="password" name="password1" id="password1"/>
+								</label>
+							</p>
+
+							<p class="form-row form-row-wide">
+								<label for="password2">Repeat Password:
+									<i class="im im-icon-Lock-2"></i>
+									<input class="input-text" type="password" name="password2" id="password2"/>
+								</label>
+							</p>
+
+							<input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
+	
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- Sign In Popup / End -->
+
+		</div>
+	</div>
+	<!-- Header / End -->
+
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Banner
+================================================== -->
+<div class="main-search-container" data-background-image="images/home.jpg">
+	<div class="main-search-inner">
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+					<h2><b style="color:#37b6bd;">Find Your Best Rentspace</b></h2>
+					<h3 style="font-size:40px"><span style="color:#37b6bd;">Search.<span style="color:#37b6bd">Love.</span><span style="color:#f91942;">Rent</span></span></h3>
+					
+
+					<div class="main-search-input">
+
+						<div class="main-search-input-item">
+							<input type="text" placeholder="What are you looking for?" value=""/>
+						</div>
+
+						<div class="main-search-input-item location">
+							<input type="text" placeholder="Location" id="tags" value=""/>
+							<a href="#"><i class="fa fa-dot-circle-o"></i></a>
+						</div>
+
+						<div class="main-search-input-item">
+							<select data-placeholder="All Categories" class="chosen-select" id="searchtype">
+								<option value="All">All Categories</option>	
+								<option value="Family">Family</option>
+								<option value="Boys">Boys</option>
+								<option value="Girls">Girls</option>
+								<option value="Hostel">Hostel</option>
+							</select>
+						</div>
+
+						<button class="button" onclick="Gethomes()">Search</button>
+
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+
+
+
+
+
+<div class="container">
+	<div class="row">
+
+		<div class="col-md-12">
+			<h3 class="headline centered margin-top-75">
+				Popular Categories
+				<span>Browse <i>the most desirable</i> categories</span>
+			</h3>
+		</div>
+
+	</div>
+</div>
+
+
+<!-- Categories Carousel -->
+<div class="fullwidth-carousel-container margin-top-25">
+	<div class="fullwidth-slick-carousel category-carousel">
+
+		<!-- Item -->
+		<div class="fw-carousel-item">
+
+			<!-- this (first) box will be hidden under 1680px resolution -->
+			<div class="category-box-container half">
+				<a href="listings-half-screen-map-grid-1.html" class="category-box" data-background-image="images/category-box-01.jpg">
+					<div class="category-box-content">
+						<h3>Hotels</h3>
+						<span>64 listings</span>
+					</div>
+					<span class="category-box-btn">Browse</span>
+				</a>
+			</div>
+
+			<div class="category-box-container half">
+				<a href="listings-half-screen-map-grid-1.html" class="category-box" data-background-image="images/category-box-02.jpg">
+					<div class="category-box-content">
+						<h3>Shops</h3>
+						<span>14 listings</span>
+					</div>
+					<span class="category-box-btn">Browse</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- Item -->
+		<div class="fw-carousel-item">
+			<div class="category-box-container">
+				<a href="listings-half-screen-map-grid-1.html" class="category-box" data-background-image="images/category-box-03.jpg">
+					<div class="category-box-content">
+						<h3>Events</h3>
+						<span>67 listings</span>
+					</div>
+					<span class="category-box-btn">Browse</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- Item -->
+		<div class="fw-carousel-item">
+			<div class="category-box-container">
+				<a href="listings-half-screen-map-grid-1.html" class="category-box" data-background-image="images/category-box-04.jpg">
+					<div class="category-box-content">
+						<h3>Fitness</h3>
+						<span>27 listings</span>
+					</div>
+					<span class="category-box-btn">Browse</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- Item -->
+		<div class="fw-carousel-item">
+			<div class="category-box-container">
+				<a href="listings-half-screen-map-list.html" class="category-box" data-background-image="images/category-box-05.jpg">
+					<div class="category-box-content">
+						<h3>Nightlife</h3>
+						<span>22 listings</span>
+					</div>
+					<span class="category-box-btn">Browse</span>
+				</a>
+			</div>
+		</div>
+
+		<!-- Item -->
+		<div class="fw-carousel-item">
+			<div class="category-box-container">
+				<a href="listings-half-screen-map-list.html" class="category-box" data-background-image="images/category-box-06.jpg">
+					<div class="category-box-content">
+						<h3>Eat & Drink</h3>
+						<span>130 listings</span>
+					</div>
+					<span class="category-box-btn">Browse</span>
+				</a>
+			</div>
+		</div>
+
+	</div>
+</div>
+<!-- Categories Carousel / End -->
+
+
+
+<!-- Fullwidth Section -->
+<section class="fullwidth margin-top-65 padding-top-75 padding-bottom-70" data-background-color="#f8f8f8">
+
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-12">
+				<h3 class="headline centered margin-bottom-45">
+					Most Visited Places
+					<span>Discover top-rated local businesses</span>
+				</h3>
+			</div>
+
+			<div class="col-md-12">
+				<div class="simple-slick-carousel dots-nav" id="listContainer">
+
+			
+				<!-- Listing Item / End -->
+				</div>
+				
+			</div>
+
+		</div>
+	</div>
+
+</section>
+<!-- Fullwidth Section / End -->
+
+
+<!-- Info Section -->
+<div class="container">
+
+	<div class="row">
+		<div class="col-md-8 col-md-offset-2">
+			<h2 class="headline centered margin-top-80">
+				Plan The Vacation of Your Dreams 
+				<span class="margin-top-25">Explore some of the best tips from around the world from our partners and friends.  Discover some of the most popular listings in Sydney.</span>
+			</h2>
+		</div>
+	</div>
+
+	<div class="row icons-container">
+		<!-- Stage -->
+		<div class="col-md-4">
+			<div class="icon-box-2 with-line">
+				<i class="im im-icon-Map2"></i>
+				<h3>Find Interesting Place</h3>
+				<p>Proin dapibus nisl ornare diam varius tempus. Aenean a quam luctus, finibus tellus ut, convallis eros sollicitudin turpis.</p>
+			</div>
+		</div>
+
+		<!-- Stage -->
+		<div class="col-md-4">
+			<div class="icon-box-2 with-line">
+				<i class="im im-icon-Mail-withAtSign"></i>
+				<h3>Contact a Few Owners</h3>
+				<p>Maecenas pulvinar, risus in facilisis dignissim, quam nisi hendrerit nulla, id vestibulum metus nullam viverra porta purus.</p>
+			</div>
+		</div>
+
+		<!-- Stage -->
+		<div class="col-md-4">
+			<div class="icon-box-2">
+				<i class="im im-icon-Checked-User"></i>
+				<h3>Make a Reservation</h3>
+				<p>Faucibus ante, in porttitor tellus blandit et. Phasellus tincidunt metus lectus sollicitudin feugiat pharetra consectetur.</p>
+			</div>
+		</div>
+	</div>
+
+</div>
+<!-- Info Section / End -->
+
+
+<!-- Recent Blog Posts -->
+<section class="fullwidth border-top margin-top-70 padding-top-75 padding-bottom-75" data-background-color="#fff">
+	<div class="container">
+
+		<div class="row">
+			<div class="col-md-12">
+				<h3 class="headline centered margin-bottom-45">
+					From The Blog
+				</h3>
+			</div>
+		</div>
+
+		<div class="row">
+			<!-- Blog Post Item -->
+			<div class="col-md-4">
+				<a href="pages-blog-post.html" class="blog-compact-item-container">
+					<div class="blog-compact-item">
+						<img src="images/blog-compact-post-01.jpg" alt="">
+						<span class="blog-item-tag">Tips</span>
+						<div class="blog-compact-item-content">
+							<ul class="blog-post-tags">
+								<li>22 August 2017</li>
+							</ul>
+							<h3>Hotels for All Budgets</h3>
+							<p>Sed sed tristique nibh iam porta volutpat finibus. Donec in aliquet urneget mattis lorem. Pellentesque pellentesque.</p>
+						</div>
+					</div>
+				</a>
+			</div>
+			<!-- Blog post Item / End -->
+
+			<!-- Blog Post Item -->
+			<div class="col-md-4">
+				<a href="pages-blog-post.html" class="blog-compact-item-container">
+					<div class="blog-compact-item">
+						<img src="images/blog-compact-post-02.jpg" alt="">
+						<span class="blog-item-tag">Tips</span>
+						<div class="blog-compact-item-content">
+							<ul class="blog-post-tags">
+								<li>18 August 2017</li>
+							</ul>
+							<h3>The 50 Greatest Street Arts In London</h3>
+							<p>Sed sed tristique nibh iam porta volutpat finibus. Donec in aliquet urneget mattis lorem. Pellentesque pellentesque.</p>
+						</div>
+					</div>
+				</a>
+			</div>
+			<!-- Blog post Item / End -->
+
+			<!-- Blog Post Item -->
+			<div class="col-md-4">
+				<a href="pages-blog-post.html" class="blog-compact-item-container">
+					<div class="blog-compact-item">
+						<img src="images/blog-compact-post-03.jpg" alt="">
+						<span class="blog-item-tag">Tips</span>
+						<div class="blog-compact-item-content">
+							<ul class="blog-post-tags">
+								<li>10 August 2017</li>
+							</ul>
+							<h3>The Best Cofee Shops In Sydney Neighborhoods</h3>
+							<p>Sed sed tristique nibh iam porta volutpat finibus. Donec in aliquet urneget mattis lorem. Pellentesque pellentesque.</p>
+						</div>
+					</div>
+				</a>
+			</div>
+			<!-- Blog post Item / End -->
+
+			<div class="col-md-12 centered-content">
+				<a href="pages-blog.html" class="button border margin-top-10">View Blog</a>
+			</div>
+
+		</div>
+
+	</div>
+</section>
+<!-- Recent Blog Posts / End -->
+
+
+<!-- Footer
+================================================== -->
+<div id="footer" class="sticky-footer">
+	<!-- Main -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-6">
+				<img class="footer-logo" src="images/logo.png" alt="">
+				<br><br>
+				<p>Morbi convallis bibendum urna ut viverra. Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper.</p>
+			</div>
+
+			<div class="col-md-4 col-sm-6 ">
+				<h4>Helpful Links</h4>
+				<ul class="footer-links">
+					<li><a href="#">Login</a></li>
+					<li><a href="#">Sign Up</a></li>
+					<li><a href="#">My Account</a></li>
+					<li><a href="#">Add Listing</a></li>
+					<li><a href="#">Pricing</a></li>
+					<li><a href="#">Privacy Policy</a></li>
+				</ul>
+
+				<ul class="footer-links">
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Our Partners</a></li>
+					<li><a href="#">How It Works</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>		
+
+			<div class="col-md-3  col-sm-12">
+				<h4>Contact Us</h4>
+				<div class="text-widget">
+					<span>12345 Little Lonsdale St, Melbourne</span> <br>
+					Phone: <span>(123) 123-456 </span><br>
+					E-Mail:<span> <a href="#">office@example.com</a> </span><br>
+				</div>
+
+				<ul class="social-icons margin-top-20">
+					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+					<li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li>
+				</ul>
+
+			</div>
+
+		</div>
+		
+		<!-- Copyright -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="copyrights">© 2017 Listeo. All Rights Reserved.</div>
+			</div>
+		</div>
+
+	</div>
+
+</div>
+<!-- Footer / End -->
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+</div>
+<!-- Wrapper / End -->
+
+      <script>
+google.maps.event.addDomListener(window, 'load', initialize);
+function initialize() {
+var input = document.getElementById('tags');
+
+
+var autocomplete = new google.maps.places.Autocomplete(input);
+autocomplete.addListener('place_changed', function () {
+
+var place = autocomplete.getPlace();
+
+var aaa = place["address_components"];
+console.log(aaa[0].long_name)
+
+// place variable will have all the information you are looking for.
+console.log(place.geometry['location'].lat());
+console.log(place.geometry['location'].lng());
+});
+}
+</script>
+
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/mmenu.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/rangeslider.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/waypoints.min.js"></script>
+<script type="text/javascript" src="scripts/counterup.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+
+
+<!-- Style Switcher
+================================================== -->
+<script src="scripts/switcher.js"></script>
+
+<div id="style-switcher">
+	<h2>Color Switcher <a href="#"><i class="sl sl-icon-settings"></i></a></h2>
+	
+	<div>
+		<ul class="colors" id="color1">
+			<li><a href="#" class="main" title="Main"></a></li>
+			<li><a href="#" class="blue" title="Blue"></a></li>
+			<li><a href="#" class="green" title="Green"></a></li>
+			<li><a href="#" class="orange" title="Orange"></a></li>
+			<li><a href="#" class="navy" title="Navy"></a></li>
+			<li><a href="#" class="yellow" title="Yellow"></a></li>
+			<li><a href="#" class="peach" title="Peach"></a></li>
+			<li><a href="#" class="beige" title="Beige"></a></li>
+			<li><a href="#" class="purple" title="Purple"></a></li>
+			<li><a href="#" class="celadon" title="Celadon"></a></li>
+			<li><a href="#" class="red" title="Red"></a></li>
+			<li><a href="#" class="brown" title="Brown"></a></li>
+			<li><a href="#" class="cherry" title="Cherry"></a></li>
+			<li><a href="#" class="cyan" title="Cyan"></a></li>
+			<li><a href="#" class="gray" title="Gray"></a></li>
+			<li><a href="#" class="olive" title="Olive"></a></li>
+		</ul>
+	</div>
+		
+</div>
+<!-- Style Switcher / End -->
+
+
+</body>
+</html>
