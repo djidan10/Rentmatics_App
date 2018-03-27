@@ -6,6 +6,10 @@
 <title>Listeo</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
+<meta name="author" content=""><meta name="google-signin-client_id" content="22067969485-itbijda0dti859jimo6u5vl6ne2g7q4b.apps.googleusercontent.com">
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 
 <!-- CSS
 ================================================== -->
@@ -152,7 +156,7 @@ Loginid = localStorage.getItem("LoginID");
 
 
 
-          sendstring = "<li><img src='"+localurl+  "' style='height:20px;width:30px'>"+localamen+"</li><br>"
+          sendstring = "<li><img src='"+localurl+  "' style='height:20px;width:30px'>"+localamen+"</li>"
         sendament = sendament.concat(sendstring);
 
         }
@@ -188,7 +192,7 @@ Loginid = localStorage.getItem("LoginID");
          var Liked =searchout.Liked;
          if(Liked == true){
            document.getElementById("addwish").style.color = "red";
-           document.getElementById("wishtext").style.color = "#fa5b0f";
+         //  document.getElementById("wishtext").style.color = "#fa5b0f";
 
          }
         
@@ -274,12 +278,9 @@ document.getElementById("imageslider").innerHTML=image;
               Schedulename = document.getElementById('schname').value;
               schedulemail = document.getElementById('schemail').value;
               Schedulephone = document.getElementById('schphone').value;
-              ScheduleDT = document.getElementById('schdate').value;
-              var split = ScheduleDT.substring(0,10)
-              var split1 = ScheduleDT.substring(11,16)
-              Scheduledate= split;
-              Scheduletime= split1;
-            console.log("scxdule date");
+              Scheduletime = document.getElementById('schtime').value;
+              Scheduledate = document.getElementById('schdate').value;
+              
             console.log(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime)
          
              var dynamicotp=parseInt(Math.random() * (2999 - 2000) + 2000);
@@ -473,41 +474,7 @@ else{
 }
          
          
-         // function Otpauth(){
-       
-         //   var authkey="150219AJLZP0ww58ff3960";
-         //   var getotp = document.getElementById('verifyotp').value;
-         //     var verifyotp ="http://api.msg91.com/api/verifyRequestOTP.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&otp="+getotp;
-
-         //   var verifyotp1={
-         //    "OTp" : verifyotp,
-         //   }
-          
-         //   $.ajax({
-         //       type: "POST",
-         //       url: "http://paymyhire.com:8083/OTPAUTH",
-         //       contentType:"application/json; charset=utf-8",
-         //       data: JSON.stringify(verifyotp1),
-              
-              
-              
-         //   success: function(responsee){
-          
-         //     Scheuleresponse = JSON.parse(responsee);
-                      
-         //      if (Scheuleresponse.type == "success"){
-         //          $('#myModal').modal('hide');
-         //          ScheduleVisit(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime)
-         //       }
-         //      else{
-         //          $('#myModal').modal('show');
-         //         document.getElementById("invalidotp").style.visibility = "visible"; 
-         //          } 
-         //        }
-            
-         
-         // });
-         // }
+      
 
         function resend(){
      
@@ -563,7 +530,7 @@ function Addfav(colorid){
           
           
            document.getElementById("addwish").style.color = "red";
-           document.getElementById("wishtext").style.color = "#fa5b0f";
+           //document.getElementById("wishtext").style.color = "#fa5b0f";
            
 }
 
@@ -587,27 +554,329 @@ else{
            success: function(responsee){
            //colorid.style.color="black";  
            document.getElementById("addwish").style.color = "black"; 
-           document.getElementById("wishtext").style.color = "black";
+          // document.getElementById("wishtext").style.color = "black";
           
  
           
 }
 
-});
-
-
-
-}
-// 
-
-
+});}
 }
 return false;
 }
 
+//Rentmatics Login & signin code 
+
+
+
+
+var loginidvalue =""
+ loginidvalue = localStorage.getItem("LoginID");
+
+//Login
+function Login() {
+    var loginuser = document.getElementById('uname').value;
+    var loginpass = document.getElementById('upass').value;
+    var Rentmatics = {
+        "Username": loginuser,
+        "Password": loginpass,
+
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiLogin,
+        crossDomain: true,
+       
+        contentType: "application/json; charset=utf-8",
+       
+        data: JSON.stringify(Rentmatics),
+
+        success: function(responsee,stat,xhr) {
+            var searchout = JSON.parse(responsee);
+           
+            if (searchout.Status == "Success") {
+                loginidd = searchout.Loginid;
+                setCookie("RentmaticsCookie",searchout.Loginid,365) 
+                $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.visibility = "visible";
+//alert(xhr.getResponseHeader('Set-Cookie'));
+              window.history.back();
+            } else {
+                alert("Incorect Username and Password")
+
+            } }
+    });
+
+}
+
+
+
+
+
+// Signup-Register the Rentmatics user
+function SignupRent() {
+    var signuser = document.getElementById('Susername').value;
+    var signpass = document.getElementById('cpassword').value;
+    var signemail = document.getElementById('Semail').value;
+    var Rentmatics = {
+        "Id ": "",
+        "Username": signuser,
+        "Password": signpass,
+        "Loginid": signemail,
+        "Logintype": "Rentmatics"
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiUser,
+        xhrFields: {
+       withCredentials: true
+    },
+
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Rentmatics),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+           window.history.back();
+        }
+    });
+}
+
+
+
+//For Google User-Signin
+var auth2; // The Sign-In object.
+var googleUser; // The current user.
+var appStart = function() {
+    gapi.load('auth2', initSigninV2);
+};
+var initSigninV2 = function() {
+    auth2 = gapi.auth2.init({
+        client_id: 'CLIENT_ID.apps.googleusercontent.com',
+        scope: 'profile'
+    });
+
+
+    auth2.isSignedIn.listen(signinChanged);
+    auth2.currentUser.listen(userChanged);
+
+    if (auth2.isSignedIn.get() == true) {
+        auth2.signIn();
+    }
+    refreshValues();
+};
+
+
+var signinChanged = function(val) {
+    console.log('Signin state changed to ', val);
+
+};
+
+var userChanged = function(user) {
+    console.log('User now: ', user);
+    googleUser = user;
+    updateGoogleUser();
+
+};
+
+
+var updateGoogleUser = function() {
+    if (googleUser) {
+        console.log("got google user");
+        console.log(googleUser)
+
+    } else {
+        console.log("did nit get google user");
+
+    }
+};
+
+
+var refreshValues = function() {
+    if (auth2) {
+        console.log('Refreshing values...');
+
+        googleUser = auth2.currentUser.get();
+        console.log(googleUser)
+        updateGoogleUser();
+    }
+}
+
+function GsignOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function() {
+        console.log('User signed out.');
+
+    });
+}
+
+
+
+var delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+var email = "";
+
+function onSignIn(googleUser) {
+    
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail());
+
+    // This is null if the 'email' scope is not present.
+
+    var Id = profile.getId(); // Do not send to your backend! Use an ID token instead.
+    var name = profile.getName();
+    // var iamprofile.getImageUrl());
+    email = profile.getEmail();
+
+
+
+    var Gmail = {
+        "Id ": Id,
+        "Username": name,
+        "Password": "",
+        "Loginid": email,
+        "Logintype": "Gmail"
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiUser,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Gmail),
+
+        success: function(responsee) {
+                   var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+          window.history.back();
+
+
+
+        }
+
+    });
+}
+
+
+  function signOut() {
+             var auth2 = gapi.auth2.getAuthInstance();
+             auth2.signOut().then(function () {
+           console.log('User signed out.');
+                  });
+                }
+
+
+
+
+            
+           window.fbAsyncInit = function() {
+             FB.init({
+               appId      : '151850542086031',
+               xfbml      : true,
+               version    : 'v2.9'
+             });
+             FB.AppEvents.logPageView();
+           };
+         
+           (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=151850542086031';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+         
+          // This is called with the results from from FB.getLoginStatus().
+           function statusChangeCallback(response) {
+             console.log('statusChangeCallback');
+             console.log(response);
+            
+             if (response.status === 'connected') {
+               // Logged into your app and Facebook.
+               testAPI();
+             } else {
+             
+               
+             }
+           }
+         
+           function checkLoginState() {
+             FB.getLoginStatus(function(response) {
+               statusChangeCallback(response);
+             });
+           }
+         
+         
+           function testAPI() {
+             console.log('Welcome!  Fetching your information.... ');
+             FB.api('/me', function(response) {
+               console.log('Successful login for: ' + response.name);
+               console.log(response);
+               // document.getElementById('status').innerHTML =
+               //   'Thanks for logging in, ' + response.name + '!';
+
+
+    var Facebook = {
+        "Id ": "",
+        "Username":response.name,
+        "Password": "",
+        "Loginid": response.name,
+        "Logintype": "Facebook"
+
+    };
+   $.ajax({
+        type: "POST",
+        url: ApiUser,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Facebook),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+            window.history.back();
+   }
+ });
+ });
+   }
+         
+
+
              
              
       </script>
+
+
+
 
 
 </head>
@@ -619,232 +888,179 @@ return false;
 
 <!-- Header Container
 ================================================== -->
-<header id="header-container">
+    <header id="header-container">
 
-	<!-- Header -->
-	<div id="header" class="not-sticky">
-		<div class="container">
-			
-			<!-- Left Side Content -->
-			<div class="left-side">
-				
-				<!-- Logo -->
-				<div id="logo">
-					<a href="index.html"><img src="images/logo.png" alt=""></a>
-				</div>
+  <!-- Header -->
+  <div id="header">
+    <div class="container">
+      
+      <!-- Left Side Content -->
+      <div class="left-side">
+        
+        <!-- Logo -->
+        <div id="logo">
+          <a href="index.html"><img src="images/logo.png" alt=""></a>
+        </div>
 
-				<!-- Mobile Navigation -->
-				<div class="mmenu-trigger">
-					<button class="hamburger hamburger--collapse" type="button">
-						<span class="hamburger-box">
-							<span class="hamburger-inner"></span>
-						</span>
-					</button>
-				</div>
+        <!-- Mobile Navigation -->
+        <div class="mmenu-trigger">
+          <button class="hamburger hamburger--collapse" type="button">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        </div>
 
-				<!-- Main Navigation -->
-				<nav id="navigation" class="style-1">
-					<ul id="responsive">
 
-						<li><a href="#">Home</a>
-							<ul>
-								<li><a href="index.html">Home 1</a></li>
-								<li><a href="index-2.html">Home 2</a></li>
-								<li><a href="index-3.html">Home 3</a></li>
-								<li><a href="index-4.html">Home 4</a></li>
-							</ul>
-						</li>
+        <!-- Main Navigation -->
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
 
-						<li><a class="current" href="#">Listings</a>
-							<ul>
-								<li><a href="#">List Layout</a>
-									<ul>
-										<li><a href="listings-list-with-sidebar.html">With Sidebar</a></li>
-										<li><a href="listings-list-full-width.html">Full Width</a></li>
-										<li><a href="listings-list-full-width-with-map.html">Full Width + Map</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Grid Layout</a>
-									<ul>
-										<li><a href="listings-grid-with-sidebar-1.html">With Sidebar 1</a></li>
-										<li><a href="listings-grid-with-sidebar-2.html">With Sidebar 2</a></li>
-										<li><a href="listings-grid-full-width.html">Full Width</a></li>
-										<li><a href="listings-grid-full-width-with-map.html">Full Width + Map</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Half Screen Map</a>
-									<ul>
-										<li><a href="listings-half-screen-map-list.html">List Layout</a></li>
-										<li><a href="listings-half-screen-map-grid-1.html">Grid Layout 1</a></li>
-										<li><a href="listings-half-screen-map-grid-2.html">Grid Layout 2</a></li>
-									</ul>
-								</li>
-								<li><a href="listings-single-page.html">Single Listing</a></li>
-							</ul>
-						</li>
+            <li><a class="current" href="index.html">Home</a></li>
+                        <li><a href="howitwork.html">How It Works </a>
+                <ul>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+                
+                </ul>
+            </li>
+                        <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+                        <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
+                          <li><a href="http://paymyhire.com/" target="_blank" style="visibility:hidden" >PayMy</a></li>
 
-						<li><a href="#">User Panel</a>
-							<ul>
-								<li><a href="dashboard.html">Dashboard</a></li>
-								<li><a href="dashboard-messages.html">Messages</a></li>
-								<li><a href="dashboard-bookings.html">Bookings</a></li>
-								<li><a href="dashboard-my-listings.html">My Listings</a></li>
-								<li><a href="dashboard-reviews.html">Reviews</a></li>
-								<li><a href="dashboard-bookmarks.html">Bookmarks</a></li>
-								<li><a href="dashboard-add-listing.html">Add Listing</a></li>
-								<li><a href="dashboard-my-profile.html">My Profile</a></li>
-								<li><a href="dashboard-invoice.html">Invoice</a></li>
-							</ul>
-						</li>
+                         <li style="display:none" id="account"><a href="#">My Account</a>
+                  <ul>
+                    <li><a href="my-profile.html" >My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                    <li><a href="javascript:logout()" ">Logout</a></li>
+                  
+                  </ul> 
+            </li>
 
-						<li><a href="#">Pages</a>
-							<div class="mega-menu mobile-styles three-columns">
+            
 
-									<div class="mega-menu-section">
-										<ul>
-											<li class="mega-menu-headline">Pages #1</li>
-											<li><a href="pages-user-profile.html"><i class="sl sl-icon-user"></i> User Profile</a></li>
-											<li><a href="pages-booking.html"><i class="sl sl-icon-check"></i> Booking Page</a></li>
-											<li><a href="pages-add-listing.html"><i class="sl sl-icon-plus"></i> Add Listing</a></li>
-											<li><a href="pages-blog.html"><i class="sl sl-icon-docs"></i> Blog</a></li>
-										</ul>
-									</div>
-		
-									<div class="mega-menu-section">
-										<ul>
-											<li class="mega-menu-headline">Pages #2</li>
-											<li><a href="pages-contact.html"><i class="sl sl-icon-envelope-open"></i> Contact</a></li>
-											<li><a href="pages-coming-soon.html"><i class="sl sl-icon-hourglass"></i> Coming Soon</a></li>
-											<li><a href="pages-404.html"><i class="sl sl-icon-close"></i> 404 Page</a></li>
-											<li><a href="pages-masonry-filtering.html"><i class="sl sl-icon-equalizer"></i> Masonry Filtering</a></li>
-										</ul>
-									</div>
+              <li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i> Sign In</a></li>
+          <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>    
+          </ul>
+           
+        </nav>
+        <div class="clearfix"></div>
+        <!-- Main Navigation / End -->
+        
+      </div>
+      <!-- Left Side Content / End -->
 
-									<div class="mega-menu-section">
-										<ul>
-											<li class="mega-menu-headline">Other</li>
-											<li><a href="pages-elements.html"><i class="sl sl-icon-settings"></i> Elements</a></li>
-											<li><a href="pages-pricing-tables.html"><i class="sl sl-icon-tag"></i> Pricing Tables</a></li>
-											<li><a href="pages-typography.html"><i class="sl sl-icon-pencil"></i> Typography</a></li>
-											<li><a href="pages-icons.html"><i class="sl sl-icon-diamond"></i> Icons</a></li>
-										</ul>
-									</div>
-									
-							</div>
-						</li>
-						
-					</ul>
-				</nav>
-				<div class="clearfix"></div>
-				<!-- Main Navigation / End -->
-				
-			</div>
-			<!-- Left Side Content / End -->
 
-			<!-- Right Side Content / End -->
-			<div class="right-side">
-				<div class="header-widget">
-					<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"><i class="sl sl-icon-login"></i> Sign In</a>
-					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>
-				</div>
-			</div>
-			<!-- Right Side Content / End -->
 
-			<!-- Sign In Popup -->
-			<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+      <!-- Sign In Popup -->
+      <div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
 
-				<div class="small-dialog-header">
-					<h3>Sign In</h3>
-				</div>
+        <div class="small-dialog-header">
+          <h3>Sign In</h3>
+        </div>
 
-				<!--Tabs -->
-				<div class="sign-in-form style-1">
+        <!--Tabs -->
+        <div class="sign-in-form style-1">
 
-					<ul class="tabs-nav">
-						<li class=""><a href="#tab1">Log In</a></li>
-						<li><a href="#tab2">Register</a></li>
-					</ul>
+          <ul class="tabs-nav">
+            <li class=""><a href="#tab1">Log In</a></li>
+            <li><a href="#tab2">Register</a></li>
+          </ul>
 
-					<div class="tabs-container alt">
+          <div class="tabs-container alt">
 
-						<!-- Login -->
-						<div class="tab-content" id="tab1" style="display: none;">
-							<form method="post" class="login">
+            <!-- Login -->
+            <div class="tab-content" id="tab1" style="display: none;">
+              <form action="" method="post" onsubmit="Login();return false;" class="login">
 
-								<p class="form-row form-row-wide">
-									<label for="username">Username:
-										<i class="im im-icon-Male"></i>
-										<input type="text" class="input-text" name="username" id="username" value="" />
-									</label>
-								</p>
+                <p class="form-row form-row-wide">
+                  <label for="username">Username:
+                    <i class="im im-icon-Male"></i>
+                    <input type="text" class="input-text" name="username" id="uname" value="" />
+                  </label>
+                </p>
 
-								<p class="form-row form-row-wide">
-									<label for="password">Password:
-										<i class="im im-icon-Lock-2"></i>
-										<input class="input-text" type="password" name="password" id="password"/>
-									</label>
-									<span class="lost_password">
-										<a href="#" >Lost Your Password?</a>
-									</span>
-								</p>
+                <p class="form-row form-row-wide">
+                  <label for="password">Password:
+                    <i class="im im-icon-Lock-2"></i>
+                    <input class="input-text" type="password" name="password" id="upass"/>
+                  </label>
+                  <span class="lost_password">
+                    <a href="#" >Lost Your Password?</a>
+                  </span>
+                </p>
 
-								<div class="form-row">
-									<input type="submit" class="button border margin-top-5" name="login" value="Login" />
-									<div class="checkboxes margin-top-10">
-										<input id="remember-me" type="checkbox" name="check">
-										<label for="remember-me">Remember Me</label>
-									</div>
-								</div>
-								
-							</form>
-						</div>
+                <div class="form-row">
+                  <input type="submit" class="button border margin-top-5" name="login" value="Login" />
+                
+                  <div>
+                          <p style="color:black;margin-top:5%">----------------------------OR----------------------------</p>
+                              
+                  
+                </div>
+                </div>
+                <!-- <form method="post" class="login"> -->
 
-						<!-- Register -->
-						<div class="tab-content" id="tab2" style="display: none;">
+              
+                <div>
+                                 <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-width="50" data-height="40" style="margin-top:4%;margin-left:25%"></div>
+&nbsp;                              
 
-							<form method="post" class="register">
-								
-							<p class="form-row form-row-wide">
-								<label for="username2">Username:
-									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="username" id="username2" value="" />
-								</label>
-							</p>
-								
-							<p class="form-row form-row-wide">
-								<label for="email2">Email Address:
-									<i class="im im-icon-Mail"></i>
-									<input type="text" class="input-text" name="email" id="email2" value="" />
-								</label>
-							</p>
+                                  <div class="g-signin2 button-social-login button-social-login-google" data-size="medium"  data-height="30" data-longtitle="true" data-onsuccess="onSignIn" data-width="200" style="margin-top:4%;margin-left:25%"></div>
+                                   </div>
+                
+              </form>
 
-							<p class="form-row form-row-wide">
-								<label for="password1">Password:
-									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password1" id="password1"/>
-								</label>
-							</p>
 
-							<p class="form-row form-row-wide">
-								<label for="password2">Repeat Password:
-									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password2" id="password2"/>
-								</label>
-							</p>
 
-							<input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
-	
-							</form>
-						</div>
+            </div>
 
-					</div>
-				</div>
-			</div>
-			<!-- Sign In Popup / End -->
+            <!-- Register -->
+            <div class="tab-content" id="tab2" style="display: none;">
 
-		</div>
-	</div>
-	<!-- Header / End -->
+              <form method="post" class="register">
+                
+              <p class="form-row form-row-wide">
+                <label for="username2">Username:
+                  <i class="im im-icon-Male"></i>
+                  <input type="text" class="input-text" name="username" id="username2" value="" />
+                </label>
+              </p>
+                
+              <p class="form-row form-row-wide">
+                <label for="email2">Email Address:
+                  <i class="im im-icon-Mail"></i>
+                  <input type="text" class="input-text" name="email" id="email2" value="" />
+                </label>
+              </p>
+
+              <p class="form-row form-row-wide">
+                <label for="password1">Password:
+                  <i class="im im-icon-Lock-2"></i>
+                  <input class="input-text" type="password" name="password1" id="password1"/>
+                </label>
+              </p>
+
+              <p class="form-row form-row-wide">
+                <label for="password2">Repeat Password:
+                  <i class="im im-icon-Lock-2"></i>
+                  <input class="input-text" type="password" name="password2" id="password2"/>
+                </label>
+              </p>
+
+              <input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
+  
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- Sign In Popup / End -->
+
+    </div>
+  </div>
+  <!-- Header / End -->
 
 </header>
 <div class="clearfix"></div>
@@ -1209,118 +1425,101 @@ return false;
 
 				
 			<!-- Verified Badge -->
-			<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
+		<!-- 	<div class="verified-badge with-tip" data-tip-content="Listing has been verified and belongs the business owner or manager.">
 				<i class="sl sl-icon-check"></i> Verified Listing
 			</div>
-
+ -->
 			<!-- Book Now -->
 			<div class="boxed-widget booking-widget margin-top-35">
 				<h3><i class="fa fa-calendar-check-o "></i>Schedule a visit</h3>
-				<div class="row with-forms  margin-top-0">
+        <form action="" method="post" onsubmit="Schedule1();return false;">
+				<!-- <div class="row with-forms  margin-top-0"> -->
 
+
+
+                 <input type="text" placeholder="Your name" id="schname" required>
+              <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="schemail" required>
+            <input type="text" placeholder="Your Phone" id="schphone" pattern="[0-9]{10}" required>
 					<!-- Date Picker - docs: http://www.vasterad.com/docs/listeo/#!/date_picker -->
 					<div class="col-lg-6 col-md-12">
-						<input type="text" id="booking-date" data-lang="en" data-large-mode="true" data-large-default="true" data-min-year="2017" data-max-year="2020" data-lock="from">
+						<input type="text" id="booking-date" data-lang="en" data-large-mode="true" data-large-default="true" data-min-year="2017" data-max-year="2020" data-lock="from" id="schdate" required>
 					</div>
 
-					<!-- Time Picker - docs: http://www.vasterad.com/docs/listeo/#!/time_picker -->
 					<div class="col-lg-6 col-md-12">
-						<input type="text" id="booking-time" value="9:00 am">
+						<input type="text" id="booking-time" value="9:00 am" id="schtime" required>
 					</div>
 
-					<!-- Panel Dropdown -->
-					<div class="col-lg-12">
-						<div class="panel-dropdown">
-							<a href="#">Guests <span class="qtyTotal" name="qtyTotal">1</span></a>
-							<div class="panel-dropdown-content">
+				
 
-								<!-- Quantity Buttons -->
-								<div class="qtyButtons">
-									<div class="qtyTitle">Adults</div>
-									<input type="text" name="qtyInput" value="1">
-								</div>
-
-								<div class="qtyButtons">
-									<div class="qtyTitle">Childrens</div>
-									<input type="text" name="qtyInput" value="0">
-								</div>
-
-							</div>
-						</div>
-					</div>
-					<!-- Panel Dropdown / End -->
-
-				</div>
+				<!-- </div> -->
 				
 				<!-- progress button animation handled via custom.js -->
-				<a href="pages-booking.html" class="button book-now fullwidth margin-top-5">Book Now</a>
+				<button type="submit"  class="button book-now fullwidth margin-top-5">Schedule a Visit</button>
+        </form>
 			</div>
 			<!-- Book Now / End -->
 		
 
-			<!-- Opening Hours -->
-			<div class="boxed-widget opening-hours margin-top-35">
-				<div class="listing-badge now-open">Now Open</div>
-				<h3><i class="sl sl-icon-clock"></i> Opening Hours</h3>
-				<ul>
-					<li>Monday <span>9 AM - 5 PM</span></li>
-					<li>Tuesday <span>9 AM - 5 PM</span></li>
-					<li>Wednesday <span>9 AM - 5 PM</span></li>
-					<li>Thursday <span>9 AM - 5 PM</span></li>
-					<li>Friday <span>9 AM - 5 PM</span></li>
-					<li>Saturday <span>9 AM - 3 PM</span></li>
-					<li>Sunday <span>Closed</span></li>
-				</ul>
-			</div>
+	   <div class="boxed-widget booking-widget margin-top-35">
+        <h3><i class="fa fa-calendar-check-o "></i>Booknow</h3>
+         <form >
+        <div class="row with-forms  margin-top-0">
+             <input type="text" placeholder="Your name" id="bookuser">
+              <input type="text" placeholder="Your Email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" id="bookemail" required>
+            <input type="text" placeholder="Your Phone" id="bookphone" pattern="[0-9]{10}" required>
+              
+        
+
+        </div>
+        <button type="submit" id="rzp-button1"   class="button book-now fullwidth margin-top-5">Booknow</button>
+        
+        <!-- progress button animation handled via custom.js -->
+        <!-- <a href="pages-booking.html"  id="rzp-button1" class="button book-now fullwidth margin-top-5">Booknow</a> -->
+        </form>
+      </div>
 			<!-- Opening Hours / End -->
 
 
-			<!-- Contact -->
-			<div class="boxed-widget margin-top-35">
-				<div class="hosted-by-title">
-					<h4><span>Hosted by</span> <a href="pages-user-profile.html">Tom Perrin</a></h4>
-					<a href="pages-user-profile.html" class="hosted-by-avatar"><img src="images/dashboard-avatar.jpg" alt=""></a>
-				</div>
-				<ul class="listing-details-sidebar">
-					<li><i class="sl sl-icon-phone"></i> (123) 123-456</li>
-					<!-- <li><i class="sl sl-icon-globe"></i> <a href="#">http://example.com</a></li> -->
-					<li><i class="fa fa-envelope-o"></i> <a href="#">tom@example.com</a></li>
-				</ul>
-
-				<ul class="listing-details-sidebar social-profiles">
-					<li><a href="#" class="facebook-profile"><i class="fa fa-facebook-square"></i> Facebook</a></li>
-					<li><a href="#" class="twitter-profile"><i class="fa fa-twitter"></i> Twitter</a></li>
-					<!-- <li><a href="#" class="gplus-profile"><i class="fa fa-google-plus"></i> Google Plus</a></li> -->
-				</ul>
-
-				<!-- Reply to review popup -->
-				<div id="small-dialog" class="zoom-anim-dialog mfp-hide">
-					<div class="small-dialog-header">
-						<h3>Send Message</h3>
-					</div>
-					<div class="message-reply margin-top-0">
-						<textarea cols="40" rows="3" placeholder="Your message to Tom"></textarea>
-						<button class="button">Send Message</button>
-					</div>
-				</div>
-
-				<a href="#small-dialog" class="send-message-to-owner button popup-with-zoom-anim"><i class="sl sl-icon-envelope-open"></i> Send Message</a>
-			</div>
-			<!-- Contact / End-->
-
+			
 
 			<!-- Share / Like -->
 			<div class="listing-share margin-top-40 margin-bottom-40 no-border">
-				<button class="like-button"><span class="like-icon"></span> Bookmark this listing</button> 
-				<span>159 people bookmarked this place</span>
 
+
+
+
+				<button class="like-button" onclick="return Addfav(this)"><span class="like-icon" id="addwish"></span> Bookmark this listing</button> 
+			
+  <div class="flx socials">
 					<!-- Share Buttons -->
-					<ul class="share-buttons margin-top-40 margin-bottom-0">
-						<li><a class="fb-share" href="#"><i class="fa fa-facebook"></i> Share</a></li>
-						<li><a class="twitter-share" href="#"><i class="fa fa-twitter"></i> Tweet</a></li>
-						<li><a class="gplus-share" href="#"><i class="fa fa-google-plus"></i> Share</a></li>
-						<!-- <li><a class="pinterest-share" href="#"><i class="fa fa-pinterest-p"></i> Pin</a></li> -->
-					</ul>
+					 <ul class="social-icons" >
+
+
+
+          <li><div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.12&appId=151850542086031&autoLogAppEvents=1';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+ <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
+</li>
+  <li > <g:plus action="share" ></g:plus>
+
+    <script>
+      window.___gcfg = {
+        lang: 'en-US',
+        parsetags: 'onload'
+      };
+    </script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script></li>
+          </ul>
+          </div>
 					<div class="clearfix"></div>
 			</div>
 
