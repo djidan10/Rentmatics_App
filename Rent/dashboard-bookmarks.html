@@ -11,6 +11,242 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
+	<script type="text/javascript" src="scripts/jquery.min.js"></script>
+	<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+
+<script>
+var ApiLogout="http://paymyhire.com:8083/Logout"
+var ApiWishlist="http://paymyhire.com:8083/Wishlist"
+var ApiDeletewishlist="http://paymyhire.com:8083/Deletewishlist"
+
+
+
+var loginidd="";
+var cooki=$.cookie('RentmaticsCookie');
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  cardstring="No wish list found"
+ 	document.getElementById("hidenid").style.display = "none";
+   }else{
+       $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.display = "inline";
+    }
+});
+
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+//Logout the User
+function logout() {
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+
+
+}
+function Payalert(){
+	window.open("http://paymyhire.com/");
+
+}
+window.onload = function () {
+
+  
+    
+
+      var s={
+          "Loginid" :cooki
+        };
+
+   $.ajax({
+         type: "POST",
+      
+          url: ApiWishlist,
+          contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+         success: function(responsee){
+   
+            var searchout = JSON.parse(responsee);
+            if (searchout == null ){
+
+              alert("No wishlist Found");
+              document.getElementById("emptywish").style.display = "inline"; 
+          //url = 'working.html?loginid='+loginid;
+      
+            }
+            else{
+
+            Getresponse(searchout)
+          }
+}
+
+});
+}
+
+
+
+
+
+//Common function for s=Displaying Response
+function Getresponse(searchout){
+	
+  var cardstring ="";
+  var property =searchout.length +" Results Found ";
+ for (k=0;k<searchout.length;k++){
+    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,cooki);
+    console.log(cardstring)
+  }
+
+  document.getElementById("listContainer1").innerHTML=cardstring
+
+
+
+ for(j=0;j<searchout.length;j++){
+
+ if (searchout == ""){
+ 	document.getElementById("emptywish").style.display = "inline";
+
+ }
+ var finalDiv="";
+
+
+ var bhk1 =" Bhk"
+ 
+ 
+  for (i=0;i<searchout[j].RentFullimages.length;i++){
+  	finalDiv= searchout[j].RentFullimages[0].Picture_url;
+   }
+    
+  
+
+ 
+  var ID = searchout[j].RentFullStruct.Id;
+    var Liked = searchout[j].RentFullStruct.Liked;
+  //GetLiked("colorid"+searchout[j].RentFullStruct.Id,Liked);
+  
+ var mapview = searchout[j].Cityname;
+ var City =searchout[j].Cityname
+ var Rent = "$ "+searchout[j].RentFullStruct.Month_rent;
+ var Housename = searchout[j].RentFullStruct.Housename;
+ var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
+ var Address1 = searchout[j].RentFullStruct.Adress1;
+ var Address2 = searchout[j].RentFullStruct.Adress2;
+ var pin = searchout[j].RentFullStruct.Pin;
+ var state = searchout[j].RentFullStruct.State;
+ var country = searchout[j].RentFullStruct.Country;
+ var housetype =searchout[j].RentFullStruct.House_type
+ var tenantType =searchout[j].RentFullStruct.Tenant_type
+ var furnishingType =searchout[j].RentFullStruct.Furnish_type
+ var bedType =searchout[j].RentFullStruct.Bed
+
+
+
+
+
+
+$("#property").html(property);
+$("#Rent"+ID).html(Rent);
+$("#Housename"+ID).html(Housename);
+$("#bhk"+ID).html(bhk);
+$("#bed"+ID).html(bedType);
+$("#Address1"+ID).html(Address1);
+$("#Address2"+ID).html(Address2);
+$("#pin"+ID).html(pin);
+$("#state"+ID).html(state);
+$("#country"+ID).html(country);
+$("#city"+ID).html(City);
+$("#houseType"+ID).html(housetype);
+$("#tenantType"+ID).html(tenantType);
+$("#furnishtype"+ID).html(furnishingType);
+//$("#rentimage1"+ID).html(finalDiv);
+document.getElementById("rentimage1"+ ID).setAttribute("src",finalDiv);
+
+ url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
+
+//document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+    var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
+      src=src.replace("&amp;","&")
+      console.log(src)
+        // document.getElementById("map-canvas").setAttribute("src",src);
+//var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ&q="+mapview+",Banglore,India";
+// document.getElementById("maprightview").setAttribute("src",src);
+// document.getElementById("mapscroll").setAttribute("src",src);
+document.getElementById("getUrl"+ ID).setAttribute("href",url);
+
+
+}
+}
+
+function Deletefav(homeid){
+  
+var s={
+         
+          "Homeid" :homeid,
+          "Loginid":cooki
+
+        };
+
+   $.ajax({
+         type: "POST",
+         url: ApiDeletewishlist,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+
+           success: function(responsee){
+              location.reload(true);
+          
+          
+ 
+          
+}
+
+});
+
+
+
+}
+// 
+
+
+
+
+
+ //For Slider
+ function Getjavascript(Dyid,loginid){
+  var str= 
+"<li>"+
+"<div class='list-box-listing'>"+
+"<div class='list-box-listing-img'>"+
+"<a id='getUrl"+Dyid+"' style=''>"+
+"<img   id='rentimage1"+Dyid+"'"+
+">"+
+"</a></div>"+
+"<div class='list-box-listing-content'>"+
+"<div class='inner'>"+
+"<h4 id='Housename"+Dyid+"'>"+
+"</h4>"+
+"<span id='Address1"+Dyid+"' style='font-family:Hanken'></span>"+
+"<span id='Address2"+Dyid+"' style='font-family:Hanken'></span>"+
+"<div class='table-property-price' id='Rent"+Dyid+"'></div>"+
+"</div>"+
+"</div>"+
+"</div>"+
+"<div class='buttons-to-right'>"+
+"<a class='button gray' href='javascript:Deletefav("+Dyid+")'><i class='sl sl-icon-close'></i> Delete</a>"+
+"</div>"+
+"</li>";
+
+  return str;
+
+ }
+
+</script>
+
 
 </head>
 
@@ -100,41 +336,18 @@
 							</ul>
 						</li>
 
-						<li><a href="#">Pages</a>
-							<div class="mega-menu mobile-styles three-columns">
-
-									<div class="mega-menu-section">
-										<ul>
-											<li class="mega-menu-headline">Pages #1</li>
-											<li><a href="pages-user-profile.html"><i class="sl sl-icon-user"></i> User Profile</a></li>
-											<li><a href="pages-booking.html"><i class="sl sl-icon-check"></i> Booking Page</a></li>
-											<li><a href="pages-add-listing.html"><i class="sl sl-icon-plus"></i> Add Listing</a></li>
-											<li><a href="pages-blog.html"><i class="sl sl-icon-docs"></i> Blog</a></li>
-										</ul>
-									</div>
-		
-									<div class="mega-menu-section">
-										<ul>
-											<li class="mega-menu-headline">Pages #2</li>
-											<li><a href="pages-contact.html"><i class="sl sl-icon-envelope-open"></i> Contact</a></li>
-											<li><a href="pages-coming-soon.html"><i class="sl sl-icon-hourglass"></i> Coming Soon</a></li>
-											<li><a href="pages-404.html"><i class="sl sl-icon-close"></i> 404 Page</a></li>
-											<li><a href="pages-masonry-filtering.html"><i class="sl sl-icon-equalizer"></i> Masonry Filtering</a></li>
-										</ul>
-									</div>
-
-									<div class="mega-menu-section">
-										<ul>
-											<li class="mega-menu-headline">Other</li>
-											<li><a href="pages-elements.html"><i class="sl sl-icon-settings"></i> Elements</a></li>
-											<li><a href="pages-pricing-tables.html"><i class="sl sl-icon-tag"></i> Pricing Tables</a></li>
-											<li><a href="pages-typography.html"><i class="sl sl-icon-pencil"></i> Typography</a></li>
-											<li><a href="pages-icons.html"><i class="sl sl-icon-diamond"></i> Icons</a></li>
-										</ul>
-									</div>
+                         <li style="display:none" id="account"><a href="#">My Account</a>
+									<ul>
+										<li><a href="my-profile.html" >My Profile</a></li>
+										<li><a href="my-bookmarks.html">My Wish List</a></li>
+										<li><a href="javascript:logout()" ">Logout</a></li>
 									
-							</div>
+									</ul>	
 						</li>
+
+						
+
+							<li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i> Sign In</a></li>
 						
 					</ul>
 				</nav>
@@ -145,9 +358,9 @@
 			<!-- Left Side Content / End -->
 
 			<!-- Right Side Content / End -->
-			<div class="right-side">
+			<div >
 				<!-- Header Widget -->
-				<div class="header-widget">
+				<div class="header-widget" style="margin-top:-1%">
 					
 					<!-- User Menu -->
 					<div class="user-menu">
@@ -160,7 +373,7 @@
 						</ul>
 					</div>
 
-					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>
+					
 				</div>
 				<!-- Header Widget / End -->
 			</div>
@@ -243,61 +456,8 @@
 			<div class="col-lg-12 col-md-12">
 				<div class="dashboard-list-box margin-top-0">
 					<h4>Bookmarked Listings</h4>
-					<ul>
+					<ul id="listContainer1">
 
-						<li>
-							<div class="list-box-listing">
-								<div class="list-box-listing-img"><a href="#"><img src="images/listing-item-02.jpg" alt=""></a></div>
-								<div class="list-box-listing-content">
-									<div class="inner">
-										<h3>Sticky Band</h3>
-										<span>Bishop Avenue, New York</span>
-										<div class="star-rating" data-rating="5.0">
-											<div class="rating-counter">(23 reviews)</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="buttons-to-right">
-								<a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
-							</div>
-						</li>
-
-						<li>
-							<div class="list-box-listing">
-								<div class="list-box-listing-img"><a href="#"><img src="images/listing-item-04.jpg" alt=""></a></div>
-								<div class="list-box-listing-content">
-									<div class="inner">
-										<h3>Burger House</h3>
-										<span>2726 Shinn Street, New York</span>
-										<div class="star-rating" data-rating="5.0">
-											<div class="rating-counter">(31 reviews)</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="buttons-to-right">
-								<a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
-							</div>
-						</li>
-
-						<li>
-							<div class="list-box-listing">
-								<div class="list-box-listing-img"><a href="#"><img src="images/listing-item-06.jpg" alt=""></a></div>
-								<div class="list-box-listing-content">
-									<div class="inner">
-										<h3>Think Coffee</h3>
-										<span>215 Terry Lane, New York</span>
-										<div class="star-rating" data-rating="5.0">
-											<div class="rating-counter">(31 reviews)</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="buttons-to-right">
-								<a href="#" class="button gray"><i class="sl sl-icon-close"></i> Delete</a>
-							</div>
-						</li>
 
 					</ul>
 				</div>
