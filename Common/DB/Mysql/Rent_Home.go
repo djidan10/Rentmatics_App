@@ -613,6 +613,94 @@ func GetallhomedetailsDB() (Temprentarray []Model.RentSend) {
 
 }
 
+func GetTophomedetailsDB() (Temprentarray []Model.RentSend) {
+	var Data Model.Home
+	var TempRentStruct Model.RentSend
+	var tophomeid int
+
+	row1, err := OpenConnection["Rentmatics"].Query("Select homeid from  tophomes")
+	fmt.Println(err)
+
+	for row1.Next() {
+
+		row1.Scan(
+			&tophomeid,
+		)
+
+		rows, err := OpenConnection["Rentmatics"].Query("Select * from home where Id=?", tophomeid)
+		fmt.Println(err)
+
+		for rows.Next() {
+
+			rows.Scan(
+				&Data.Id,
+				&Data.Housename,
+				&Data.Executive_id,
+				&Data.Ownerid,
+				&Data.Adress1,
+				&Data.Adress2,
+				&Data.City,
+				&Data.District,
+				&Data.State,
+				&Data.Country,
+				&Data.Pin,
+				&Data.Phone_number,
+				&Data.Month_rent,
+				&Data.Bed_rent,
+				&Data.Bhk_rent,
+				&Data.Tenant_type,
+				&Data.Booking_type,
+				&Data.House_type,
+				&Data.Bhk,
+				&Data.Bed,
+				&Data.Avail_bed,
+				&Data.Avail_room,
+				&Data.Booked_bed,
+				&Data.Booked_bhk,
+				&Data.Distance,
+				&Data.Furnish_type,
+				&Data.Secutity_deposit,
+				&Data.Listing,
+				&Data.Amenities,
+				&Data.Description,
+				&Data.Latitude,
+				&Data.Longitude,
+				&Data.Squarefeet,
+				&Data.Totalfloors,
+				&Data.Facing,
+				&Data.Parking,
+			)
+
+			rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
+			fmt.Println("err", err)
+			var Rentimgarray []Model.Home_images
+
+			for rows.Next() {
+				var Rentimage Model.Home_images
+
+				rows.Scan(
+
+					&Rentimage.Home_id,
+					&Rentimage.Picture_id,
+					&Rentimage.Picture_url)
+
+				Rentimgarray = append(Rentimgarray, Rentimage)
+			}
+
+			//		row := OpenConnection["Rentmatics"].QueryRow("select cities from cities where id=?", Data.Cityid)
+			//		row.Scan(&TempRentStruct.Cityname)
+
+			TempRentStruct.RentFullStruct = Data
+			TempRentStruct.RentFullimages = Rentimgarray
+
+			Temprentarray = append(Temprentarray, TempRentStruct)
+		}
+	}
+
+	return Temprentarray
+
+}
+
 //Get Home details based on Address
 func GetHomeDetils_DBwithOwnerid(Ownerid int) (Temprentarray []Model.RentSend) {
 

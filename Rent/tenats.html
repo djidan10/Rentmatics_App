@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<head>
+
+<!-- Basic Page Needs
+================================================== -->
+<title>Listeo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
+================================================== -->
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+<style>
+  .jumbo-banner-section{
+    background-image: url('images/house7.jpeg');
+    filter: brightness(95%);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 480px;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    display: table;
+    width: 100%;
+}
+</style>
+
+</head>
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
+================================================== -->
+<header id="header-container">
+
+  <!-- Header -->
+  <div id="header">
+    <div class="container">
+      
+      <!-- Left Side Content -->
+      <div class="left-side">
+        
+        <!-- Logo -->
+        <div id="logo">
+          <a href="index.html"><img src="images/logo.png" alt=""></a>
+        </div>
+
+        <!-- Mobile Navigation -->
+        <div class="mmenu-trigger">
+          <button class="hamburger hamburger--collapse" type="button">
+            <span class="hamburger-box">
+              <span class="hamburger-inner"></span>
+            </span>
+          </button>
+        </div>
+
+
+        <!-- Main Navigation -->
+        <nav id="navigation" class="style-1">
+          <ul id="responsive">
+
+            <li><a class="current" href="index.html">Home</a></li>
+                        <li><a href="howitwork.html">How It Works </a>
+                <ul>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+                
+                </ul>
+            </li>
+                        <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+                        <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
+                          <li><a href="http://paymyhire.com/" target="_blank" style="visibility:hidden" >PayMy</a></li>
+
+                         <li style="display:none" id="account"><a href="#">My Account</a>
+                  <ul>
+                    <li><a href="my-profile.html" >My Profile</a></li>
+                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                    <li><a href="javascript:logout()" ">Logout</a></li>
+                  
+                  </ul> 
+            </li>
+
+            
+
+              <li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i> Sign In</a></li>
+          <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>    
+          </ul>
+           
+        </nav>
+        <div class="clearfix"></div>
+        <!-- Main Navigation / End -->
+        
+      </div>
+      <!-- Left Side Content / End -->
+
+
+
+      <!-- Sign In Popup -->
+      <div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+
+        <div class="small-dialog-header">
+          <h3>Sign In</h3>
+        </div>
+
+        <!--Tabs -->
+        <div class="sign-in-form style-1">
+
+          <ul class="tabs-nav">
+            <li class=""><a href="#tab1">Log In</a></li>
+            <li><a href="#tab2">Register</a></li>
+          </ul>
+
+          <div class="tabs-container alt">
+
+            <!-- Login -->
+            <div class="tab-content" id="tab1" style="display: none;">
+              <form action="" method="post" onsubmit="Login();return false;" class="login">
+
+                <p class="form-row form-row-wide">
+                  <label for="username">Username:
+                    <i class="im im-icon-Male"></i>
+                    <input type="text" class="input-text" name="username" id="uname" value="" />
+                  </label>
+                </p>
+
+                <p class="form-row form-row-wide">
+                  <label for="password">Password:
+                    <i class="im im-icon-Lock-2"></i>
+                    <input class="input-text" type="password" name="password" id="upass"/>
+                  </label>
+                  <span class="lost_password">
+                    <a href="#" >Lost Your Password?</a>
+                  </span>
+                </p>
+
+                <div class="form-row">
+                  <input type="submit" class="button border margin-top-5" name="login" value="Login" />
+                
+                  <div>
+                          <p style="color:black;margin-top:5%">----------------------------OR----------------------------</p>
+                              
+                  
+                </div>
+                </div>
+                <!-- <form method="post" class="login"> -->
+
+              
+                <div>
+                                 <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-width="50" data-height="40" style="margin-top:4%;margin-left:25%"></div>
+&nbsp;                              
+
+                                  <div class="g-signin2 button-social-login button-social-login-google" data-size="medium"  data-height="30" data-longtitle="true" data-onsuccess="onSignIn" data-width="200" style="margin-top:4%;margin-left:25%"></div>
+                                   </div>
+                
+              </form>
+
+
+
+            </div>
+
+            <!-- Register -->
+            <div class="tab-content" id="tab2" style="display: none;">
+
+              <form method="post" class="register">
+                
+              <p class="form-row form-row-wide">
+                <label for="username2">Username:
+                  <i class="im im-icon-Male"></i>
+                  <input type="text" class="input-text" name="username" id="username2" value="" />
+                </label>
+              </p>
+                
+              <p class="form-row form-row-wide">
+                <label for="email2">Email Address:
+                  <i class="im im-icon-Mail"></i>
+                  <input type="text" class="input-text" name="email" id="email2" value="" />
+                </label>
+              </p>
+
+              <p class="form-row form-row-wide">
+                <label for="password1">Password:
+                  <i class="im im-icon-Lock-2"></i>
+                  <input class="input-text" type="password" name="password1" id="password1"/>
+                </label>
+              </p>
+
+              <p class="form-row form-row-wide">
+                <label for="password2">Repeat Password:
+                  <i class="im im-icon-Lock-2"></i>
+                  <input class="input-text" type="password" name="password2" id="password2"/>
+                </label>
+              </p>
+
+              <input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
+  
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- Sign In Popup / End -->
+
+    </div>
+  </div>
+  <!-- Header / End -->
+
+</header>
+<div class="clearfix"></div>
+<!-- Header Container / End -->
+
+
+<!-- Content
+================================================== -->
+
+
+<!-- Container / Start -->
+<div style="margin-top:2%">
+
+    
+     
+       
+      
+          <h1 style="text-align:center"><b>Tenants</b></h1>
+          
+          <h5 style="text-align:center;">Discover how rentmatics can you help you find everything you want</h5>
+          <br>
+          <br>
+          
+            <!-- Status -->
+          
+          
+  
+
+
+
+          
+          
+          <!-- Breadcrumbs -->
+          
+        </div>
+      </div>
+
+  <div class="row">
+
+ <section class="fullwidth" data-background-color="#f7f7f7">
+
+  <!-- Content -->
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4">
+      <div class="testimonial-box">
+          <div >
+        <!-- Icon Box -->
+        <div class="icon-box-1 alternative">
+
+          <div >
+          <img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/phone.png">
+          </div>
+
+          <h3>Book and Confirm</h3>
+          <p>TSearch and filter hundreds of listings, read reviews, explore photos and find the perfect spot.</p>
+        </div>
+      </div>
+      </div>
+      </div>
+
+      <div class="col-md-4">
+      <div class="testimonial-box">
+          <div >
+        <!-- Icon Box -->
+        <div class="icon-box-1 alternative">
+
+          <div >
+            <img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/find.png">
+          </div>
+
+          <h3>Check In and Work</h3>
+          <p>Go and have a good time or even make a booking directly from the listing page. All of those, thanks to Listable!</p>
+        </div>
+        </div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+      <div class="testimonial-box">
+          <div >
+        <!-- Icon Box -->
+        <div class="icon-box-1 alternative">
+
+          <div>
+            <img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/save.png">
+          </div>
+
+          <h3>Find a Space</h3>
+          <p>Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a mall to do some shopping?</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  </div>
+  </div>
+
+</section>
+
+<section class="fullwidth" data-background-color="#70c39e" >
+
+  <!-- Content -->
+  <div class="container">
+    <div class="row">
+    <h2 style="font-family:inherit; font-weight: 500;line-height: 1.1;color:white;">Why singles love Rentmatics homes</h2>
+    <br>
+    <div style="color:white;line-height: 2.1">
+    <li>Feel like a Home</li>
+    <li>Verified Houses</li>
+    <li>Hassle-free living</li>
+    <li>Easy move in/move out policies</li>
+    <li>Choose your roommate</li>
+    <li>And More events, activities</li>
+<br>
+    <a href="listings-half-map-grid-compact.html" class="button border">Explore Houses</a>
+
+    </div>
+
+      
+    </div>
+  </div>
+  
+
+</section>
+
+  </div>
+
+</div>
+<!-- Container / End -->
+
+
+
+<!-- Footer
+================================================== -->
+<div id="footer" class="margin-top-55">
+  <!-- Main -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-sm-6">
+        <img class="footer-logo" src="images/logo.png" alt="">
+        <br><br>
+        <p>Morbi convallis bibendum urna ut viverra. Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper.</p>
+      </div>
+
+      <div class="col-md-4 col-sm-6 ">
+        <h4>Helpful Links</h4>
+        <ul class="footer-links">
+          <li><a href="#">Login</a></li>
+          <li><a href="#">Sign Up</a></li>
+          <li><a href="#">My Account</a></li>
+          <li><a href="#">Add Listing</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Privacy Policy</a></li>
+        </ul>
+
+        <ul class="footer-links">
+          <li><a href="#">FAQ</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Our Partners</a></li>
+          <li><a href="#">How It Works</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>    
+
+      <div class="col-md-3  col-sm-12">
+        <h4>Contact Us</h4>
+        <div class="text-widget">
+          <span>12345 Little Lonsdale St, Melbourne</span> <br>
+          Phone: <span>(123) 123-456 </span><br>
+          E-Mail:<span> <a href="#">office@example.com</a> </span><br>
+        </div>
+
+        <ul class="social-icons margin-top-20">
+          <li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+          <li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+          <li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li>
+        </ul>
+
+      </div>
+
+    </div>
+    
+    <!-- Copyright -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="copyrights">© 2017 Listeo. All Rights Reserved.</div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer / End -->
+
+
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
+
+
+</div>
+<!-- Wrapper / End -->
+
+
+
+<!-- Scripts
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/mmenu.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/rangeslider.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/waypoints.min.js"></script>
+<script type="text/javascript" src="scripts/counterup.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+
+<!-- Maps -->
+<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
+<script type="text/javascript" src="scripts/infobox.min.js"></script>
+<script type="text/javascript" src="scripts/markerclusterer.js"></script>
+<script type="text/javascript" src="scripts/maps.js"></script>
+
+
+<!-- Style Switcher
+================================================== -->
+<script src="scripts/switcher.js"></script>
+
+<div id="style-switcher">
+  <h2>Color Switcher <a href="#"><i class="sl sl-icon-settings"></i></a></h2>
+  
+  <div>
+    <ul class="colors" id="color1">
+      <li><a href="#" class="main" title="Main"></a></li>
+      <li><a href="#" class="blue" title="Blue"></a></li>
+      <li><a href="#" class="green" title="Green"></a></li>
+      <li><a href="#" class="orange" title="Orange"></a></li>
+      <li><a href="#" class="navy" title="Navy"></a></li>
+      <li><a href="#" class="yellow" title="Yellow"></a></li>
+      <li><a href="#" class="peach" title="Peach"></a></li>
+      <li><a href="#" class="beige" title="Beige"></a></li>
+      <li><a href="#" class="purple" title="Purple"></a></li>
+      <li><a href="#" class="celadon" title="Celadon"></a></li>
+      <li><a href="#" class="red" title="Red"></a></li>
+      <li><a href="#" class="brown" title="Brown"></a></li>
+      <li><a href="#" class="cherry" title="Cherry"></a></li>
+      <li><a href="#" class="cyan" title="Cyan"></a></li>
+      <li><a href="#" class="gray" title="Gray"></a></li>
+      <li><a href="#" class="olive" title="Olive"></a></li>
+    </ul>
+  </div>
+    
+</div>
+<!-- Style Switcher / End -->
+
+
+</body>
+</html>

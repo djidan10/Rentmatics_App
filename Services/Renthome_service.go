@@ -50,6 +50,26 @@ func Getallhomedetails(w http.ResponseWriter, r *http.Request) {
 
 }
 
+//Get All Home Detials without service id
+func Tophome(w http.ResponseWriter, r *http.Request) {
+
+	Data := Db.GetTophomedetailsDB()
+
+	Senddata, err := json.Marshal(Data)
+
+	if err != nil {
+		log.Error("Error on send home details", err)
+	}
+	w.WriteHeader(http.StatusOK)
+	//	w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+	//	w.Header().Set("Access-Control-Allow-Orgin", "localhost")
+
+	fmt.Println("header", w.Header())
+	w.Write(Senddata)
+
+}
+
 //Gethome detaiils based on city
 func Gethomedetails(w http.ResponseWriter, r *http.Request) {
 	var Cityid Cityy

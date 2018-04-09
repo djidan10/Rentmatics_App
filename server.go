@@ -190,6 +190,9 @@ func Serve() bool {
 	router.HandleFunc("/Getfeedback", Service.GetFeedback)
 	router.HandleFunc("/OwnerReferandearn", Service.Referandearn)
 
+	//top homes
+	router.HandleFunc("/Tophome", Service.Tophome)
+
 	//Refer and earn
 	router.HandleFunc("/Getrefercode", Service.GetRefercode)
 

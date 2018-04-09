@@ -171,6 +171,8 @@
         $("#getbed").val(bhkarray1[--bhkarraycount1]);
       
       }}
+
+
       function getplus1(){
       if (bhkarraycount1<=6){
         
@@ -310,10 +312,13 @@
      
          if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
               alert("inside favourte ")
+              $("#sign-in-dialog").click()
+   // $("#sign-in-dialog").load( $(this).attr("href") );
 
-          var url2 = "#sign-in-dialog";
-       
-          location.href = url2;
+
+          
+           // $('').show();  
+      
       
         
               }
@@ -1045,13 +1050,13 @@ function onSignIn(googleUser) {
       <!-- Header Container / End -->
       <!-- Content
          ================================================== -->
-      <div class="fs-container">
+      <div class="fs-container" >
          <div class="fs-inner-container content">
-            <div class="fs-content">
+            <div class="fs-content" style="margin-top:-14%">
                <!-- Search -->
                <section class="search">
                   <div class="row">
-                     <div class="col-md-12">
+                     <div class="col-md-12" >
                         <!-- Row With Forms -->
                         <div class="row with-forms">
                            <!-- Main Search Input -->
