@@ -227,7 +227,7 @@ img { max-width: 100%; }
 ------------------------------------- */
 #logo { display: inline-block; margin-top: 3px; }
 
-#logo img { max-height: 38px; width: auto; transform: translate3d(0,0,0); }
+#logo img { max-height: 45px; width: auto;  }
 img.footer-logo { max-height: 38px; width: auto; }
 
 #header {
@@ -332,7 +332,7 @@ header.fullwidth .container {
 #header.cloned { background-color: #fff; }
 
 /* Sticky header styles */
-#header.cloned #logo img { transform: translate3d(0,0,0); max-width: 120px; margin-top: 1px; }
+#header.cloned #logo img {  max-width: 120px; margin-top: 1px; }
 #header.cloned { padding: 18px 0 7px 0; }
 
 .sticky-logo { display: none; }
@@ -9106,7 +9106,7 @@ header.fullwidth.dashboard .container { padding-left: 285px; }
 .dashboard #logo a img {
 	top: 50%;
 	position: relative;
-	transform: translate3d(0,-50%,0);
+	/*transform: translate3d(0,-50%,0);*/
 }
 
 
@@ -13250,7 +13250,7 @@ img.mfp-img {
 		top: 0;
 		position: relative;
 		max-height: 40px;
-    	transform: translate3d(0,0,0);
+    	/*transform: translate3d(0,0,0);*/
 	}
 }
 

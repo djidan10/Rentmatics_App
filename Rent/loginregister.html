@@ -1,22 +1,30 @@
 <!DOCTYPE html>
-<html>
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><!-- Basic Page Needs
+<head>
+
+<!-- Basic Page Needs
 ================================================== -->
-	<title>Rentmatics</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><!-- CSS
+<title>Listeo</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- CSS
 ================================================== -->
-	<link href="css/style.css" rel="stylesheet" />
-	<link href="css/colors/main.css" id="colors" rel="stylesheet" />
-	<!-- <link href="css/style1.css" rel="stylesheet" /> -->
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/colors/main.css" id="colors">
+<link href="css/font-awesome.min.css" rel="stylesheet" />
+	<link href="css/bootstrap.min.css" rel="stylesheet" />
 	<link href="css/style2.css" rel="stylesheet" /><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
 
 <meta name="author" content=""><meta name="google-signin-client_id" content="22067969485-itbijda0dti859jimo6u5vl6ne2g7q4b.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script><!-- Google font Source Sans Pro --><!-- <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700" rel="stylesheet"> --><!-- Fontawesome Icons -->
-	<link href="css/font-awesome.min.css" rel="stylesheet" />
-	<link href="css/bootstrap.min.css" rel="stylesheet" />
+<script src="https://apis.google.com/js/platform.js" async defer></script>
 <script type="text/javascript" src="scripts/jquery.min.js"></script><script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false">
+  
+  
+</script>
 <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
 	<style type="text/css">.jumbo-banner-section{
     background-image: url('images/banner1.jpg');
@@ -412,92 +420,211 @@ function Forgot() {
 }
 
 
-
-
-
-
-
 </script>
+
 </head>
-<body><!-- Wrapper -->
-<div id="wrapper"><!-- Header Container
-================================================== --><!-- Header Container
+
+<body>
+
+<!-- Wrapper -->
+<div id="wrapper">
+
+<!-- Header Container
 ================================================== -->
-<header class="fullwidth" id="header-container"><!-- Topbar -->
-<div id="top-bar">
-<div class="container"><!-- Left Side Content -->
-<div class="left-side">
-<ul class="top-bar-menu">
-	<li>+91-9884379333/9811448697</li>
-	<li><a href="#" style="font-size:12px;">Info@rentmatics.com</a></li>
-</ul>
-</div>
+<header id="header-container">
 
-<div class="right-side">
-<ul class="social-icons">
-	<li></li>
-	<li></li>
-	<li></li>
-</ul>
-</div>
-</div>
-</div>
+	<!-- Header -->
+	<div id="header">
+		<div class="container">
+			
+			<!-- Left Side Content -->
+			<div class="left-side">
+				
+				<!-- Logo -->
+				<div id="logo">
+					<a href="index.html"><img src="images/logo.png" alt=""></a>
+				</div>
 
-<div class="clearfix"></div>
+				<!-- Mobile Navigation -->
+				<div class="mmenu-trigger">
+					<button class="hamburger hamburger--collapse" type="button">
+						<span class="hamburger-box">
+							<span class="hamburger-inner"></span>
+						</span>
+					</button>
+				</div>
 
-<div id="header">
-<div class="container">
-<div class="left-side">
-<div id="logo"><a href="index.html"><img alt="" src="images/rm_logo.png" /></a></div>
-<!-- Mobile Navigation -->
 
-<div class="menu-responsive"></div>
-<!-- Main Navigation -->
+				<!-- Main Navigation -->
+				<nav id="navigation" class="style-1">
+					<ul id="responsive">
 
-<nav class="style-1" id="navigation">
-<ul id="responsive">
-	<li><a href="index.html">Home</a></li>
-	<li><a href="howitwork.html" style="font-size:15px;">How It Works </a>
-	<ul>
-		<li><a href="owner.html" style="font-size:15px;">Owners</a></li>
-		<li><a href="tenats.html" style="font-size:15px;">Tenants</a></li>
-	</ul>
-	</li>
-	<li><a href="listings-half-map-grid-compact.html" style="font-size:15px;">Find Room</a></li>
-	<li><a href="javascript:Payalert()" style="font-size:15px;">PayMyHire</a></li>
-</ul>
-</nav>
+						<li><a class="current" href="index.html">Home</a></li>
+                        <li><a href="howitwork.html">How It Works </a>
+							  <ul>
+								<li><a href="owner.html">Owners</a>	</li>
+								<li><a href="tenats.html">Tenants</a></li>
+								
+				    		</ul>
+						</li>
+                        <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+                        <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
+                          <li><a href="http://paymyhire.com/" target="_blank" style="visibility:hidden" >PayMy</a></li>
 
-<div class="clearfix"></div>
-</div>
+                         <li style="display:none" id="account"><a href="#">My Account</a>
+									<ul>
+										<li><a href="my-profile.html" >My Profile</a></li>
+										<li><a href="my-bookmarks.html">My Wish List</a></li>
+										<li><a href="javascript:logout()" ">Logout</a></li>
+									
+									</ul>	
+						</li>
 
-<div class="right-side">
-<nav class="style-1" id="navigation">
-<ul id="responsive">
-	<li style="visibility:hidden">bjkdhdkjjjjdhjdcbcdkjdhd</li>
-	<li id="loginhiden"><a class="sign-in" href="login-register.html" style="font-size:15px;">Log In / Register</a></li>
-	<li id="account" style="display:none"><a href="#">My Account</a>
-	<ul>
-		<li><a href="my-profile.html">My Profile</a></li>
-		<li><a href="my-bookmarks.html">My Wish List</a></li>
-		<li><a href="javascript:logout()">Logout</a></li>
-	</ul>
-	</li>
-</ul>
-</nav>
-</div>
-</div>
-</div>
+						
+
+							<li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i> Sign In</a></li>
+					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>		
+					</ul>
+					 
+				</nav>
+				<div class="clearfix"></div>
+				<!-- Main Navigation / End -->
+				
+			</div>
+			<!-- Left Side Content / End -->
+
+
+
+			<!-- Sign In Popup -->
+			<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+
+				<div class="small-dialog-header">
+					<h3>Sign In</h3>
+				</div>
+
+				<!--Tabs -->
+				<div class="sign-in-form style-1">
+
+					<ul class="tabs-nav">
+						<li class=""><a href="#tab1">Log In</a></li>
+						<li><a href="#tab2">Register</a></li>
+					</ul>
+
+					<div class="tabs-container alt">
+
+						<!-- Login -->
+						<div class="tab-content" id="tab1" style="display: none;">
+							<form action="" method="post" onsubmit="Login();return false;" class="login">
+
+								<p class="form-row form-row-wide">
+									<label for="username">Username:
+										<i class="im im-icon-Male"></i>
+										<input type="text" class="input-text" name="username" id="uname" value="" />
+									</label>
+								</p>
+
+								<p class="form-row form-row-wide">
+									<label for="password">Password:
+										<i class="im im-icon-Lock-2"></i>
+										<input class="input-text" type="password" name="password" id="upass"/>
+									</label>
+									<span class="lost_password">
+										<a href="#" >Lost Your Password?</a>
+									</span>
+								</p>
+
+								<div class="form-row">
+									<input type="submit" class="button border margin-top-5" name="login" value="Login" />
+								
+									<div>
+                          <p style="color:black;margin-top:5%">----------------------------OR----------------------------</p>
+                              
+									
+								</div>
+								</div>
+								<!-- <form method="post" class="login"> -->
+
+							
+								<div>
+                                 <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-width="50" data-height="40" style="margin-top:4%;margin-left:25%"></div>
+&nbsp;                              
+
+                                  <div class="g-signin2 button-social-login button-social-login-google" data-size="medium"  data-height="30" data-longtitle="true" data-onsuccess="onSignIn" data-width="200" style="margin-top:4%;margin-left:25%"></div>
+                                   </div>
+								
+							</form>
+
+
+
+						</div>
+
+						<!-- Register -->
+						<div class="tab-content" id="tab2" style="display: none;">
+
+							<form method="post" class="register">
+								
+							<p class="form-row form-row-wide">
+								<label for="username2">Username:
+									<i class="im im-icon-Male"></i>
+									<input type="text" class="input-text" name="username" id="username2" value="" />
+								</label>
+							</p>
+								
+							<p class="form-row form-row-wide">
+								<label for="email2">Email Address:
+									<i class="im im-icon-Mail"></i>
+									<input type="text" class="input-text" name="email" id="email2" value="" />
+								</label>
+							</p>
+
+							<p class="form-row form-row-wide">
+								<label for="password1">Password:
+									<i class="im im-icon-Lock-2"></i>
+									<input class="input-text" type="password" name="password1" id="password1"/>
+								</label>
+							</p>
+
+							<p class="form-row form-row-wide">
+								<label for="password2">Repeat Password:
+									<i class="im im-icon-Lock-2"></i>
+									<input class="input-text" type="password" name="password2" id="password2"/>
+								</label>
+							</p>
+
+							<input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
+	
+							</form>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- Sign In Popup / End -->
+
+		</div>
+	</div>
+	<!-- Header / End -->
+
 </header>
-
 <div class="clearfix"></div>
-<!-- Header Container / End --><!-- Titlebar
+<!-- Header Container / End -->
 
-<!-- main -->
+
+
+
+<!-- Content
+================================================== -->
+
+
+
+
+
+
+
 
 <div class="jumbo-banner-section">
-<div class="main agileits-w3layouts" style="margin-top:-80px">
-<div class="main-agileinfo" style="margin-top:70px;">
+<!-- <div class="main agileits-w3layouts" > -->
+<div class="main-agileinfo" >
 <div class="agileui-forms">
 <div class="container-form" style="height:500px;">
 <div class="form-item log-in"><!-- login form-->
@@ -596,69 +723,125 @@ function Forgot() {
 </div>
 </div>
 </div>
+
+
+
 <!-- Footer
 ================================================== -->
+<div id="footer" class="margin-top-60">
+	<!-- Main -->
+	<div class="container">
+		<div class="row">
+			<div class="col-md-5 col-sm-6">
+				<img class="footer-logo" src="images/logo.png" alt="">
+				<br><br>
+				<p>Morbi convallis bibendum urna ut viverra. Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper.</p>
+			</div>
 
-<div class="margin-top-55"></div>
-<!-- Footer
-================================================== -->
+			<div class="col-md-4 col-sm-6 ">
+				<h4>Helpful Links</h4>
+				<ul class="footer-links">
+					<li><a href="#">Login</a></li>
+					<li><a href="#">Sign Up</a></li>
+					<li><a href="#">My Account</a></li>
+					<li><a href="#">Add Listing</a></li>
+					<li><a href="#">Pricing</a></li>
+					<li><a href="#">Privacy Policy</a></li>
+				</ul>
 
-<div id="footer" style="background-color:#484848;color:white"><!-- Main -->
-<div class="container">
-<div class="row">
-<div class="col-md-5 col-sm-6">
-<h2 style="color:white;font-family:Hanken;font-size:35px;margin-top:-1px"><b style="text-shadow: 1px 1px 2px black, 0 0 25px grey, 0 0 5px grey">Rentmatics</b></h2>
-<!-- <img class="footer-logo" src="images/rm_logo.png"  alt=""> --><br />
-&nbsp;
-<p style="font-family:Hanken;font-size:17px;margin-top:-35px">Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+				<ul class="footer-links">
+					<li><a href="#">FAQ</a></li>
+					<li><a href="#">Blog</a></li>
+					<li><a href="#">Our Partners</a></li>
+					<li><a href="#">How It Works</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+				<div class="clearfix"></div>
+			</div>		
+
+			<div class="col-md-3  col-sm-12">
+				<h4>Contact Us</h4>
+				<div class="text-widget">
+					<span>12345 Little Lonsdale St, Melbourne</span> <br>
+					Phone: <span>(123) 123-456 </span><br>
+					E-Mail:<span> <a href="#">office@example.com</a> </span><br>
+				</div>
+
+				<ul class="social-icons margin-top-20">
+					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
+					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
+					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
+					<li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li>
+				</ul>
+
+			</div>
+
+		</div>
+		
+		<!-- Copyright -->
+		<div class="row">
+			<div class="col-md-12">
+				<div class="copyrights">© 2017 Listeo. All Rights Reserved.</div>
+			</div>
+		</div>
+
+	</div>
+
 </div>
+<!-- Footer / End -->
 
-<div class="col-md-4 col-sm-6 ">
-<h4 style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Helpful Links</b></h4>
 
-<ul class="footer-links">
-	<li style="color:white;font-family:Hanken;font-size:17px"><a href="login-register.html" style="color:white">Login/Signup</a></li>
-	<li style="color:white;font-family:Hanken;font-size:17px"><a href="about.html" style="color:white">About</a></li>
-	<li style="color:white;font-family:Hanken;font-size:17px"><a href="myprivacy.html" style="color:white">Privacy Policy</a></li>
-</ul>
+<!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
 
-<ul class="footer-links"><!-- <li><a href="#">FAQ</a></li> -->
-	<li style="color:white;font-family:Hanken;font-size:17px"><a href="blog.html" style="color:white">Blog</a></li>
-	<li style="color:white;font-family:Hanken;font-size:17px"><a href="howitwork.html" style="color:white">How It Works</a></li>
-	<li style="color:white;font-family:Hanken;font-size:17px"><a href="tandc.html" style="color:white">Terms and condition</a></li>
-</ul>
 
-<div class="clearfix"></div>
 </div>
+<!-- Wrapper / End -->
 
-<div class="col-md-3  col-sm-12">
-<h4 style="color:white;font-family:Hanken;font-size:21px"><b style="text-shadow: 2px 2px 4px #000000;">Contact Us</b></h4>
 
-<div class="text-widget"><span style="color:white;font-family:Hanken;font-size:17px">12345 Little Lonsdale St, Melbourne</span><br />
-Phone: <span style="color:white;font-family:Hanken;font-size:17px">Tel: +91-9884379333/9811448697 </span><br />
-E-Mail:<span style="color:white;font-family:Hanken;font-size:17px"> <a href="#" style="font-family:Hanken;font-size:17px;">info@rentmatics.com</a> </span></div>
 
-<ul class="social-icons margin-top-20">
-	<li></li>
-	<li></li>
-	<li></li>
-</ul>
-</div>
-</div>
-<!-- Copyright -->
-
-<div class="row">
-<div class="col-md-12">
-<div class="copyrights" style="color:white;font-family:Hanken;font-size:20px">&copy; 2016 Rentmatics. All Rights Reserved.</div>
-</div>
-</div>
-</div>
-</div>
-<!-- Footer / End --><!-- Back To Top Button -->
-
-<div id="backtotop"></div>
 <!-- Scripts
-================================================== --><script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script><script type="text/javascript" src="scripts/chosen.min.js"></script><script type="text/javascript" src="scripts/magnific-popup.min.js"></script><script type="text/javascript" src="scripts/owl.carousel.min.js"></script><script type="text/javascript" src="scripts/rangeSlider.js"></script><script type="text/javascript" src="scripts/sticky-kit.min.js"></script><script type="text/javascript" src="scripts/slick.min.js"></script><script type="text/javascript" src="scripts/jquery.jpanelmenu.js"></script><script type="text/javascript" src="scripts/tooltips.min.js"></script><script type="text/javascript" src="scripts/masonry.min.js"></script><script type="text/javascript" src="scripts/custom.js"></script><script src="scripts/bootstrap.min.js"></script><script>
+================================================== -->
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+<script type="text/javascript" src="scripts/mmenu.min.js"></script>
+<script type="text/javascript" src="scripts/chosen.min.js"></script>
+<script type="text/javascript" src="scripts/slick.min.js"></script>
+<script type="text/javascript" src="scripts/rangeslider.min.js"></script>
+<script type="text/javascript" src="scripts/magnific-popup.min.js"></script>
+<script type="text/javascript" src="scripts/waypoints.min.js"></script>
+<script type="text/javascript" src="scripts/counterup.min.js"></script>
+<script type="text/javascript" src="scripts/jquery-ui.min.js"></script>
+<script type="text/javascript" src="scripts/tooltips.min.js"></script>
+<script type="text/javascript" src="scripts/custom.js"></script>
+
+<!-- Masonry Filtering -->
+<script type="text/javascript" src="scripts/isotope.min.js"></script>
+<script>
+	$(window).load(function(){
+	  var $container = $('.isotope-wrapper');
+	  $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
+	});
+
+	$('#filters a').click(function(e){
+	  e.preventDefault();
+
+	  var selector = $(this).attr('data-filter');
+	  $('.projects.isotope-wrapper').isotope({ filter: selector });
+
+	  $(this).parents('ul').find('a').removeClass('selected');
+	  $(this).addClass('selected');
+	});
+</script>
+
+
+<!-- Style Switcher
+================================================== -->
+
+
+
+<!-- Style Switcher / End -->
+
+<script>
 
     $(".info-w3lsitem .btn").click(function() {
         $(".main-agileinfo").toggleClass("log-in");
@@ -666,5 +849,6 @@ E-Mail:<span style="color:white;font-family:Hanken;font-size:17px"> <a href="#" 
       $(".container-form .btn").click(function() {
         $(".main-agileinfo").addClass("active");
     });
-  </script><!-- //js --><!-- Wrapper / End --></body>
+  </script>
+</body>
 </html>
