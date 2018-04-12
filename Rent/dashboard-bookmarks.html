@@ -257,10 +257,10 @@ var s={
 
 <!-- Header Container
 ================================================== -->
-<header id="header-container" class="fixed fullwidth dashboard">
+<header id="header-container">
 
 	<!-- Header -->
-	<div id="header" class="not-sticky">
+	<div id="header">
 		<div class="container">
 			
 			<!-- Left Side Content -->
@@ -268,8 +268,7 @@ var s={
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="index.html"><img src="images/logo.png" alt=""></a>
-					<a href="index.html" class="dashboard-logo"><img src="images/logo2.png" alt=""></a>
+					<a href="index.html"><img src="images/logo1.png" alt="" style="margin-top:-3px"></a>
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -281,75 +280,37 @@ var s={
 					</button>
 				</div>
 
+
 				<!-- Main Navigation -->
 				<nav id="navigation" class="style-1">
 					<ul id="responsive">
 
-						<li><a href="#">Home</a>
-							<ul>
-								<li><a href="index.html">Home 1</a></li>
-								<li><a href="index-2.html">Home 2</a></li>
-								<li><a href="index-3.html">Home 3</a></li>
-								<li><a href="index-4.html">Home 4</a></li>
-							</ul>
+						<li><a class="current" href="index.html">Home</a></li>
+                        <li><a href="howitwork.html">How It Works </a>
+							  <ul>
+								<li><a href="owner.html">Owners</a>	</li>
+								<li><a href="tenats.html">Tenants</a></li>
+								
+				    		</ul>
 						</li>
-
-						<li><a href="#">Listings</a>
-							<ul>
-								<li><a href="#">List Layout</a>
-									<ul>
-										<li><a href="listings-list-with-sidebar.html">With Sidebar</a></li>
-										<li><a href="listings-list-full-width.html">Full Width</a></li>
-										<li><a href="listings-list-full-width-with-map.html">Full Width + Map</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Grid Layout</a>
-									<ul>
-										<li><a href="listings-grid-with-sidebar-1.html">With Sidebar 1</a></li>
-										<li><a href="listings-grid-with-sidebar-2.html">With Sidebar 2</a></li>
-										<li><a href="listings-grid-full-width.html">Full Width</a></li>
-										<li><a href="listings-grid-full-width-with-map.html">Full Width + Map</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Half Screen Map</a>
-									<ul>
-										<li><a href="listings-half-screen-map-list.html">List Layout</a></li>
-										<li><a href="listings-half-screen-map-grid-1.html">Grid Layout 1</a></li>
-										<li><a href="listings-half-screen-map-grid-2.html">Grid Layout 2</a></li>
-									</ul>
-								</li>
-								<li><a href="listings-single-page.html">Single Listing</a></li>
-							</ul>
-						</li>
-
-						<li><a class="current" href="#">User Panel</a>
-							<ul>
-								<li><a href="dashboard.html">Dashboard</a></li>
-								<li><a href="dashboard-messages.html">Messages</a></li>
-								<li><a href="dashboard-bookings.html">Bookings</a></li>
-								<li><a href="dashboard-my-listings.html">My Listings</a></li>
-								<li><a href="dashboard-reviews.html">Reviews</a></li>
-								<li><a href="dashboard-bookmarks.html">Bookmarks</a></li>
-								<li><a href="dashboard-add-listing.html">Add Listing</a></li>
-								<li><a href="dashboard-my-profile.html">My Profile</a></li>
-								<li><a href="dashboard-invoice.html">Invoice</a></li>
-							</ul>
-						</li>
-
+                        <li><a href="listings-half-screen-map-list.html">Find Room</a></li>
+                        <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
+                          
                          <li style="display:none" id="account"><a href="#">My Account</a>
 									<ul>
-										<li><a href="my-profile.html" >My Profile</a></li>
-										<li><a href="my-bookmarks.html">My Wish List</a></li>
+										<li><a href="dashboard-my-profile.html" >My Profile</a></li>
+										<li><a href="dashboard-bookmarks.html">My Wish List</a></li>
 										<li><a href="javascript:logout()" ">Logout</a></li>
 									
 									</ul>	
 						</li>
 
-						
+					
 
-							<li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i> Sign In</a></li>
-						
+							<li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
+					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>		
 					</ul>
+					 
 				</nav>
 				<div class="clearfix"></div>
 				<!-- Main Navigation / End -->
@@ -357,30 +318,120 @@ var s={
 			</div>
 			<!-- Left Side Content / End -->
 
-			<!-- Right Side Content / End -->
-			<div >
-				<!-- Header Widget -->
-				<div class="header-widget" style="margin-top:-1%">
-					
-					<!-- User Menu -->
-					<div class="user-menu">
-						<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>My Account</div>
-						<ul>
-							<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>
-							<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-							<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> Bookings</a></li>
-							<li><a href="index.html"><i class="sl sl-icon-power"></i> Logout</a></li>
-						</ul>
-					</div>
 
-					
+
+			<!-- Sign In Popup -->
+			<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+
+				<div class="small-dialog-header">
+					<h3>Sign In</h3>
 				</div>
-				<!-- Header Widget / End -->
+
+				<!--Tabs -->
+				<div class="sign-in-form style-1">
+
+					<ul class="tabs-nav">
+						<li class=""><a href="#tab1">Log In</a></li>
+						<li><a href="#tab2">Register</a></li>
+					</ul>
+
+					<div class="tabs-container alt">
+
+						<!-- Login -->
+						<div class="tab-content" id="tab1" style="display: none;">
+							<form action="" method="post" onsubmit="Login();return false;" class="login">
+
+								<p class="form-row form-row-wide">
+									<label for="username">Username:
+										<i class="im im-icon-Male"></i>
+										<input type="text" class="input-text" name="username" id="uname" value="" />
+									</label>
+								</p>
+
+								<p class="form-row form-row-wide">
+									<label for="password">Password:
+										<i class="im im-icon-Lock-2"></i>
+										<input class="input-text" type="password" name="password" id="upass"/>
+									</label>
+									<span class="lost_password">
+                  <a  href="forgotpassword.html" >Lost Your Password?</a> 
+										
+									</span>
+								</p>
+
+								<div class="form-row">
+									<input type="submit" class="button border margin-top-5" name="login" value="Login" />
+								
+									<div>
+                          <p style="color:black;margin-top:5%">----------------------------OR----------------------------</p>
+                              
+									
+								</div>
+								</div>
+								<!-- <form method="post" class="login"> -->
+
+							
+								<div>
+                                 <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-width="50" data-height="40" style="margin-top:4%;margin-left:25%"></div>
+&nbsp;                              
+
+                                  <div class="g-signin2 button-social-login button-social-login-google" data-size="medium"  data-height="30" data-longtitle="true" data-onsuccess="onSignIn" data-width="200" style="margin-top:4%;margin-left:25%"></div>
+                                   </div>
+								
+							</form>
+
+
+
+						</div>
+
+						<!-- Register -->
+						<div class="tab-content" id="tab2" style="display: none;">
+
+							<form method="post" action="" method="post" onsubmit="SignupRent();return false;" class="register">
+
+								
+							<p class="form-row form-row-wide">
+								<label for="username2">Username:
+									<i class="im im-icon-Male"></i>
+									<input type="text" class="input-text" name="username" id="Susername" value="" />
+								</label>
+							</p>
+								
+							<p class="form-row form-row-wide">
+								<label for="email2">Email Address:
+									<i class="im im-icon-Mail"></i>
+									<input type="text" class="input-text" name="email" id="Semail" value="" />
+								</label>
+							</p>
+
+							<p class="form-row form-row-wide">
+								<label for="password1">Password:
+									<i class="im im-icon-Lock-2"></i>
+									<input class="input-text" type="password" name="password1" />
+								</label>
+							</p>
+
+							<p class="form-row form-row-wide">
+								<label for="password2">Repeat Password:
+									<i class="im im-icon-Lock-2"></i>
+									<input class="input-text" type="password" name="password2" id="cpassword"/>
+								</label>
+							</p>
+
+							<input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
+	
+							</form>
+						</div>
+
+					</div>
+				</div>
 			</div>
-			<!-- Right Side Content / End -->
+			<!-- Sign In Popup / End -->
 
 		</div>
 	</div>
+
+
 	<!-- Header / End -->
 
 </header>

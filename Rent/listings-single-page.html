@@ -888,7 +888,7 @@ function onSignIn(googleUser) {
 
 <!-- Header Container
 ================================================== -->
-    <header id="header-container">
+  <header id="header-container">
 
   <!-- Header -->
   <div id="header">
@@ -899,7 +899,7 @@ function onSignIn(googleUser) {
         
         <!-- Logo -->
         <div id="logo">
-          <a href="index.html"><img src="images/logo.png" alt=""></a>
+          <a href="index.html"><img src="images/logo1.png" alt="" style="margin-top:-3px"></a>
         </div>
 
         <!-- Mobile Navigation -->
@@ -924,22 +924,21 @@ function onSignIn(googleUser) {
                 
                 </ul>
             </li>
-                        <li><a href="listings-half-map-grid-compact.html">Find Room</a></li>
+                        <li><a href="listings-half-screen-map-list.html">Find Room</a></li>
                         <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
-                          <li><a href="http://paymyhire.com/" target="_blank" style="visibility:hidden" >PayMy</a></li>
-
+                          
                          <li style="display:none" id="account"><a href="#">My Account</a>
                   <ul>
-                    <li><a href="my-profile.html" >My Profile</a></li>
-                    <li><a href="my-bookmarks.html">My Wish List</a></li>
+                    <li><a href="dashboard-my-profile.html" >My Profile</a></li>
+                    <li><a href="dashboard-bookmarks.html">My Wish List</a></li>
                     <li><a href="javascript:logout()" ">Logout</a></li>
                   
                   </ul> 
             </li>
 
-            
+          
 
-              <li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i> Sign In</a></li>
+              <li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
           <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>    
           </ul>
            
@@ -986,7 +985,8 @@ function onSignIn(googleUser) {
                     <input class="input-text" type="password" name="password" id="upass"/>
                   </label>
                   <span class="lost_password">
-                    <a href="#" >Lost Your Password?</a>
+                  <a  href="forgotpassword.html" >Lost Your Password?</a> 
+                    
                   </span>
                 </p>
 
@@ -1018,33 +1018,34 @@ function onSignIn(googleUser) {
             <!-- Register -->
             <div class="tab-content" id="tab2" style="display: none;">
 
-              <form method="post" class="register">
+              <form method="post" action="" method="post" onsubmit="SignupRent();return false;" class="register">
+
                 
               <p class="form-row form-row-wide">
                 <label for="username2">Username:
                   <i class="im im-icon-Male"></i>
-                  <input type="text" class="input-text" name="username" id="username2" value="" />
+                  <input type="text" class="input-text" name="username" id="Susername" value="" />
                 </label>
               </p>
                 
               <p class="form-row form-row-wide">
                 <label for="email2">Email Address:
                   <i class="im im-icon-Mail"></i>
-                  <input type="text" class="input-text" name="email" id="email2" value="" />
+                  <input type="text" class="input-text" name="email" id="Semail" value="" />
                 </label>
               </p>
 
               <p class="form-row form-row-wide">
                 <label for="password1">Password:
                   <i class="im im-icon-Lock-2"></i>
-                  <input class="input-text" type="password" name="password1" id="password1"/>
+                  <input class="input-text" type="password" name="password1" />
                 </label>
               </p>
 
               <p class="form-row form-row-wide">
                 <label for="password2">Repeat Password:
                   <i class="im im-icon-Lock-2"></i>
-                  <input class="input-text" type="password" name="password2" id="password2"/>
+                  <input class="input-text" type="password" name="password2" id="cpassword"/>
                 </label>
               </p>
 
@@ -1060,6 +1061,8 @@ function onSignIn(googleUser) {
 
     </div>
   </div>
+
+
   <!-- Header / End -->
 
 </header>

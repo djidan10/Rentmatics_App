@@ -3,7 +3,7 @@
 
 <!-- Basic Page Needs
 ================================================== -->
-<title>Listeo</title>
+<title>Rentmatics</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -11,6 +11,7 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
+
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
 <meta name="author" content=""><meta name="google-signin-client_id" content="22067969485-itbijda0dti859jimo6u5vl6ne2g7q4b.apps.googleusercontent.com">
@@ -25,9 +26,11 @@ var loginidd="";
 var Apiprefixlogout="http://paymyhire.com:8083/Logout"
 var ApiprefixAllhome="http://paymyhire.com:8083/GetAllhomedetails"
 var ApiLogout="http://paymyhire.com:8083/Logout"
-  var ApiLogin ="http://paymyhire.com:8083/Login"
+var ApiLogin ="http://paymyhire.com:8083/Login"
 var ApiUser="http://paymyhire.com:8083/User"
 var ApiForgotpassword="http://paymyhire.com:8083/Forgotpassword"
+
+
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
  if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
@@ -36,7 +39,6 @@ $(document).ready(function(){
        $("#login").html("MyAccount");
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.display = "inline";
-                
                 localStorage.setItem("LoginID", cooki);
     }
 });
@@ -56,165 +58,6 @@ function logout() {
 
 
 }
-//Payment coming soon
-function Payalert(){
-	window.open("http://paymyhire.com/");
-
-}
-
-//Geting all home data
-window.onload = function () {
-
-	 var s={
-          
-          "Loginid":cooki
-
-        };
-
-
-
-	$.ajax({
-         type: "POST",
-         url: ApiprefixAllhome,
-         contentType:"application/json; charset=utf-8",
-         data: JSON.stringify(s),
-            async: false,
-         
-         
-      	success: function(responsee){
- 			var searchout = JSON.parse(responsee);
-            Getresponse(searchout)
-          }});
-}
-
-
-
-//Common function for=Displaying Response
-function Getresponse(searchout){
-	
-  var cardstring ="";
-  var property =searchout.length +" Results Found ";
- for (k=0;k<searchout.length;k++){
-    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,cooki);
-   }
-
-  document.getElementById("listContainer").innerHTML=cardstring;
-	for(j=0;j<searchout.length;j++){
-
- var Singlesliderstart2="<img src='";
- var Singlesliderend = "' alt='"+"'>";
-
-
- var bhk1 =" Bhk"
-  var finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
-   
- var ID = searchout[j].RentFullStruct.Id;
- var Liked = searchout[j].RentFullStruct.Liked;
- var mapview = searchout[j].Cityname;
- var City =searchout[j].RentFullStruct.City
- var Rent = "₹ "+searchout[j].RentFullStruct.Month_rent;
- var Housename = searchout[j].RentFullStruct.Housename;
- var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
- var Address1 = searchout[j].RentFullStruct.Adress1;
- var Address2 = searchout[j].RentFullStruct.Adress2;
- var pin = searchout[j].RentFullStruct.Pin;
- var state = searchout[j].RentFullStruct.State;
- var country = searchout[j].RentFullStruct.Country;
- var housetype =searchout[j].RentFullStruct.House_type
- var tenantType =searchout[j].RentFullStruct.Tenant_type
- var furnishingType =searchout[j].RentFullStruct.Furnish_type
- var bedType =searchout[j].RentFullStruct.Bed
-$("#property").html(property);
-$("#Rent"+ID).html(Rent);
-$("#Housename"+ID).html(Housename);
-$("#bhk"+ID).html(bhk);
-$("#bed"+ID).html(bedType);
-$("#Address1"+ID).html(Address1);
-$("#Address2"+ID).html(Address2);
-$("#pin"+ID).html(pin);
-$("#state"+ID).html(state);
-$("#country"+ID).html(country);
-$("#city"+ID).html(City);
-$("#houseType"+ID).html(housetype);
-$("#tenantType"+ID).html(tenantType);
-$("#furnishtype"+ID).html(furnishingType);
-$("#rentimage1"+ID).html(finalDiv);
-
- url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
-
-document.getElementById("getUrl1"+ ID).setAttribute("href",url);
-
-    var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
-      src=src.replace("&amp;","&")
-      console.log(src)
-      
-
-}}		
-
-
-
-// image  card all home
- function Getjavascript(Dyid,loginid){
- 
-  var rentimage = 
-"<div class='carousel-item'>"+
-"<a  id='getUrl1"+Dyid+"' class='listing-item-container'>"+
-"<div class='listing-item' >"+
-"<div id='rentimage1"+Dyid+"'></div>"+
-"<div class='listing-badge now-open'  id='tenantType"+Dyid+"'>open</div>"+
-"<div class='listing-item-content'>"+
-"<span class='tag'  id='Rent"+Dyid+"' >Eat & Drink</span>"+
-"<h3 id='city"+Dyid+"' >Tom's Restaurant <i class='verified-icon'></i></h3>"+
-"<span id='houseType"+Dyid+"'>964 School Street, New York</span>"+
-"</div>"+
-"</div>"+
-"</div>"+
-
-"</a>"+
-"</div>";
-
- return rentimage;
-
- }
-
-
-
-
-function Gethomes() {
-
-var url =""
- var cities = document.getElementById('tags').value;
-  var search = document.getElementById('searchtype').value;
-  alert(search);
- 
-  var partsOfStr = cities.split(',');
-  if (partsOfStr  == null || partsOfStr  == ""){
-     url = 'listings-half-screen-map-list.html' 
-   }else{
-    
-      url = 'listings-half-screen-map-list.html?Id=' + partsOfStr[0] + "&Filter="+ search;
-   localStorage.setItem("Getcity", partsOfStr[0]);
-
-   }
-  
-
-     document.location.href = url;
-   
-}
-
-function Payalert(){
-    alert("Pay Myrent Comminng Soon!...please wait")
-}
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -516,7 +359,159 @@ function onSignIn(googleUser) {
  });
  });
    }
+
+
+//Geting all home data
+window.onload = function () {
+
+	 var s={
+          
+          "Loginid":cooki
+
+        };
+
+
+
+	$.ajax({
+         type: "POST",
+         url: ApiprefixAllhome,
+         contentType:"application/json; charset=utf-8",
+         data: JSON.stringify(s),
+            async: false,
          
+         
+      	success: function(responsee){
+ 			var searchout = JSON.parse(responsee);
+            Getresponse(searchout)
+          }});
+}
+
+
+
+//Common function for=Displaying Response
+function Getresponse(searchout){
+	
+  var cardstring ="";
+  var property =searchout.length +" Results Found ";
+ for (k=0;k<searchout.length;k++){
+    cardstring=cardstring+Getjavascript(searchout[k].RentFullStruct.Id,cooki);
+   }
+
+  document.getElementById("listContainer").innerHTML=cardstring;
+	for(j=0;j<searchout.length;j++){
+
+ var Singlesliderstart2="<img src='";
+ var Singlesliderend = "' alt='"+"'>";
+
+
+ var bhk1 =" Bhk"
+  var finalDiv= Singlesliderstart2+searchout[j].RentFullimages[0].Picture_url+Singlesliderend;
+   
+ var ID = searchout[j].RentFullStruct.Id;
+ var Liked = searchout[j].RentFullStruct.Liked;
+ var mapview = searchout[j].Cityname;
+ var City =searchout[j].RentFullStruct.City
+ var Rent = "₹ "+searchout[j].RentFullStruct.Month_rent;
+ var Housename = searchout[j].RentFullStruct.Housename;
+ var bhk =searchout[j].RentFullStruct.Bhk+bhk1;
+ var Address1 = searchout[j].RentFullStruct.Adress1;
+ var Address2 = searchout[j].RentFullStruct.Adress2;
+ var pin = searchout[j].RentFullStruct.Pin;
+ var state = searchout[j].RentFullStruct.State;
+ var country = searchout[j].RentFullStruct.Country;
+ var housetype =searchout[j].RentFullStruct.House_type
+ var tenantType =searchout[j].RentFullStruct.Tenant_type
+ var furnishingType =searchout[j].RentFullStruct.Furnish_type
+ var bedType =searchout[j].RentFullStruct.Bed
+$("#property").html(property);
+$("#Rent"+ID).html(Rent);
+$("#Housename"+ID).html(Housename);
+$("#bhk"+ID).html(bhk);
+$("#bed"+ID).html(bedType);
+$("#Address1"+ID).html(Address1);
+$("#Address2"+ID).html(Address2);
+$("#pin"+ID).html(pin);
+$("#state"+ID).html(state);
+$("#country"+ID).html(country);
+$("#city"+ID).html(City);
+$("#houseType"+ID).html(housetype);
+$("#tenantType"+ID).html(tenantType);
+$("#furnishtype"+ID).html(furnishingType);
+$("#rentimage1"+ID).html(finalDiv);
+
+ url = 'single-property-page-1.html?Id=' + encodeURIComponent(ID);
+
+document.getElementById("getUrl1"+ ID).setAttribute("href",url);
+
+    var src="https://www.google.com/maps/embed/v1/place?key=AIzaSyDLvifz-ncHC8YRhoK6meAFdAq7rv6ebrQ"+'&'+"q="+mapview+",Banglore,India";
+      src=src.replace("&amp;","&")
+      console.log(src)
+      
+
+}}		
+
+
+
+// image  card all home
+ function Getjavascript(Dyid,loginid){
+ 
+  var rentimage = 
+"<div class='carousel-item'>"+
+"<a  id='getUrl1"+Dyid+"' class='listing-item-container'>"+
+"<div class='listing-item' >"+
+"<div id='rentimage1"+Dyid+"'></div>"+
+"<div class='listing-badge now-open'  id='tenantType"+Dyid+"'>open</div>"+
+"<div class='listing-item-content'>"+
+"<span class='tag'  id='Rent"+Dyid+"' >Eat & Drink</span>"+
+"<h3 id='city"+Dyid+"' >Tom's Restaurant <i class='verified-icon'></i></h3>"+
+"<span id='houseType"+Dyid+"'>964 School Street, New York</span>"+
+"</div>"+
+"</div>"+
+"</div>"+
+
+"</a>"+
+"</div>";
+
+ return rentimage;
+
+ }
+
+
+
+
+function Gethomes() {
+
+var url =""
+ var cities = document.getElementById('tags').value;
+  var search = document.getElementById('searchtype').value;
+  alert(search);
+ 
+  var partsOfStr = cities.split(',');
+  if (partsOfStr  == null || partsOfStr  == ""){
+     url = 'listings-half-screen-map-list.html' 
+   }else{
+    
+      url = 'listings-half-screen-map-list.html?Id=' + partsOfStr[0] + "&Filter="+ search;
+   localStorage.setItem("Getcity", partsOfStr[0]);
+
+   }
+  
+
+     document.location.href = url;
+   
+}
+
+
+
+
+
+
+
+
+
+
+
+      
 
 //Redirect to wishlist page
 
@@ -580,7 +575,7 @@ function Forgot() {
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="index.html"><img src="images/logo1.png" alt="" ></a>
+					<a href="index.html"><img src="images/logo1.png" alt="" style="margin-top:-3px"></a>
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -607,20 +602,19 @@ function Forgot() {
 						</li>
                         <li><a href="listings-half-screen-map-list.html">Find Room</a></li>
                         <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
-                          <li><a href="http://paymyhire.com/" target="_blank" style="visibility:hidden" >PayMy</a></li>
-
+                          
                          <li style="display:none" id="account"><a href="#">My Account</a>
 									<ul>
-										<li><a href="my-profile.html" >My Profile</a></li>
-										<li><a href="my-bookmarks.html">My Wish List</a></li>
+										<li><a href="dashboard-my-profile.html" >My Profile</a></li>
+										<li><a href="dashboard-bookmarks.html">My Wish List</a></li>
 										<li><a href="javascript:logout()" ">Logout</a></li>
 									
 									</ul>	
 						</li>
 
-						
+					
 
-							<li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i> Sign In</a></li>
+							<li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
 					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>		
 					</ul>
 					 
@@ -667,7 +661,8 @@ function Forgot() {
 										<input class="input-text" type="password" name="password" id="upass"/>
 									</label>
 									<span class="lost_password">
-										<a href="#" >Lost Your Password?</a>
+                  <a  href="forgotpassword.html" >Lost Your Password?</a> 
+										
 									</span>
 								</p>
 
@@ -699,33 +694,34 @@ function Forgot() {
 						<!-- Register -->
 						<div class="tab-content" id="tab2" style="display: none;">
 
-							<form method="post" class="register">
+							<form method="post" action="" method="post" onsubmit="SignupRent();return false;" class="register">
+
 								
 							<p class="form-row form-row-wide">
 								<label for="username2">Username:
 									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="username" id="username2" value="" />
+									<input type="text" class="input-text" name="username" id="Susername" value="" />
 								</label>
 							</p>
 								
 							<p class="form-row form-row-wide">
 								<label for="email2">Email Address:
 									<i class="im im-icon-Mail"></i>
-									<input type="text" class="input-text" name="email" id="email2" value="" />
+									<input type="text" class="input-text" name="email" id="Semail" value="" />
 								</label>
 							</p>
 
 							<p class="form-row form-row-wide">
 								<label for="password1">Password:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password1" id="password1"/>
+									<input class="input-text" type="password" name="password1" />
 								</label>
 							</p>
 
 							<p class="form-row form-row-wide">
 								<label for="password2">Repeat Password:
 									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password2" id="password2"/>
+									<input class="input-text" type="password" name="password2" id="cpassword"/>
 								</label>
 							</p>
 
@@ -741,6 +737,8 @@ function Forgot() {
 
 		</div>
 	</div>
+
+
 	<!-- Header / End -->
 
 </header>
@@ -1056,7 +1054,7 @@ function Forgot() {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-5 col-sm-6">
-				<img class="footer-logo" src="images/logo1.png" alt="">
+				<img class="footer-logo" src="images/logo1.png" alt="" style="height:10%">
 				<br><br>
 				<p>Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
 			</div>
@@ -1072,7 +1070,7 @@ function Forgot() {
 				</ul>
 
 				<ul class="footer-links">
-					<li><a href="#">FAQ</a></li>
+					<li><a href="faq.html">FAQ</a></li>
 					
 					<li><a href="howitwork.html">How It Works</a></li>
 					<li><a href="pages-contact.html">Contact</a></li>
@@ -1089,11 +1087,13 @@ function Forgot() {
 					E-Mail:<span> <a href="#"> Info@rentmatics.com</a> </span><br>
 				</div>
 
+     
+
 				<ul class="social-icons margin-top-20">
-					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-					<li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li>
+					   <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+					<!-- <li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li> -->
 				</ul>
 
 			</div>
@@ -1103,14 +1103,22 @@ function Forgot() {
 		<!-- Copyright -->
 		<div class="row">
 			<div class="col-md-12">
-				<div class="copyrights">© 2017 Listeo. All Rights Reserved.</div>
+				<div class="copyrights">Copyright © 2016 Rentmatics.  •<i class="fa fa-heart"></i> 
+                  •  Tel: +91-9884379333/9811448697    </div>
 			</div>
 		</div>
+
+
+
+
+
+
 
 	</div>
 
 </div>
-<!-- Footer / End -->
+
+
 
 
 <!-- Back To Top Button -->
