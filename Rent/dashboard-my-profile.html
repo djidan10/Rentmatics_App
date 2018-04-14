@@ -3,7 +3,6 @@
 
 <!-- Basic Page Needs
 ================================================== -->
-<title>Listeo</title>
 <title>Rentmatics</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -12,22 +11,20 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
-
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
-<meta name="author" content=""><meta name="google-signin-client_id" content="22067969485-itbijda0dti859jimo6u5vl6ne2g7q4b.apps.googleusercontent.com">
-<script src="https://apis.google.com/js/platform.js" async defer></script>
-  <script type="text/javascript" src="scripts/jquery.min.js"></script>
-  <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
-
-    
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
 <script>
 var ApiLogout="http://paymyhire.com:8083/Logout"
 var ApiGetProfile="http://paymyhire.com:8083/GetProfile"
 var ApiMyprofile="http://paymyhire.com:8083/Myprofile"//Logout the User
+
+var ApiLogin ="http://paymyhire.com:8083/Login"
+var ApiUser="http://paymyhire.com:8083/User"
+var ApiForgotpassword="http://paymyhire.com:8083/Forgotpassword"
+
+var delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
 
 function setCookie(cname, cvalue, exdays) { 
   
@@ -73,7 +70,7 @@ $(document).ready(function(){
 
 
      var searchout = JSON.parse(responsee);
-     console.log(searchout);
+     alert(searchout)
      if (searchout == ""){
 
      }else{
@@ -112,22 +109,9 @@ function logout() {
 	
 
 
-   // $.removeCookie('RentmaticsCookie');
-    delete_cookie("RentmaticsCookie");
-     $.ajax({
-        type: "GET",
-        url: ApiLogout,
-
-
-        success: function(responsee) {
-        	localStorage.removeItem("LoginID");
-           document.getElementById("loginhiden").style.display = "inline";
-            document.getElementById("account").style.visibility = "hidden";
-
-    
-        }
-
-    });
+         
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
 
 }
 function Payalert(){
@@ -216,39 +200,7 @@ function myprofile(){
 
 
 }
-var loginidd="";
-var Apiprefixlogout="http://paymyhire.com:8083/Logout"
-var ApiLogout="http://paymyhire.com:8083/Logout"
-var ApiLogin ="http://paymyhire.com:8083/Login"
-var ApiUser="http://paymyhire.com:8083/User"
-var cooki=$.cookie('RentmaticsCookie');
-var cooki=$.cookie('RentmaticsCookie');
-$(document).ready(function(){
- if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
-  
-   }else{
-       $("#login").html("MyAccount");
-                document.getElementById("loginhiden").style.display = "none";
-                document.getElementById("account").style.display = "inline";
-                localStorage.setItem("LoginID", cooki);
-    }
-});
-function setCookie(cname, cvalue, exdays) { 
-  
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-function logout() {
-  
-  
-         
-       setCookie("RentmaticsCookie", "NODATA",365) 
-        location.reload(true);
 
-
-}
 
 
 
@@ -286,7 +238,7 @@ function Login() {
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
 //alert(xhr.getResponseHeader('Set-Cookie'));
-              window.history.back();
+              
             } else {
                 alert("Incorect Username and Password")
 
@@ -333,7 +285,7 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-           window.history.back();
+           
         }
     });
 }
@@ -455,7 +407,7 @@ function onSignIn(googleUser) {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-          window.history.back();
+          
 
 
 
@@ -545,12 +497,11 @@ function onSignIn(googleUser) {
             $("#login").html(loginidd);
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-            window.history.back();
+           
    }
  });
  });
    }
-
 
 </script>
 
@@ -563,10 +514,10 @@ function onSignIn(googleUser) {
 
 <!-- Header Container
 ================================================== -->
-<header id="header-container">
+<header id="header-container" class="fixed fullwidth dashboard">
 
 	<!-- Header -->
-	<div id="header">
+	<div id="header" class="not-sticky">
 		<div class="container">
 			
 			<!-- Left Side Content -->
@@ -574,7 +525,8 @@ function onSignIn(googleUser) {
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="index.html"><img src="images/logo1.png" alt="" style="margin-top:-3px"></a>
+					<a href="index.html"><img src="images/logo1.png" alt=""></a>
+					<a href="index.html" class="dashboard-logo"><img src="images/logo2.png" alt=""></a>
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -586,158 +538,47 @@ function onSignIn(googleUser) {
 					</button>
 				</div>
 
-
 				<!-- Main Navigation -->
-				<nav id="navigation" class="style-1">
-					<ul id="responsive">
+				  <nav id="navigation" class="style-1">
+          <ul id="responsive">
 
-						<li><a class="current" href="index.html">Home</a></li>
+            <li><a class="current" href="index.html">Home</a></li>
                         <li><a href="howitwork.html">How It Works </a>
-							  <ul>
-								<li><a href="owner.html">Owners</a>	</li>
-								<li><a href="tenats.html">Tenants</a></li>
-								
-				    		</ul>
-						</li>
-                        <li><a href="listings-half-screen-map-list.html">Find Room</a></li>
+                <ul>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+                
+                </ul>
+            </li>
+                        <li><a href="findamate.html">Find a mate</a></li>
                         <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
                           
-                         <li style="display:none" id="account"><a href="#">My Account</a>
-									<ul>
-										<li><a href="dashboard-my-profile.html" >My Profile</a></li>
-										<li><a href="dashboard-bookmarks.html">My Wish List</a></li>
-										<li><a href="javascript:logout()" ">Logout</a></li>
-									
-									</ul>	
-						</li>
+                         <li style="display:none" id="account"><a href="#">Hi Rentiees</a>
+                  <ul>
+                    <li><a href="dashboard-my-profile.html" >My Profile</a></li>
+                    <li><a href="dashboard-bookmarks.html">My Wish List</a></li>
+                    <li><a href="javascript:logout()" ">Logout</a></li>
+                  
+                  </ul> 
+            </li>
 
-					
+          
 
-							<li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
-					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>		
-					</ul>
-					 
-				</nav>
+              <li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
+
+          <a href="listings-half-screen-map-list.html" class="button border with-icon">Explore Homes <i class="sl sl-icon-home"></i></a>    
+          </ul>
+           
+        </nav>
 				<div class="clearfix"></div>
 				<!-- Main Navigation / End -->
 				
 			</div>
 			<!-- Left Side Content / End -->
 
-
-
-			<!-- Sign In Popup -->
-			<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-
-				<div class="small-dialog-header">
-					<h3>Sign In</h3>
-				</div>
-
-				<!--Tabs -->
-				<div class="sign-in-form style-1">
-
-					<ul class="tabs-nav">
-						<li class=""><a href="#tab1">Log In</a></li>
-						<li><a href="#tab2">Register</a></li>
-					</ul>
-
-					<div class="tabs-container alt">
-
-						<!-- Login -->
-						<div class="tab-content" id="tab1" style="display: none;">
-							<form action="" method="post" onsubmit="Login();return false;" class="login">
-
-								<p class="form-row form-row-wide">
-									<label for="username">Username:
-										<i class="im im-icon-Male"></i>
-										<input type="text" class="input-text" name="username" id="uname" value="" />
-									</label>
-								</p>
-
-								<p class="form-row form-row-wide">
-									<label for="password">Password:
-										<i class="im im-icon-Lock-2"></i>
-										<input class="input-text" type="password" name="password" id="upass"/>
-									</label>
-									<span class="lost_password">
-                  <a  href="forgotpassword.html" >Lost Your Password?</a> 
-										
-									</span>
-								</p>
-
-								<div class="form-row">
-									<input type="submit" class="button border margin-top-5" name="login" value="Login" />
-								
-									<div>
-                          <p style="color:black;margin-top:5%">----------------------------OR----------------------------</p>
-                              
-									
-								</div>
-								</div>
-								<!-- <form method="post" class="login"> -->
-
-							
-								<div>
-                                 <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-width="50" data-height="40" style="margin-top:4%;margin-left:25%"></div>
-&nbsp;                              
-
-                                  <div class="g-signin2 button-social-login button-social-login-google" data-size="medium"  data-height="30" data-longtitle="true" data-onsuccess="onSignIn" data-width="200" style="margin-top:4%;margin-left:25%"></div>
-                                   </div>
-								
-							</form>
-
-
-
-						</div>
-
-						<!-- Register -->
-						<div class="tab-content" id="tab2" style="display: none;">
-
-							<form method="post" action="" method="post" onsubmit="SignupRent();return false;" class="register">
-
-								
-							<p class="form-row form-row-wide">
-								<label for="username2">Username:
-									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="username" id="Susername" value="" />
-								</label>
-							</p>
-								
-							<p class="form-row form-row-wide">
-								<label for="email2">Email Address:
-									<i class="im im-icon-Mail"></i>
-									<input type="text" class="input-text" name="email" id="Semail" value="" />
-								</label>
-							</p>
-
-							<p class="form-row form-row-wide">
-								<label for="password1">Password:
-									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password1" />
-								</label>
-							</p>
-
-							<p class="form-row form-row-wide">
-								<label for="password2">Repeat Password:
-									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password2" id="cpassword"/>
-								</label>
-							</p>
-
-							<input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
-	
-							</form>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<!-- Sign In Popup / End -->
-
+			
 		</div>
 	</div>
-
-
 	<!-- Header / End -->
 
 </header>
@@ -757,28 +598,19 @@ function onSignIn(googleUser) {
 	<div class="dashboard-nav">
 		<div class="dashboard-nav-inner">
 
-			<ul data-submenu-title="Main">
-				<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>
-				<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages <span class="nav-tag messages">2</span></a></li>
-				<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> Bookings</a></li>
-			</ul>
+		
 			
 			<ul data-submenu-title="Listings">
-				<li><a><i class="sl sl-icon-layers"></i> My Listings</a>
-					<ul>
-						<li><a href="dashboard-my-listings.html">Active <span class="nav-tag green">6</span></a></li>
-						<li><a href="dashboard-my-listings.html">Pending <span class="nav-tag yellow">1</span></a></li>
-						<li><a href="dashboard-my-listings.html">Expired <span class="nav-tag red">2</span></a></li>
-					</ul>	
-				</li>
-				<li><a href="dashboard-reviews.html"><i class="sl sl-icon-star"></i> Reviews</a></li>
+				
+			
 				<li><a href="dashboard-bookmarks.html"><i class="sl sl-icon-heart"></i> Bookmarks</a></li>
-				<li><a href="dashboard-add-listing.html"><i class="sl sl-icon-plus"></i> Add Listing</a></li>
+				<li><a href="changepassword.html"><i class="sl sl-icon-plus"></i> Change Password</a></li>
 			</ul>	
 
 			<ul data-submenu-title="Account">
 				<li class="active"><a href="dashboard-my-profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
-				<li><a href="index.html"><i class="sl sl-icon-power"></i> Logout</a></li>
+			
+				<li><a href="javascript:logout()"><i class="sl sl-icon-power"></i>Logout</a></li>
 			</ul>
 
 	</div>
@@ -796,13 +628,7 @@ function onSignIn(googleUser) {
 				<div class="col-md-12">
 					<h2>My Profile</h2>
 					<!-- Breadcrumbs -->
-					<nav id="breadcrumbs">
-						<ul>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Dashboard</a></li>
-							<li>My Profile</li>
-						</ul>
-					</nav>
+					
 				</div>
 			</div>
 		</div>
@@ -810,26 +636,18 @@ function onSignIn(googleUser) {
 		<div class="row">
 
 			<!-- Profile -->
-			<div class="col-lg-6 col-md-12">
+			<div class="col-lg-8 col-md-12">
 				<div class="dashboard-list-box margin-top-0">
 					<h4 class="gray">Profile Details</h4>
 					<div class="dashboard-list-box-static">
 						
 						<!-- Avatar -->
-						<div class="edit-profile-photo">
-							<img src="images/user-avatar.jpg" alt="">
-							<div class="change-photo-btn">
-								<div class="photoUpload">
-								    <span><i class="fa fa-upload"></i> Upload Photo</span>
-								    <input type="file" class="upload" />
-								</div>
-							</div>
-						</div>
+						
 	
 						<!-- Details -->
 						<div class="my-profile">
 
-					<label>Your Name</label>
+						<label>Your Name</label>
 					<input  type="text" id="Pname">
 
 					<label>Your Title</label>
@@ -842,23 +660,35 @@ function onSignIn(googleUser) {
 					<input  type="text" id="Pemail">
 
 
-					<h4 class="margin-top-50 margin-bottom-25">About Me</h4>
+				
+					<label>About Me</label>
 					<textarea name="about"  cols="30" rows="10" id="Pabout">Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper</textarea>
-						</div>
-	
-						<button class="button margin-top-15">Save Changes</button>
+				
+
+					
+
+					<label><i class="fa fa-twitter"></i> Twitter</label>
+					<input  type="text" id="Ptwitter">
+
+					<label><i class="fa fa-facebook-square"></i> Facebook</label>
+					<input  type="text" id="Pfacebook">
+
+					<label><i class="fa fa-google-plus"></i> Google+</label>
+					<input  type="text" id="Pgoogle">
+
+
+					<button class="button margin-top-20 margin-bottom-20" onclick="myprofile()">Save Changes</button>
 
 					</div>
 				</div>
 			</div>
 
 			<!-- Change Password -->
-			<div class="col-lg-6 col-md-12">
+			<!-- <div class="col-lg-6 col-md-12">
 				<div class="dashboard-list-box margin-top-0">
 					<h4 class="gray">Change Password</h4>
 					<div class="dashboard-list-box-static">
 
-						<!-- Change Password -->
 						<div class="my-profile">
 							<label class="margin-top-0">Current Password</label>
 							<input type="password">
@@ -874,77 +704,13 @@ function onSignIn(googleUser) {
 
 					</div>
 				</div>
-			</div>
+			</div> -->
 
 
-		<div id="footer" class="sticky-footer">
-	<!-- Main -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-5 col-sm-6">
-				<img class="footer-logo" src="images/logo1.png" alt="" style="height:10%">
-				<br><br>
-				<p>Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
-			</div>
-
-			<div class="col-md-4 col-sm-6 ">
-				<h4>Helpful Links</h4>
-				<ul class="footer-links">
-				
-					
-					<li><a href="about.html">About</a></li>
-					<li><a href="tc.html">Terms & condition</a></li>
-					<li><a href="privacy.html">Privacy Policy</a></li>
-				</ul>
-
-				<ul class="footer-links">
-					<li><a href="faq.html">FAQ</a></li>
-					
-					<li><a href="howitwork.html">How It Works</a></li>
-					<li><a href="pages-contact.html">Contact</a></li>
-				</ul>
-				<div class="clearfix"></div>
-			</div>		
-
-			<div class="col-md-3  col-sm-12">
-				<h4>Contact Us</h4>
-				<div class="text-widget">
-					<span>Rentmatics, Electronic City</span> <br>
-          <span>Banglore - 100 </span> <br>
-					 <span>+91-9884379333/9811448697 </span><br>
-					E-Mail:<span> <a href="#"> Info@rentmatics.com</a> </span><br>
-				</div>
-
-     
-
-				<ul class="social-icons margin-top-20">
-					   <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
-          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
-          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
-					<!-- <li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li> -->
-				</ul>
-
-			</div>
-
-		</div>
-		
-		<!-- Copyright -->
-		<div class="row">
+			<!-- Copyrights -->
 			<div class="col-md-12">
-				<div class="copyrights">Copyright © 2016 Rentmatics.  •<i class="fa fa-heart"></i> 
-                  •  Tel: +91-9884379333/9811448697    </div>
+				<div class="copyrights">© 2017 Listeo. All Rights Reserved.</div>
 			</div>
-		</div>
-
-
-
-
-
-
-
-	</div>
-
-</div>
 
 		</div>
 

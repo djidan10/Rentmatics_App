@@ -3,7 +3,7 @@
 
 <!-- Basic Page Needs
 ================================================== -->
-<title>Listeo</title>
+<title>Rentmatics</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
@@ -11,13 +11,17 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
-	<script type="text/javascript" src="scripts/jquery.min.js"></script>
-	<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+
 
 <script>
 var ApiLogout="http://paymyhire.com:8083/Logout"
 var ApiWishlist="http://paymyhire.com:8083/Wishlist"
 var ApiDeletewishlist="http://paymyhire.com:8083/Deletewishlist"
+var ApiLogin ="http://paymyhire.com:8083/Login"
+var ApiUser="http://paymyhire.com:8083/User"
+var ApiForgotpassword="http://paymyhire.com:8083/Forgotpassword"
 
 
 
@@ -33,6 +37,7 @@ $(document).ready(function(){
                 document.getElementById("account").style.display = "inline";
     }
 });
+
 
 function setCookie(cname, cvalue, exdays) { 
   
@@ -245,8 +250,309 @@ var s={
 
  }
 
-</script>
 
+
+var loginidvalue =""
+ loginidvalue = localStorage.getItem("LoginID");
+
+//Login
+function Login() {
+    var loginuser = document.getElementById('uname').value;
+    var loginpass = document.getElementById('upass').value;
+    var Rentmatics = {
+        "Username": loginuser,
+        "Password": loginpass,
+
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiLogin,
+        crossDomain: true,
+       
+        contentType: "application/json; charset=utf-8",
+       
+        data: JSON.stringify(Rentmatics),
+
+        success: function(responsee,stat,xhr) {
+            var searchout = JSON.parse(responsee);
+           
+            if (searchout.Status == "Success") {
+                loginidd = searchout.Loginid;
+                setCookie("RentmaticsCookie",searchout.Loginid,365) 
+                $("#login").html("MyAccount");
+                document.getElementById("loginhiden").style.display = "none";
+                document.getElementById("account").style.visibility = "visible";
+//alert(xhr.getResponseHeader('Set-Cookie'));
+              
+            } else {
+                alert("Incorect Username and Password")
+
+            } }
+    });
+
+}
+
+
+
+
+
+// Signup-Register the Rentmatics user
+function SignupRent() {
+    var signuser = document.getElementById('Susername').value;
+    var signpass = document.getElementById('cpassword').value;
+    var signemail = document.getElementById('Semail').value;
+    var Rentmatics = {
+        "Id ": "",
+        "Username": signuser,
+        "Password": signpass,
+        "Loginid": signemail,
+        "Logintype": "Rentmatics"
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiUser,
+        xhrFields: {
+       withCredentials: true
+    },
+
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Rentmatics),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+           
+        }
+    });
+}
+
+
+
+//For Google User-Signin
+var auth2; // The Sign-In object.
+var googleUser; // The current user.
+var appStart = function() {
+    gapi.load('auth2', initSigninV2);
+};
+var initSigninV2 = function() {
+    auth2 = gapi.auth2.init({
+        client_id: 'CLIENT_ID.apps.googleusercontent.com',
+        scope: 'profile'
+    });
+
+
+    auth2.isSignedIn.listen(signinChanged);
+    auth2.currentUser.listen(userChanged);
+
+    if (auth2.isSignedIn.get() == true) {
+        auth2.signIn();
+    }
+    refreshValues();
+};
+
+
+var signinChanged = function(val) {
+    console.log('Signin state changed to ', val);
+
+};
+
+var userChanged = function(user) {
+    console.log('User now: ', user);
+    googleUser = user;
+    updateGoogleUser();
+
+};
+
+
+var updateGoogleUser = function() {
+    if (googleUser) {
+        console.log("got google user");
+        console.log(googleUser)
+
+    } else {
+        console.log("did nit get google user");
+
+    }
+};
+
+
+var refreshValues = function() {
+    if (auth2) {
+        console.log('Refreshing values...');
+
+        googleUser = auth2.currentUser.get();
+        console.log(googleUser)
+        updateGoogleUser();
+    }
+}
+
+function GsignOut() {
+    var auth2 = gapi.auth2.getAuthInstance();
+    auth2.signOut().then(function() {
+        console.log('User signed out.');
+
+    });
+}
+
+
+
+var delete_cookie = function(name) {
+    document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+};
+var email = "";
+
+function onSignIn(googleUser) {
+    
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail());
+
+    // This is null if the 'email' scope is not present.
+
+    var Id = profile.getId(); // Do not send to your backend! Use an ID token instead.
+    var name = profile.getName();
+    // var iamprofile.getImageUrl());
+    email = profile.getEmail();
+
+
+
+    var Gmail = {
+        "Id ": Id,
+        "Username": name,
+        "Password": "",
+        "Loginid": email,
+        "Logintype": "Gmail"
+
+    };
+
+
+    $.ajax({
+        type: "POST",
+        url: ApiUser,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Gmail),
+
+        success: function(responsee) {
+                   var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+          
+
+
+
+        }
+
+    });
+}
+
+
+  function signOut() {
+             var auth2 = gapi.auth2.getAuthInstance();
+             auth2.signOut().then(function () {
+           console.log('User signed out.');
+                  });
+                }
+
+
+
+
+            
+           window.fbAsyncInit = function() {
+             FB.init({
+               appId      : '151850542086031',
+               xfbml      : true,
+               version    : 'v2.9'
+             });
+             FB.AppEvents.logPageView();
+           };
+         
+           (function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=151850542086031';
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+         
+          // This is called with the results from from FB.getLoginStatus().
+           function statusChangeCallback(response) {
+             console.log('statusChangeCallback');
+             console.log(response);
+            
+             if (response.status === 'connected') {
+               // Logged into your app and Facebook.
+               testAPI();
+             } else {
+             
+               
+             }
+           }
+         
+           function checkLoginState() {
+             FB.getLoginStatus(function(response) {
+               statusChangeCallback(response);
+             });
+           }
+         
+         
+           function testAPI() {
+             console.log('Welcome!  Fetching your information.... ');
+             FB.api('/me', function(response) {
+               console.log('Successful login for: ' + response.name);
+               console.log(response);
+               // document.getElementById('status').innerHTML =
+               //   'Thanks for logging in, ' + response.name + '!';
+
+
+    var Facebook = {
+        "Id ": "",
+        "Username":response.name,
+        "Password": "",
+        "Loginid": response.name,
+        "Logintype": "Facebook"
+
+    };
+   $.ajax({
+        type: "POST",
+        url: ApiUser,
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(Facebook),
+
+        success: function(responsee) {
+            var searchout = JSON.parse(responsee);
+            var uservalue = searchout.Username;
+            loginidd = searchout.Loginid;
+            setCookie("RentmaticsCookie",searchout.Loginid,365) 
+            $("#login").html(loginidd);
+            document.getElementById("loginhiden").style.display = "none";
+            document.getElementById("account").style.visibility = "visible";
+           
+   }
+ });
+ });
+   }
+
+
+</script>
 
 </head>
 
@@ -257,10 +563,10 @@ var s={
 
 <!-- Header Container
 ================================================== -->
-<header id="header-container">
+<header id="header-container" class="fixed fullwidth dashboard">
 
 	<!-- Header -->
-	<div id="header">
+	<div id="header" class="not-sticky">
 		<div class="container">
 			
 			<!-- Left Side Content -->
@@ -268,7 +574,8 @@ var s={
 				
 				<!-- Logo -->
 				<div id="logo">
-					<a href="index.html"><img src="images/logo1.png" alt="" style="margin-top:-3px"></a>
+					<a href="index.html"><img src="images/logo1.png" alt=""></a>
+					<a href="index.html" class="dashboard-logo"><img src="images/logo2.png" alt=""></a>
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -280,158 +587,47 @@ var s={
 					</button>
 				</div>
 
-
 				<!-- Main Navigation -->
-				<nav id="navigation" class="style-1">
-					<ul id="responsive">
+				  <nav id="navigation" class="style-1">
+          <ul id="responsive">
 
-						<li><a class="current" href="index.html">Home</a></li>
+            <li><a class="current" href="index.html">Home</a></li>
                         <li><a href="howitwork.html">How It Works </a>
-							  <ul>
-								<li><a href="owner.html">Owners</a>	</li>
-								<li><a href="tenats.html">Tenants</a></li>
-								
-				    		</ul>
-						</li>
-                        <li><a href="listings-half-screen-map-list.html">Find Room</a></li>
+                <ul>
+                <li><a href="owner.html">Owners</a> </li>
+                <li><a href="tenats.html">Tenants</a></li>
+                
+                </ul>
+            </li>
+                        <li><a href="findamate.html">Find a mate</a></li>
                         <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
                           
-                         <li style="display:none" id="account"><a href="#">My Account</a>
-									<ul>
-										<li><a href="dashboard-my-profile.html" >My Profile</a></li>
-										<li><a href="dashboard-bookmarks.html">My Wish List</a></li>
-										<li><a href="javascript:logout()" ">Logout</a></li>
-									
-									</ul>	
-						</li>
+                         <li style="display:none" id="account"><a href="#">Hi Rentiees</a>
+                  <ul>
+                    <li><a href="dashboard-my-profile.html" >My Profile</a></li>
+                    <li><a href="dashboard-bookmarks.html">My Wish List</a></li>
+                    <li><a href="javascript:logout()" ">Logout</a></li>
+                  
+                  </ul> 
+            </li>
 
-					
+          
 
-							<li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
-					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>		
-					</ul>
-					 
-				</nav>
+              <li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
+
+          <a href="listings-half-screen-map-list.html" class="button border with-icon">Explore Homes <i class="sl sl-icon-home"></i></a>    
+          </ul>
+           
+        </nav>
 				<div class="clearfix"></div>
 				<!-- Main Navigation / End -->
 				
 			</div>
 			<!-- Left Side Content / End -->
 
-
-
-			<!-- Sign In Popup -->
-			<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-
-				<div class="small-dialog-header">
-					<h3>Sign In</h3>
-				</div>
-
-				<!--Tabs -->
-				<div class="sign-in-form style-1">
-
-					<ul class="tabs-nav">
-						<li class=""><a href="#tab1">Log In</a></li>
-						<li><a href="#tab2">Register</a></li>
-					</ul>
-
-					<div class="tabs-container alt">
-
-						<!-- Login -->
-						<div class="tab-content" id="tab1" style="display: none;">
-							<form action="" method="post" onsubmit="Login();return false;" class="login">
-
-								<p class="form-row form-row-wide">
-									<label for="username">Username:
-										<i class="im im-icon-Male"></i>
-										<input type="text" class="input-text" name="username" id="uname" value="" />
-									</label>
-								</p>
-
-								<p class="form-row form-row-wide">
-									<label for="password">Password:
-										<i class="im im-icon-Lock-2"></i>
-										<input class="input-text" type="password" name="password" id="upass"/>
-									</label>
-									<span class="lost_password">
-                  <a  href="forgotpassword.html" >Lost Your Password?</a> 
-										
-									</span>
-								</p>
-
-								<div class="form-row">
-									<input type="submit" class="button border margin-top-5" name="login" value="Login" />
-								
-									<div>
-                          <p style="color:black;margin-top:5%">----------------------------OR----------------------------</p>
-                              
-									
-								</div>
-								</div>
-								<!-- <form method="post" class="login"> -->
-
-							
-								<div>
-                                 <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-width="50" data-height="40" style="margin-top:4%;margin-left:25%"></div>
-&nbsp;                              
-
-                                  <div class="g-signin2 button-social-login button-social-login-google" data-size="medium"  data-height="30" data-longtitle="true" data-onsuccess="onSignIn" data-width="200" style="margin-top:4%;margin-left:25%"></div>
-                                   </div>
-								
-							</form>
-
-
-
-						</div>
-
-						<!-- Register -->
-						<div class="tab-content" id="tab2" style="display: none;">
-
-							<form method="post" action="" method="post" onsubmit="SignupRent();return false;" class="register">
-
-								
-							<p class="form-row form-row-wide">
-								<label for="username2">Username:
-									<i class="im im-icon-Male"></i>
-									<input type="text" class="input-text" name="username" id="Susername" value="" />
-								</label>
-							</p>
-								
-							<p class="form-row form-row-wide">
-								<label for="email2">Email Address:
-									<i class="im im-icon-Mail"></i>
-									<input type="text" class="input-text" name="email" id="Semail" value="" />
-								</label>
-							</p>
-
-							<p class="form-row form-row-wide">
-								<label for="password1">Password:
-									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password1" />
-								</label>
-							</p>
-
-							<p class="form-row form-row-wide">
-								<label for="password2">Repeat Password:
-									<i class="im im-icon-Lock-2"></i>
-									<input class="input-text" type="password" name="password2" id="cpassword"/>
-								</label>
-							</p>
-
-							<input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
-	
-							</form>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<!-- Sign In Popup / End -->
-
+			
 		</div>
 	</div>
-
-
 	<!-- Header / End -->
 
 </header>
@@ -451,31 +647,21 @@ var s={
 	<div class="dashboard-nav">
 		<div class="dashboard-nav-inner">
 
-			<ul data-submenu-title="Main">
-				<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>
-				<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages <span class="nav-tag messages">2</span></a></li>
-				<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> Bookings</a></li>
-			</ul>
+		
 			
 			<ul data-submenu-title="Listings">
-				<li><a><i class="sl sl-icon-layers"></i> My Listings</a>
-					<ul>
-						<li><a href="dashboard-my-listings.html">Active <span class="nav-tag green">6</span></a></li>
-						<li><a href="dashboard-my-listings.html">Pending <span class="nav-tag yellow">1</span></a></li>
-						<li><a href="dashboard-my-listings.html">Expired <span class="nav-tag red">2</span></a></li>
-					</ul>	
-				</li>
-				<li><a href="dashboard-reviews.html"><i class="sl sl-icon-star"></i> Reviews</a></li>
-				<li class="active"><a href="dashboard-bookmarks.html"><i class="sl sl-icon-heart"></i> Bookmarks</a></li>
-				<li><a href="dashboard-add-listing.html"><i class="sl sl-icon-plus"></i> Add Listing</a></li>
+				
+			
+				<li><a href="dashboard-bookmarks.html"><i class="sl sl-icon-heart"></i> Bookmarks</a></li>
+				<li><a href="changepassword.html"><i class="sl sl-icon-plus"></i> Change Password</a></li>
 			</ul>	
 
 			<ul data-submenu-title="Account">
-				<li><a href="dashboard-my-profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
-				<li><a href="index.html"><i class="sl sl-icon-power"></i> Logout</a></li>
+				<li class="active"><a href="dashboard-my-profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
+				<li><a href="javascript:logout()"><i class="sl sl-icon-power"></i> Log Out</a></li>
 			</ul>
 
-		</div>
+	</div>
 	</div>
 	<!-- Navigation / End -->
 
@@ -484,26 +670,8 @@ var s={
 	================================================== -->
 	<div class="dashboard-content">
 
-		<!-- Titlebar -->
-		<div id="titlebar">
-			<div class="row">
-				<div class="col-md-12">
-					<h2>Bookmarks</h2>
-					<!-- Breadcrumbs -->
-					<nav id="breadcrumbs">
-						<ul>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Dashboard</a></li>
-							<li>Bookmarks</li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
+		
 
-		<div class="row">
-			
-			<!-- Listings -->
 			<div class="col-lg-12 col-md-12">
 				<div class="dashboard-list-box margin-top-0">
 					<h4>Bookmarked Listings</h4>
@@ -515,10 +683,14 @@ var s={
 			</div>
 
 
+
+
+
 			<!-- Copyrights -->
 			<div class="col-md-12">
 				<div class="copyrights">© 2017 Listeo. All Rights Reserved.</div>
 			</div>
+
 		</div>
 
 	</div>

@@ -31,7 +31,7 @@
     function mainMap() {
 
       function locationData(locationURL,locationPrice,locationPriceDetails,locationImg,locationTitle,locationAddress) {
-          return('<a href="'+ locationURL +'" class="listing-img-container"><div class="infoBox-close"><i class="fa fa-times"></i></div><div class="listing-img-content"><span class="listing-price">'+ locationPrice +'<i>' + locationPriceDetails +'</i></span></div><img src="'+locationImg+'" alt=""></a><div class="listing-content"><div class="listing-title"><h4><a href="#">'+locationTitle+'</a></h4><p>'+locationAddress+'</p></div></div>')
+          return('<a href="'+ locationURL +'" class="listing-img-container"><div class="infoBox-close"><i class="fa fa-times"></i></div><img src="'+locationImg+'" alt=""></a><div class="listing-content"><div class="listing-title"><h4><a href="#">'+locationTitle+'</a></h4><p>'+locationAddress+'</p></div><div class="listing-img-content"><span class="listing-price">'+ locationPrice +'<i>' + locationPriceDetails +'</i></span></div></div>')
       }
 
 
@@ -67,7 +67,7 @@ for(var j=0;j<searchout.length;j++){
  var furnishingType =searchout[j].RentFullStruct.Furnish_type
  var bedType =searchout[j].RentFullStruct.Bed
  var image = searchout[j].RentFullimages[0].Picture_url
- var geturl ="single-property-page-1.html?Id="+mapgetid
+ var geturl ="listings-single-page.html?Id="+mapgetid
  var lalitude =searchout[j].RentFullStruct.Latitude
  var longitude =searchout[j].RentFullStruct.Longitude
 

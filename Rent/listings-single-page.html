@@ -3,8 +3,16 @@
 
 <!-- Basic Page Needs
 ================================================== -->
-<title>Listeo</title>
+
+<title>Rentmatics</title>
 <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta property="og:url"           content="https://develop.rentmatics.com/test/index.html" />
+  <meta property="og:type"          content="develop.rentmatics.com" />
+  <meta property="og:title"         content="Your Website Title" />
+  <meta property="og:description"   content="Your description" />
+  <meta property="og:image"         content="https://www.your-domain.com/path/image.jpg" />
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
@@ -14,6 +22,7 @@
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
+<link href="css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
 <script type="text/javascript" src="scripts/jquery.min.js"></script>
 <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
@@ -47,30 +56,12 @@ var Apibooknow="http://paymyhire.com:8083/paytm"
 var ApiScheduleVisit="http://paymyhire.com:8083/ScheduleVisit"
 var ApiInsertwishlist="http://paymyhire.com:8083/Insertwishlist"
 var ApiDeletewishlist="http://paymyhire.com:8083/Deletewishlist"
+ var ApiLogout="http://paymyhire.com:8083/Logout"
+var ApiLogin ="http://paymyhire.com:8083/Login"
+var ApiUser="http://paymyhire.com:8083/User"
+var ApiForgotpassword="http://paymyhire.com:8083/Forgotpassword"
 
 
-
-
-function setCookie(cname, cvalue, exdays) { 
-  
-    var d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    var expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-//Logout the User
-function logout() {
-       setCookie("RentmaticsCookie", "NODATA",365) 
-        location.reload(true);
-
-
-}
-
-//Pay my rent
-function Payalert(){
-  window.open("http://paymyhire.com/");
-
-}
 
 //Onload Function Started
 var loginidd="";
@@ -146,17 +137,16 @@ Loginid = localStorage.getItem("LoginID");
            success: function(responsee){
             
          var searchout = JSON.parse(responsee);
+          console.log("data")
+         console.log(searchout)
 
         var sendament =""
         var NewAment = searchout.Amenties
-        for(i =0;i<NewAment.length;i++){
+        for(i = 0;i<NewAment.length;i++){
          var  localamen = NewAment[i].Amenties;
         var  localurl = NewAment[i].Url;
 
-
-
-
-          sendstring = "<li><img src='"+localurl+  "' style='height:20px;width:30px'>"+localamen+"</li>"
+        sendstring = "<li><img src='"+localurl+  "' style='height:20px;width:30px'>"+localamen+"</li>"
         sendament = sendament.concat(sendstring);
 
         }
@@ -165,7 +155,7 @@ Loginid = localStorage.getItem("LoginID");
          var Address=searchout.Home_Data.Adress1;
          var Address1=searchout.Home_Data.Adress2;
          var Listing=searchout.Home_Data.Listing;
-         var Amenities=searchout.Home_Data.Amenities;
+         //var Amenities=searchout.Home_Data.Amenities;
          var Description=searchout.Home_Data.Description;
          var City =searchout.Home_Data.City;
          var Housetype =searchout.Home_Data.House_type;
@@ -278,8 +268,8 @@ document.getElementById("imageslider").innerHTML=image;
               Schedulename = document.getElementById('schname').value;
               schedulemail = document.getElementById('schemail').value;
               Schedulephone = document.getElementById('schphone').value;
-              Scheduletime = document.getElementById('schtime').value;
-              Scheduledate = document.getElementById('schdate').value;
+              Scheduletime = document.getElementById('booking-time').value;
+              Scheduledate = document.getElementById('booking-date').value;
               
             console.log(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime)
          
@@ -473,6 +463,41 @@ else{
 
 }
          
+           function Otpauth(){
+       
+           var authkey="150219AJLZP0ww58ff3960";
+           var getotp = document.getElementById('verifyotp').value;
+             var verifyotp ="http://api.msg91.com/api/verifyRequestOTP.php?authkey="+authkey+"&mobile=91"+Schedulephone+"&otp="+getotp;
+
+           var verifyotp1={
+            "OTp" : verifyotp,
+           }
+          
+           $.ajax({
+               type: "POST",
+               url: "http://paymyhire.com:8083/OTPAUTH",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(verifyotp1),
+              
+              
+              
+           success: function(responsee){
+          
+             Scheuleresponse = JSON.parse(responsee);
+                      
+              if (Scheuleresponse.type == "success"){
+                  $('#myModal').modal('hide');
+                  ScheduleVisit(Schedulename,schedulemail,Schedulephone,Scheduledate,Scheduletime)
+               }
+              else{
+                  $('#myModal').modal('show');
+                 document.getElementById("invalidotp").style.visibility = "visible"; 
+                  } 
+                }
+            
+         
+         });
+         }
          
       
 
@@ -567,6 +592,23 @@ return false;
 
 //Rentmatics Login & signin code 
 
+     
+function setCookie(cname, cvalue, exdays) { 
+  
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+function logout() {
+  
+  
+         
+       setCookie("RentmaticsCookie", "NODATA",365) 
+        location.reload(true);
+
+
+}
 
 
 
@@ -604,7 +646,7 @@ function Login() {
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
 //alert(xhr.getResponseHeader('Set-Cookie'));
-              window.history.back();
+            
             } else {
                 alert("Incorect Username and Password")
 
@@ -651,7 +693,7 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-           window.history.back();
+        
         }
     });
 }
@@ -773,7 +815,7 @@ function onSignIn(googleUser) {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-          window.history.back();
+         
 
 
 
@@ -863,15 +905,14 @@ function onSignIn(googleUser) {
             $("#login").html(loginidd);
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-            window.history.back();
+            
    }
  });
  });
    }
-         
 
 
-             
+   
              
       </script>
 
@@ -888,7 +929,7 @@ function onSignIn(googleUser) {
 
 <!-- Header Container
 ================================================== -->
-  <header id="header-container">
+   <header id="header-container">
 
   <!-- Header -->
   <div id="header">
@@ -924,10 +965,10 @@ function onSignIn(googleUser) {
                 
                 </ul>
             </li>
-                        <li><a href="listings-half-screen-map-list.html">Find Room</a></li>
+                        <li><a href="findamate.html">Find a mate</a></li>
                         <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
                           
-                         <li style="display:none" id="account"><a href="#">My Account</a>
+                         <li style="display:none" id="account"><a href="#">Hi Rentiees</a>
                   <ul>
                     <li><a href="dashboard-my-profile.html" >My Profile</a></li>
                     <li><a href="dashboard-bookmarks.html">My Wish List</a></li>
@@ -939,7 +980,8 @@ function onSignIn(googleUser) {
           
 
               <li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
-          <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>    
+
+          <a href="listings-half-screen-map-list.html" class="button border with-icon">Explore Homes <i class="sl sl-icon-home"></i></a>    
           </ul>
            
         </nav>
@@ -1295,11 +1337,11 @@ function onSignIn(googleUser) {
             <input type="text" placeholder="Your Phone" id="schphone" pattern="[0-9]{10}" required>
 					<!-- Date Picker - docs: http://www.vasterad.com/docs/listeo/#!/date_picker -->
 					<div class="col-lg-6 col-md-12">
-						<input type="text" id="booking-date" data-lang="en" data-large-mode="true" data-large-default="true" data-min-year="2017" data-max-year="2020" data-lock="from" id="schdate" required>
+						<input type="text" id="booking-date" data-lang="en" data-large-mode="true" data-large-default="true" data-min-year="2017" data-max-year="2020" data-lock="from"  required style="margin-left:-16px;">
 					</div>
 
 					<div class="col-lg-6 col-md-12">
-						<input type="text" id="booking-time" value="9:00 am" id="schtime" required>
+						<input type="text" id="booking-time" value="9:00 am"  style="margin-left:-10px;" required>
 					</div>
 
 				
@@ -1362,6 +1404,7 @@ function onSignIn(googleUser) {
 
  <div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="small" data-mobile-iframe="true"><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse" class="fb-xfbml-parse-ignore">Share</a></div>
 </li>
+<li style="visibility:hidden">aa</li>
   <li > <g:plus action="share" ></g:plus>
 
     <script>
@@ -1383,66 +1426,65 @@ function onSignIn(googleUser) {
 </div>
 
 
-<!-- Footer
-================================================== -->
-<div id="footer" class="margin-top-15">
-	<!-- Main -->
-	<div class="container">
-		<div class="row">
-			<div class="col-md-5 col-sm-6">
-				<img class="footer-logo" src="images/logo.png" alt="">
-				<br><br>
-				<p>Morbi convallis bibendum urna ut viverra. Maecenas quis consequat libero, a feugiat eros. Nunc ut lacinia tortor morbi ultricies laoreet ullamcorper phasellus semper.</p>
-			</div>
+<div id="footer" class="sticky-footer">
+  <!-- Main -->
+  <div class="container">
+    <div class="row">
+      <div class="col-md-5 col-sm-6">
+        <img class="footer-logo" src="images/logo1.png" alt="" style="height:10%">
+        <br><br>
+        <p>Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors.</p>
+      </div>
 
-			<div class="col-md-4 col-sm-6 ">
-				<h4>Helpful Links</h4>
-				<ul class="footer-links">
-					<li><a href="#">Login</a></li>
-					<li><a href="#">Sign Up</a></li>
-					<li><a href="#">My Account</a></li>
-					<li><a href="#">Add Listing</a></li>
-					<li><a href="#">Pricing</a></li>
-					<li><a href="#">Privacy Policy</a></li>
-				</ul>
+      <div class="col-md-4 col-sm-6 ">
+        <h4>Helpful Links</h4>
+        <ul class="footer-links">
+        
+          
+          <li><a href="about.html">About</a></li>
+          <li><a href="tc.html">Terms & condition</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+        </ul>
 
-				<ul class="footer-links">
-					<li><a href="#">FAQ</a></li>
-					<li><a href="#">Blog</a></li>
-					<li><a href="#">Our Partners</a></li>
-					<li><a href="#">How It Works</a></li>
-					<li><a href="#">Contact</a></li>
-				</ul>
-				<div class="clearfix"></div>
-			</div>		
+        <ul class="footer-links">
+          <li><a href="faq.html">FAQ</a></li>
+          
+          <li><a href="howitwork.html">How It Works</a></li>
+          <li><a href="pages-contact.html">Contact</a></li>
+        </ul>
+        <div class="clearfix"></div>
+      </div>    
 
-			<div class="col-md-3  col-sm-12">
-				<h4>Contact Us</h4>
-				<div class="text-widget">
-					<span>12345 Little Lonsdale St, Melbourne</span> <br>
-					Phone: <span>(123) 123-456 </span><br>
-					E-Mail:<span> <a href="#">office@example.com</a> </span><br>
-				</div>
+      <div class="col-md-3  col-sm-12">
+        <h4>Contact Us</h4>
+        <div class="text-widget">
+          <span>Rentmatics, Electronic City</span> <br>
+          <span>Banglore - 100 </span> <br>
+           <span>+91-9884379333/9811448697 </span><br>
+          E-Mail:<span> <a href="#"> Info@rentmatics.com</a> </span><br>
+        </div>
 
-				<ul class="social-icons margin-top-20">
-					<li><a class="facebook" href="#"><i class="icon-facebook"></i></a></li>
-					<li><a class="twitter" href="#"><i class="icon-twitter"></i></a></li>
-					<li><a class="gplus" href="#"><i class="icon-gplus"></i></a></li>
-					<li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li>
-				</ul>
+     
 
-			</div>
+        <ul class="social-icons margin-top-20">
+             <li><a class="facebook" href="https://www.facebook.com/Rentmatics/"><i class="icon-facebook"></i></a></li>
+          <li><a class="twitter" href="https://twitter.com/rentmatics"><i class="icon-twitter"></i></a></li>
+          <li><a class="instagram" href="https://www.instagram.com/rentmatics/"><i class="im im-icon-Instagram"></i></a></li>
+          <!-- <li><a class="vimeo" href="#"><i class="icon-vimeo"></i></a></li> -->
+        </ul>
 
-		</div>
-		
-		<!-- Copyright -->
-		<div class="row">
-			<div class="col-md-12">
-				<div class="copyrights">© 2017 Listeo. All Rights Reserved.</div>
-			</div>
-		</div>
+      </div>
 
-	</div>
+    </div>
+    
+    <!-- Copyright -->
+    <div class="row">
+      <div class="col-md-12">
+        <div class="copyrights">Copyright © 2016 Rentmatics.  •<i class="fa fa-heart"></i> 
+                  •  Tel: +91-9884379333/9811448697    </div>
+      </div>
+    </div>
+
 
 </div>
 <!-- Footer / End -->
@@ -1452,6 +1494,34 @@ function onSignIn(googleUser) {
 <div id="backtotop"><a href="#"></a></div>
 
 
+
+</div>
+
+
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel">Rentmatics verification</h3>
+        <button type="button" class="close" aria-label="Close" data-dismiss="modal" style="margin-top:-30px;">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+      <div class="modal-body">
+        <h4>Enter your Otp</h4>
+        <input type="text" id="verifyotp" >
+          <div id="invalidotp" style="visibility:hidden;color:red">
+                           Invalid Otp         
+                        </div>
+      </div>
+      <div class="modal-footer">
+       
+    <a href="javascript:Otpauth()" class="button btn btn-danger"   style="margin-left:3%;">Submitotp</a>
+    <a href="javascript:resend()" class="button btn btn-danger"  style="margin-left:8%;">Resendotp</a>
+      </div>
+   
+  </div>
 </div>
 <!-- Wrapper / End -->
 
@@ -1470,6 +1540,7 @@ function onSignIn(googleUser) {
 <script type="text/javascript" src="scripts/tooltips.min.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
 <script type="text/javascript" src="css/jquery.datetimepicker.full.js"></script>
+ <script src="scripts/bootstrap.min.js"></script> 
 
 
 <!-- Maps -->
@@ -1483,72 +1554,37 @@ function onSignIn(googleUser) {
 <script type="text/javascript" src="scripts/maps.js"></script>
 
 
-<!-- Style Switcher
-================================================== -->
-
-<!-- Style Switcher / End -->
-
-
-<!-- Wrapper / End -->
-<script>/*
-window.onerror = function(errorMsg) {
-  $('#console').html($('#console').html()+'<br>'+errorMsg)
-}*/
-
-
-var logic = function( currentDateTime ){
-  if (currentDateTime && currentDateTime.getDay() == 6){
-    this.setOptions({
-      minTime:'11:00'
-    });
-  }else
-    this.setOptions({
-      minTime:'8:00'
-    });
-};
-$('.datetimepicker7').datetimepicker({
-  onChangeDateTime:logic,
-  onShow:logic,
-  'format': 'd/m/Y H:i',
-    'minDate': -0,
-    'closeOnDateSelect' : true,
-    'validateOnBlur' : true,
-    'minDateTime': new Date()
-});
 
 
 
-     
 
 
-
-</script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script>
 
-// var options = {
-//     "key": "rzp_test_raeiwtOUjRtYDL",
-//     "amount": "100", // 2000 paise = INR 20
-//     "name": "Sandhiya",
-//     "description": "Booking Home",
-//     "image": "img/rm_logo.png",
-//     "handler": function (response){
-//         alert(response.razorpay_payment_id);
-//         Sendbookingdata(response.razorpay_payment_id)
+var options = {
+    "key": "rzp_test_raeiwtOUjRtYDL",
+    "amount": "100", // 2000 paise = INR 20
+    "name": "Sandhiya",
+    "description": "Booking Home",
+    "image": "img/rm_logo.png",
+    "handler": function (response){
+        alert(response.razorpay_payment_id);
+        Sendbookingdata(response.razorpay_payment_id)
 
-//          console.log(response)
-//     },
+         console.log(response)
+    },
   
-//     "theme": {
-//         "color": "#F37254"
-//     }
-// };
-// var rzp1 = new Razorpay(options);
+    "theme": {
+        "color": "#F37254"
+    }
+};
+var rzp1 = new Razorpay(options);
 
-// document.getElementById('rzp-button1').onclick = function(e){
-//     rzp1.open();
-//     e.preventDefault();
-// }
+document.getElementById('rzp-button1').onclick = function(e){
+    rzp1.open();
+    e.preventDefault();
+}
 
 
 
@@ -1592,7 +1628,7 @@ function Sendbookingdata(paymentid ){
         $.ajax({
               
                type: "POST",
-               url: "http://localhost:8083/Booknow",
+               url: "http://paymyhire.com:8083/Booknow",
                contentType:"application/json; charset=utf-8",
                data: JSON.stringify(payment),
        success: function(responsee){
@@ -1606,6 +1642,10 @@ function Sendbookingdata(paymentid ){
 }
 
 </script>
+
+
+
+
 
 
 <!-- Date Picker - docs: http://www.vasterad.com/docs/listeo/#!/date_picker -->
@@ -1638,34 +1678,9 @@ this.$('#booking-time').timeDropper({
 
 <!-- Style Switcher
 ================================================== -->
-<script src="scripts/switcher.js"></script>
 
-<div id="style-switcher">
-	<h2>Color Switcher <a href="#"><i class="sl sl-icon-settings"></i></a></h2>
-	
-	<div>
-		<ul class="colors" id="color1">
-			<li><a href="#" class="main" title="Main"></a></li>
-			<li><a href="#" class="blue" title="Blue"></a></li>
-			<li><a href="#" class="green" title="Green"></a></li>
-			<li><a href="#" class="orange" title="Orange"></a></li>
-			<li><a href="#" class="navy" title="Navy"></a></li>
-			<li><a href="#" class="yellow" title="Yellow"></a></li>
-			<li><a href="#" class="peach" title="Peach"></a></li>
-			<li><a href="#" class="beige" title="Beige"></a></li>
-			<li><a href="#" class="purple" title="Purple"></a></li>
-			<li><a href="#" class="celadon" title="Celadon"></a></li>
-			<li><a href="#" class="red" title="Red"></a></li>
-			<li><a href="#" class="brown" title="Brown"></a></li>
-			<li><a href="#" class="cherry" title="Cherry"></a></li>
-			<li><a href="#" class="cyan" title="Cyan"></a></li>
-			<li><a href="#" class="gray" title="Gray"></a></li>
-			<li><a href="#" class="olive" title="Olive"></a></li>
-		</ul>
-	</div>
-		
-</div>
-<!-- Style Switcher / End -->
+
+
 
 
 </body>

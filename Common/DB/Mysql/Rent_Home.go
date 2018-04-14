@@ -330,6 +330,7 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 //Get single home based on id
 func GetSinglehome_DbFav(homeid int, Login string) (Data1 Model.Home_single) {
 	var Data Model.Home
+	var Amen []Model.Amenties
 
 	// query
 	rows, err := OpenConnection["Rentmatics"].Query("Select * from home where id=?", homeid)
@@ -393,6 +394,27 @@ func GetSinglehome_DbFav(homeid int, Login string) (Data1 Model.Home_single) {
 			Rentimgarray = append(Rentimgarray, Rentimage)
 		}
 
+		var Amenid int
+		row1, err := OpenConnection["Rentmatics"].Query("select Amentiesid from HomeAmenties where Homeid=?", Data.Id)
+		for row1.Next() {
+			row1.Scan(
+				&Amenid)
+
+			row2, err := OpenConnection["Rentmatics"].Query("select Name,url  from Amenties where id=?", Amenid)
+			fmt.Println("err", err)
+
+			for row2.Next() {
+				var Amentemp Model.Amenties
+
+				row2.Scan(
+
+					&Amentemp.Amenties,
+					&Amentemp.Url)
+
+				Amen = append(Amen, Amentemp)
+			}
+		}
+
 		var Count int
 		query := "SELECT COUNT(*) FROM wishlist WHERE wishlist.loginid ='" + Login + "'" + "and wishlist.homeid = " + fmt.Sprintf("%v", Data.Id)
 		row := OpenConnection["Rentmatics"].QueryRow(query)
@@ -407,6 +429,7 @@ func GetSinglehome_DbFav(homeid int, Login string) (Data1 Model.Home_single) {
 
 		Data1.Home_Data = Data
 		Data1.Home_images = Rentimgarray
+		Data1.Amenties = Amen
 		Data1.Ownerdetails = GetSingleOwner_Db(Data.Ownerid)
 		fmt.Println("end of Data", Data1)
 

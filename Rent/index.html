@@ -95,7 +95,7 @@ function Login() {
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
 //alert(xhr.getResponseHeader('Set-Cookie'));
-              window.history.back();
+              
             } else {
                 alert("Incorect Username and Password")
 
@@ -142,7 +142,7 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-           window.history.back();
+           
         }
     });
 }
@@ -264,7 +264,7 @@ function onSignIn(googleUser) {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-          window.history.back();
+          
 
 
 
@@ -354,7 +354,7 @@ function onSignIn(googleUser) {
             $("#login").html(loginidd);
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-            window.history.back();
+           
    }
  });
  });
@@ -484,7 +484,7 @@ function Gethomes() {
 var url =""
  var cities = document.getElementById('tags').value;
   var search = document.getElementById('searchtype').value;
-  alert(search);
+  
  
   var partsOfStr = cities.split(',');
   if (partsOfStr  == null || partsOfStr  == ""){
@@ -600,10 +600,10 @@ function Forgot() {
 								
 				    		</ul>
 						</li>
-                        <li><a href="listings-half-screen-map-list.html">Find Room</a></li>
+                        <li><a href="findamate.html">Find a mate</a></li>
                         <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
                           
-                         <li style="display:none" id="account"><a href="#">My Account</a>
+                         <li style="display:none" id="account"><a href="#">Hi Rentiees</a>
 									<ul>
 										<li><a href="dashboard-my-profile.html" >My Profile</a></li>
 										<li><a href="dashboard-bookmarks.html">My Wish List</a></li>
@@ -615,7 +615,8 @@ function Forgot() {
 					
 
 							<li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
-					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>		
+
+					<a href="listings-half-screen-map-list.html" class="button border with-icon">Explore Homes <i class="sl sl-icon-home"></i></a>		
 					</ul>
 					 
 				</nav>

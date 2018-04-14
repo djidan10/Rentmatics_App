@@ -3,9 +3,7 @@
 
 <!-- Basic Page Needs
 ================================================== -->
-<title>Listeo</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
 
 <!-- CSS
 ================================================== -->
@@ -17,6 +15,129 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
+<style type="text/css">
+  .icon-box-1 {
+  text-align: center;
+  padding: 20px 0;
+  padding-bottom: 15px;
+}
+
+.icon-box-1.alternative {
+  padding: 20px;
+  padding-bottom: 15px;
+}
+
+.icon-box-1 .icon-container {
+  font-size: 66px;
+  color: #fff;
+  background-color: #66676b;
+  height: 140px;
+  width: 140px;
+  line-height: 140px;
+  border-radius: 50%;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 13px;
+  display: inline-block;
+  position: relative;
+}
+
+.icon-box-1.alternative .icon-container {
+  font-size: 60px;
+  height: 130px;
+  width: 130px;
+  line-height: 130px;
+}
+
+.icon-box-1 .icon-container i {
+  opacity: 1;
+  transform: translate3d(0,0,0)  scale(1);
+  transition: all 0.2s ease-in;
+  display: inline-block;
+}
+
+.icon-box-1:hover .icon-container i {
+  opacity: 0;
+  transform: translate3d(0,0,0)  scale(1.16);
+}
+
+.icon-box-1.alternative:hover .icon-container i {
+  opacity: 1;
+  transform: translate3d(0,0,0)  scale(1);
+}
+
+/* Links inside */
+.icon-box-1 .icon-container .icon-links {
+  opacity: 0;
+  visibility: hidden;
+  width: 100%;
+  font-size: 16px;
+  line-height: 22px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%) translateX(0) scale(1.2);
+  transition: all 0.2s ease-in;
+  display: block;
+}
+
+.icon-box-1 .icon-container .icon-links a {
+  display: block;
+  color: #fff;
+  padding: 5px 20px;
+  transition: all 0.2s;
+  position: relative;
+}
+
+.icon-box-1:hover .icon-container .icon-links {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(-50%) translateX(0) scale(1);
+}
+
+
+/* Content styling */
+.icon-box-1 h3 {
+  font-size: 26px;
+}
+
+.icon-box-1.alternative h3 {
+  font-size: 23px;
+}
+
+.icon-box-1 p {
+  font-size: 16px;
+  color: #888;
+  margin: 18px 0 0 0;
+}
+
+.icon-box-1.alternative p {
+  font-size: 16px;
+  line-height: 29px;
+}
+
+
+
+/* Icon Box Shadow Animation*/
+.icon-box-1.alternative { overflow: hidden; position: relative; display: block;}
+
+.icon-box-1.alternative:after {
+  content: "";
+  width: 120%;
+  height: 0px;
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: #fff;
+  z-index: 8;
+  transition: height 0.3s ease-in-out, opacity 0.3s ease-out;
+  opacity: 0;
+  transform: translate3d(30%,-30%,0) scale(1) rotate(45deg);
+
+}
+
+.icon-box-1.alternative:hover:after { height: 62%; opacity: 0.06; }
+</style>
 
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
@@ -27,7 +148,8 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
 <script>
 var loginidd="";
-var Apiprefixlogout="http://paymyhire.com:8083/Logout"
+var ApiOwnertoexecutive="http://paymyhire.com:8083/Ownertoexecutive"
+
 var ApiLogout="http://paymyhire.com:8083/Logout"
 var ApiLogin ="http://paymyhire.com:8083/Login"
 var ApiUser="http://paymyhire.com:8083/User"
@@ -360,6 +482,45 @@ function onSignIn(googleUser) {
  });
  });
    }
+    function ownerSubmit(){
+      
+ 
+              ownername = document.getElementById('ownername').value;
+              owneremail = document.getElementById('owneremail').value;
+              ownerphone = document.getElementById('ownerphone').value;
+              ownertenant = document.getElementById('ownertype').value;
+              owneraddress = document.getElementById('tags').value;
+
+              var partsOfStr = owneraddress.split(',');
+               
+  
+         
+            var Ownerhome ={
+              
+               "Name":ownername,
+               "Email":owneremail,
+               "Phone":ownerphone,
+               "Tenanttype":ownertenant,
+               "Address": partsOfStr[0],
+               
+                     };
+             
+         $.ajax({
+               type: "POST",
+               url: ApiOwnertoexecutive,
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(Ownerhome),
+         
+           success: function(responsee){
+               alert("Succesfully Updated our executive will contact you soon")
+         
+          }
+         
+         });
+         
+         }
+         
+
 </script>
 <style>
   .jumbo-banner-section{
@@ -421,10 +582,10 @@ function onSignIn(googleUser) {
                 
                 </ul>
             </li>
-                        <li><a href="listings-half-screen-map-list.html">Find Room</a></li>
+                        <li><a href="findamate.html">Find a mate</a></li>
                         <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
                           
-                         <li style="display:none" id="account"><a href="#">My Account</a>
+                         <li style="display:none" id="account"><a href="#">Hi Rentiees</a>
                   <ul>
                     <li><a href="dashboard-my-profile.html" >My Profile</a></li>
                     <li><a href="dashboard-bookmarks.html">My Wish List</a></li>
@@ -436,7 +597,8 @@ function onSignIn(googleUser) {
           
 
               <li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
-          <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>    
+
+          <a href="listings-half-screen-map-list.html" class="button border with-icon">Explore Homes <i class="sl sl-icon-home"></i></a>    
           </ul>
            
         </nav>
@@ -587,15 +749,15 @@ function onSignIn(googleUser) {
             <div class=" txtr">
                 <div class="rtbox">
                     <div class="row">
-                        <div class="col-md-6">
-                            <p style="font-size:30px;color:white;margin-left:30px" class="rtboxTitle" ><b>Earn more rent as a Rentmatic(ian)</b></p>
+                        <div class="col-md-7">
+                            <p style="font-size:30px;color:white;margin-left:20%" class="rtboxTitle" ><b>Earn more rent as a Rentmatic(ian)</b></p>
                             <br>
-                            <p style="margin-bottom: 30px;font-size:20px;color:white;margin-left:30px">We make owners to stress free and get more income from their own place.</p>
+                            <p style="margin-bottom: 5px;font-size:20px;color:white;margin-left:25%">We make owners to stress free and get more </p><p style="font-size:20px;color:white;margin-left:35%">income from their own place.</p>
                             <!-- <div class="rtboxbtn">
                                 <a class="btn list-space-btn" href="">List a space</a>
                             </div> -->
                         </div>
-                        <div class="col-md-6 txtr">
+                        <div class="col-md-5 txtr">
                             <div class="form-container-rt">
                          <form action="" method="post" onsubmit="ownerSubmit();return false;" style="width:80%">
 
@@ -615,6 +777,7 @@ function onSignIn(googleUser) {
                                     <div class="form-group">
                                         <input type="text" placeholder="City" class="rpfi" id="tags" required>
                                     </div>
+
                                     <div class="form-group">
                                         <div class="flx selUni">
                                             <select class="rpfs" id="ownertype" required>
@@ -626,9 +789,11 @@ function onSignIn(googleUser) {
                                             <span class="selChev"><i class="fa fa-chevron-down"></i></span>
                                         </div>
                                     </div>  
+
                                     <div>
-                                    <a type="submit"  class="button">List Your House </a> 
-                                       
+                                 
+                                    <button class="button margin-top-20 margin-bottom-20" type="submit">Submit Owner Details</button>
+
                                     </div>
                                     </form>
                             </div>
@@ -643,7 +808,55 @@ function onSignIn(googleUser) {
 
 </div>
 <!-- Container / End -->
+<section class="fullwidth border-bottom margin-top-0 margin-bottom-0 padding-top-50 padding-bottom-50" data-background-color="#ffffff">
 
+  <!-- Content -->
+  <div class="container">
+    <div class="row">
+
+      <div class="col-md-4">
+        <!-- Icon Box -->
+        <div class="icon-box-1 alternative">
+
+          <div class="icon-container">
+            <i class="im im-icon-Checked-User"></i>
+          </div>
+
+          <h3>VERIFIED TENANTS</h3>
+          <p>Through strict tenant screening process we ensure your property is in the right hands.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <!-- Icon Box -->
+        <div class="icon-box-1 alternative">
+
+          <div class="icon-container">
+            <i class="im im-icon-Cloud-Computer"></i>
+          </div>
+
+          <h3>DAMAGES COVERED</h3>
+          <p>Get peace of mind by availing our house insurance service for any unforeseen damages.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <!-- Icon Box -->
+        <div class="icon-box-1 alternative">
+
+          <div class="icon-container">
+            <i class="im im-icon-Idea"></i>
+          </div>
+
+          <h3>HASSLE FREE RENTING</h3>
+          <p>No more managing multiple calls and visits to property. We do all that for you.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
 
 
 <!-- Footer
@@ -725,6 +938,27 @@ function onSignIn(googleUser) {
 
 </div>
 <!-- Wrapper / End -->
+<script>
+google.maps.event.addDomListener(window, 'load', initialize);
+function initialize() {
+var input = document.getElementById('tags');
+
+
+var autocomplete = new google.maps.places.Autocomplete(input);
+autocomplete.addListener('place_changed', function () {
+
+var place = autocomplete.getPlace();
+
+var aaa = place["address_components"];
+
+
+// place variable will have all the information you are looking for.
+console.log(place.geometry['location'].lat());
+console.log(place.geometry['location'].lng());
+});
+}
+</script>
+
 
 
 
@@ -743,7 +977,6 @@ function onSignIn(googleUser) {
 <script type="text/javascript" src="scripts/custom.js"></script>
 
 <!-- Maps -->
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&amp;language=en"></script>
 <script type="text/javascript" src="scripts/infobox.min.js"></script>
 <script type="text/javascript" src="scripts/markerclusterer.js"></script>
 <script type="text/javascript" src="scripts/maps.js"></script>
