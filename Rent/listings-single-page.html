@@ -48,7 +48,7 @@ table, th, td {
 </style>
 
 <script>
-var ApiLogout="http://paymyhire.com:8083/Logout"
+
 var ApiGetAllhomedetails="http://paymyhire.com:8083/GetAllhomedetails"
 
 var ApiGetIndivual_home="http://paymyhire.com:8083/GetIndivual_home"
@@ -645,6 +645,7 @@ function Login() {
                 $("#login").html("MyAccount");
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
+                 location.reload(true);
 //alert(xhr.getResponseHeader('Set-Cookie'));
             
             } else {
@@ -693,6 +694,7 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
+             location.reload(true);
         
         }
     });

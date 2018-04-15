@@ -168,6 +168,16 @@ func GetOwnerExecutive_Db(Homedata Model.OwnertoExecutive) {
 }
 
 //func Inserthome_DB(Homedata Model.HomeInsert, Imageurl []string) {
+func Getcontact_Db(Homedata Model.Contactform) {
+
+	rows, err := OpenConnection["Rentmatics"].Exec("insert into contact (name,mail,number,subject,message) values (?,?,?,?,?)", Homedata.Name, Homedata.Email, Homedata.Phonenumber, Homedata.Subject, Homedata.Message)
+	if err != nil {
+		log.Error("Error -DB: Executive insert", rows)
+	}
+
+}
+
+//func Inserthome_DB(Homedata Model.HomeInsert, Imageurl []string) {
 func Insertowner_Db(Insertownerdata Model.Owner) {
 
 	rows, err := OpenConnection["Rentmatics"].Exec("insert into owner (Homeid,First_Name,Last_Name,Email_Id,Contact,Alernate_Contact,DOB,Permanent_Address1,Permanent_Address2,Permanent_Area,Permanent_City,Permanent_Pin,Tenant_img,Pan_Card,Aadhar_Card,Voter_Card,Aggrement) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Insertownerdata.Homeid, Insertownerdata.First_Name, Insertownerdata.Last_Name, Insertownerdata.Email_Id, Insertownerdata.Contact, Insertownerdata.Alernate_Contact, Insertownerdata.DOB, Insertownerdata.Permanent_Address1, Insertownerdata.Permanent_Address2, Insertownerdata.Permanent_Area, Insertownerdata.Permanent_City, Insertownerdata.Permanent_Pin, Insertownerdata.Tenant_img, Insertownerdata.Pan_Card, Insertownerdata.Aadhar_Card, Insertownerdata.Voter_Card, Insertownerdata.Aggrement)

@@ -285,6 +285,7 @@ function Login() {
                 $("#login").html("MyAccount");
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
+                 location.reload(true);
 //alert(xhr.getResponseHeader('Set-Cookie'));
               
             } else {
@@ -333,6 +334,7 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
+             location.reload(true);
            
         }
     });

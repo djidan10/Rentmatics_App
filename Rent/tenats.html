@@ -26,7 +26,7 @@ var ApiLogout="http://paymyhire.com:8083/Logout"
 var ApiLogin ="http://paymyhire.com:8083/Login"
 var ApiUser="http://paymyhire.com:8083/User"
 var cooki=$.cookie('RentmaticsCookie');
-var cooki=$.cookie('RentmaticsCookie');
+
 $(document).ready(function(){
  if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
   
@@ -90,7 +90,8 @@ function Login() {
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
 //alert(xhr.getResponseHeader('Set-Cookie'));
-              window.history.back();
+               location.reload(true);
+
             } else {
                 alert("Incorect Username and Password")
 
@@ -137,7 +138,8 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-           window.history.back();
+            location.reload(true);
+
         }
     });
 }
@@ -355,20 +357,6 @@ function onSignIn(googleUser) {
  });
    }
 </script>
-<style>
-  .jumbo-banner-section{
-    background-image: url('images/house7.jpeg');
-    filter: brightness(95%);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 480px;
-    padding-top: 60px;
-    padding-bottom: 60px;
-    display: table;
-    width: 100%;
-}
-</style>
 
 </head>
 
@@ -562,131 +550,96 @@ function onSignIn(googleUser) {
 <!-- Header Container / End -->
 
 
+
+
 <!-- Content
 ================================================== -->
 
+<div id="titlebar" style=" background-image: url('images/house9.jpg');">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
 
-<!-- Container / Start -->
-<div style="margin-top:2%">
+        <h2 style="color:white;font-family:Hanken;"><b>Tenant</b></h2>
+          <h4 style="font-size: 24px;font-family:Hanken;color:white">Discover how rentmatics can you help you find everything you want.</h4>
+
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Banner
+================================================== -->
 
     
-     
-       
-      
-          <h1 style="text-align:center"><b>Tenants</b></h1>
-          
-          <h5 style="text-align:center;">Discover how rentmatics can you help you find everything you want</h5>
-          <br>
-          <br>
-          
-            <!-- Status -->
-          
-          
+<!-- Content
+================================================== -->
+<!-- Fullwidth Section -->
+<section>
+
+  <!-- Content -->
   
 
 
 
-          
-          
-          <!-- Breadcrumbs -->
-          
-        </div>
-      </div>
+
+
+
+
+
+    
+</div>
+
+<!-- Fullwidth Section / End -->
+
+
+<!-- Info Section -->
+<div class="container">
 
   <div class="row">
-
- <section class="fullwidth" data-background-color="#f7f7f7">
-
-  <!-- Content -->
-  <div class="container">
-    <div class="row">
-
-      <div class="col-md-4">
-      <div class="testimonial-box">
-          <div >
-        <!-- Icon Box -->
-        <div class="icon-box-1 alternative">
-
-          <div >
-          <img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/phone.png">
-          </div>
-
-          <h3>Book and Confirm</h3>
-          <p>TSearch and filter hundreds of listings, read reviews, explore photos and find the perfect spot.</p>
-        </div>
-      </div>
-      </div>
-      </div>
-
-      <div class="col-md-4">
-      <div class="testimonial-box">
-          <div >
-        <!-- Icon Box -->
-        <div class="icon-box-1 alternative">
-
-          <div >
-            <img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/find.png">
-          </div>
-
-          <h3>Check In and Work</h3>
-          <p>Go and have a good time or even make a booking directly from the listing page. All of those, thanks to Listable!</p>
-        </div>
-        </div>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-      <div class="testimonial-box">
-          <div >
-        <!-- Icon Box -->
-        <div class="icon-box-1 alternative">
-
-          <div>
-            <img class="classImg" src="http://rentmatics.com/wp-content/uploads/2016/03/save.png">
-          </div>
-
-          <h3>Find a Space</h3>
-          <p>Looking for a cozy hotel to stay, a restaurant to eat, a museum to visit or a mall to do some shopping?</p>
-        </div>
-      </div>
-
+    <div class="col-md-8 col-md-offset-2">
+      <h2 class="headline centered ">
+        Plan The Vacation of Your Dreams 
+        <span class="margin-top-25">Explore some of the best tips from around the world from our partners and friends.  Discover some of the most popular listings in Sydney.</span>
+      </h2>
     </div>
   </div>
-  </div>
-  </div>
 
-</section>
-
-<section class="fullwidth" data-background-color="#70c39e" >
-
-  <!-- Content -->
-  <div class="container">
-    <div class="row">
-    <h2 style="font-family:inherit; font-weight: 500;line-height: 1.1;color:white;">Why singles love Rentmatics homes</h2>
-    <br>
-    <div style="color:white;line-height: 2.1">
-    <li>Feel like a Home</li>
-    <li>Verified Houses</li>
-    <li>Hassle-free living</li>
-    <li>Easy move in/move out policies</li>
-    <li>Choose your roommate</li>
-    <li>And More events, activities</li>
-<br>
-    <a href="listings-half-map-grid-compact.html" class="button border">Explore Houses</a>
-
+  <div class="row icons-container">
+    <!-- Stage -->
+    <div class="col-md-4">
+      <div class="icon-box-2 with-line">
+        <i class="im im-icon-Map2"></i>
+        <h3>Find Interesting Place</h3>
+        <p>Proin dapibus nisl ornare diam varius tempus. Aenean a quam luctus, finibus tellus ut, convallis eros sollicitudin turpis.</p>
+      </div>
     </div>
 
-      
+    <!-- Stage -->
+    <div class="col-md-4">
+      <div class="icon-box-2 with-line">
+        <i class="im im-icon-Mail-withAtSign"></i>
+        <h3>Contact a Few Owners</h3>
+        <p>Maecenas pulvinar, risus in facilisis dignissim, quam nisi hendrerit nulla, id vestibulum metus nullam viverra porta purus.</p>
+      </div>
     </div>
-  </div>
-  
 
-</section>
-
+    <!-- Stage -->
+    <div class="col-md-4">
+      <div class="icon-box-2">
+        <i class="im im-icon-Checked-User"></i>
+        <h3>Make a Reservation</h3>
+        <p>Faucibus ante, in porttitor tellus blandit et. Phasellus tincidunt metus lectus sollicitudin feugiat pharetra consectetur.</p>
+      </div>
+    </div>
   </div>
 
 </div>
-<!-- Container / End -->
+<!-- Info Section / End -->
+
 
 
 
@@ -786,16 +739,24 @@ function onSignIn(googleUser) {
 <script type="text/javascript" src="scripts/tooltips.min.js"></script>
 <script type="text/javascript" src="scripts/custom.js"></script>
 
-<!-- Maps -->
-<script type="text/javascript" src="scripts/infobox.min.js"></script>
-<script type="text/javascript" src="scripts/markerclusterer.js"></script>
-<script type="text/javascript" src="scripts/maps.js"></script>
+<!-- Masonry Filtering -->
+<script type="text/javascript" src="scripts/isotope.min.js"></script>
+<script>
+  $(window).load(function(){
+    var $container = $('.isotope-wrapper');
+    $container.isotope({ itemSelector: '.isotope-item', layoutMode: 'masonry' });
+  });
 
+  $('#filters a').click(function(e){
+    e.preventDefault();
 
-<!-- Style Switcher
-================================================== -->
+    var selector = $(this).attr('data-filter');
+    $('.projects.isotope-wrapper').isotope({ filter: selector });
 
-
+    $(this).parents('ul').find('a').removeClass('selected');
+    $(this).addClass('selected');
+  });
+</script>
 
 
 

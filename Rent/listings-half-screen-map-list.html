@@ -339,7 +339,7 @@ var url =""
       
      
          if( cooki == ""||cooki ==null|| cooki ==undefined|| cooki =="NODATA"){
-              alert("inside favourte ")
+             
                var url2 = "loginregister.html";
  
     document.location.href = url2;
@@ -418,10 +418,7 @@ var url =""
       return false;
       }
       
-      function Payalert(){
-        alert("PayMyRent is coming Soon!Please wait")
       
-      }
       
       function GetLiked(likedid,liked){
       
@@ -610,6 +607,7 @@ function Login() {
                 $("#login").html("MyAccount");
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
+                 location.reload(true);
 //alert(xhr.getResponseHeader('Set-Cookie'));
             
             } else {
@@ -658,6 +656,7 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
+             location.reload(true);
           
         }
     });

@@ -85,6 +85,19 @@ func Ownertoexecutive(w http.ResponseWriter, r *http.Request) {
 }
 
 //Get Single Owner Details
+func Insertcontact(w http.ResponseWriter, r *http.Request) {
+
+	var Contactform Model.Contactform
+	err := json.NewDecoder(r.Body).Decode(&Contactform)
+	if err != nil {
+		log.Error("Error - Owner single", err)
+	}
+
+	Db.Getcontact_Db(Contactform)
+
+}
+
+//Get Single Owner Details
 func Insertowner(w http.ResponseWriter, r *http.Request) {
 
 	var InsOwner Model.Owner

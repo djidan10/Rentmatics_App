@@ -218,7 +218,7 @@ function Login() {
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
 //alert(xhr.getResponseHeader('Set-Cookie'));
-              window.history.back();
+               location.reload(true);
             } else {
                 alert("Incorect Username and Password")
 
@@ -265,7 +265,7 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-           window.history.back();
+            location.reload(true);
         }
     });
 }
@@ -526,6 +526,7 @@ function onSignIn(googleUser) {
   .jumbo-banner-section{
     background-image: url('images/house7.jpeg');
     /*filter: brightness(90%);*/
+    opacity:20%;
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
@@ -738,30 +739,30 @@ function onSignIn(googleUser) {
 
 
 <!-- Container / Start -->
-<div style="margin-top:2%">
+<div >
 
   <div class="row">
 
   
    
-  <div class="jumbo-banner-section" style="width:100%">
+  <div class="jumbo-banner-section" style="width:100%;">
         <div class="inrv">
             <div class=" txtr">
                 <div class="rtbox">
                     <div class="row">
                         <div class="col-md-7">
-                            <p style="font-size:30px;color:white;margin-left:20%" class="rtboxTitle" ><b>Earn more rent as a Rentmatic(ian)</b></p>
-                            <br>
-                            <p style="margin-bottom: 5px;font-size:20px;color:white;margin-left:25%">We make owners to stress free and get more </p><p style="font-size:20px;color:white;margin-left:35%">income from their own place.</p>
+                            <p style="font-size:30px;color:white;margin-left:20%" class="rtboxTitle" ><b>Earn more rent as a Rentmatic(ian)</b><br>
+                            
+                            <h4 style="color:white;text-align:center">We make owners to stress free and get more income from their own place.</h4></p>
                             <!-- <div class="rtboxbtn">
                                 <a class="btn list-space-btn" href="">List a space</a>
                             </div> -->
                         </div>
-                        <div class="col-md-5 txtr">
+                        <div class="col-md-4 txtr" style="background-color: #f91942 ;">
                             <div class="form-container-rt">
-                         <form action="" method="post" onsubmit="ownerSubmit();return false;" style="width:80%">
+                         <form action="" method="post" onsubmit="ownerSubmit();return false;" style="width:80%;margin-left:40px" >
 
-                                    <div class="form-group">
+                                    <div class="form-group" style="margin-top:8%">
                                         <input type="text" placeholder="Name" class="rpfi" id="ownername" required>
                                     </div>
                                     <div class="form-group">
@@ -786,13 +787,13 @@ function onSignIn(googleUser) {
                                                 <option>Family</option>
                                                 <option>No Choice</option>
                                             </select>
-                                            <span class="selChev"><i class="fa fa-chevron-down"></i></span>
+                                          
                                         </div>
                                     </div>  
 
                                     <div>
                                  
-                                    <button class="button margin-top-20 margin-bottom-20" type="submit">Submit Owner Details</button>
+                                    <button class="button margin-top-20 margin-bottom-20" type="submit" style="background-color:white;color:#f91942 ">Submit Owner Details</button>
 
                                     </div>
                                     </form>

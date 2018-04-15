@@ -198,6 +198,9 @@ func Serve() bool {
 
 	//For HTTPS
 
+	//Contactform
+	router.HandleFunc("/insertcontact", Service.Insertcontact)
+
 	// Default server - non-trusted for debugging
 
 	serverhttp := func() {

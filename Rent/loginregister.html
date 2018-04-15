@@ -68,15 +68,15 @@ var loginidd="";
 
 var cooki=$.cookie('RentmaticsCookie');
 $(document).ready(function(){
-    var owl = $('.owl-carousel');
-        owl.owlCarousel({
-            items: 3,
-            loop: true,
-            margin: 10,
-            autoplay: true,
-            autoplayTimeout: 1000,
-            autoplayHoverPause: true
-        });
+    // var owl = $('.owl-carousel');
+    //     owl.owlCarousel({
+    //         items: 3,
+    //         loop: true,
+    //         margin: 10,
+    //         autoplay: true,
+    //         autoplayTimeout: 1000,
+    //         autoplayHoverPause: true
+    //     });
  if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
    }else{
        $("#login").html("MyAccount");
@@ -88,10 +88,13 @@ $(document).ready(function(){
 var loginidvalue =""
   loginidvalue = localStorage.getItem("LoginID");
 
-//Login
+
+
 function Login() {
-    var loginuser = document.getElementById('uname').value;
-    var loginpass = document.getElementById('upass').value;
+  alert("inise")
+    var loginuser = document.getElementById('loginname').value;
+    var loginpass = document.getElementById('loginpass').value;
+   alert(loginpass)
     var Rentmatics = {
         "Username": loginuser,
         "Password": loginpass,
@@ -109,17 +112,16 @@ function Login() {
        
         data: JSON.stringify(Rentmatics),
 
-        success: function(responsee,stat,xhr) {
+        success: function(responsee) {
             var searchout = JSON.parse(responsee);
            
             if (searchout.Status == "Success") {
                 loginidd = searchout.Loginid;
                 setCookie("RentmaticsCookie",searchout.Loginid,365) 
-                $("#login").html("MyAccount");
-                document.getElementById("loginhiden").style.display = "none";
-                document.getElementById("account").style.visibility = "visible";
+               
+                 window.history.back();
 //alert(xhr.getResponseHeader('Set-Cookie'));
-              window.history.back();
+            
             } else {
                 alert("Incorect Username and Password")
 
@@ -162,14 +164,15 @@ function SignupRent() {
             var uservalue = searchout.Username;
             loginidd = searchout.Loginid;
             setCookie("RentmaticsCookie",searchout.Loginid,365) 
-            $("#login").html(loginidd);
+              window.history.back();
             
-            document.getElementById("loginhiden").style.display = "none";
-            document.getElementById("account").style.visibility = "visible";
-           window.history.back();
+          
         }
     });
 }
+
+
+
 
 
 
@@ -284,10 +287,7 @@ function onSignIn(googleUser) {
             var uservalue = searchout.Username;
             loginidd = searchout.Loginid;
             setCookie("RentmaticsCookie",searchout.Loginid,365) 
-            $("#login").html(loginidd);
-            
-            document.getElementById("loginhiden").style.display = "none";
-            document.getElementById("account").style.visibility = "visible";
+           
           window.history.back();
 
 
@@ -375,9 +375,7 @@ function onSignIn(googleUser) {
             var uservalue = searchout.Username;
             loginidd = searchout.Loginid;
             setCookie("RentmaticsCookie",searchout.Loginid,365) 
-            $("#login").html(loginidd);
-            document.getElementById("loginhiden").style.display = "none";
-            document.getElementById("account").style.visibility = "visible";
+           
             window.history.back();
    }
  });
@@ -431,184 +429,7 @@ function Forgot() {
 
 <!-- Header Container
 ================================================== -->
-<header id="header-container">
 
-  <!-- Header -->
-  <div id="header">
-    <div class="container">
-      
-      <!-- Left Side Content -->
-      <div class="left-side">
-        
-        <!-- Logo -->
-        <div id="logo">
-          <a href="index.html"><img src="images/logo1.png" alt="" style="margin-top:-3px"></a>
-        </div>
-
-        <!-- Mobile Navigation -->
-        <div class="mmenu-trigger">
-          <button class="hamburger hamburger--collapse" type="button">
-            <span class="hamburger-box">
-              <span class="hamburger-inner"></span>
-            </span>
-          </button>
-        </div>
-
-
-        <!-- Main Navigation -->
-        <nav id="navigation" class="style-1">
-          <ul id="responsive">
-
-            <li><a class="current" href="index.html">Home</a></li>
-                        <li><a href="howitwork.html">How It Works </a>
-                <ul>
-                <li><a href="owner.html">Owners</a> </li>
-                <li><a href="tenats.html">Tenants</a></li>
-                
-                </ul>
-            </li>
-                        <li><a href="listings-half-screen-map-list.html">Find Room</a></li>
-                        <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
-                          
-                         <li style="display:none" id="account"><a href="#">My Account</a>
-                  <ul>
-                    <li><a href="dashboard-my-profile.html" >My Profile</a></li>
-                    <li><a href="dashboard-bookmarks.html">My Wish List</a></li>
-                    <li><a href="javascript:logout()" ">Logout</a></li>
-                  
-                  </ul> 
-            </li>
-
-          
-
-              <li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
-          <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>    
-          </ul>
-           
-        </nav>
-        <div class="clearfix"></div>
-        <!-- Main Navigation / End -->
-        
-      </div>
-      <!-- Left Side Content / End -->
-
-
-
-      <!-- Sign In Popup -->
-      <div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
-
-        <div class="small-dialog-header">
-          <h3>Sign In</h3>
-        </div>
-
-        <!--Tabs -->
-        <div class="sign-in-form style-1">
-
-          <ul class="tabs-nav">
-            <li class=""><a href="#tab1">Log In</a></li>
-            <li><a href="#tab2">Register</a></li>
-          </ul>
-
-          <div class="tabs-container alt">
-
-            <!-- Login -->
-            <div class="tab-content" id="tab1" style="display: none;">
-              <form action="" method="post" onsubmit="Login();return false;" class="login">
-
-                <p class="form-row form-row-wide">
-                  <label for="username">Username:
-                    <i class="im im-icon-Male"></i>
-                    <input type="text" class="input-text" name="username" id="uname" value="" />
-                  </label>
-                </p>
-
-                <p class="form-row form-row-wide">
-                  <label for="password">Password:
-                    <i class="im im-icon-Lock-2"></i>
-                    <input class="input-text" type="password" name="password" id="upass"/>
-                  </label>
-                  <span class="lost_password">
-                  <a  href="forgotpassword.html" >Lost Your Password?</a> 
-                    
-                  </span>
-                </p>
-
-                <div class="form-row">
-                  <input type="submit" class="button border margin-top-5" name="login" value="Login" />
-                
-                  <div>
-                          <p style="color:black;margin-top:5%">----------------------------OR----------------------------</p>
-                              
-                  
-                </div>
-                </div>
-                <!-- <form method="post" class="login"> -->
-
-              
-                <div>
-                                 <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false" data-width="50" data-height="40" style="margin-top:4%;margin-left:25%"></div>
-&nbsp;                              
-
-                                  <div class="g-signin2 button-social-login button-social-login-google" data-size="medium"  data-height="30" data-longtitle="true" data-onsuccess="onSignIn" data-width="200" style="margin-top:4%;margin-left:25%"></div>
-                                   </div>
-                
-              </form>
-
-
-
-            </div>
-
-            <!-- Register -->
-            <div class="tab-content" id="tab2" style="display: none;">
-
-              <form method="post" action="" method="post" onsubmit="SignupRent();return false;" class="register">
-
-                
-              <p class="form-row form-row-wide">
-                <label for="username2">Username:
-                  <i class="im im-icon-Male"></i>
-                  <input type="text" class="input-text" name="username" id="Susername" value="" />
-                </label>
-              </p>
-                
-              <p class="form-row form-row-wide">
-                <label for="email2">Email Address:
-                  <i class="im im-icon-Mail"></i>
-                  <input type="text" class="input-text" name="email" id="Semail" value="" />
-                </label>
-              </p>
-
-              <p class="form-row form-row-wide">
-                <label for="password1">Password:
-                  <i class="im im-icon-Lock-2"></i>
-                  <input class="input-text" type="password" name="password1" />
-                </label>
-              </p>
-
-              <p class="form-row form-row-wide">
-                <label for="password2">Repeat Password:
-                  <i class="im im-icon-Lock-2"></i>
-                  <input class="input-text" type="password" name="password2" id="cpassword"/>
-                </label>
-              </p>
-
-              <input type="submit" class="button border fw margin-top-10" name="register" value="Register" />
-  
-              </form>
-            </div>
-
-          </div>
-        </div>
-      </div>
-      <!-- Sign In Popup / End -->
-
-    </div>
-  </div>
-
-
-  <!-- Header / End -->
-
-</header>
 <div class="clearfix"></div>
 <!-- Header Container / End -->
 
@@ -639,10 +460,14 @@ function Forgot() {
 
 <form action="" method="post" onsubmit="Login();return false;">
 <div class="fields-grid">
-<div class="styled-input agile-styled-input-top"><input id="uname" name="Username" required="" type="text" /> <label>Username</label></div>
+<div class="styled-input agile-styled-input-top">
+<input id="loginname" name="Username" required="" type="text" /> <label>Username</label></div>
 
-<div class="styled-input"><input id="upass" name="Password" required="" type="Password" /> <label>Password</label></div>
-<a data-target="#myModal" data-toggle="modal" href="#" style="font-family:Hanken">forgot password?</a> <input type="submit" value="Sign in" /></div>
+<div class="styled-input">
+<input id="loginpass" name="Password" required="" type="Password" /> <label>Password</label></div>
+<a data-target="#myModal" data-toggle="modal" href="#" style="font-family:Hanken">forgot password?</a> 
+  <button class="button margin-top-15" type="submit">Sign in</button>
+</div>
 
 <div class="social-grids">
 <div class="social-text">
@@ -656,7 +481,6 @@ function Forgot() {
 <div class="g-signin2 button-social-login button-social-login-google" data-height="40" data-longtitle="true" data-onsuccess="onSignIn" data-width="230" style="margin-left:25px;margin-top:10%"></div>
 </div>
 
-<div class="clear"></div>
 </div>
 </form>
 </div>

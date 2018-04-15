@@ -90,7 +90,7 @@ function Login() {
                 document.getElementById("loginhiden").style.display = "none";
                 document.getElementById("account").style.visibility = "visible";
 //alert(xhr.getResponseHeader('Set-Cookie'));
-              window.history.back();
+               location.reload(true);
             } else {
                 alert("Incorect Username and Password")
 
@@ -137,7 +137,7 @@ function SignupRent() {
             
             document.getElementById("loginhiden").style.display = "none";
             document.getElementById("account").style.visibility = "visible";
-           window.history.back();
+            location.reload(true);
         }
     });
 }
@@ -553,23 +553,20 @@ function onSignIn(googleUser) {
 
 <!-- Content
 ================================================== -->
-<div class="container">
+        
+<div id="titlebar" style=" background-image: url('images/house9.jpg');">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+
+          <h2 style="color:white;margin-left:14%"><b>Privacy Policy</b></h2>
+         
 
 
-
-
-<!-- Banner
-================================================== -->
-
-				
-
-					<!-- Form -->
-					<h2 style="text-align:center"><b>Privacy</b></h2>
-
-					
-					<!-- Row With Forms / End -->
-
-		
+      </div>
+    </div>
+  </div>
+</div>
 <!-- Content
 ================================================== -->
 <!-- Fullwidth Section -->
@@ -753,37 +750,6 @@ If you choose to visit the website, your visit and any dispute over privacy is s
 	});
 </script>
 
-
-<!-- Style Switcher
-================================================== -->
-<script src="scripts/switcher.js"></script>
-
-<div id="style-switcher">
-	<h2>Color Switcher <a href="#"><i class="sl sl-icon-settings"></i></a></h2>
-	
-	<div>
-		<ul class="colors" id="color1">
-			<li><a href="#" class="main" title="Main"></a></li>
-			<li><a href="#" class="blue" title="Blue"></a></li>
-			<li><a href="#" class="green" title="Green"></a></li>
-			<li><a href="#" class="orange" title="Orange"></a></li>
-			<li><a href="#" class="navy" title="Navy"></a></li>
-			<li><a href="#" class="yellow" title="Yellow"></a></li>
-			<li><a href="#" class="peach" title="Peach"></a></li>
-			<li><a href="#" class="beige" title="Beige"></a></li>
-			<li><a href="#" class="purple" title="Purple"></a></li>
-			<li><a href="#" class="celadon" title="Celadon"></a></li>
-			<li><a href="#" class="red" title="Red"></a></li>
-			<li><a href="#" class="brown" title="Brown"></a></li>
-			<li><a href="#" class="cherry" title="Cherry"></a></li>
-			<li><a href="#" class="cyan" title="Cyan"></a></li>
-			<li><a href="#" class="gray" title="Gray"></a></li>
-			<li><a href="#" class="olive" title="Olive"></a></li>
-		</ul>
-	</div>
-		
-</div>
-<!-- Style Switcher / End -->
 
 
 </body>
