@@ -97,6 +97,32 @@ func Insertcontact(w http.ResponseWriter, r *http.Request) {
 
 }
 
+type Browse struct {
+	Input string
+}
+
+//Get Single Owner Details
+func Browswcat(w http.ResponseWriter, r *http.Request) {
+
+	var Browsein Browse
+	err := json.NewDecoder(r.Body).Decode(&Browsein)
+	if err != nil {
+		log.Error("Error - Owner single", err)
+	}
+
+	Data := Db.GetBrowse_Db(Browsein.Input)
+	Senddata, err := json.Marshal(Data)
+
+	if err != nil {
+		log.Error("Error - Get single Owner Data from DB", err)
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+
+	w.Write(Senddata)
+
+}
+
 //Get Single Owner Details
 func Insertowner(w http.ResponseWriter, r *http.Request) {
 

@@ -201,6 +201,9 @@ func Serve() bool {
 	//Contactform
 	router.HandleFunc("/insertcontact", Service.Insertcontact)
 
+	//Browsecategories
+	router.HandleFunc("/Browsecategories", Service.Browswcat)
+
 	// Default server - non-trusted for debugging
 
 	serverhttp := func() {

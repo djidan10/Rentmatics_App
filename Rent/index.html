@@ -565,6 +565,23 @@ function onSignIn(googleUser) {
    }
 
 
+   function sendRoomdata(sharedroom){
+  
+   
+
+  
+ 
+
+    
+      url = 'listing-separate.html?Id=' + sharedroom;
+ 
+
+  
+
+     document.location.href = url;
+   }
+
+
 </script>
 
 </head>
@@ -811,7 +828,7 @@ function onSignIn(googleUser) {
 
     <div class="col-md-12">
       <h3 class="headline centered margin-top-75">
-        Browse Categories
+        Browse Categories 
       </h3>
     </div>
 
@@ -825,31 +842,31 @@ function onSignIn(googleUser) {
       <div class="categories-boxes-container margin-top-5 margin-bottom-30" style="margin-left:10%">
         
         <!-- Box -->
-        <a href="listings-list-with-sidebar.html" class="category-small-box">
+        <a href="javascript:sendRoomdata('Sharedhouse')" class="category-small-box">
           <i class="im im-icon-Door"></i>
           <h4>Shared Rooms</h4>
         </a>
 
         <!-- Box -->
-        <a href="listings-list-with-sidebar.html" class="category-small-box">
+        <a href="javascript:sendRoomdata('Furnished')" class="category-small-box">
           <i class="im  im-icon-Home-Window"></i>
           <h4>Semi/Fully Furnished Rooms</h4>
         </a>
 
         <!-- Box -->
-        <a href="listings-list-with-sidebar.html" class="category-small-box">
+        <a href="javascript:sendRoomdata('Privateroom')" class="category-small-box">
           <i class="im im-icon-Home-2"></i>
           <h4>Private Rooms</h4>
         </a>
 
         <!-- Box -->
-        <a href="listings-list-with-sidebar.html" class="category-small-box">
+        <a href="javascript:sendRoomdata('Entirehouse')" class="category-small-box">
           <i class="im im-icon-Home-5"></i>
           <h4>Full Houses</h4>
         </a>
 
         <!-- Box -->
-        <a href="listings-list-with-sidebar.html" class="category-small-box">
+        <a href="javascript:sendRoomdata('Office')" class="category-small-box">
           <i class="im im-icon-Office"></i>
           <h4>Officespace</h4>
         </a>
