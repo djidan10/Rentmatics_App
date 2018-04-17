@@ -3,90 +3,141 @@
 
 <!-- Basic Page Needs
 ================================================== -->
-<title>Findeo</title>
-<meta charset="utf-8">
 
 
 <!-- CSS
 ================================================== -->
-
-<link rel="stylesheet" href="css/colors/main.css" id="colors">
+<title>Rentmatics</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-<!-- <style type="text/css">
-  .row1
-{
-  border:1px solid black;  
-   margin-top:10px; 
+ <script type="text/javascript" src="scripts/jquery.min.js"></script>
+<script>
+    $(document).ready(function() {
+    $('select').material_select();
+  });
+        </script>
+        <style type="text/css">
+          body {
+   background-image: url("images/jumbo-banner.jpg");
+   background-color: #cccccc;
+}
+        </style>
 
+        <style>
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
 }
 </style>
- -->
+
 </head>
 
-<body>
 
-<!-- Wrapper -->
-
+<body >
 
 
+<div >
 
-   <!-- data-background="images/jumbo-banner.jpg" -->
+  <div class="row">
 
 
-<!-- Content
+
+
+
+<!-- Banner
 ================================================== -->
+<div class="main-search-container"  style="color:white">
+  <div class="main-search-inner">
 
-<div class="blue-grey lighten-5" >
-
- <div class="row " style="margin-left:200px;">
-    <form class="col s8 row1 blue-grey lighten-5" action="http://localhost:8083/GetImage" method="POST" enctype="multipart/form-data"  name="myform" novalidate>
-    <h3>Insert Your Best Rentspace</h3>
-     
-     
+    <div class="container" style="color:white">
       <div class="row">
+          <h3>Insert Your Best Rentspace</h3>
+          <br>
+
+        <div class="col-md-12">
+           <form class="col s8 row1" action="http://localhost:8083/GetImage" method="POST" enctype="multipart/form-data"  name="myform" novalidate>
+     
+     
+      <div class="row" >
        <div class="input-field">
-          <input name="housename" type="text" class="validate" required>
-          <label for="last_name1"><b>House owner Name</b></label>
+          <input name="housename" type="text" class="validate" required >
+          <label for="last_name1" style="color:white"><b>House owner Name</b></label>
         </div>
       </div>
 
       <div class="row">
        <div class="input-field">
           <input name="executiveid" type="text" class="validate" required>
-          <label for="last_name1"><b>ExecutiveID</b></label>
+          <label for="last_name1" style="color:white"><b>ExecutiveID</b></label>
         </div>
       </div>
 
       <div class="row">
        <div class="input-field">
           <input name="ownerid" type="text" class="validate" required>
-          <label for="last_name1"><b>OwnerID</b></label>
+          <label for="last_name1" style="color:white"><b>OwnerID</b></label>
         </div>
       </div>
         <div class="row">
        <div class="input-field">
           <input name=houseownername type="text" class="validate" required>
-          <label for="last_name"><b>House Name</b></label>
+          <label for="last_name"  style="color:white"><b>House Name</b></label>
         </div>
       </div>
      
        <div class="row">
        <div class="input-field">
           <input name="address1" type="text" class="validate" required>
-          <label for="last_name"><b>Address1</b></label>
+          <label for="last_name"  style="color:white"><b>Address1</b></label>
         </div>
       </div>
      
        <div class="row">
        <div class="input-field">
           <input name="address2" type="text" class="validate" required>
-          <label for="last_name"><b>Address2</b></label>
+          <label for="last_name"  style="color:white"><b>Address2</b></label>
         </div>
       </div>
      
-  <div class="input-field">
-    <select name="city" required>
-      <option value="" disabled selected>city</option>
+  <div class="input-field" style="color:white;margin-left:-2%">
+    <select name="city" required >
+      <option value="" disabled selected ><b>City</b></option>
       <option value="Sarjapur Road"></option>
                     <option value="Whitefield">Whitefield</option>
                     <option value="Bannerghatta Road">Bannerghatta Road</option>
@@ -97,7 +148,7 @@
                     <option value="Hosur Road">Hosur Road</option>
     </select>
   </div>
-  <div class="input-field">
+  <div class="input-field" style="color:white;margin-left:-2%">
     <select name="district" required>
       <option value="" disabled selected>district</option>
       <option value="Bangalore"> Bangalore</option>
@@ -105,7 +156,7 @@
      
     </select>
   </div>
-  <div class="input-field" >
+  <div class="input-field" style="color:white;margin-left:-2%">
     <select name="state" required>
       <option value="" disabled selected>State</option>
       <option value="TamilNadu">TamilNadu</option>
@@ -114,7 +165,7 @@
     </select>
   </div>
 
-    <div class="input-field">
+    <div class="input-field" style="color:white;margin-left:-2%">
     <select name="country" required>
       <option value="" disabled selected>country</option>
       <option value="India">India</option>
@@ -126,21 +177,21 @@
        <div class="row" >
        <div class="input-field">
           <input name="pin" type="text" class="validate" required>
-          <label for="last_name"><b>pin</b></label>
+          <label for="last_name" style="color:white;"><b>pin</b></label>
         </div>
       </div>
 
       <div class="row">
        <div class="input-field">
           <input name="phonenumber" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
-          <label for="last_name"><b>Phonenumber</b></label>
+          <label for="last_name" style="color:white;"><b>Phonenumber</b></label>
         </div>
       </div>
 
        <div class="row">
        <div class="input-field">
           <input name="email" type="text" class="validate" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" required>
-          <label for="last_name"><b>Email</b></label>
+          <label for="last_name" style="color:white;"><b>Email</b></label>
         </div>
       </div>
 
@@ -148,31 +199,31 @@
        <div class="row">
        <div class="input-field">
           <input name="securitydeposit" pattern="^(0|[1-9][0-9]*)$" type="text" class="validate" required>
-          <label for="last_name"><b>Security Deposit</b></label>
+          <label for="last_name" style="color:white;"><b>Security Deposit</b></label>
         </div>
       </div>
         <div class="row">
        <div class="input-field">
           <input name="monthlyrent"  pattern="^(0|[1-9][0-9]*)$" type="text" class="validate" required> 
-          <label for="last_name"><b>Monthly  Rent</b></label>
+          <label for="last_name" style="color:white;"><b>Monthly  Rent</b></label>
         </div>
       </div>
 
         <div class="row">
        <div class="input-field">
           <input name="bedrent" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
-          <label for="last_name"><b>Bed  Rent</b></label>
+          <label for="last_name" style="color:white;"><b>Bed  Rent</b></label>
         </div>
       </div>
 
       <div class="row">
        <div class="input-field">
           <input name="bhkrent" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
-          <label for="last_name"><b>Bhk  Rent</b></label>
+          <label for="last_name" style="color:white;"><b>Bhk  Rent</b></label>
         </div>
       </div>
      
-       <div class="input-field">
+       <div class="input-field" style="color:white;margin-left:-2%">
     <select name="bed" required>
       <option value="" disabled selected>Bed</option>
       <option value="1"> 1 Bed</option>
@@ -185,7 +236,7 @@
   </div>
 
 
-  <div class="input-field">
+  <div class="input-field" style="color:white;margin-left:-2%">
     <select name="bhk" required>
       <option value="" disabled selected>Bhk</option>
       <option value="1"> 1 BHK</option>
@@ -202,14 +253,14 @@
      <div class="row">
        <div class="input-field">
           <input name="availbed" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
-          <label for="last_name"><b>Available Bed</b></label>
+          <label for="last_name" style="color:white;"><b>Available Bed</b></label>
         </div>
       </div>
      
       <div class="row">
        <div class="input-field">
           <input name="availbhk" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
-          <label for="last_name"><b>Available Bhk</b></label>
+          <label for="last_name" style="color:white;"><b>Available Bhk</b></label>
         </div>
       </div>
      
@@ -217,7 +268,7 @@
       <div class="row">
        <div class="input-field">
           <input name="bookbed" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
-          <label for="last_name"><b>Booked Bed</b></label>
+          <label for="last_name" style="color:white;"><b>Booked Bed</b></label>
         </div>
       </div>
      
@@ -225,14 +276,14 @@
       <div class="row">
        <div class="input-field">
           <input name="bookbhk" type="text" class="validate" pattern="^(0|[1-9][0-9]*)$" required>
-          <label for="last_name"><b>Booked bhk</b></label>
+          <label for="last_name" style="color:white;"><b>Booked bhk</b></label>
         </div>
       </div>
      
       
 
 
- <div class="input-field" required>
+ <div class="input-field" required style="color:white;margin-left:-2%">
     <select name="furnishtype" required>
       <option value=""  disabled selected>Furnished Type</option>
         
@@ -245,7 +296,7 @@
   </div>
 
 
-  <div class="input-field" required>
+  <div class="input-field" required style="color:white;margin-left:-2%">
     <select name="tenant" required>
       <option value=""  disabled selected>Tenant type</option>
         
@@ -259,7 +310,7 @@
 
 
 
-  <div class="input-field" required>
+  <div class="input-field" style="color:white;margin-left:-2%" required>
     <select name ="booking" required>
       <option value=""  disabled selected>Booking type</option>
         
@@ -272,7 +323,7 @@
   </div>
 
 
-  <div class="input-field" required>
+  <div class="input-field" style="color:white;margin-left:-2%" required>
     <select name="housetype" required>
       <option value=""  disabled selected>House type</option>
         
@@ -287,7 +338,7 @@
 
   <div>
 
- <label><h6><b>Distance</b></h6></label>
+ <label ><h6 style="color:white;margin-left:-2%"><b>Distance</b></h6></label>
 
     <p class="range-field">
       <input type="range" id="test5" min="0" max="5" name="distance"/>
@@ -296,28 +347,28 @@
 </div>     
 
 
- <div class="row">
+ <div class="row" style="color:white;">
        <div class="input-field">
           <input id="last_name" type="text" class="validate" name="lalitude"  required>
-          <label><b>Latitude</b></label>
+          <label style="color:white;"><b>Latitude</b></label>
         </div>
       </div>
-       <div class="row">
+       <div class="row" >
        <div class="input-field">
           <input id="last_name" type="text" class="validate" name="longitude" required>
-          <label ><b>Longitude</b></label>
+          <label style="color:white;" ><b>Longitude</b></label>
         </div>
       </div>
  <div class="row">
       <div class="input-field">
           <input id="last_name" type="text" class="validate" name="sqft" pattern="^(0|[1-9][0-9]*)$" required>
-          <label ><b>Squarefeet</b></label>
+          <label style="color:white;"><b>Squarefeet</b></label>
         </div>
       </div>
  <div class="row">
       <div class="input-field">
           <input id="last_name" type="text" class="validate" name="tnf" pattern="^(0|[1-9][0-9]*)$" required>
-          <label ><b>Totalfloors</b></label>
+          <label style="color:white;"><b>Totalfloors</b></label>
         </div>
       </div>
        
@@ -352,7 +403,7 @@
 
 
  
-  <label ><h6><b>Amenties</b></h6></label>
+  <label style="color:white;"><h6><b>Amenties</b></h6></label>
   <br>
  
 
@@ -360,78 +411,78 @@
 
         <p>
         <input type="checkbox" class="filled-in" id="Amen1" value="Sofa" name="groupamen"  />
-      <label for="Amen1">Sofa</label>
+      <label style="color:white;" for="Amen1">Sofa</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen2" value="Wifi" name="groupamen"  />
-      <label for="Amen2">Wifi</label>
+      <label  style="color:white;" for="Amen2">Wifi</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen3" value="Television" name="groupamen"  />
-      <label for="Amen3">Television</label>
+      <label  style="color:white;" for="Amen3">Television</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen4" value="Dish" name="groupamen"  />
-      <label for="Amen4">Dish</label>
+      <label style="color:white;"  for="Amen4">Dish</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen5" value="Washing Machine" name="groupamen"  />
-      <label for="Amen5">Washing Machine</label>
+      <label style="color:white;"  for="Amen5">Washing Machine</label>
     </p>
 
 
         <p>
         <input type="checkbox" class="filled-in" id="Amen6" value="Western Toilet" name="groupamen"  />
-      <label for="Amen6">Western Toilet</label>
+      <label style="color:white;"  for="Amen6">Western Toilet</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen7" value="Solar Heater" name="groupamen"  />
-      <label for="Amen7">Solar Heater</label>
+      <label style="color:white;"  for="Amen7">Solar Heater</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen8" value="Geyser" name="groupamen"  />
-      <label for="Amen8">Geyser</label>
+      <label style="color:white;"   for="Amen8">Geyser</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen9" value="Fridge" name="groupamen"  />
-      <label for="Amen9">Fridge</label>
+      <label style="color:white;"  for="Amen9">Fridge</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen10" value="LPG Gas Stove" name="groupamen"  />
-      <label for="Amen10">LPG Gas Stove</label>
+      <label style="color:white;"  for="Amen10">LPG Gas Stove</label>
     </p>
 
 
         <p>
         <input type="checkbox" class="filled-in" id="Amen11" value="Crockery Set" name="groupamen"  />
-      <label for="Amen11">Crockery Set</label>
+      <label for="Amen11" style="color:white;" >Crockery Set</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen12" value="Wardrobes" name="groupamen"  />
-      <label for="Amen12">Wardrobes</label>
+      <label for="Amen12" style="color:white;" >Wardrobes</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen13" value="Laptop Table + Chair" name="groupamen"  />
-      <label for="Amen13">Laptop Table + Chair</label>
+      <label for="Amen13" style="color:white;" >Laptop Table + Chair</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen14" value="Side table" name="groupamen"  />
-      <label for="Amen14">Side table</label>
+      <label for="Amen14" style="color:white;" >Side table</label>
     </p>
      <p>
         <input type="checkbox" class="filled-in" id="Amen15" value="LPG Gas Stove" name="groupamen"  />
-      <label for="Amen15">Lift</label>
+      <label for="Amen15" style="color:white;" >Lift</label>
     </p>
 
 
 
     <p>
         <input type="checkbox" class="filled-in" id="Amen16" value="Swimming Pool" name="groupamen"  />
-      <label for="Amen16">Swimming Pool</label>
+      <label for="Amen16" style="color:white;" >Swimming Pool</label>
     </p>
     <p>
       <input type="checkbox" class="filled-in" id="Amen17" value="Gym" name="groupamen" />
-      <label for="Amen17">Gym</label>
+      <label for="Amen17" style="color:white;" >Gym</label>
     </p>
     
                 
@@ -444,7 +495,7 @@
         <div class="input-field col s12">
          
           <textarea id="icon_prefix2" class="materialize-textarea" name="listing"></textarea>
-          <label for="icon_prefix2"><b>Listing</b></label>
+          <label for="icon_prefix2" style="color:white;" ><b>Listing</b></label>
         </div>
       </div>
  
@@ -457,7 +508,7 @@
         <div class="input-field col s12">
          
           <textarea id="icon_prefix2" class="materialize-textarea" name="description"></textarea>
-          <label for="icon_prefix2"><b>Description</b></label>
+          <label for="icon_prefix2" style="color:white;" ><b>Description</b></label>
         </div>
       </div>
  
@@ -468,7 +519,7 @@
    
     <div class="file-field input-field">
       <div class="btn">
-        <span>File</span>
+        <span>File1</span>
         <input type="file"  name="uploadfile0" >
       </div>
       <div class="file-path-wrapper">
@@ -477,7 +528,7 @@
     </div>
       <div class="file-field input-field">
       <div class="btn">
-        <span>File1</span>
+        <span>File2</span>
         <input type="file"  name="uploadfile1" >
       </div>
       <div class="file-path-wrapper">
@@ -487,7 +538,7 @@
 
     <div class="file-field input-field">
       <div class="btn">
-        <span>File</span>
+        <span>File3</span>
         <input type="file"  name="uploadfile2" >
       </div>
       <div class="file-path-wrapper">
@@ -496,7 +547,7 @@
     </div>
       <div class="file-field input-field">
       <div class="btn">
-        <span>File1</span>
+        <span>File4</span>
         <input type="file"  name="uploadfile3" >
       </div>
       <div class="file-path-wrapper">
@@ -507,7 +558,7 @@
    
     <div class="file-field input-field">
       <div class="btn">
-        <span>File</span>
+        <span>File5</span>
         <input type="file"  name="uploadfile4" >
       </div>
       <div class="file-path-wrapper">
@@ -516,50 +567,97 @@
     </div>
       <div class="file-field input-field">
       <div class="btn">
-        <span>File1</span>
+        <span>File6</span>
         <input type="file"  name="uploadfile5" >
       </div>
       <div class="file-path-wrapper">
         <input class="file-path validate" type="text">
       </div>
     </div>
-
-
+<br>
+<br>
 
 <!-- <a class="waves-effect waves-light btn">Submit</a> -->
-  <button class="btn waves-effect waves-light" style ="margin-left:5%;" type="submit"  >upload
+  <button class="btn waves-effect waves-light" style ="margin-left:35%;" type="submit"  >upload Rentspace
  
   </button> 
 
 <br>
    </form>
+          
 
-</div>
+
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
 </div>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
   
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+  
+  
+  </div>
+
+</div>
 <!-- Footer / End -->
 
 
 <!-- Back To Top Button -->
+<div id="backtotop"><a href="#"></a></div>
 
-<!-- Scripts
+
+</div>
+
+<!-- Style Switcher
 ================================================== -->
-<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-  <script>
-    $(document).ready(function() {
-    $('select').material_select();
-  });
-        </script>
 
-
-
-<!-- Wrapper / End -->
+<!-- Style Switcher / End -->
 
 
 </body>

@@ -1,7 +1,7 @@
 package Model
 
 type CityStruct struct {
-	Id   string
+	//	Id   string
 	City string
 }
 

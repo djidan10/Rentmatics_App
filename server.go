@@ -44,9 +44,9 @@ func Serve() bool {
 	//http.Handle("/", fs)
 	router.PathPrefix("/rentmatics/").Handler(http.StripPrefix("/rentmatics/", fs2))
 
-	fs3 := http.FileServer(http.Dir("./rentmatics/"))
+	fs3 := http.FileServer(http.Dir("./HTML/"))
 	//http.Handle("/", fs)
-	router.PathPrefix("/rentmatics/").Handler(http.StripPrefix("/rentmatics/", fs3))
+	router.PathPrefix("/HTML/").Handler(http.StripPrefix("/HTML/", fs3))
 	fs4 := http.FileServer(http.Dir("./rentmatics_final/"))
 	//http.Handle("/", fs)
 	router.PathPrefix("/rentmatics_final/").Handler(http.StripPrefix("/rentmatics_final/", fs4))

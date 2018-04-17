@@ -26,17 +26,17 @@ func GetCity_DB(Userdata Model.Login) (Uservalid Model.Login) {
 	return Uservalid
 }
 
-func GetAllCities() []Model.CityStruct {
-	var TempCitySlice []Model.CityStruct
-	rows, err := OpenConnection["Rentmatics"].Query("Select * from cities")
+func GetAllCities() []string {
+	var TempCitySlice []string
+	rows, err := OpenConnection["Rentmatics"].Query("Select cities from cities")
 	if err != nil {
 		log.Error("Error -DB: Get All cities", err)
 	}
 	for rows.Next() {
-		var TempCityStruct Model.CityStruct
+		var TempCityStruct string
 		rows.Scan(
-			&TempCityStruct.Id,
-			&TempCityStruct.City,
+			//			&TempCityStruct.Id,
+			&TempCityStruct,
 		)
 		TempCitySlice = append(TempCitySlice, TempCityStruct)
 	}

@@ -15,10 +15,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Rentmatics is fastest growing network, where you will get Rentspace along with opportunity to live luxury and make more neighbors."/>
 <meta name="author" content=""><meta name="google-signin-client_id" content="22067969485-itbijda0dti859jimo6u5vl6ne2g7q4b.apps.googleusercontent.com">
+
+ <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
 <script src="https://apis.google.com/js/platform.js" async defer></script>
 	<script type="text/javascript" src="scripts/jquery.min.js"></script>
 	<script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script>
+
+
+ 
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
 
 //Foe Login
@@ -38,6 +44,33 @@ $(document).ready(function(){
           "Loginid":cooki
 
         };
+
+
+
+ $.ajax({
+         type: "GET",
+         url: "http://paymyhire.com:8083/GetCities",
+         contentType:"application/json; charset=utf-8",
+         
+         
+        success: function(responsee){
+      var searchout = JSON.parse(responsee);
+     console.log(searchout)
+          $( "#tags" ).autocomplete({
+      source: searchout
+    });
+
+          }});
+
+
+ 
+
+
+
+
+
+
+
 
 
 
@@ -603,7 +636,7 @@ function onSignIn(googleUser) {
       <div class="left-side">
         
         <!-- Logo -->
-        <div id="logo">
+        <div id="logo" >
           <a href="index.html"><img src="images/logo1.png" alt="" style="margin-top:-3px;margin-left:-15%"></a>
         </div>
 
@@ -620,8 +653,8 @@ function onSignIn(googleUser) {
         <!-- Main Navigation -->
         <nav id="navigation" class="style-1" style="margin-left:-5%">
           <ul id="responsive">
-
-            <li><a class="current" href="index.html" >Home</a></li>
+   <li style="visibility:hidden">aaa</li>
+          
                         <li><a href="howitwork.html">How It Works </a>
                 <ul>
                 <li><a href="owner.html">Owners</a> </li>
@@ -629,10 +662,11 @@ function onSignIn(googleUser) {
                 
                 </ul>
             </li>
+              
                         <li><a href="findamate.html">Find a mate</a></li>
-                        <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
-                         <li style="visibility:hidden">hkdnfjss</li>
                           
+                        <li><a href="http://paymyhire.com/" target="_blank" >PayMyHire</a></li>
+                        
                          <li style="display:none" id="account"><a href="#">Hi Rentiees</a>
                   <ul>
                     <li><a href="dashboard-my-profile.html" >My Profile</a></li>
@@ -641,10 +675,11 @@ function onSignIn(googleUser) {
                   
                   </ul> 
             </li>
-
+             
          
 
               <li><a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"  id="loginhiden"><i class="sl sl-icon-login"></i>Sign In</a></li>
+             <li style="visibility:hidden">aaa</li>
           
           <a href="listings-half-screen-map-list.html" class="button border with-icon">Explore Homes <i class="sl sl-icon-home"></i></a>    
           </ul>
@@ -916,6 +951,33 @@ function onSignIn(googleUser) {
 
 
 
+<!-- Container -->
+<div class="container">
+  <div class="row">
+
+    <div class="col-md-12">
+      <h3 class="headline centered margin-bottom-35 margin-top-70">Office Space <span>Browse Your Favourite Rent Space</span></h3>
+    </div>
+
+
+    <div class="col-md-12">
+
+      <!-- Image Box -->
+      <a href="listings-list-with-sidebar.html" class="img-box" data-background-image="images/office1.jpg">
+        <div class="img-box-content visible">
+          <h4>Coming Soon!</h4>
+          
+        </div>
+      </a>
+
+    </div>  
+      
+  
+
+  </div>
+</div>
+<!-- Container / End -->
+
 <!-- Info Section -->
 <div class="container">
 
@@ -976,13 +1038,13 @@ function onSignIn(googleUser) {
     <div class="container">
 
       <div class="row">
-        <div class="col-lg-6 col-sm-8">
+        <div class="col-lg-5 col-sm-8">
           <h2>It's your journey. We're here to help.</h2>
           <p>We’re full-service, local agents who know how to find people and home each together. We use online tools with an unmatched search capability to make you smarter and faster.</p>
           <a href="listings-half-screen-map-list.html" class="button margin-top-25">Get Started</a>
         </div>
-        <div class="col-lg-6 col-sm-8">
-        <img src="images/1.jpg"/>
+        <div class="col-lg-7 col-sm-12">
+        <img src="images/1.jpg"  />
         </div>
 
       </div>
@@ -1077,7 +1139,7 @@ function onSignIn(googleUser) {
 
 </div>
 <!-- Wrapper / End -->
-
+<!-- 
       <script>
 google.maps.event.addDomListener(window, 'load', initialize);
 function initialize() {
@@ -1097,12 +1159,12 @@ console.log(place.geometry['location'].lat());
 console.log(place.geometry['location'].lng());
 });
 }
-</script>
+</script> -->
 
 
 <!-- Scripts
 ================================================== -->
-<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+
 <script type="text/javascript" src="scripts/mmenu.min.js"></script>
 <script type="text/javascript" src="scripts/chosen.min.js"></script>
 <script type="text/javascript" src="scripts/slick.min.js"></script>

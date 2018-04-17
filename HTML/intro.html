@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Login V18</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+<style>
+.dropbtn {
+    background-color: #3348BE;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+      min-width: 200px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #3348BE}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3348BE;
+}
+</style>
+
+	<script>
+	function login(){
+		
+		  
+           document.location.href = "dashboard.html";
+	}
+	</script>
+
+<!--===============================================================================================-->
+	<!-- <link rel="stylesheet" type="text/css" href="css/util.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+<body style="background-color: #666666;">
+	
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100">
+				<form class="login100-form validate-form">
+					<span class="login100-form-title p-b-43" style="margin-top:-10%">
+						Owner &Tenant Login
+					</span>
+					<br>
+					<br>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate = "Username required">
+						<input class="input100" type="text"  placeholder="Username">
+						
+					</div>
+					
+					
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<input class="input100" type="password"  placeholder="Password">
+					
+					</div>
+                    
+
+      	<div class="dropdown" >
+  <button class="dropbtn">Login type</button>
+  <div class="dropdown-content">
+    <a href="#">Tenant Type</a>
+    <a href="#">Owner Type</a>
+    <a href="#">Executive </a>
+  </div>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+
+				
+
+					<div class="container-login100-form-btn">
+						<a href="dashboard.html" class="login100-form-btn button" >
+							Login
+						</a>
+					</div>
+
+			
+
+
+					
+				
+				</form>
+
+				<div class="login100-more" style="background-image: url('images/introimg.jpg');">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	
+
+
+</body>
+</html>
