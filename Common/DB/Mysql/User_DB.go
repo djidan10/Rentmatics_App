@@ -152,13 +152,14 @@ func GetUSer(User1 Model.LoginUser) (Userinfo Model.UserResponse) {
 }
 
 func GetRentUSer(User1 Model.LoginUser) (Adminres Model.AdminLoginResponse) {
-	rows, err := OpenConnection["Rentmatics"].Query("select username,password,role from rentmatics_userdetails where username=?", User1.Username)
+	rows, err := OpenConnection["Rentmatics"].Query("select userid,username,password,role from rentmatics_userdetails where username=?", User1.Username)
 	if err != nil {
 		log.Error("Error -DB: Get User", err)
 	}
 	for rows.Next() {
 
 		rows.Scan(
+			&Adminres.Userid,
 			&Adminres.Username,
 			&Adminres.Password,
 			&Adminres.Role,

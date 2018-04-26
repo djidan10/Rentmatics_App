@@ -11,7 +11,172 @@
 ================================================== -->
 <link rel="stylesheet" href="css/style.css">
 <link rel="stylesheet" href="css/colors/main.css" id="colors">
+<script type="text/javascript" src="scripts/jquery-2.2.0.min.js"></script>
+  <script type="text/javascript" src="scripts/jquery.cookie.min.js"></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC5huqrx4Wp0KO0OFq1YUu_XKteJX6xHkE&libraries=places&sensor=false"></script> -->
+<script>
 
+var cooki=$.cookie('Rentmaticsadmin');
+var tenantid=$.cookie('Rentmaticsadminid');
+var tenantint = ""
+var cardstring =""
+var homeid =""
+
+
+$(document).ready(function(){
+ if(cooki==""||cooki==null||cooki==undefined||cooki=="NODATA"){
+  
+   }else{
+
+   	    var str ="Hello " + cooki
+       $("#login").html(str);
+       
+
+
+       var url = document.location.href,
+         url1 = decodeURIComponent(url)
+         var params = location.search.substr(location.search.indexOf("?")+1);
+         params = params.split("&");
+      for (var i=0; i<params.length; i++)
+       {
+
+         temp = params[i].split("=");
+         if ( [temp[0]] == "Id" ) { tenantint = temp[1]; }
+       }  
+        
+        var Home={
+                   "Complaintid" :parseInt(tenantint),
+                   };
+
+         
+            $.ajax({
+               type: "POST",
+               url: "http://localhost:8083/Getsingletenantcomplaint",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(Home),
+               async: false,
+         
+           success: function(responsee){
+            
+         var searchout = JSON.parse(responsee);
+       
+          homeid = searchout.Tenantdetails.Homeid
+        
+         if (searchout.ComplaintsDetails.length != null){
+          for (k=0;k<searchout.ComplaintsDetails.length;k++){
+    cardstring=cardstring+Getjavascript(searchout.ComplaintsDetails[k].Complaint_id);
+   }
+
+  document.getElementById("listContainer").innerHTML=cardstring;
+}else{
+	 document.getElementById("listContainer").innerHTML="No Messages found";
+}
+
+for(j=0;j<searchout.ComplaintsDetails.length;j++){
+var ID = searchout.ComplaintsDetails[j].Complaint_id;
+var raiseddate = searchout.ComplaintsDetails[j].Complaint_raisedDate
+var Complaint_status = searchout.ComplaintsDetails[j].Complaint_status
+var Complaint_Description = searchout.ComplaintsDetails[j].Complaint_Description
+var Complaint_solvedDate = searchout.ComplaintsDetails[j].Complaint_solvedDate
+
+$("#Raise"+ID ).html(raiseddate);
+$("#status"+ID).html(Complaint_status);
+$("#Description"+ID).html(Complaint_Description);
+$("#solved"+ID).html(Complaint_solvedDate);
+}  } });
+
+            
+    }
+});
+
+
+
+// image  card all home
+ function Getjavascript(Dyid){
+ 
+  var rentimage = 
+
+
+
+"<li class='unread'>"+
+"<a href='#'>"+
+"<div>"+
+"<b>complaint Date - </b><span id='Raise"+Dyid+"'></span>"+
+"</div>"+
+"<div><b>complaint Status - </b><span id='status"+Dyid+"'> </span></div>"+
+"<div><b>Complaint Solved Date -</b> <span id='solved"+Dyid+"'>2 hours ago</span>"+
+"</div>"+
+"<div ><b>Message -</b> <span id='Description"+Dyid+"'>2 hours ago</span>"+
+"</div>"+
+"<p ></p>"+
+"</div>"+
+"</a>"+
+"</li>";
+
+
+
+
+
+ return rentimage;
+
+ 
+}
+
+
+function sendmessage(){
+	alert("inside ")
+
+	var getmessage = document.getElementById('getmessage').value;
+	
+	var today = new Date();
+var dd = today.getDate();
+var mm = today.getMonth()+1; //January is 0!
+var yyyy = today.getFullYear();
+
+if(dd<10) {
+    dd = '0'+dd
+} 
+
+if(mm<10) {
+    mm = '0'+mm
+} 
+
+today = mm + '/' + dd + '/' + yyyy;
+alert(homeid);
+
+
+	   var Home={
+                   "Home_id" :parseInt(homeid),
+                   "Tenant_Id":parseInt(tenantint),
+                   "Complaint_raisedDate":today,
+                   "Raisedby" :"Tenant",
+                   "Complaint_Description": getmessage,
+                   "Complaint_status": "Pending",
+                   "Complaint_solvedDate" :"null"
+
+
+                  
+         
+                 };
+
+         
+            $.ajax({
+               type: "POST",
+               url: "http://localhost:8083/InsertComplaint",
+               contentType:"application/json; charset=utf-8",
+               data: JSON.stringify(Home),
+               async: false,
+         
+           success: function(){
+           	alert("sucess")
+
+
+}
+
+
+});
+}
+</script>
 </head>
 
 <body>
@@ -31,9 +196,9 @@
 			<div class="left-side">
 				
 				<!-- Logo -->
-				<div id="logo">
+				<div id="logo" >
 					<a href="index.html"><img src="images/logo.png" alt=""></a>
-					<a href="index.html" class="dashboard-logo"><img src="images/logo2.png" alt=""></a>
+					<a href="index.html" class="dashboard-logo"><img src="images/logo1.png" alt=""></a>
 				</div>
 
 				<!-- Mobile Navigation -->
@@ -48,93 +213,8 @@
 				<!-- Main Navigation -->
 				<nav id="navigation" class="style-1">
 					<ul id="responsive">
+					<div class="user-name"><h2>RENTMATICS DASHBOARD</h2></div>
 
-						<li><a href="#">Home</a>
-							<ul>
-								<li><a href="index.html">Home 1</a></li>
-								<li><a href="index-2.html">Home 2</a></li>
-								<li><a href="index-3.html">Home 3</a></li>
-								<li><a href="index-4.html">Home 4</a></li>
-							</ul>
-						</li>
-
-						<li><a href="#">Listings</a>
-							<ul>
-								<li><a href="#">List Layout</a>
-									<ul>
-										<li><a href="listings-list-with-sidebar.html">With Sidebar</a></li>
-										<li><a href="listings-list-full-width.html">Full Width</a></li>
-										<li><a href="listings-list-full-width-with-map.html">Full Width + Map</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Grid Layout</a>
-									<ul>
-										<li><a href="listings-grid-with-sidebar-1.html">With Sidebar 1</a></li>
-										<li><a href="listings-grid-with-sidebar-2.html">With Sidebar 2</a></li>
-										<li><a href="listings-grid-full-width.html">Full Width</a></li>
-										<li><a href="listings-grid-full-width-with-map.html">Full Width + Map</a></li>
-									</ul>
-								</li>
-								<li><a href="#">Half Screen Map</a>
-									<ul>
-										<li><a href="listings-half-screen-map-list.html">List Layout</a></li>
-										<li><a href="listings-half-screen-map-grid-1.html">Grid Layout 1</a></li>
-										<li><a href="listings-half-screen-map-grid-2.html">Grid Layout 2</a></li>
-									</ul>
-								</li>
-								<li><a href="listings-single-page.html">Single Listing</a></li>
-							</ul>
-						</li>
-
-						<li><a class="current" href="#">User Panel</a>
-							<ul>
-								<li><a href="dashboard.html">Dashboard</a></li>
-								<li><a href="dashboard-messages.html">Messages</a></li>
-								<li><a href="dashboard-bookings.html">Bookings</a></li>
-								<li><a href="dashboard-my-listings.html">My Listings</a></li>
-								<li><a href="dashboard-reviews.html">Reviews</a></li>
-								<li><a href="dashboard-bookmarks.html">Bookmarks</a></li>
-								<li><a href="dashboard-add-listing.html">Add Listing</a></li>
-								<li><a href="dashboard-my-profile.html">My Profile</a></li>
-								<li><a href="dashboard-invoice.html">Invoice</a></li>
-							</ul>
-						</li>
-
-						<li><a href="#">Pages</a>
-							<div class="mega-menu mobile-styles three-columns">
-
-									<div class="mega-menu-section">
-										<ul>
-											<li class="mega-menu-headline">Pages #1</li>
-											<li><a href="pages-user-profile.html"><i class="sl sl-icon-user"></i> User Profile</a></li>
-											<li><a href="pages-booking.html"><i class="sl sl-icon-check"></i> Booking Page</a></li>
-											<li><a href="pages-add-listing.html"><i class="sl sl-icon-plus"></i> Add Listing</a></li>
-											<li><a href="pages-blog.html"><i class="sl sl-icon-docs"></i> Blog</a></li>
-										</ul>
-									</div>
-		
-									<div class="mega-menu-section">
-										<ul>
-											<li class="mega-menu-headline">Pages #2</li>
-											<li><a href="pages-contact.html"><i class="sl sl-icon-envelope-open"></i> Contact</a></li>
-											<li><a href="pages-coming-soon.html"><i class="sl sl-icon-hourglass"></i> Coming Soon</a></li>
-											<li><a href="pages-404.html"><i class="sl sl-icon-close"></i> 404 Page</a></li>
-											<li><a href="pages-masonry-filtering.html"><i class="sl sl-icon-equalizer"></i> Masonry Filtering</a></li>
-										</ul>
-									</div>
-
-									<div class="mega-menu-section">
-										<ul>
-											<li class="mega-menu-headline">Other</li>
-											<li><a href="pages-elements.html"><i class="sl sl-icon-settings"></i> Elements</a></li>
-											<li><a href="pages-pricing-tables.html"><i class="sl sl-icon-tag"></i> Pricing Tables</a></li>
-											<li><a href="pages-typography.html"><i class="sl sl-icon-pencil"></i> Typography</a></li>
-											<li><a href="pages-icons.html"><i class="sl sl-icon-diamond"></i> Icons</a></li>
-										</ul>
-									</div>
-									
-							</div>
-						</li>
 						
 					</ul>
 				</nav>
@@ -143,39 +223,30 @@
 				
 			</div>
 			<!-- Left Side Content / End -->
-
-			<!-- Right Side Content / End -->
-			<div class="right-side">
+				<div class="right-side">
 				<!-- Header Widget -->
 				<div class="header-widget">
 					
 					<!-- User Menu -->
 					<div class="user-menu">
-						<div class="user-name"><span><img src="images/dashboard-avatar.jpg" alt=""></span>My Account</div>
-						<ul>
-							<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>
-							<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages</a></li>
-							<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> Bookings</a></li>
-							<li><a href="index.html"><i class="sl sl-icon-power"></i> Logout</a></li>
-						</ul>
+						
 					</div>
 
-					<a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a>
+					<!-- <a href="dashboard-add-listing.html" class="button border with-icon">Add Listing <i class="sl sl-icon-plus"></i></a> -->
 				</div>
 				<!-- Header Widget / End -->
 			</div>
+
 			<!-- Right Side Content / End -->
 
 		</div>
 	</div>
 	<!-- Header / End -->
 
-</header>
+</header>		
 <div class="clearfix"></div>
 <!-- Header Container / End -->
 
-
-<!-- Dashboard -->
 <div id="dashboard">
 
 	<!-- Navigation
@@ -183,59 +254,36 @@
 
 	<!-- Responsive Navigation Trigger -->
 	<a href="#" class="dashboard-responsive-nav-trigger"><i class="fa fa-reorder"></i> Dashboard Navigation</a>
-	
+
 	<div class="dashboard-nav">
 		<div class="dashboard-nav-inner">
 
 			<ul data-submenu-title="Main">
-				<li><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>
-				<li class="active"><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages <span class="nav-tag messages">2</span></a></li>
-				<li><a href="dashboard-bookings.html"><i class="fa fa-calendar-check-o"></i> Bookings</a></li>
+				<li class="active"><a href="dashboard.html"><i class="sl sl-icon-settings"></i> Dashboard</a></li>
+				<li><a href="dashboard-messages.html"><i class="sl sl-icon-envelope-open"></i> Messages <span class="nav-tag messages">2</span></a></li>
+				<li><a href="listings-single-page.html"><i class="sl sl-icon-home"></i> Homedetails</a></li>
 			</ul>
 			
 			<ul data-submenu-title="Listings">
-				<li><a><i class="sl sl-icon-layers"></i> My Listings</a>
-					<ul>
-						<li><a href="dashboard-my-listings.html">Active <span class="nav-tag green">6</span></a></li>
-						<li><a href="dashboard-my-listings.html">Pending <span class="nav-tag yellow">1</span></a></li>
-						<li><a href="dashboard-my-listings.html">Expired <span class="nav-tag red">2</span></a></li>
-					</ul>	
-				</li>
-				<li><a href="dashboard-reviews.html"><i class="sl sl-icon-star"></i> Reviews</a></li>
-				<li><a href="dashboard-bookmarks.html"><i class="sl sl-icon-heart"></i> Bookmarks</a></li>
-				<li><a href="dashboard-add-listing.html"><i class="sl sl-icon-plus"></i> Add Listing</a></li>
+				
+				<li><a href="pages-booking.html"><i class="sl sl-icon-star"></i> Payment Details</a></li>
+				<!-- <li><a href="dashboard-bookmarks.html"><i class="sl sl-icon-layers"></i>Executive Details</a></li> -->
+				<li><a href="dashboard-add-listing.html"><i class="sl sl-icon-heart"></i> Customer Care</a></li>
 			</ul>	
 
 			<ul data-submenu-title="Account">
 				<li><a href="dashboard-my-profile.html"><i class="sl sl-icon-user"></i> My Profile</a></li>
 				<li><a href="index.html"><i class="sl sl-icon-power"></i> Logout</a></li>
 			</ul>
-
+			
+		</div>
 	</div>
-	</div>
-	<!-- Navigation / End -->
-
 
 	<!-- Content
 	================================================== -->
 	<div class="dashboard-content">
 
-		<!-- Titlebar -->
-		<div id="titlebar">
-			<div class="row">
-				<div class="col-md-12">
-					<h2>Messages</h2>
-					<!-- Breadcrumbs -->
-					<nav id="breadcrumbs">
-						<ul>
-							<li><a href="#">Home</a></li>
-							<li><a href="#">Dashboard</a></li>
-							<li>Messages</li>
-						</ul>
-					</nav>
-				</div>
-			</div>
-		</div>
+		
 
 		<div class="row">
 			
@@ -245,104 +293,56 @@
 				<div class="messages-container margin-top-0">
 					<div class="messages-headline">
 						<h4>Inbox</h4>
+					<!-- Right Side Content / End -->
+			<div class="right-side">
+				<div class="header-widget">
+					<a href="#sign-in-dialog" class="sign-in popup-with-zoom-anim"><i class="sl sl-icon-login"></i> <b>Write Message</b></a>
+					
+				</div>
+			</div>
+			<!-- Right Side Content / End -->
+
+			<!-- Sign In Popup -->
+			<div id="sign-in-dialog" class="zoom-anim-dialog mfp-hide">
+
+				<div class="small-dialog-header">
+					<h3>Sign In</h3>
+				</div>
+
+				<!--Tabs -->
+				<div class="sign-in-form style-1">
+
+				
+
+					<div class="tabs-container alt">
+
+						<!-- Login -->
+						<div class="tab-content" id="tab1" style="display: none;">
+							<form method="post" onsubmit="sendmessage()" class="login">
+
+								<textarea id="getmessage"></textarea>
+
+								<button class="button border with-icon" type="submit">Send Message</button>
+									<!-- <a href=" class="button border with-icon">Send Message<i class="sl sl-icon-plus"></i></a> -->
+								
+							</form>
+						</div>
+
+					
+
 					</div>
+				</div>
+			</div>
 					
 					<div class="messages-inbox">
 
-						<ul>
-							<li class="unread">
-								<a href="dashboard-messages-conversation.html">
-									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-
-									<div class="message-by">
-										<div class="message-by-headline">
-											<h5>Kathy Brown <i>Unread</i></h5>
-											<span>2 hours ago</span>
-										</div>
-										<p>Hello, I want to talk about your great listing! Morbi velit eros, sagittis in facilisis non, rhoncus posuere ultricies...</p>
-									</div>
-								</a>
-							</li>
-
-							<li class="unread">
-								<a href="dashboard-messages-conversation.html">
-									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-
-									<div class="message-by">
-										<div class="message-by-headline">
-											<h5>John Doe <i>Unread</i></h5>
-											<span>4 hours ago</span>
-										</div>
-										<p>Hello, I want to talk about your great listing! Morbi velit eros, sagittis in facilisis non, rhoncus posuere ultricies...</p>
-									</div>
-								</a>
-							</li>
+						<ul id="listContainer">
 							
-							<li>
-								<a href="dashboard-messages-conversation.html">
-									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
+							
+							</ul>
 
-									<div class="message-by">
-										<div class="message-by-headline">
-											<h5>Thomas Smith</h5>
-											<span>Yesterday</span>
-										</div>
-										<p>Hello, I want to talk about your great listing! Morbi velit eros, sagittis in facilisis non, rhoncus posuere ultricies...</p>
-									</div>
-								</a>
-							</li>
-
-							<li>
-								<a href="dashboard-messages-conversation.html">
-									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-
-									<div class="message-by">
-										<div class="message-by-headline">
-											<h5>Mike Behringer</h5>
-											<span>28.06.2017</span>
-										</div>
-										<p>Hello, I want to talk about your great listing! Morbi velit eros, sagittis in facilisis non, rhoncus posuere ultricies...</p>
-									</div>
-								</a>
-							</li>
-
-							<li>
-								<a href="dashboard-messages-conversation.html">
-									<div class="message-avatar"><img src="http://www.gravatar.com/avatar/00000000000000000000000000000000?d=mm&amp;s=70" alt="" /></div>
-
-									<div class="message-by">
-										<div class="message-by-headline">
-											<h5>Robert Baker</h5>
-											<span>22.06.2017</span>
-										</div>
-										<p>Hello, I want to talk about your great listing! Morbi velit eros, sagittis in facilisis non, rhoncus posuere ultricies...</p>
-									</div>
-								</a>
-							</li>
-						</ul>
-						
-					</div>
-				</div>
-
-				<!-- Pagination -->
-				<div class="clearfix"></div>
-				<div class="pagination-container margin-top-30 margin-bottom-0">
-					<nav class="pagination">
-						<ul>
-							<li><a href="#" class="current-page">1</a></li>
-							<li><a href="#">2</a></li>
-							<li><a href="#"><i class="sl sl-icon-arrow-right"></i></a></li>
-						</ul>
-					</nav>
-				</div>
-				<!-- Pagination / End -->
-
-			</div>
-
-			<!-- Copyrights -->
-			<div class="col-md-12">
-				<div class="copyrights">© 2017 Listeo. All Rights Reserved.</div>
-			</div>
+							
+			
 		</div>
 
 	</div>
@@ -354,7 +354,17 @@
 
 
 </div>
-<!-- Wrapper / End -->
+</div>
+
+     
+      <!-- Sign In Popup / End -->
+
+
+
+
+			<!-- Sign In Popup -->
+		
+			<!-- Sign In Popup / End -->
 
 
 <!-- Scripts

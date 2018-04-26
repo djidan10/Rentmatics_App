@@ -171,7 +171,7 @@ func InsertHomeDetails(w http.ResponseWriter, r *http.Request) {
 
 		io.Copy(f, file)
 		fmt.Println("Imageurl", Imageurl)
-		ImageurlFinal = append(ImageurlFinal, "http://localhost:8083/"+Imageurl)
+		ImageurlFinal = append(ImageurlFinal, "http://176.111.105.86:8083/"+Imageurl)
 
 	}
 

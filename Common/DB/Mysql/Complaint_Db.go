@@ -119,6 +119,37 @@ func GetSingleComplaint_Db(Complaintid int) (Datasend Model.Complaintsend) {
 	return
 }
 
+//Get Simple Complaint
+func GetSingleComplainttenant_Db(tenantid int) (Datasend Model.Complaintsend1) {
+	var Data1 []Model.Complaints
+	rows, err := OpenConnection["Rentmatics"].Query("Select * from complaint where Raisedby = 'Tenant' and tenantid =?", tenantid)
+	if err != nil {
+		log.Error("Error -Db:Tenant SingleComplaint", err)
+	}
+
+	for rows.Next() {
+		fmt.Println("data")
+		var Data Model.Complaints
+
+		rows.Scan(
+
+			&Data.Complaint_id,
+			&Data.Home_id,
+			&Data.Tenant_Id,
+			&Data.Complaint_raisedDate,
+			&Data.Raisedby,
+			&Data.Complaint_Description,
+			&Data.Complaint_status,
+			&Data.Complaint_solvedDate,
+		)
+		Data1 = append(Data1, Data)
+
+	}
+	Datasend.ComplaintsDetails = Data1
+	Datasend.Tenantdetails = GetIndivualTenant_Db(tenantid)
+	return
+}
+
 func InsertComplaints_Db(Complaintdata Model.Complaints) {
 	fmt.Println(Complaintdata.Raisedby, Complaintdata.Complaint_raisedDate, Complaintdata.Complaint_solvedDate, Complaintdata.Complaint_status)
 	rows, err := OpenConnection["Rentmatics"].Exec("insert into complaint (homeid,tenantid,complained_raiseddate,Raisedby,complaint_description,complaint_status,complaint_solveddate) values (?,?,?,?,?,?,?)", Complaintdata.Home_id, Complaintdata.Tenant_Id, Complaintdata.Complaint_raisedDate, Complaintdata.Raisedby, Complaintdata.Complaint_Description, Complaintdata.Complaint_status, Complaintdata.Complaint_solvedDate)

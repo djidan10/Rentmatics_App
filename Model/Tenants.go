@@ -77,6 +77,11 @@ type Complaintsend struct {
 	Tenantdetails     Tenant
 }
 
+type Complaintsend1 struct {
+	ComplaintsDetails []Complaints
+	Tenantdetails     Tenant
+}
+
 type Vacate struct {
 	Vacate_id        int
 	Home_id          int

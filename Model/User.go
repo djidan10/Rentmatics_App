@@ -20,6 +20,7 @@ type AdminResponse struct {
 }
 
 type AdminLoginResponse struct {
+	Userid   int
 	Username string
 	Password string
 	Role     string

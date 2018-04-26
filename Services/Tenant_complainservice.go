@@ -58,8 +58,28 @@ func GetsingleComplaint(w http.ResponseWriter, r *http.Request) {
 
 }
 
+func Getsingletenantcomplaint(w http.ResponseWriter, r *http.Request) {
+
+	var GetComplaintid Complaintviewid
+	err := json.NewDecoder(r.Body).Decode(&GetComplaintid)
+	if err != nil {
+		log.Error("Error :tenant Complaint", err)
+	}
+
+	Data := Db.GetSingleComplainttenant_Db(GetComplaintid.Complaintid)
+	Senddata, err := json.Marshal(Data)
+	if err != nil {
+		log.Error("Error :tenant Complaint", err)
+	}
+
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+	w.Write(Senddata)
+
+}
+
 func InsertComplaints(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("inside func")
+
 	var InsComplaint Model.Complaints
 	err := json.NewDecoder(r.Body).Decode(&InsComplaint)
 	if err != nil {

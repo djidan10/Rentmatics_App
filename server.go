@@ -180,6 +180,8 @@ func Serve() bool {
 
 	//GetComplaints and request Details
 	router.HandleFunc("/GetcomplaintsRequestData", Service.GetComplaintRequest)
+	router.HandleFunc("/Getsingletenantcomplaint", Service.Getsingletenantcomplaint)
+
 	router.HandleFunc("/GetOwnercomplaintsRequestData", Service.GetOwnerComplaintRequest)
 	router.HandleFunc("/GetOwnermessage", Service.GetOwnermessage)
 	router.HandleFunc("/GetOwnermessagedetail", Service.GetOwnermessagedetails)
