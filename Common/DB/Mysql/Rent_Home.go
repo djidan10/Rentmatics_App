@@ -158,7 +158,7 @@ func GetHomeDetils_DB(City string, filter string) (Temprentarray []Model.RentSen
 		}
 
 	} else {
-		rows, err := OpenConnection["Rentmatics"].Query("Select * from home where city IN(?) OR tenant_type = (?);", City, filter)
+		rows, err := OpenConnection["Rentmatics"].Query("Select * from home where city IN(?) OR house_type = (?);", City, filter)
 		fmt.Println(err)
 		for rows.Next() {
 
@@ -236,8 +236,7 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 	var Amen []Model.Amenties
 
 	// query
-	rows, err := OpenConnection["Rentmatics"].Query("Select * from home where id=?", homeid)
-	fmt.Println(err)
+	rows, _ := OpenConnection["Rentmatics"].Query("Select * from home where id=?", homeid)
 
 	for rows.Next() {
 
@@ -280,8 +279,8 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 			&Data.Parking,
 		)
 
-		rows, err := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
-		fmt.Println("err", err)
+		rows, _ := OpenConnection["Rentmatics"].Query("select * from pictures_url where home_id=?", Data.Id)
+
 		var Rentimgarray []Model.Home_images
 
 		for rows.Next() {
@@ -297,13 +296,12 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 		}
 
 		var Amenid int
-		row1, err := OpenConnection["Rentmatics"].Query("select Amentiesid from HomeAmenties where Homeid=?", Data.Id)
+		row1, _ := OpenConnection["Rentmatics"].Query("select Amentiesid from HomeAmenties where Homeid=?", Data.Id)
 		for row1.Next() {
 			row1.Scan(
 				&Amenid)
 
-			row2, err := OpenConnection["Rentmatics"].Query("select Name,url  from Amenties where id=?", Amenid)
-			fmt.Println("err", err)
+			row2, _ := OpenConnection["Rentmatics"].Query("select Name,url  from Amenties where id=?", Amenid)
 
 			for row2.Next() {
 				var Amentemp Model.Amenties
@@ -321,7 +319,6 @@ func GetSinglehome_Db(homeid int) (Data1 Model.Home_single) {
 		Data1.Home_images = Rentimgarray
 		Data1.Amenties = Amen
 		Data1.Ownerdetails = GetSingleOwner_Db(Data.Ownerid)
-		fmt.Println("end of Data", Data1)
 
 	}
 	return
