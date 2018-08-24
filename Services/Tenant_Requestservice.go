@@ -55,6 +55,29 @@ func GetsingleRequest(w http.ResponseWriter, r *http.Request) {
 	w.Write(Senddata)
 
 }
+type RequestTenant struct {
+	Tenantid int
+}
+
+func GetsingleRequestTenant(w http.ResponseWriter, r *http.Request) {
+
+	var GetRequestsingle RequestTenant
+	err := json.NewDecoder(r.Body).Decode(&GetRequestsingle)
+	if err != nil {
+		log.Error("Error :tenant Complaint", err)
+	}
+
+	Data := Db.GetSingleRequestTenant_Db(GetRequestsingle.Tenantid)
+	Senddata, err := json.Marshal(Data)
+	if err != nil {
+		log.Error("Error :tenant Complaint", err)
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+	w.Write(Senddata)
+
+}
+
 
 func InsertRequest(w http.ResponseWriter, r *http.Request) {
 

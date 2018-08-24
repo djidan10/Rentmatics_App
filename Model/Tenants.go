@@ -121,7 +121,10 @@ type Requestsend struct {
 	Resquestdetails Request
 	Tenantdetails   Tenant
 }
-
+type RequestTenantsend struct {
+	Resquestdetails []Request
+	Tenantdetails   Tenant
+}
 type Complaintstatus struct {
 	Complaintid string
 	Status      string

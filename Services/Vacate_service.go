@@ -23,7 +23,9 @@ func Getvacatedetails(w http.ResponseWriter, r *http.Request) {
 type Vacatesingle struct {
 	Vacateid int
 }
-
+type Tenantvacatesingle struct {
+	Tenantid int
+}
 func Getsinglevacate(w http.ResponseWriter, r *http.Request) {
 
 	var GetVacate Vacatesingle
@@ -32,6 +34,23 @@ func Getsinglevacate(w http.ResponseWriter, r *http.Request) {
 		log.Error("Error: Tenant vacate ", err)
 	}
 	Data := Db.GetSinglevacate_Db(GetVacate.Vacateid)
+	Senddata, err := json.Marshal(Data)
+	if err != nil {
+		log.Error("Error: Tenant vacate ", err)
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Access-Control-Allow-Orgin", "*")
+	w.Write(Senddata)
+
+}
+func GetsingleTenantvacate(w http.ResponseWriter, r *http.Request) {
+
+	var GetVacate Tenantvacatesingle
+	err := json.NewDecoder(r.Body).Decode(&GetVacate)
+	if err != nil {
+		log.Error("Error: Tenant vacate ", err)
+	}
+	Data := Db.GetSinglevacateTenant_Db(GetVacate.Tenantid)
 	Senddata, err := json.Marshal(Data)
 	if err != nil {
 		log.Error("Error: Tenant vacate ", err)

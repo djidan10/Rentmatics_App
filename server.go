@@ -83,16 +83,17 @@ func Serve() bool {
 
 	router.HandleFunc("/User", Service.Userdata)
 
-	router.HandleFunc("/RentUser", Service.RentUserdata)
-	router.HandleFunc("/RentLogin", Service.RentLogin)
-	router.HandleFunc("/RentUserlogout", Service.RentUserlogout)
+	
 
 	router.HandleFunc("/Login", Service.Login)
 	router.HandleFunc("/Logout", Service.Userlogout)
 	router.HandleFunc("/Changepassword", Service.Changepassword)
 	router.HandleFunc("/Forgotpassword", Service.Forgot)
 
-	router.HandleFunc("/RentLogin", Service.RentLogin)
+	
+	router.HandleFunc("/RentUser", Service.RentUserdata)//tenant ,admin ,owner dashboard 
+	router.HandleFunc("/RentLogin", Service.RentLogin) // dashboard
+	router.HandleFunc("/RentUserlogout", Service.RentUserlogout)//dashboard
 
 	//Notify
 	router.HandleFunc("/Notifyme", Service.Notification)
@@ -124,12 +125,14 @@ func Serve() bool {
 	router.HandleFunc("/GetComplaint", Service.GetComplaint)
 	router.HandleFunc("/GetAllpendingComplaints", Service.Getpendingstatus)
 	router.HandleFunc("/GetSingleComplaint", Service.GetsingleComplaint)
+	//Tennt or owner 
 	router.HandleFunc("/InsertComplaint", Service.InsertComplaints)
 	router.HandleFunc("/UpdateComplaintstaus", Service.Upadtecomplaintstatus)
 
 	//Vacate
 	router.HandleFunc("/Getvacatedetails", Service.Getvacatedetails)
 	router.HandleFunc("/GetSinglevacate", Service.Getsinglevacate)
+	router.HandleFunc("/GetSingleTenatvacate", Service.GetsingleTenantvacate)
 	router.HandleFunc("/Insertvacate", Service.InsertVacate)
 	router.HandleFunc("/Updatevacate", Service.UpdatetVacate)
 
@@ -144,6 +147,7 @@ func Serve() bool {
 	router.HandleFunc("/GetRequestdetails", Service.GetRequest)
 	router.HandleFunc("/GetRequestPendingdetails", Service.GetPendingrequest)
 	router.HandleFunc("/GetSingleRequest", Service.GetsingleRequest)
+	router.HandleFunc("/GetSingleRequestbycomplaint", Service.GetsingleRequestTenant)
 	router.HandleFunc("/InsertRequest", Service.InsertRequest)
 	router.HandleFunc("/Updaterequeststaus", Service.Updaterequeststatus)
 
